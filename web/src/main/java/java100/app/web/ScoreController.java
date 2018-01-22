@@ -18,8 +18,8 @@ public class ScoreController {
     
     @Autowired ScoreService scoreService; // 수정했음
     
-    @RequestMapping("list")
-    public String list(////asdfasfasdfasdfasfd
+    @RequestMapping("list")//수정2
+    public String list(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
             @RequestParam(value="ps", defaultValue="5") int pageSize,
             @RequestParam(value="word", required=false) String[] words,
@@ -89,9 +89,6 @@ public class ScoreController {
     // 송우정
     
 }
-
-
-
 
 
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java100.app.domain.Score;
 import java100.app.service.ScoreService;
-
+ 
 @Controller        
 @RequestMapping("/score")
 public class ScoreController { 

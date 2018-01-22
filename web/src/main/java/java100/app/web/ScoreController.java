@@ -17,7 +17,7 @@ import java100.app.service.ScoreService;
 public class ScoreController { 
     
     @Autowired ScoreService scoreService; // 수정했음
-    
+    //수정해봅시다
     @RequestMapping("list")//수정2
     public String list(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
@@ -79,21 +79,11 @@ public class ScoreController {
     // 송우정
     @RequestMapping("update")
     public String update(Score score) throws Exception {
-<<<<<<< HEAD
         
         scoreService.update(score); //욷=절 dskfj
-=======
-        scoreService.update(score); //욷=절
->>>>>>> refs/remotes/origin/master
         return "redirect:list";   //이승서
-<<<<<<< HEAD
-    }    
-=======
-    }
-    
     // 송우정
->>>>>>> refs/remotes/origin/master
-    
+    }    
 }
 
 

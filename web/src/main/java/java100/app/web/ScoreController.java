@@ -18,7 +18,7 @@ public class ScoreController {
     
     @Autowired ScoreService scoreService; // 수정했음
     
-    @RequestMapping("list")
+    @RequestMapping("list")//수정2
     public String list(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
             @RequestParam(value="ps", defaultValue="5") int pageSize,
@@ -79,6 +79,8 @@ public class ScoreController {
     // 송우정
     @RequestMapping("update")
     public String update(Score score) throws Exception {
+        
+        scoreService.update(score); //욷=절 dskfj
         scoreService.update(score); //욷=절
         return "redirect:list";   //이승서
         //이승서다 이놈아아아아아

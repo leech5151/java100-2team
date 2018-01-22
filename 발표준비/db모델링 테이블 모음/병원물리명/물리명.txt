@@ -1,0 +1,39 @@
+병원
+병원번호: hospital no  /  hpno
+병원명: hospital name  /  hp_name
+운영시간: operating time  /  op_time
+진료과목: medical subject  /  mdc_sub
+진료동물: medical animal  /  mdc_ani
+병원전화번호: hospital tel  /  hp_tel
+의료진: medical staff  /  mdc_staff  
+내용: contents  /  conts
+
+병원회원
+병원관련회원번호: hospital member no  /  hpmno
+이메일: email  /  email
+암호: password  /  psd
+닉네임: nick name  /  n_name
+이름: name  /  name
+전화번호: tel  /  tel
+일림수신여부: push  /  push
+
+진료자료
+진료번호: medical no  /  mdcno
+진료카테고리: medical category  /  mdc_cg
+진료명: medical name  /  mdc_name
+진료내용: medical contents  /  mdc_conts
+체중: weight  /  weight
+기록일자: date of recording  /  date_rec
+기록자: record caracter  /  recd
+비고 remarks  /  rems
+
+산책
+산책번호: walk number  /  walk no
+산책시간: walking time  /  walktime
+산책일자: the date of the walk  /  walkdate
+거리: street  / street
+소모칼로리: consumed calories  / calorie
+
+
+
+

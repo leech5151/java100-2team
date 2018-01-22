@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java100.app.domain.Score;
 import java100.app.service.ScoreService;
-
+ 
 @Controller        
 @RequestMapping("/score")
-public class ScoreController {
+public class ScoreController { 
     
-    @Autowired ScoreService scoreService;
+    @Autowired ScoreService scoreService; // 수정했음
     
     @RequestMapping("list")//현석아아아아아아아아아
     public String list(
@@ -27,7 +27,7 @@ public class ScoreController {
             @RequestParam(value="al", required=false) String align,
             Model model) throws Exception {
 
-        if (pageNo < 1) {
+        if (pageNo < 1) { 
             pageNo = 1;
         }   
         if (pageSize < 5 || pageSize > 15) {
@@ -79,9 +79,11 @@ public class ScoreController {
     @RequestMapping("update")
     public String update(Score score) throws Exception {
         
-        scoreService.update(score); //욷=절
+
+        scoreService.update(score); //욷=절 dskfj
         return "redirect:list";   //이승서
-    }
+    }    
+
     
 }
 

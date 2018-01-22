@@ -83,6 +83,14 @@ public class ScoreController {
         return "redirect:list";
     }
     
+    
+    @RequestMapping("update")
+    public String update(Score score) throws Exception {
+        
+        scoreService.update(score); //욷=절
+        return "redirect:list";
+    }
+    
 }
 
 

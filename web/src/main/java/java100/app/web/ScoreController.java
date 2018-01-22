@@ -15,7 +15,7 @@ import java100.app.service.ScoreService;
 @Controller        
 @RequestMapping("/score")
 public class ScoreController { 
-    
+    //durltj tnwjd
     @Autowired ScoreService scoreService; // 수정했음
     //수정해봅시다
     @RequestMapping("list")////현석아아아아아아아아아dsdffsadfsdf수정2

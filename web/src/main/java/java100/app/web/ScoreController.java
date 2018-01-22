@@ -79,9 +79,15 @@ public class ScoreController {
     @RequestMapping("update")
     public String update(Score score) throws Exception {
         
+<<<<<<< HEAD
         scoreService.update(score); //욷=절 dskfj
         return "redirect:list";
     }    
+=======
+        scoreService.update(score); //욷=절
+        return "redirect:list";   //이승서
+    }
+>>>>>>> refs/remotes/origin/master
     
 }
 

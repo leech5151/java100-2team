@@ -81,13 +81,12 @@ public class ScoreController {
     public String update(Score score) throws Exception {
         scoreService.update(score); //욷=절
         return "redirect:list";   //이승서
-        //이승서다 이승서입니다
+        //이승서다 이놈아아아아아
     }
     
+    // 송우정
+    
 }
-
-
-
 
 
 

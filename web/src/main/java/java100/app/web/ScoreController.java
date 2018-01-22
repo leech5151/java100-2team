@@ -19,7 +19,7 @@ public class ScoreController {
     @Autowired ScoreService scoreService; // 수정했음
     
     @RequestMapping("list")
-    public String list(
+    public String list(////asdfasfasdfasdfasfd
             @RequestParam(value="pn", defaultValue="1") int pageNo,
             @RequestParam(value="ps", defaultValue="5") int pageSize,
             @RequestParam(value="word", required=false) String[] words,

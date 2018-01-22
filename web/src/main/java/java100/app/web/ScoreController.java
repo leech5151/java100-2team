@@ -76,30 +76,9 @@ public class ScoreController {
         return "redirect:list";
     }
     
+    // 송우정
     @RequestMapping("update")
     public String update(Score score) throws Exception {
-        
-<<<<<<< HEAD
-        scoreService.update(score); //욷=절 dskfj
-<<<<<<< HEAD
-        return "redirect:list";
-    }    
-=======
-        scoreService.update(score); //욷=절
-        return "redirect:list";   //이승서
-    }
->>>>>>> refs/remotes/origin/master
-    
-    
-    @RequestMapping("update")
-    public String update(Score score) throws Exception {
-        
-        scoreService.update(score); //욷=절 dskfj
-        return "redirect:list";
-    }    
-        scoreService.update(score); //욷=절
-        return "redirect:list";
-    }    
         scoreService.update(score); //욷=절
         return "redirect:list";   //이승서
     }

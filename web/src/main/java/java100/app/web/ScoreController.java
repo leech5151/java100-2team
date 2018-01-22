@@ -17,13 +17,8 @@ import java100.app.service.ScoreService;
 public class ScoreController { 
     
     @Autowired ScoreService scoreService; // 수정했음
-<<<<<<< HEAD
     //수정해봅시다
-    @RequestMapping("list")//수정2
-=======
-    
     @RequestMapping("list")////현석아아아아아아아아아dsdffsadfsdf수정2
->>>>>>> branch 'master' of https://github.com/leech5151/java100-2team.git
     public String list(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
             @RequestParam(value="ps", defaultValue="5") int pageSize,

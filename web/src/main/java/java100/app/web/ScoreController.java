@@ -18,7 +18,7 @@ public class ScoreController {
     
     @Autowired ScoreService scoreService; // 수정했음
     
-    @RequestMapping("list")//수정2
+    @RequestMapping("list")////현석아아아아아아아아아dsdffsadfsdf수정2
     public String list(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
             @RequestParam(value="ps", defaultValue="5") int pageSize,
@@ -75,17 +75,19 @@ public class ScoreController {
         scoreService.delete(no);
         return "redirect:list";
     }
+     
+    @RequestMapping("update") // 심현석
     
     // 송우정
-    @RequestMapping("update")
     public String update(Score score) throws Exception {
         
         scoreService.update(score); //욷=절 dskfj
         scoreService.update(score); //욷=절
         return "redirect:list";   //이승서
         //이승서다 이놈아아아아아
-        //안니오오오오오오오오오오오옹
+        //안니오오오오오오오오오오오옹  
     }
+    // 송우정
     
     // 송우정
     

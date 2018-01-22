@@ -79,8 +79,11 @@ public class ScoreController {
     // 송우정
     @RequestMapping("update")
     public String update(Score score) throws Exception {
+        
+        scoreService.update(score); //욷=절 dskfj
         scoreService.update(score); //욷=절
         return "redirect:list";   //이승서
+        //이승서다 이놈아아아아아
     }
     
     // 송우정

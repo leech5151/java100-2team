@@ -18,7 +18,7 @@ public class ScoreController {
     
     @Autowired ScoreService scoreService;
     
-    @RequestMapping("list")//현석ㄴ
+    @RequestMapping("list")//현석아아아아아아
     public String list(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
             @RequestParam(value="ps", defaultValue="5") int pageSize,

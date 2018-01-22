@@ -9,11 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java100.app.dao.ScoreDao;
 import java100.app.domain.Score;
 import java100.app.service.ScoreService;
 
-@Controller
+@Controller        
 @RequestMapping("/score")
 public class ScoreController {
     
@@ -30,7 +29,7 @@ public class ScoreController {
 
         if (pageNo < 1) {
             pageNo = 1;
-        }
+        }   
         if (pageSize < 5 || pageSize > 15) {
             pageSize = 5;
         }

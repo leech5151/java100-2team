@@ -16,7 +16,7 @@ import java100.app.service.ScoreService;
 @RequestMapping("/score")
 public class ScoreController {
     
-    @Autowired ScoreService scoreService;
+    @Autowired ScoreService scoreService; // 수정했음
     
     @RequestMapping("list")
     public String list(

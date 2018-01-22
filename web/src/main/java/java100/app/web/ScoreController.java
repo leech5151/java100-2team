@@ -77,7 +77,7 @@ public class ScoreController {
     }
      
     @RequestMapping("update") // 심현석
-    
+    //아 짜증나
     // 송우정
     public String update(Score score) throws Exception {
         

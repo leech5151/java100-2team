@@ -84,6 +84,7 @@ public class ScoreController {
         scoreService.update(score); //욷=절
         return "redirect:list";   //이승서
         //이승서다 이놈아아아아아
+        //안니오오오오오오오오오오오옹
     }
     
     // 송우정

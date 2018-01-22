@@ -18,7 +18,7 @@ public class ScoreController {
     
     @Autowired ScoreService scoreService;
     
-    @RequestMapping("list")//현석아아아아아아
+    @RequestMapping("list")//현석아아아아아아아아아
     public String list(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
             @RequestParam(value="ps", defaultValue="5") int pageSize,
@@ -37,7 +37,7 @@ public class ScoreController {
         options.put("names", words);
         options.put("orderColumn", orderColumn);
         options.put("align", align);
-        
+        System.out.println();
         int totalCount = scoreService.getTotalCount();
         int lastPageNo = totalCount / pageSize;
         if(totalCount % pageSize > 0) {

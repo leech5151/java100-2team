@@ -83,7 +83,7 @@ public class ScoreController {
         
         scoreService.update(score); //욷=절
         return "redirect:list";   //이승서
-    }    
+    }     
 }
 
 

@@ -82,7 +82,7 @@ public class ScoreController {
         
         scoreService.update(score);
         return "redirect:list";
-    }
+    } 
     
 }
 

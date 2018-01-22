@@ -27,7 +27,7 @@ public class ScoreController {
             @RequestParam(value="al", required=false) String align,
             Model model) throws Exception {
 
-        if (pageNo < 1) {
+        if (pageNo < 1) { 
             pageNo = 1;
         }   
         if (pageSize < 5 || pageSize > 15) {
@@ -37,7 +37,7 @@ public class ScoreController {
         options.put("names", words);
         options.put("orderColumn", orderColumn);
         options.put("align", align);
-        
+        System.out.println();
         int totalCount = scoreService.getTotalCount();
         int lastPageNo = totalCount / pageSize;
         if(totalCount % pageSize > 0) {

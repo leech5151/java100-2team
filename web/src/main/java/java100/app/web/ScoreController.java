@@ -83,6 +83,8 @@ public class ScoreController {
         return "redirect:list";   //이승서
     }
     
+    // 송우정
+    
 }
 
 

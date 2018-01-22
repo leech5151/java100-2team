@@ -18,7 +18,7 @@ public class ScoreController {
     
     @Autowired ScoreService scoreService; // 수정했음
     
-    @RequestMapping("list")
+    @RequestMapping("list")//수정2
     public String list(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
             @RequestParam(value="ps", defaultValue="5") int pageSize,
@@ -79,15 +79,9 @@ public class ScoreController {
     @RequestMapping("update")
     public String update(Score score) throws Exception {
         
-<<<<<<< HEAD
         scoreService.update(score); //욷=절 dskfj
         return "redirect:list";
     }    
-=======
-        scoreService.update(score); //욷=절
-        return "redirect:list";   //이승서
-    }
->>>>>>> refs/remotes/origin/master
     
 }
 

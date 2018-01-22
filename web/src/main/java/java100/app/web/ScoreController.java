@@ -77,7 +77,7 @@ public class ScoreController {
         return "redirect:list";
     }
     
-    @RequestMapping("update")
+    @RequestMapping("update") //현석
     public String update(Score score) throws Exception {
         
         scoreService.update(score);

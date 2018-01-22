@@ -17,8 +17,13 @@ import java100.app.service.ScoreService;
 public class ScoreController { 
     
     @Autowired ScoreService scoreService; // 수정했음
+<<<<<<< HEAD
     //수정해봅시다
     @RequestMapping("list")//수정2
+=======
+    
+    @RequestMapping("list")////현석아아아아아아아아아dsdffsadfsdf수정2
+>>>>>>> branch 'master' of https://github.com/leech5151/java100-2team.git
     public String list(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
             @RequestParam(value="ps", defaultValue="5") int pageSize,
@@ -27,7 +32,7 @@ public class ScoreController {
             @RequestParam(value="al", required=false) String align,
             Model model) throws Exception {
 
-        if (pageNo < 1) {
+        if (pageNo < 1) { 
             pageNo = 1;
         }   
         if (pageSize < 5 || pageSize > 15) {
@@ -37,7 +42,7 @@ public class ScoreController {
         options.put("names", words);
         options.put("orderColumn", orderColumn);
         options.put("align", align);
-        
+        System.out.println();
         int totalCount = scoreService.getTotalCount();
         int lastPageNo = totalCount / pageSize;
         if(totalCount % pageSize > 0) {
@@ -75,27 +80,25 @@ public class ScoreController {
         scoreService.delete(no);
         return "redirect:list";
     }
-    
+     
+    @RequestMapping("update") // 심현석
+    //아 짜증나 심현석 키보드
     // 송우정
-    @RequestMapping("update")
     public String update(Score score) throws Exception {
         
         scoreService.update(score); //욷=절 dskfj
 
         return "redirect:list";   //이승서
     // 송우정
-    }    
         //이승서다 이놈아아아아아
         //안니오오오오오오오오오오오옹  
         //아 집에좀 갑시다
+    }
     // 송우정
     
     // 송우정
     
 }
-
-
-
 
 
 

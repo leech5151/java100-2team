@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java100.app.domain.Score;
 import java100.app.service.ScoreService;
-
+ 
 @Controller        
 @RequestMapping("/score")
-public class ScoreController {
+public class ScoreController { 
     
-    @Autowired ScoreService scoreService;
+    @Autowired ScoreService scoreService; // 수정했음
     
     @RequestMapping("list")
     public String list(
@@ -76,9 +76,9 @@ public class ScoreController {
         return "redirect:list";
     }
     
+    // 송우정
     @RequestMapping("update")
     public String update(Score score) throws Exception {
-        
         scoreService.update(score); //욷=절
         return "redirect:list";   //이승서
         //이승서다 이승서입니다

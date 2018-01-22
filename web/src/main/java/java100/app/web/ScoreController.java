@@ -80,7 +80,7 @@ public class ScoreController {
     public String update(Score score) throws Exception {
         
         scoreService.update(score); //욷=절 dskfj
-        return "redirect:list";
+        return "redirect:list";   //이승서
     }    
     
 }

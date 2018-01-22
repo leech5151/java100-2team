@@ -86,7 +86,7 @@ public class ScoreController {
         return "redirect:list";   //이승서
         //이승서다 이놈아아아아아
         //안니오오오오오오오오오오오옹  
-    }
+    } // 여기 계속 숮벙
     // 송우정
     
     // 송우정

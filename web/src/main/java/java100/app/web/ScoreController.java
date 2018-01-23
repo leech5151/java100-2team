@@ -15,10 +15,12 @@ import java100.app.service.ScoreService;
 @Controller        
 @RequestMapping("/score")
 public class ScoreController { 
-    
+    //여기도 수정
+ //이건홈페이지수정
+    //durltj tnwjd
     @Autowired ScoreService scoreService; // 수정했음
-    
-    @RequestMapping("list")//수정2
+    //수정해봅시다
+    @RequestMapping("list")////현석아아아아아아아아아dsdffsadfsdf수정2
     public String list(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
             @RequestParam(value="ps", defaultValue="5") int pageSize,
@@ -27,7 +29,7 @@ public class ScoreController {
             @RequestParam(value="al", required=false) String align,
             Model model) throws Exception {
 
-        if (pageNo < 1) {
+        if (pageNo < 1) { 
             pageNo = 1;
         }   
         if (pageSize < 5 || pageSize > 15) {
@@ -37,7 +39,7 @@ public class ScoreController {
         options.put("names", words);
         options.put("orderColumn", orderColumn);
         options.put("align", align);
-        
+        System.out.println();
         int totalCount = scoreService.getTotalCount();
         int lastPageNo = totalCount / pageSize;
         if(totalCount % pageSize > 0) {
@@ -75,16 +77,21 @@ public class ScoreController {
         scoreService.delete(no);
         return "redirect:list";
     }
-    
+     
+    @RequestMapping("update") // 심현석
+    //아 짜증나 심현석 키보드
     // 송우정
-    @RequestMapping("update")
     public String update(Score score) throws Exception {
         
         scoreService.update(score); //욷=절 dskfj
-        scoreService.update(score); //욷=절
+
         return "redirect:list";   //이승서
+    // 송우정
         //이승서다 이놈아아아아아
+        //안니오오오오오오오오오오오옹  
+        //아 집에좀 갑시다
     }
+    // 송우정
     
     // 송우정
     

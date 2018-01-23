@@ -78,19 +78,18 @@ DROP TABLE IF EXISTS hp_rv_mda RESTRICT;
 
 -- 회원
 CREATE TABLE memb (
-	m_no     INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-	email    VARCHAR(40)  NOT NULL COMMENT '이메일', -- 이메일
-	pwd      VARCHAR(50)  NOT NULL COMMENT '암호', -- 암호
-	nic_name VARCHAR(50)  NOT NULL COMMENT '닉네임', -- 닉네임
-	name     VARCHAR(50)  NOT NULL COMMENT '이름', -- 이름
-	tel      VARCHAR(30)  NOT NULL COMMENT '전화번호', -- 전화번호
-	push     BOOLEAN      NOT NULL COMMENT '알림수신여부', -- 알림수신여부
-	pst_no   VARCHAR(6)   NOT NULL COMMENT '우편번호', -- 우편번호
-	prm_addr VARCHAR(255) NOT NULL COMMENT '기본주소', -- 기본주소
-	det_addr VARCHAR(255) NULL     COMMENT '상세주소', -- 상세주소
-	m_type   CHAR(10)     NOT NULL COMMENT '유형' -- 유형
-)
-COMMENT '회원';
+	m_no     INTEGER      NOT NULL, -- 회원번호
+	email    VARCHAR(40)  NOT NULL, -- 이메일
+	pwd      VARCHAR(50)  NOT NULL, -- 암호
+	nic_name VARCHAR(50)  NOT NULL, -- 닉네임
+	name     VARCHAR(50)  NOT NULL, -- 이름
+	tel      VARCHAR(30)  NOT NULL, -- 전화번호
+	push     BOOLEAN      NOT NULL, -- 알림수신여부
+	pst_no   VARCHAR(6)   NOT NULL, -- 우편번호
+	prm_addr VARCHAR(255) NOT NULL, -- 기본주소
+	det_addr VARCHAR(255) NULL,     -- 상세주소
+	m_type   CHAR(10)     NOT NULL  -- 유형
+);
 
 -- 회원
 ALTER TABLE memb
@@ -118,21 +117,20 @@ CREATE UNIQUE INDEX UIX_memb3
 	);
 
 ALTER TABLE memb
-	MODIFY COLUMN m_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '회원번호';
+	MODIFY COLUMN m_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 미아찾기
 CREATE TABLE lost (
-	l_no   INTEGER      NOT NULL COMMENT '미아번호', -- 미아번호
-	m_no   INTEGER      NOT NULL COMMENT '회원번호', -- 회원번호
-	p_name VARCHAR(50)  NOT NULL COMMENT '강아지이름', -- 강아지이름
-	l_loc  VARCHAR(100) NOT NULL COMMENT '분실장소', -- 분실장소
-	l_date DATETIME     NOT NULL COMMENT '분실시간', -- 분실시간
-	char   TEXT         NOT NULL COMMENT '특이사항', -- 특이사항
-	rwd    INTEGER      NOT NULL COMMENT '사례금', -- 사례금
-	vwcnt  INTEGER      NOT NULL COMMENT '조회수', -- 조회수
-	conts  TEXT         NULL     COMMENT '내용' -- 내용
-)
-COMMENT '미아찾기';
+	l_no   INTEGER      NOT NULL, -- 미아번호
+	m_no   INTEGER      NOT NULL, -- 회원번호
+	p_name VARCHAR(50)  NOT NULL, -- 강아지이름
+	l_loc  VARCHAR(100) NOT NULL, -- 분실장소
+	l_date DATETIME     NOT NULL, -- 분실시간
+	cha    TEXT         NOT NULL, -- 특이사항
+	rwd    INTEGER      NOT NULL, -- 사례금
+	vwcnt  INTEGER      NOT NULL, -- 조회수
+	conts  TEXT         NULL      -- 내용
+);
 
 -- 미아찾기
 ALTER TABLE lost
@@ -142,21 +140,20 @@ ALTER TABLE lost
 		);
 
 ALTER TABLE lost
-	MODIFY COLUMN l_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '미아번호';
+	MODIFY COLUMN l_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 아지백과
 CREATE TABLE pedia (
-	ped_no  INTEGER     NOT NULL COMMENT '아지백과번호', -- 아지백과번호
-	ctg     CHAR(10)    NOT NULL COMMENT '카테고리', -- 카테고리
-	title   VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
-	conts   TEXT        NOT NULL COMMENT '설명', -- 설명
-	rdt     DATE        NOT NULL COMMENT '등록일시', -- 등록일시
-	vwcnt   INTEGER     NOT NULL COMMENT '조회수', -- 조회수
-	likes   INTEGER     NOT NULL COMMENT '추천수', -- 추천수
-	m_conts TEXT        NOT NULL COMMENT '본문내용', -- 본문내용
-	m_no    INTEGER     NOT NULL COMMENT '회원번호' -- 회원번호
-)
-COMMENT '아지백과';
+	ped_no  INTEGER     NOT NULL, -- 아지백과번호
+	ctg     CHAR(10)    NOT NULL, -- 카테고리
+	title   VARCHAR(50) NOT NULL, -- 제목
+	conts   TEXT        NOT NULL, -- 설명
+	rdt     DATE        NOT NULL, -- 등록일시
+	vwcnt   INTEGER     NOT NULL, -- 조회수
+	likes   INTEGER     NOT NULL, -- 추천수
+	m_conts TEXT        NOT NULL, -- 본문내용
+	m_no    INTEGER     NOT NULL  -- 회원번호
+);
 
 -- 아지백과
 ALTER TABLE pedia
@@ -166,21 +163,20 @@ ALTER TABLE pedia
 		);
 
 ALTER TABLE pedia
-	MODIFY COLUMN ped_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '아지백과번호';
+	MODIFY COLUMN ped_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 훈련정보
 CREATE TABLE trainning (
-	t_no    INTEGER     NOT NULL COMMENT '훈련번호', -- 훈련번호
-	m_no    INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
-	ctg     CHAR(10)    NOT NULL COMMENT '카테고리', -- 카테고리
-	title   VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
-	conts   TEXT        NOT NULL COMMENT '설명', -- 설명
-	m_conts TEXT        NOT NULL COMMENT '본문내용', -- 본문내용
-	vwcnt   INTEGER     NOT NULL COMMENT '조회수', -- 조회수
-	rdt     DATE        NOT NULL COMMENT '등록일시', -- 등록일시
-	likes   INTEGER     NOT NULL COMMENT '추천수' -- 추천수
-)
-COMMENT '훈련정보';
+	t_no    INTEGER     NOT NULL, -- 훈련번호
+	m_no    INTEGER     NOT NULL, -- 회원번호
+	ctg     CHAR(10)    NOT NULL, -- 카테고리
+	title   VARCHAR(50) NOT NULL, -- 제목
+	conts   TEXT        NOT NULL, -- 설명
+	m_conts TEXT        NOT NULL, -- 본문내용
+	vwcnt   INTEGER     NOT NULL, -- 조회수
+	rdt     DATE        NOT NULL, -- 등록일시
+	likes   INTEGER     NOT NULL  -- 추천수
+);
 
 -- 훈련정보
 ALTER TABLE trainning
@@ -190,17 +186,16 @@ ALTER TABLE trainning
 		);
 
 ALTER TABLE trainning
-	MODIFY COLUMN t_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '훈련번호';
+	MODIFY COLUMN t_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 펫스타그램
 CREATE TABLE pet_str (
-	str_no INTEGER NOT NULL COMMENT '팻스타그램번호', -- 팻스타그램번호
-	m_no   INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-	conts  TEXT    NOT NULL COMMENT '게시물내용', -- 게시물내용
-	rdt    DATE    NOT NULL COMMENT '등록일시', -- 등록일시
-	likes  INTEGER NOT NULL COMMENT '좋아요수' -- 좋아요수
-)
-COMMENT '펫스타그램';
+	str_no INTEGER NOT NULL, -- 팻스타그램번호
+	m_no   INTEGER NOT NULL, -- 회원번호
+	conts  TEXT    NOT NULL, -- 게시물내용
+	rdt    DATE    NOT NULL, -- 등록일시
+	likes  INTEGER NOT NULL  -- 좋아요수
+);
 
 -- 펫스타그램
 ALTER TABLE pet_str
@@ -210,20 +205,19 @@ ALTER TABLE pet_str
 		);
 
 ALTER TABLE pet_str
-	MODIFY COLUMN str_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '팻스타그램번호';
+	MODIFY COLUMN str_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 리뷰
 CREATE TABLE bus_rv (
-	rv_no  INTEGER     NOT NULL COMMENT '리뷰번호', -- 리뷰번호
-	bus_no INTEGER     NOT NULL COMMENT '사업체번호', -- 사업체번호
-	m_no   INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
-	title  VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
-	conts  TEXT        NOT NULL COMMENT '내용', -- 내용
-	date   DATE        NOT NULL COMMENT '일자', -- 일자
-	point  DOUBLE      NOT NULL COMMENT '별점', -- 별점
-	vwcnt  INTEGER     NOT NULL COMMENT '조회수' -- 조회수
-)
-COMMENT '리뷰';
+	rv_no  INTEGER     NOT NULL, -- 리뷰번호
+	bus_no INTEGER     NOT NULL, -- 사업체번호
+	m_no   INTEGER     NOT NULL, -- 회원번호
+	title  VARCHAR(50) NOT NULL, -- 제목
+	conts  TEXT        NOT NULL, -- 내용
+	date   DATE        NOT NULL, -- 일자
+	point  DOUBLE      NOT NULL, -- 별점
+	vwcnt  INTEGER     NOT NULL  -- 조회수
+);
 
 -- 리뷰
 ALTER TABLE bus_rv
@@ -233,19 +227,18 @@ ALTER TABLE bus_rv
 		);
 
 ALTER TABLE bus_rv
-	MODIFY COLUMN rv_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '리뷰번호';
+	MODIFY COLUMN rv_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 애완견
 CREATE TABLE pet (
-	p_no  INTEGER     NOT NULL COMMENT '강아지번호', -- 강아지번호
-	name  VARCHAR(50) NOT NULL COMMENT '이름', -- 이름
-	brd   VARCHAR(50) NOT NULL COMMENT '품종', -- 품종
-	age   DOUBLE      NOT NULL COMMENT '나이', -- 나이
-	wgt   DOUBLE      NOT NULL COMMENT '체중', -- 체중
-	g_wgt DOUBLE      NOT NULL COMMENT '목표체중', -- 목표체중
-	m_no  INTEGER     NOT NULL COMMENT '회원번호' -- 회원번호
-)
-COMMENT '애완견';
+	p_no  INTEGER     NOT NULL, -- 강아지번호
+	name  VARCHAR(50) NOT NULL, -- 이름
+	brd   VARCHAR(50) NOT NULL, -- 품종
+	age   DOUBLE      NOT NULL, -- 나이
+	wgt   DOUBLE      NOT NULL, -- 체중
+	g_wgt DOUBLE      NOT NULL, -- 목표체중
+	m_no  INTEGER     NOT NULL  -- 회원번호
+);
 
 -- 애완견
 ALTER TABLE pet
@@ -255,15 +248,14 @@ ALTER TABLE pet
 		);
 
 ALTER TABLE pet
-	MODIFY COLUMN p_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '강아지번호';
+	MODIFY COLUMN p_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 회원미디어
 CREATE TABLE m_mda (
-	mda_no INTEGER   NOT NULL COMMENT '미디어번호', -- 미디어번호
-	m_no   INTEGER   NOT NULL COMMENT '회원번호', -- 회원번호
-	file   VARBINARY NULL     COMMENT '파일' -- 파일
-)
-COMMENT '회원미디어';
+	mda_no INTEGER      NOT NULL, -- 미디어번호
+	m_no   INTEGER      NOT NULL, -- 회원번호
+	file   VARCHAR(255) NULL      -- 파일
+);
 
 -- 회원미디어
 ALTER TABLE m_mda
@@ -273,17 +265,16 @@ ALTER TABLE m_mda
 		);
 
 ALTER TABLE m_mda
-	MODIFY COLUMN mda_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '미디어번호';
+	MODIFY COLUMN mda_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 리뷰댓글
 CREATE TABLE bus_rv_cmt (
-	cmt_no INTEGER NOT NULL COMMENT '댓글번호', -- 댓글번호
-	m_no   INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-	rv_no  INTEGER NOT NULL COMMENT '리뷰번호', -- 리뷰번호
-	conts  TEXT    NOT NULL COMMENT '내용', -- 내용
-	rdt    DATE    NOT NULL COMMENT '등록일시' -- 등록일시
-)
-COMMENT '리뷰댓글';
+	cmt_no INTEGER NOT NULL, -- 댓글번호
+	m_no   INTEGER NOT NULL, -- 회원번호
+	rv_no  INTEGER NOT NULL, -- 리뷰번호
+	conts  TEXT    NOT NULL, -- 내용
+	rdt    DATE    NOT NULL  -- 등록일시
+);
 
 -- 리뷰댓글
 ALTER TABLE bus_rv_cmt
@@ -293,18 +284,17 @@ ALTER TABLE bus_rv_cmt
 		);
 
 ALTER TABLE bus_rv_cmt
-	MODIFY COLUMN cmt_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '댓글번호';
+	MODIFY COLUMN cmt_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 산책정보
 CREATE TABLE walk (
-	walk_no  INTEGER  NOT NULL COMMENT '산책번호', -- 산책번호
-	walktime DATETIME NOT NULL COMMENT '산책시간', -- 산책시간
-	walkdate DATETIME NOT NULL COMMENT '산책일자', -- 산책일자
-	street   DOUBLE   NOT NULL COMMENT '거리', -- 거리
-	calorie  INTEGER  NOT NULL COMMENT '소모칼로리', -- 소모칼로리
-	m_no     INTEGER  NOT NULL COMMENT '회원번호' -- 회원번호
-)
-COMMENT '산책정보';
+	walk_no  INTEGER  NOT NULL, -- 산책번호
+	walktime DATETIME NOT NULL, -- 산책시간
+	walkdate DATETIME NOT NULL, -- 산책일자
+	street   DOUBLE   NOT NULL, -- 거리
+	calorie  INTEGER  NOT NULL, -- 소모칼로리
+	m_no     INTEGER  NOT NULL  -- 회원번호
+);
 
 -- 산책정보
 ALTER TABLE walk
@@ -314,24 +304,23 @@ ALTER TABLE walk
 		);
 
 ALTER TABLE walk
-	MODIFY COLUMN walk_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '산책번호';
+	MODIFY COLUMN walk_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 병원
 CREATE TABLE hp (
-	hp_no     INTEGER      NOT NULL COMMENT '병원번호', -- 병원번호
-	hp_name   VARCHAR(50)  NOT NULL COMMENT '병원명', -- 병원명
-	op_time   DATETIME     NOT NULL COMMENT '운영시간', -- 운영시간
-	mdc_sub   VARCHAR(50)  NOT NULL COMMENT '진료과목', -- 진료과목
-	mdc_ani   VARCHAR(50)  NOT NULL COMMENT '진료동물', -- 진료동물
-	hp_tel    VARCHAR(30)  NOT NULL COMMENT '병원전화번호', -- 병원전화번호
-	mdc_staff VARCHAR(50)  NOT NULL COMMENT '의료진', -- 의료진
-	conts     TEXT         NULL     COMMENT '내용', -- 내용
-	pst_no    VARCHAR(6)   NOT NULL COMMENT '우편번호', -- 우편번호
-	prm_addr  VARCHAR(255) NOT NULL COMMENT '기본주소', -- 기본주소
-	det_addr  VARCHAR(255) NULL     COMMENT '상세주소', -- 상세주소
-	m_no      INTEGER      NOT NULL COMMENT '회원번호' -- 회원번호
-)
-COMMENT '병원';
+	hp_no     INTEGER      NOT NULL, -- 병원번호
+	hp_name   VARCHAR(50)  NOT NULL, -- 병원명
+	op_time   DATETIME     NOT NULL, -- 운영시간
+	mdc_sub   VARCHAR(50)  NOT NULL, -- 진료과목
+	mdc_ani   VARCHAR(50)  NOT NULL, -- 진료동물
+	hp_tel    VARCHAR(30)  NOT NULL, -- 병원전화번호
+	mdc_staff VARCHAR(50)  NOT NULL, -- 의료진
+	conts     TEXT         NULL,     -- 내용
+	pst_no    VARCHAR(6)   NOT NULL, -- 우편번호
+	prm_addr  VARCHAR(255) NOT NULL, -- 기본주소
+	det_addr  VARCHAR(255) NULL,     -- 상세주소
+	m_no      INTEGER      NOT NULL  -- 회원번호
+);
 
 -- 병원
 ALTER TABLE hp
@@ -354,22 +343,21 @@ CREATE INDEX IX_hp
 	);
 
 ALTER TABLE hp
-	MODIFY COLUMN hp_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '병원번호';
+	MODIFY COLUMN hp_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 진료자료
 CREATE TABLE dgn (
-	dgn_no    INTEGER     NOT NULL COMMENT '진료번호', -- 진료번호
-	m_no      INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
-	hp_no     INTEGER     NOT NULL COMMENT '병원번호', -- 병원번호
-	dgn_cg    CHAR(10)    NOT NULL COMMENT '진료카테고리', -- 진료카테고리
-	dgn_name  VARCHAR(50) NOT NULL COMMENT '진료명', -- 진료명
-	dgn_conts TEXT        NOT NULL COMMENT '진료내용', -- 진료내용
-	weight    DOUBLE      NOT NULL COMMENT '체중', -- 체중
-	date_rec  DATETIME    NOT NULL COMMENT '기록일자', -- 기록일자
-	recd      VARCHAR(50) NOT NULL COMMENT '기록자', -- 기록자
-	rems      TEXT        NULL     COMMENT '비고' -- 비고
-)
-COMMENT '진료자료';
+	dgn_no    INTEGER     NOT NULL, -- 진료번호
+	m_no      INTEGER     NOT NULL, -- 회원번호
+	hp_no     INTEGER     NOT NULL, -- 병원번호
+	dgn_cg    CHAR(10)    NOT NULL, -- 진료카테고리
+	dgn_name  VARCHAR(50) NOT NULL, -- 진료명
+	dgn_conts TEXT        NOT NULL, -- 진료내용
+	weight    DOUBLE      NOT NULL, -- 체중
+	date_rec  DATETIME    NOT NULL, -- 기록일자
+	recd      VARCHAR(50) NOT NULL, -- 기록자
+	rems      TEXT        NULL      -- 비고
+);
 
 -- 진료자료
 ALTER TABLE dgn
@@ -379,15 +367,14 @@ ALTER TABLE dgn
 		);
 
 ALTER TABLE dgn
-	MODIFY COLUMN dgn_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '진료번호';
+	MODIFY COLUMN dgn_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 훈련미디어
 CREATE TABLE t_mda (
-	mda_no INTEGER   NOT NULL COMMENT '미디어번호', -- 미디어번호
-	t_no   INTEGER   NOT NULL COMMENT '훈련번호', -- 훈련번호
-	file   VARBINARY NULL     COMMENT '파일' -- 파일
-)
-COMMENT '훈련미디어';
+	mda_no INTEGER      NOT NULL, -- 미디어번호
+	t_no   INTEGER      NOT NULL, -- 훈련번호
+	file   VARCHAR(255) NULL      -- 파일
+);
 
 -- 훈련미디어
 ALTER TABLE t_mda
@@ -397,15 +384,14 @@ ALTER TABLE t_mda
 		);
 
 ALTER TABLE t_mda
-	MODIFY COLUMN mda_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '미디어번호';
+	MODIFY COLUMN mda_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 리뷰미디어
 CREATE TABLE bus_rv_mda (
-	mda_no INTEGER   NOT NULL COMMENT '미디어번호', -- 미디어번호
-	rv_no  INTEGER   NOT NULL COMMENT '리뷰번호', -- 리뷰번호
-	file   VARBINARY NULL     COMMENT '파일' -- 파일
-)
-COMMENT '리뷰미디어';
+	mda_no INTEGER      NOT NULL, -- 미디어번호
+	rv_no  INTEGER      NOT NULL, -- 리뷰번호
+	file   VARCHAR(255) NULL      -- 파일
+);
 
 -- 리뷰미디어
 ALTER TABLE bus_rv_mda
@@ -415,15 +401,14 @@ ALTER TABLE bus_rv_mda
 		);
 
 ALTER TABLE bus_rv_mda
-	MODIFY COLUMN mda_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '미디어번호';
+	MODIFY COLUMN mda_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 팻스타미디어
 CREATE TABLE str_mda (
-	mda_no INTEGER   NOT NULL COMMENT '미디어번호', -- 미디어번호
-	str_no INTEGER   NOT NULL COMMENT '팻스타그램번호', -- 팻스타그램번호
-	file   VARBINARY NULL     COMMENT '파일' -- 파일
-)
-COMMENT '팻스타미디어';
+	mda_no INTEGER      NOT NULL, -- 미디어번호
+	str_no INTEGER      NOT NULL, -- 팻스타그램번호
+	file   VARCHAR(255) NULL      -- 파일
+);
 
 -- 팻스타미디어
 ALTER TABLE str_mda
@@ -433,15 +418,14 @@ ALTER TABLE str_mda
 		);
 
 ALTER TABLE str_mda
-	MODIFY COLUMN mda_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '미디어번호';
+	MODIFY COLUMN mda_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 아지미디어
 CREATE TABLE ped_mda (
-	mda_no INTEGER   NOT NULL COMMENT '미디어번호', -- 미디어번호
-	ped_no INTEGER   NOT NULL COMMENT '아지백과번호', -- 아지백과번호
-	file   VARBINARY NULL     COMMENT '파일' -- 파일
-)
-COMMENT '아지미디어';
+	mda_no INTEGER      NOT NULL, -- 미디어번호
+	ped_no INTEGER      NOT NULL, -- 아지백과번호
+	file   VARCHAR(255) NULL      -- 파일
+);
 
 -- 아지미디어
 ALTER TABLE ped_mda
@@ -451,15 +435,14 @@ ALTER TABLE ped_mda
 		);
 
 ALTER TABLE ped_mda
-	MODIFY COLUMN mda_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '미디어번호';
+	MODIFY COLUMN mda_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 미아미디어
 CREATE TABLE lost_mda (
-	mda_no INTEGER   NOT NULL COMMENT '미디어번호', -- 미디어번호
-	l_no   INTEGER   NOT NULL COMMENT '미아번호', -- 미아번호
-	file   VARBINARY NULL     COMMENT '파일' -- 파일
-)
-COMMENT '미아미디어';
+	mda_no INTEGER      NOT NULL, -- 미디어번호
+	l_no   INTEGER      NOT NULL, -- 미아번호
+	file   VARCHAR(255) NULL      -- 파일
+);
 
 -- 미아미디어
 ALTER TABLE lost_mda
@@ -469,15 +452,14 @@ ALTER TABLE lost_mda
 		);
 
 ALTER TABLE lost_mda
-	MODIFY COLUMN mda_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '미디어번호';
+	MODIFY COLUMN mda_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 병원미디어
 CREATE TABLE hp_mda (
-	mda_no INTEGER   NOT NULL COMMENT '미디어번호', -- 미디어번호
-	hp_no  INTEGER   NOT NULL COMMENT '병원번호', -- 병원번호
-	file   VARBINARY NULL     COMMENT '파일' -- 파일
-)
-COMMENT '병원미디어';
+	mda_no INTEGER      NOT NULL, -- 미디어번호
+	hp_no  INTEGER      NOT NULL, -- 병원번호
+	file   VARCHAR(255) NULL      -- 파일
+);
 
 -- 병원미디어
 ALTER TABLE hp_mda
@@ -487,15 +469,14 @@ ALTER TABLE hp_mda
 		);
 
 ALTER TABLE hp_mda
-	MODIFY COLUMN mda_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '미디어번호';
+	MODIFY COLUMN mda_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 사업체미디어
 CREATE TABLE bus_mda (
-	mda_no INTEGER   NOT NULL COMMENT '미디어번호', -- 미디어번호
-	bus_no INTEGER   NOT NULL COMMENT '사업체번호', -- 사업체번호
-	file   VARBINARY NULL     COMMENT '파일' -- 파일
-)
-COMMENT '사업체미디어';
+	mda_no INTEGER      NOT NULL, -- 미디어번호
+	bus_no INTEGER      NOT NULL, -- 사업체번호
+	file   VARCHAR(255) NULL      -- 파일
+);
 
 -- 사업체미디어
 ALTER TABLE bus_mda
@@ -505,17 +486,16 @@ ALTER TABLE bus_mda
 		);
 
 ALTER TABLE bus_mda
-	MODIFY COLUMN mda_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '미디어번호';
+	MODIFY COLUMN mda_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 팻스타댓글
 CREATE TABLE str_cmt (
-	cmt_no INTEGER NOT NULL COMMENT '댓글번호', -- 댓글번호
-	m_no   INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-	str_no INTEGER NOT NULL COMMENT '팻스타그램번호', -- 팻스타그램번호
-	conts  TEXT    NOT NULL COMMENT '내용', -- 내용
-	rdt    DATE    NOT NULL COMMENT '등록일시' -- 등록일시
-)
-COMMENT '팻스타댓글';
+	cmt_no INTEGER NOT NULL, -- 댓글번호
+	m_no   INTEGER NOT NULL, -- 회원번호
+	str_no INTEGER NOT NULL, -- 팻스타그램번호
+	conts  TEXT    NOT NULL, -- 내용
+	rdt    DATE    NOT NULL  -- 등록일시
+);
 
 -- 팻스타댓글
 ALTER TABLE str_cmt
@@ -525,17 +505,16 @@ ALTER TABLE str_cmt
 		);
 
 ALTER TABLE str_cmt
-	MODIFY COLUMN cmt_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '댓글번호';
+	MODIFY COLUMN cmt_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 아지댓글
 CREATE TABLE ped_cmt (
-	cmt_no INTEGER NOT NULL COMMENT '댓글번호', -- 댓글번호
-	m_no   INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-	ped_no INTEGER NOT NULL COMMENT '아지백과번호', -- 아지백과번호
-	conts  TEXT    NOT NULL COMMENT '내용', -- 내용
-	rdt    DATE    NOT NULL COMMENT '등록일시' -- 등록일시
-)
-COMMENT '아지댓글';
+	cmt_no INTEGER NOT NULL, -- 댓글번호
+	m_no   INTEGER NOT NULL, -- 회원번호
+	ped_no INTEGER NOT NULL, -- 아지백과번호
+	conts  TEXT    NOT NULL, -- 내용
+	rdt    DATE    NOT NULL  -- 등록일시
+);
 
 -- 아지댓글
 ALTER TABLE ped_cmt
@@ -545,17 +524,16 @@ ALTER TABLE ped_cmt
 		);
 
 ALTER TABLE ped_cmt
-	MODIFY COLUMN cmt_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '댓글번호';
+	MODIFY COLUMN cmt_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 훈련댓글
 CREATE TABLE t_cmt (
-	cmt_no INTEGER NOT NULL COMMENT '댓글번호', -- 댓글번호
-	conts  TEXT    NOT NULL COMMENT '내용', -- 내용
-	rdt    DATE    NOT NULL COMMENT '등록일시', -- 등록일시
-	t_no   INTEGER NOT NULL COMMENT '훈련번호', -- 훈련번호
-	m_no   INTEGER NOT NULL COMMENT '회원번호' -- 회원번호
-)
-COMMENT '훈련댓글';
+	cmt_no INTEGER NOT NULL, -- 댓글번호
+	conts  TEXT    NOT NULL, -- 내용
+	rdt    DATE    NOT NULL, -- 등록일시
+	t_no   INTEGER NOT NULL, -- 훈련번호
+	m_no   INTEGER NOT NULL  -- 회원번호
+);
 
 -- 훈련댓글
 ALTER TABLE t_cmt
@@ -565,25 +543,24 @@ ALTER TABLE t_cmt
 		);
 
 ALTER TABLE t_cmt
-	MODIFY COLUMN cmt_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '댓글번호';
+	MODIFY COLUMN cmt_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 사업체
 CREATE TABLE bus (
-	bus_no   INTEGER      NOT NULL COMMENT '사업체번호', -- 사업체번호
-	m_no     INTEGER      NULL     COMMENT '회원번호', -- 회원번호
-	ctgr     CHAR(10)     NOT NULL COMMENT '카테고리', -- 카테고리
-	b_name   VARCHAR(50)  NOT NULL COMMENT '업소명', -- 업소명
-	op_time  TIME         NULL     COMMENT '영업시작시간', -- 영업시작시간
-	cl_time  TIME         NULL     COMMENT '영업종료시간', -- 영업종료시간
-	con_inf  VARCHAR(20)  NOT NULL COMMENT '연락처', -- 연락처
-	menu     TEXT         NULL     COMMENT '메뉴', -- 메뉴
-	conts    TEXT         NOT NULL COMMENT '내용', -- 내용
-	url      VARCHAR(255) NULL     COMMENT '홈페이지', -- 홈페이지
-	pst_no   VARCHAR(6)   NOT NULL COMMENT '우편번호', -- 우편번호
-	prm_addr VARCHAR(255) NOT NULL COMMENT '기본주소', -- 기본주소
-	det_addr VARCHAR(255) NULL     COMMENT '상세주소' -- 상세주소
-)
-COMMENT '사업체';
+	bus_no   INTEGER      NOT NULL, -- 사업체번호
+	m_no     INTEGER      NULL,     -- 회원번호
+	ctgr     CHAR(10)     NOT NULL, -- 카테고리
+	b_name   VARCHAR(50)  NOT NULL, -- 업소명
+	op_time  TIME         NULL,     -- 영업시작시간
+	cl_time  TIME         NULL,     -- 영업종료시간
+	con_inf  VARCHAR(20)  NOT NULL, -- 연락처
+	menu     TEXT         NULL,     -- 메뉴
+	conts    TEXT         NOT NULL, -- 내용
+	url      VARCHAR(255) NULL,     -- 홈페이지
+	pst_no   VARCHAR(6)   NOT NULL, -- 우편번호
+	prm_addr VARCHAR(255) NOT NULL, -- 기본주소
+	det_addr VARCHAR(255) NULL      -- 상세주소
+);
 
 -- 사업체
 ALTER TABLE bus
@@ -593,17 +570,16 @@ ALTER TABLE bus
 		);
 
 ALTER TABLE bus
-	MODIFY COLUMN bus_no INTEGER NOT NULL AUTO_INCREMENT COMMENT '사업체번호';
+	MODIFY COLUMN bus_no INTEGER NOT NULL AUTO_INCREMENT;
 
 -- 병원리뷰댓글
 CREATE TABLE hp_rv_cmt (
-	cmt_no INTEGER NOT NULL COMMENT '댓글번호', -- 댓글번호
-	m_no   INTEGER NOT NULL COMMENT '회원번호', -- 회원번호
-	rv_no  INTEGER NOT NULL COMMENT '리뷰번호', -- 리뷰번호
-	conts  TEXT    NOT NULL COMMENT '내용', -- 내용
-	rdt    DATE    NOT NULL COMMENT '등록일시' -- 등록일시
-)
-COMMENT '병원리뷰댓글';
+	cmt_no INTEGER NOT NULL, -- 댓글번호
+	m_no   INTEGER NOT NULL, -- 회원번호
+	rv_no  INTEGER NOT NULL, -- 리뷰번호
+	conts  TEXT    NOT NULL, -- 내용
+	rdt    DATE    NOT NULL  -- 등록일시
+);
 
 -- 병원리뷰댓글
 ALTER TABLE hp_rv_cmt
@@ -614,16 +590,15 @@ ALTER TABLE hp_rv_cmt
 
 -- 병원리뷰
 CREATE TABLE hp_rv (
-	rv_no INTEGER     NOT NULL COMMENT '리뷰번호', -- 리뷰번호
-	hp_no INTEGER     NULL     COMMENT '병원번호', -- 병원번호
-	m_no  INTEGER     NOT NULL COMMENT '회원번호', -- 회원번호
-	title VARCHAR(50) NOT NULL COMMENT '제목', -- 제목
-	conts TEXT        NOT NULL COMMENT '내용', -- 내용
-	date  DATE        NOT NULL COMMENT '일자', -- 일자
-	point DOUBLE      NOT NULL COMMENT '별점', -- 별점
-	vwcnt INTEGER     NOT NULL COMMENT '조회수' -- 조회수
-)
-COMMENT '병원리뷰';
+	rv_no INTEGER     NOT NULL, -- 리뷰번호
+	hp_no INTEGER     NULL,     -- 병원번호
+	m_no  INTEGER     NOT NULL, -- 회원번호
+	title VARCHAR(50) NOT NULL, -- 제목
+	conts TEXT        NOT NULL, -- 내용
+	date  DATE        NOT NULL, -- 일자
+	point DOUBLE      NOT NULL, -- 별점
+	vwcnt INTEGER     NOT NULL  -- 조회수
+);
 
 -- 병원리뷰
 ALTER TABLE hp_rv
@@ -634,11 +609,10 @@ ALTER TABLE hp_rv
 
 -- 병원리뷰미디어
 CREATE TABLE hp_rv_mda (
-	mda_no INTEGER   NOT NULL COMMENT '미디어번호', -- 미디어번호
-	rv_no  INTEGER   NOT NULL COMMENT '리뷰번호', -- 리뷰번호
-	file   VARBINARY NULL     COMMENT '파일' -- 파일
-)
-COMMENT '병원리뷰미디어';
+	mda_no INTEGER      NOT NULL, -- 미디어번호
+	rv_no  INTEGER      NOT NULL, -- 리뷰번호
+	file   VARCHAR(255) NULL      -- 파일
+);
 
 -- 병원리뷰미디어
 ALTER TABLE hp_rv_mda

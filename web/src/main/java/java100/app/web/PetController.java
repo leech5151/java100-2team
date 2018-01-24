@@ -1,8 +1,5 @@
 package java100.app.web;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletContext;
@@ -10,23 +7,19 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.multipart.MultipartFile;
 
-import java100.app.domain.Member;
-import java100.app.domain.UploadFile;
-import java100.app.service.MemberService;
+import java100.app.service.PetService;
 
 @Controller
-@RequestMapping("/member")
+@RequestMapping("/pet")
 @SessionAttributes("loginUser")
-public class MemberController {
+public class PetController {
     
     @Autowired ServletContext servletContext;
-    @Autowired MemberService memberService;
+    @Autowired PetService petService;
     
     @RequestMapping("list")
     public String list(
@@ -37,8 +30,6 @@ public class MemberController {
             @RequestParam(value="al", required=false) String align,
             Model model) throws Exception {
 
-        // UI 제어와 관련된 코드는 이렇게 페이지 컨트롤러에 두어야 한다.
-        //
         if (pageNo < 1) {
             pageNo = 1;
         }
@@ -54,17 +45,16 @@ public class MemberController {
         options.put("orderColumn", orderColumn);
         options.put("align", align);
         
-        int totalCount = memberService.getTotalCount();
+        int totalCount = petService.getTotalCount();
         int lastPageNo = totalCount / pageSize;
         if ((totalCount % pageSize) > 0) {
             lastPageNo++;
         }
         
-        // view 컴포넌트가 사용할 값을 Model에 담는다.
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("lastPageNo", lastPageNo);
-        model.addAttribute("list", memberService.list(pageNo, pageSize, options));
-        return "member/list";
+        model.addAttribute("list", petService.list(pageNo, pageSize, options));
+        return "pet/list";
     }
     
     @RequestMapping("form")
@@ -72,6 +62,7 @@ public class MemberController {
         return "member/form";
         
     }
+    /*
 
     @RequestMapping("add")
     public String add(
@@ -169,6 +160,7 @@ public class MemberController {
         part.transferTo(new File(path + "/" + filename));
         return filename;
     }    
+    */
 }
 
 

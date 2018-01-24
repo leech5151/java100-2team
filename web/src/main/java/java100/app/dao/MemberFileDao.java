@@ -4,7 +4,7 @@ import java.util.List;
 
 import java100.app.domain.UploadFile;
 
-public interface FileDao {
+public interface MemberFileDao {
 
     List<UploadFile> findByMemberNo(int no);
     

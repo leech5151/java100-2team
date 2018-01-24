@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import java100.app.domain.Member;
-import java100.app.domain.UploadFile;
+import java100.app.domain.MemberUploadFile;
 import java100.app.service.MemberService;
 
 @Controller
@@ -81,7 +81,7 @@ public class MemberController {
         
         String uploadDir = servletContext.getRealPath("/download");
 
-        ArrayList<UploadFile> uploadFiles = new ArrayList<>();
+        ArrayList<MemberUploadFile> uploadFiles = new ArrayList<>();
         
         for (MultipartFile part : file) {
             if (part.isEmpty())
@@ -89,7 +89,7 @@ public class MemberController {
             
             String filename = this.writeUploadFile(part, uploadDir);
             
-            uploadFiles.add(new UploadFile(filename));
+            uploadFiles.add(new MemberUploadFile(filename));
         }
         
         member.setFiles(uploadFiles);
@@ -113,7 +113,7 @@ public class MemberController {
         
         String uploadDir = servletContext.getRealPath("/download");
 
-        ArrayList<UploadFile> uploadFiles = new ArrayList<>();
+        ArrayList<MemberUploadFile> uploadFiles = new ArrayList<>();
         
         for (MultipartFile part : file) {
             if (part.isEmpty())
@@ -121,7 +121,7 @@ public class MemberController {
             
             String filename = this.writeUploadFile(part, uploadDir);
             
-            uploadFiles.add(new UploadFile(filename));
+            uploadFiles.add(new MemberUploadFile(filename));
         }
         
         member.setFiles(uploadFiles);

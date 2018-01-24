@@ -35,20 +35,19 @@ public class PetServiceImpl implements PetService {
         return petDao.countAll();
     }
     
-    /*
-
     @Override
-    public int add(Member member) {
-        
-        // insert를 하기 전에는 board의 no 프로퍼티 값은 0이다.
-        // insert를 한 후에는 no 프로퍼티에 DB에서 생성한 값이 저장된다.
-        int count = memberDao.insert(member);
-        
-        // 첨부파일 등록
-        this.addFiles(member.getFiles(), member.getMemberNo());
-        
+    public int add(Pet pet) {
+        int count = petDao.insert(pet);
         return count;
     }
+    
+    @Override
+    public int delete(int no) {
+        
+        return petDao.delete(no);
+    }
+    /*
+
     
     @Override
     public Member get(int no) {
@@ -81,13 +80,7 @@ public class PetServiceImpl implements PetService {
         
         return count;
     }
-    @Override
-    public int delete(int no) {
-        
-        fileDao.deleteAllByMemberNo(no);
-        
-        return memberDao.delete(no);
-    }
+
 
     */
 }

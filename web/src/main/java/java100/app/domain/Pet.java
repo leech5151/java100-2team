@@ -2,7 +2,7 @@ package java100.app.domain;
 
 public class Pet {
     protected int petNo; 
-    protected String name; 
+    protected String petName; 
     protected String breed; 
     protected int age; 
     protected double weight; 
@@ -17,14 +17,14 @@ public class Pet {
         this.petNo = petNo;
     }
     
-    public String getName() {
-        return name;
+    public String getPetName() {
+        return petName;
     }
-    
-    public void setName(String name) {
-        this.name = name;
+
+    public void setPetName(String petName) {
+        this.petName = petName;
     }
-    
+
     public String getBreed() {
         return breed;
     }

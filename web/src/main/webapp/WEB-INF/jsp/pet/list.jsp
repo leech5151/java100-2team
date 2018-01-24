@@ -24,7 +24,7 @@
 <table class='table table-hover'>
 <thead>
 <tr>
-<th>번호</th><th>이름</th><th>품종</th><th>나이</th><th>체중</th><th>목표체중</th>
+<th>번호</th><th>이름</th><th>품종</th><th>나이</th><th>체중</th><th>목표체중</th><th>삭제</th>
 </tr>
 </thead>
 <tbody>
@@ -32,11 +32,12 @@
 <c:forEach items="${list}" var="pet">
         <tr>
         <td>${pet.petNo}</td>
-        <td>${pet.name}</td>
+        <td>${pet.petName}</td>
         <td>${pet.breed}</td>
         <td>${pet.age}</td>
         <td>${pet.weight}</td>
         <td>${pet.goalWeight}</td>
+        <td><a href='delete?petNo=${pet.petNo}' class='btn btn-danger btn-sm'>삭제</a></td>
         </tr>
 </c:forEach>
 

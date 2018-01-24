@@ -24,7 +24,7 @@
 <table class='table table-hover'>
 <thead>
 <tr>
-<th>번호</th><th>이름</th><th>닉네임</th><th>이메일</th><th>등록일자</th><th>회원사진</th>
+<th>번호</th><th>이름</th><th>닉네임</th><th>이메일</th><th>등록일자</th><th>회원사진</th><th>강아지정보</th>
 </tr>
 </thead>
 <tbody>
@@ -38,8 +38,11 @@
         <td>${member.createDate}</td>
         <td>
         <c:forEach items="${member.files}" var="file">
-        <img src="${contextPath}/download/${file.filename}" alt="${file.filename}" width="50px" height="50px">
+        <img src="${contextPath}/download/${file.filename}" alt="${file.filename}" width="50" height="50">
         </c:forEach>
+        </td>
+        <td>
+        <a href='../pet/list' class='btn btn-primary btn-sm'>이동</a>
         </td>
         </tr>
 </c:forEach>

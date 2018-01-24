@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import java100.app.domain.Member;
-import java100.app.domain.UploadFile;
+import java100.app.domain.MemberUploadFile;
 
 //=> "역할"을 강조할 때는 "객체(object)"라는 말보다는 
 //"컴포넌트(component)"라는 말을 사용한다.
@@ -18,8 +18,8 @@ import java100.app.domain.UploadFile;
 public interface MemberService {
     List<Member> list(int pageNo, int pageSize, Map<String,Object> options);
     int getTotalCount();
-    int add(Member score);
-    void addFiles(List<UploadFile> files, int memberNo);
+    int add(Member member);
+    void addFiles(List<MemberUploadFile> files, int memberNo);
     Member get(int no);
     Member get(String email, String password);
     int update(Member member);

@@ -9,23 +9,18 @@
 
     <resultMap type="pet" id="petMap">
         <id column="p_no" property="petNo"/>
-        <result column="name" property="name"/>
+        <result column="p_name" property="petName"/>
         <result column="brd" property="breed"/>
         <result column="age" property="age"/>
         <result column="wgt" property="weight"/>
         <result column="g_wgt" property="goalWeight"/>
+        <result column="m_no"   property="memberNo"/>
         
-        <!-- 
-        <association property="writer" javaType="member">
-            <id     column="m_no"       property="m_no"/>
-        </association>    
-        -->     
     </resultMap>
-    
     <sql id="select1">
         select 
             p_no,
-            name,
+            p_name,
             brd,
             age,
             wgt,
@@ -41,7 +36,16 @@
         select count(*) from pet
     </select>
         
-
+    <insert id="insert" parameterType="pet"
+        useGeneratedKeys="true" keyColumn="p_no" keyProperty="petNo">
+        insert into pet(p_name,brd,age,wgt,g_wgt,m_no)
+        values(#{petName},#{breed},#{age},#{weight},#{goalWeight},#{memberNo})
+    </insert>
+    
+    <delete id="delete" parameterType="int">
+        delete from pet
+        where p_no=#{value}
+    </delete>
 <!-- 
 
         <if test="words != null">
@@ -88,12 +92,7 @@
         limit #{startIndex}, #{size}
     </select>
 
-    
-    <insert id="insert" parameterType="member"
-        useGeneratedKeys="true" keyColumn="m_no" keyProperty="memberNo">
-        insert into memb(email,pwd,nic_name,name,tel,push,pst_no,prm_addr,det_addr,m_type,cre_date)
-        values(#{email},password(#{password}),#{nicname},#{name},#{tel},#{push},#{postalNo},#{primaryAddress},#{detailAddress},#{memberType},now())
-    </insert>
+
 
     <select id="findByNo" resultMap="memberMap" parameterType="int">
         select 
@@ -137,10 +136,7 @@
         where m_no=#{memberNo}
     </update>
 
-    <delete id="delete" parameterType="int">
-        delete from memb
-        where m_no=#{value}
-    </delete>
+
     
      -->
 </mapper>  

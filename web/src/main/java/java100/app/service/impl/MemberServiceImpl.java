@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java100.app.dao.MemberFileDao;
 import java100.app.dao.MemberDao;
 import java100.app.domain.Member;
-import java100.app.domain.UploadFile;
+import java100.app.domain.MemberUploadFile;
 import java100.app.service.MemberService;
 
 @Service
@@ -41,11 +41,8 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public int add(Member member) {
         
-        // insert를 하기 전에는 board의 no 프로퍼티 값은 0이다.
-        // insert를 한 후에는 no 프로퍼티에 DB에서 생성한 값이 저장된다.
         int count = memberDao.insert(member);
         
-        // 첨부파일 등록
         this.addFiles(member.getFiles(), member.getMemberNo());
         
         return count;
@@ -74,10 +71,8 @@ public class MemberServiceImpl implements MemberService {
         
         int count = memberDao.update(member);
         
-        // 기존의 게시물 첨부파일은 모두 지운다. 
         memberFileDao.deleteAllByMemberNo(member.getMemberNo());
         
-        // 다시 게시물 첨부파일을 저장한다.
         addFiles(member.getFiles(), member.getMemberNo());
         
         return count;
@@ -92,8 +87,8 @@ public class MemberServiceImpl implements MemberService {
 
     
     @Override
-    public void addFiles(List<UploadFile> files, int no) {
-        for (UploadFile file : files) {
+    public void addFiles(List<MemberUploadFile> files, int no) {
+        for (MemberUploadFile file : files) {
             file.setMemberNo(no);
             memberFileDao.insert(file);
         }

@@ -1,17 +1,17 @@
 package java100.app.domain;
 
-public class UploadFile {
+public class MemberUploadFile {
     int no;
     String filename;
     int memberNo;
     
-    public UploadFile() {}
+    public MemberUploadFile() {}
     
-    public UploadFile(String filename) {
+    public MemberUploadFile(String filename) {
         this(0, filename);
     }
 
-    public UploadFile(int no, String filename) {
+    public MemberUploadFile(int no, String filename) {
         this.no = no;
         this.filename = filename;
     }

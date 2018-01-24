@@ -8,13 +8,13 @@ import java100.app.domain.Pet;
 public interface PetService {
     List<Pet> list(int pageNo, int pageSize, Map<String,Object> options);
     int getTotalCount();
+    int add(Pet pet);
+    int delete(int no);
     /*
-    int add(Member score);
     void addFiles(List<UploadFile> files, int memberNo);
     Member get(int no);
     Member get(String email, String password);
     int update(Member member);
-    int delete(int no);
     */
 }
 

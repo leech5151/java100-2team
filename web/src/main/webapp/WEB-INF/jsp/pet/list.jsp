@@ -1,4 +1,4 @@
-<%@page import="java100.app.domain.Member"%>
+<%@ page import="java100.app.domain.Pet"%>
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>게시판</title>
+<title>내 강아지</title>
 <link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <link rel='stylesheet' href='../../css/common.css'>
 </head>
@@ -17,33 +17,27 @@
 
 <jsp:include page="../header.jsp"/>
 
-<h1>게시물 목록</h1>
+<h1>내 강아지</h1>
 
 <jsp:include page="../listToolbar.jsp"/>
 
 <table class='table table-hover'>
 <thead>
 <tr>
-<th>번호</th><th>이름</th><th>닉네임</th><th>이메일</th><th>등록일자</th><th>회원사진</th><th>강아지정보</th>
+<th>번호</th><th>이름</th><th>품종</th><th>나이</th><th>체중</th><th>목표체중</th><th>삭제</th>
 </tr>
 </thead>
 <tbody>
 
-<c:forEach items="${list}" var="member">
+<c:forEach items="${list}" var="pet">
         <tr>
-        <td>${member.memberNo}</td>
-        <td><a href='${member.memberNo}'>${member.name}</a></td>
-        <td>${member.nicname}</td>
-        <td>${member.email}</td>
-        <td>${member.createDate}</td>
-        <td>
-        <c:forEach items="${member.files}" var="file">
-        <img src="${contextPath}/download/${file.filename}" alt="${file.filename}" width="50" height="50">
-        </c:forEach>
-        </td>
-        <td>
-        <a href='../pet/list' class='btn btn-primary btn-sm'>이동</a>
-        </td>
+        <td>${pet.petNo}</td>
+        <td>${pet.petName}</td>
+        <td>${pet.breed}</td>
+        <td>${pet.age}</td>
+        <td>${pet.weight}</td>
+        <td>${pet.goalWeight}</td>
+        <td><a href='delete?petNo=${pet.petNo}' class='btn btn-danger btn-sm'>삭제</a></td>
         </tr>
 </c:forEach>
 

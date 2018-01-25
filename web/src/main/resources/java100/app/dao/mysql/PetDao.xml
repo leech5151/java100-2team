@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- DAO 객체를 자동으로 생성하려면,
+     namespace의 값이 인터페이스 이름과 같아야 한다. -->
+<mapper namespace="java100.app.dao.PetDao">
+
+    <resultMap type="pet" id="petMap">
+        <id column="p_no" property="petNo"/>
+        <result column="p_name" property="petName"/>
+        <result column="brd" property="breed"/>
+        <result column="age" property="age"/>
+        <result column="wgt" property="weight"/>
+        <result column="g_wgt" property="goalWeight"/>
+        <result column="m_no"   property="memberNo"/>
+        
+    </resultMap>
+    <sql id="select1">
+        select 
+            p_no,
+            p_name,
+            brd,
+            age,
+            wgt,
+            g_wgt
+    </sql>
+
+    <select id="findAll" resultMap="petMap" parameterType="map">
+        <include refid="select1"/>
+        from pet
+    </select>
+
+    <select id="countAll" resultType="int">
+        select count(*) from pet
+    </select>
+        
+    <insert id="insert" parameterType="pet"
+        useGeneratedKeys="true" keyColumn="p_no" keyProperty="petNo">
+        insert into pet(p_name,brd,age,wgt,g_wgt,m_no)
+        values(#{petName},#{breed},#{age},#{weight},#{goalWeight},#{memberNo})
+    </insert>
+    
+    <delete id="delete" parameterType="int">
+        delete from pet
+        where p_no=#{value}
+    </delete>
+<!-- 
+
+        <if test="words != null">
+	        <where>
+	            <foreach collection="words" item="word">
+	                or title like '%${word}%'
+	            </foreach>
+	        </where>
+        </if>
+        
+        정렬 조건에 따라 SQL문을 변경한다.
+        order by 
+        <choose>
+            <when test="orderColumn == 'name' and align == 'desc'">
+                name desc
+            </when>
+            <when test="orderColumn == 'name' and align == 'asc'">
+                name asc
+            </when>
+            <when test="orderColumn == 'nic_name' and align == 'desc'">
+                nic_name desc
+            </when>
+            <when test="orderColumn == 'nic_name' and align == 'asc'">
+                nic_name asc
+            </when>
+            <when test="orderColumn == 'email' and align == 'desc'">
+                email desc
+            </when>
+            <when test="orderColumn == 'email' and align == 'asc'">
+                email asc
+            </when>
+            <when test="orderColumn == 'cre_date' and align == 'desc'">
+                cre_date desc
+            </when>
+            <when test="orderColumn == 'cre_date' and align == 'asc'">
+                cre_date asc
+            </when>
+            <otherwise>
+                m_no desc
+            </otherwise>
+        </choose>
+       
+        페이지징 처리
+        limit #{startIndex}, #{size}
+    </select>
+
+
+
+    <select id="findByNo" resultMap="memberMap" parameterType="int">
+        select 
+		    m.m_no,
+		    m.email,
+		    m.pwd,
+		    m.nic_name,
+		    m.name,
+		    m.tel,
+		    m.push,
+		    m.pst_no,
+		    m.prm_addr,
+		    m.det_addr,
+		    m.m_type,
+		    cre_date,	    
+		    d.mda_no,
+		    d.file
+		from 
+		    memb as m 
+		    left join m_mda as d on m.m_no=d.m_no
+        where m.m_no=#{value}
+    </select>
+        
+    <select id="findByEmailAndPassword" 
+            resultMap="memberMap" parameterType="map">
+        <include refid="select1"/>
+        from memb
+        where email=#{email} and pwd=password(#{password})
+    </select>
+    
+    <update id="update" parameterType="member">
+        update memb set
+            nic_name=#{nicname}, 
+            email=#{email}, 
+            pwd=password(#{password}),
+            tel=#{tel}, 
+            pst_no=#{postalNo}, 
+            prm_addr=#{primaryAddress}, 
+            det_addr=#{detailAddress}, 
+            m_type=#{memberType}
+        where m_no=#{memberNo}
+    </update>
+
+
+    
+     -->
+</mapper>  
+
+
+
+
+
+
+
+
+

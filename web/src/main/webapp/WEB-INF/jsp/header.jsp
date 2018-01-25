@@ -24,12 +24,15 @@
 
 <ul class='navbar-nav mr-auto'>
   <li class='nav-item'>
+<<<<<<< HEAD
     <a class='nav-link' href='../business/list'>회원가입</a>
   </li>
 </ul>
 
 <ul class='navbar-nav mr-auto'>
   <li class='nav-item'>
+=======
+>>>>>>> branch 'master' of https://github.com/leech5151/java100-2team.git
     <a class='nav-link' href='../lost/list'>미아찾기</a>
   </li>
 </ul>

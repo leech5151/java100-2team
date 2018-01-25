@@ -1,21 +1,17 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/leech5151/java100-2team.git
 package java100.app.domain;
 
-public class MemberUploadFile {
+public class LostUploadFile {
     int no;
     String filename;
-    int memberNo;
+    int lostNo;
     
-    public MemberUploadFile() {}
+    public LostUploadFile() {}
     
-    public MemberUploadFile(String filename) {
+    public LostUploadFile(String filename) {
         this(0, filename);
     }
 
-    public MemberUploadFile(int no, String filename) {
+    public LostUploadFile(int no, String filename) {
         this.no = no;
         this.filename = filename;
     }
@@ -36,12 +32,12 @@ public class MemberUploadFile {
         this.filename = filename;
     }
 
-    public int getMemberNo() {
-        return memberNo;
+    public int getLostNo() {
+        return lostNo;
     }
 
-    public void setMemberNo(int memberNo) {
-        this.memberNo = memberNo;
+    public void setLostNo(int lostNo) {
+        this.lostNo = lostNo;
     }
-    
+
 }

@@ -77,7 +77,6 @@ public class MemberController {
     public String add(
             Member member,
             MultipartFile[] file
-//            @ModelAttribute(value="loginUser") Member loginUser
             ) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
@@ -95,10 +94,6 @@ public class MemberController {
         
         member.setFiles(uploadFiles);
 
-        // 게시글 작성자는 로그인 사용자이다. 
-//        member.setWriter(loginUser);
-        
-        // 게시글 등록
         memberService.add(member);
         
         return "redirect:list";

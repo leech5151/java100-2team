@@ -16,7 +16,7 @@ public class Member {
     protected String detailAddress;
     protected String memberType;
     protected Date createDate; // list
-    protected List<UploadFile> files;
+    protected List<MemberUploadFile> files;
    
     public int getMemberNo() {
         return memberNo;
@@ -114,11 +114,11 @@ public class Member {
         this.push = push;
     }
 
-    public List<UploadFile> getFiles() {
+    public List<MemberUploadFile> getFiles() {
         return files;
     }
 
-    public void setFiles(List<UploadFile> files) {
+    public void setFiles(List<MemberUploadFile> files) {
         this.files = files;
     }
     

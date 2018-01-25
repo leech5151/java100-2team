@@ -7,17 +7,17 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java100.app.dao.FileDao;
 import java100.app.dao.MemberDao;
+import java100.app.dao.MemberFileDao;
 import java100.app.domain.Member;
-import java100.app.domain.UploadFile;
+import java100.app.domain.MemberUploadFile;
 import java100.app.service.MemberService;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 
     @Autowired MemberDao memberDao;
-    @Autowired FileDao fileDao;
+    @Autowired MemberFileDao memberfileDao;
     
     @Override
     public List<Member> list(int pageNo, int pageSize, Map<String, Object> options) {
@@ -75,7 +75,7 @@ public class MemberServiceImpl implements MemberService {
         int count = memberDao.update(member);
         
         // 기존의 게시물 첨부파일은 모두 지운다. 
-        fileDao.deleteAllByMemberNo(member.getMemberNo());
+        memberfileDao.deleteAllByMemberNo(member.getMemberNo());
         
         // 다시 게시물 첨부파일을 저장한다.
         addFiles(member.getFiles(), member.getMemberNo());
@@ -85,17 +85,17 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public int delete(int no) {
         
-        fileDao.deleteAllByMemberNo(no);
+        memberfileDao.deleteAllByMemberNo(no);
         
         return memberDao.delete(no);
     }
 
     
     @Override
-    public void addFiles(List<UploadFile> files, int no) {
-        for (UploadFile file : files) {
+    public void addFiles(List<MemberUploadFile> files, int no) {
+        for (MemberUploadFile file : files) {
             file.setMemberNo(no);
-            fileDao.insert(file);
+            memberfileDao.memberInsert(file);
         }
     }
 }

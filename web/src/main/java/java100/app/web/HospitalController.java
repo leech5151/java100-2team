@@ -15,16 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java100.app.domain.Member;
-import java100.app.domain.MemberUploadFile;
-import java100.app.service.MemberService;
+import java100.app.domain.Hospital;
+import java100.app.domain.HospitalUploadFile;
+import java100.app.service.HospitalService;
 
 @Controller
-@RequestMapping("/member")
-public class MemberController {
+@RequestMapping("/hospital")
+public class HospitalController {
     
     @Autowired ServletContext servletContext;
-    @Autowired MemberService memberService;
+    @Autowired HospitalService hospitalService;
+    
     
     @RequestMapping("list")
     public String list(
@@ -33,54 +34,50 @@ public class MemberController {
             @RequestParam(value="words", required=false) String[] words,
             @RequestParam(value="oc", required=false) String orderColumn,
             @RequestParam(value="al", required=false) String align,
-            Model model) throws Exception {
-
-        // UI 제어와 관련된 코드는 이렇게 페이지 컨트롤러에 두어야 한다.
-        //
-        if (pageNo < 1) {
-            pageNo = 1;
-        }
-        
-        if (pageSize < 5 || pageSize > 15) {
-            pageSize = 5;
-        }
-        
-        HashMap<String,Object> options = new HashMap<>();
-        if (words != null && words[0].length() > 0) {
-            options.put("words", words);
-        }
-        options.put("orderColumn", orderColumn);
-        options.put("align", align);
-        
-        int totalCount = memberService.getTotalCount();
-        int lastPageNo = totalCount / pageSize;
-        if ((totalCount % pageSize) > 0) {
-            lastPageNo++;
-        }
-        
-        // view 컴포넌트가 사용할 값을 Model에 담는다.
-        model.addAttribute("pageNo", pageNo);
-        model.addAttribute("lastPageNo", lastPageNo);
-        model.addAttribute("list", memberService.list(pageNo, pageSize, options));
-        return "member/list";
+            Model model)throws Exception{  if (pageNo < 1) {
+                pageNo = 1;
+            }
+            
+            if (pageSize < 5 || pageSize > 15) {
+                pageSize = 5;
+            }
+            
+            HashMap<String,Object> options = new HashMap<>();
+            if (words != null && words[0].length() > 0) {
+                options.put("words", words);
+            }
+            options.put("orderColumn", orderColumn);
+            options.put("align", align);
+            
+            int totalCount = hospitalService.getTotalCount();
+            int lastPageNo = totalCount / pageSize;
+            if ((totalCount % pageSize) > 0) {
+                lastPageNo++;
+            }
+            
+            // view 컴포넌트가 사용할 값을 Model에 담는다.
+            model.addAttribute("pageNo", pageNo);
+            model.addAttribute("lastPageNo", lastPageNo);
+            model.addAttribute("list", hospitalService.list(pageNo, pageSize, options));
+            return "hospital/list";
     }
     
     @RequestMapping("form")
     public String form() throws Exception {
-        return "member/form";
+        return "hospital/form";
         
     }
 
     @RequestMapping("add")
     public String add(
-            Member member,
+            Hospital hospital,
             MultipartFile[] file
 //            @ModelAttribute(value="loginUser") Member loginUser
             ) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
 
-        ArrayList<MemberUploadFile> uploadFiles = new ArrayList<>();
+        ArrayList<HospitalUploadFile> uploadFiles = new ArrayList<>();
         
         for (MultipartFile part : file) {
             if (part.isEmpty())
@@ -88,16 +85,16 @@ public class MemberController {
             
             String filename = this.writeUploadFile(part, uploadDir);
             
-            uploadFiles.add(new MemberUploadFile(filename));
+            uploadFiles.add(new HospitalUploadFile(filename));
         }
         
-        member.setFiles(uploadFiles);
+        hospital.setFiles(uploadFiles);
 
         // 게시글 작성자는 로그인 사용자이다. 
 //        member.setWriter(loginUser);
         
         // 게시글 등록
-        memberService.add(member);
+        hospitalService.add(hospital);
         
         return "redirect:list";
     }
@@ -105,18 +102,18 @@ public class MemberController {
     @RequestMapping("{no}")
     public String view(@PathVariable int no, Model model) throws Exception {
         
-        model.addAttribute("member", memberService.get(no));
-        return "member/view";
+        model.addAttribute("hospital", hospitalService.get(no));
+        return "hospital/view";
     }
 
     @RequestMapping("update")
     public String update(
-            Member member, 
+            Hospital hospital, 
             MultipartFile[] file) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
 
-        ArrayList<MemberUploadFile> uploadFiles = new ArrayList<>();
+        ArrayList<HospitalUploadFile> uploadFiles = new ArrayList<>();
         
         for (MultipartFile part : file) {
             if (part.isEmpty())
@@ -124,20 +121,21 @@ public class MemberController {
             
             String filename = this.writeUploadFile(part, uploadDir);
             
-            uploadFiles.add(new MemberUploadFile(filename));
+            uploadFiles.add(new HospitalUploadFile(filename));
         }
         
-        member.setFiles(uploadFiles);
+        hospital.setFiles(uploadFiles);
 
-        memberService.update(member);
+        hospitalService.update(hospital);
         
         return "redirect:list";
     }
 
     @RequestMapping("delete")
     public String delete(int no) throws Exception {
-
-        memberService.delete(no);
+        
+        
+        hospitalService.delete(no);
         return "redirect:list";
     }
 
@@ -172,12 +170,5 @@ public class MemberController {
         part.transferTo(new File(path + "/" + filename));
         return filename;
     }    
+
 }
-
-
-
-
-
-
-
-

@@ -3,8 +3,7 @@ package java100.app.service;
 import java.util.List;
 import java.util.Map;
 
-import java100.app.domain.Member;
-import java100.app.domain.MemberUploadFile;
+import java100.app.domain.Diagnosis;
 
 //=> "역할"을 강조할 때는 "객체(object)"라는 말보다는 
 //"컴포넌트(component)"라는 말을 사용한다.
@@ -15,14 +14,12 @@ import java100.app.domain.MemberUploadFile;
 //담당하기 때문에 인터페이스에 선언하는 메서드 이름도 
 //가능한 업무 용어를 사용한다.
 //
-public interface MemberService {
-    List<Member> list(int pageNo, int pageSize, Map<String,Object> options);
+public interface DiagnosisService {
+    List<Diagnosis> list(int pageNo, int pageSize, Map<String,Object> options);
     int getTotalCount();
-    int add(Member score);
-    void addFiles(List<MemberUploadFile> files, int memberNo);
-    Member get(int no);
-    Member get(String email, String password);
-    int update(Member member);
+    int add(Diagnosis diagnosis);
+    Diagnosis get(int no);
+    int update(Diagnosis diagnosis);
     int delete(int no);
 }
 

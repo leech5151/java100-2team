@@ -1,29 +1,30 @@
 package java100.app.domain;
 
-public class UploadFile {
+public class HospitalUploadFile {
     int no;
     String filename;
-    int memberNo;
+    int hospitalNo;
     
-    public UploadFile() {}
     
-    public UploadFile(String filename) {
+    public HospitalUploadFile() {}
+    
+    public HospitalUploadFile(String filename) {
         this(0, filename);
     }
 
-    public UploadFile(int no, String filename) {
+    public HospitalUploadFile(int no, String filename) {
         this.no = no;
         this.filename = filename;
     }
-    
+
     public int getNo() {
         return no;
     }
-    
+
     public void setNo(int no) {
         this.no = no;
     }
-    
+
     public String getFilename() {
         return filename;
     }
@@ -32,12 +33,13 @@ public class UploadFile {
         this.filename = filename;
     }
 
-    public int getMemberNo() {
-        return memberNo;
+    public int getHospitalNo() {
+        return hospitalNo;
     }
 
-    public void setMemberNo(int memberNo) {
-        this.memberNo = memberNo;
+    public void setHospitalNo(int hospitalNo) {
+        this.hospitalNo = hospitalNo;
     }
     
+ 
 }

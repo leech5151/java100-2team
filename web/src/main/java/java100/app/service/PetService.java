@@ -10,12 +10,6 @@ public interface PetService {
     int getTotalCount();
     int add(Pet pet);
     int delete(int no);
-    /*
-    void addFiles(List<UploadFile> files, int memberNo);
-    Member get(int no);
-    Member get(String email, String password);
-    int update(Member member);
-    */
 }
 
 

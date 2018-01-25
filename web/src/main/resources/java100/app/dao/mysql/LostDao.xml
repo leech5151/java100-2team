@@ -127,12 +127,6 @@
         where l.l_no=#{value}
     </select>
     
-        
-
-    
-
-
-        
     <update id="updateViewCount" parameterType="int">
         update lost set 
             vwcnt=vwcnt + 1

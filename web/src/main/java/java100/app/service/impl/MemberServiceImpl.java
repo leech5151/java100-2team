@@ -7,17 +7,17 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java100.app.dao.FileDao;
 import java100.app.dao.MemberDao;
+import java100.app.dao.MemberFileDao;
 import java100.app.domain.Member;
-import java100.app.domain.UploadFile;
+import java100.app.domain.MemberUploadFile;
 import java100.app.service.MemberService;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 
     @Autowired MemberDao memberDao;
-    @Autowired FileDao fileDao;
+    @Autowired MemberFileDao fileDao;
     
     @Override
     public List<Member> list(int pageNo, int pageSize, Map<String, Object> options) {
@@ -92,8 +92,8 @@ public class MemberServiceImpl implements MemberService {
 
     
     @Override
-    public void addFiles(List<UploadFile> files, int no) {
-        for (UploadFile file : files) {
+    public void addFiles(List<MemberUploadFile> files, int no) {
+        for (MemberUploadFile file : files) {
             file.setMemberNo(no);
             fileDao.insert(file);
         }

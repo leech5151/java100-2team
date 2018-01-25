@@ -10,10 +10,10 @@ public interface MemberDao {
     List<Member> findAll(Map<String,Object> params);
     int countAll();
     int insert(Member member);
-    Member findByNo(int no);
+    Member findByNo(int bus_no);
     Member findByEmailAndPassword(HashMap<String, Object> params);
     int update(Member member);
-    int delete(int no);
+    int delete(int bus_no);
 }
 
 

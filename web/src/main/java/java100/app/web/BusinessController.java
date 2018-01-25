@@ -16,17 +16,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import java100.app.domain.Member;
-import java100.app.domain.MemberUploadFile;
-import java100.app.service.MemberService;
+import java100.app.domain.Business;
+import java100.app.domain.BusinessUploadFile;
+import java100.app.service.BusinessService;
 
 @Controller
-@RequestMapping("/member")
+@RequestMapping("/business")
 @SessionAttributes("loginUser")
-public class MemberController {
+public class BusinessController {
     
     @Autowired ServletContext servletContext;
-    @Autowired MemberService memberService;
+    @Autowired BusinessService businessService;
     
     @RequestMapping("list")
     public String list(
@@ -54,7 +54,7 @@ public class MemberController {
         options.put("orderColumn", orderColumn);
         options.put("align", align);
         
-        int totalCount = memberService.getTotalCount();
+        int totalCount = businessService.getTotalCount();
         int lastPageNo = totalCount / pageSize;
         if ((totalCount % pageSize) > 0) {
             lastPageNo++;
@@ -63,26 +63,26 @@ public class MemberController {
         // view 컴포넌트가 사용할 값을 Model에 담는다.
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("lastPageNo", lastPageNo);
-        model.addAttribute("list", memberService.list(pageNo, pageSize, options));
-        return "member/list";
+        model.addAttribute("list", businessService.list(pageNo, pageSize, options));
+        return "business/list";
     }
     
     @RequestMapping("form")
     public String form() throws Exception {
-        return "member/form";
+        return "business/form";
         
     }
-
+   
     @RequestMapping("add")
     public String add(
-            Member member,
+            Business business,
             MultipartFile[] file
-//            @ModelAttribute(value="loginUser") Member loginUser
+//            @ModelAttribute(value="loginUser") Business loginUser
             ) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
 
-        ArrayList<MemberUploadFile> uploadFiles = new ArrayList<>();
+        ArrayList<BusinessUploadFile> uploadFiles = new ArrayList<>();
         
         for (MultipartFile part : file) {
             if (part.isEmpty())
@@ -90,35 +90,43 @@ public class MemberController {
             
             String filename = this.writeUploadFile(part, uploadDir);
             
-            uploadFiles.add(new MemberUploadFile(filename));
+            uploadFiles.add(new BusinessUploadFile(filename));
         }
         
-        member.setFiles(uploadFiles);
+        business.setFiles(uploadFiles);
 
         // 게시글 작성자는 로그인 사용자이다. 
-//        member.setWriter(loginUser);
+//        business.setWriter(loginUser);
         
         // 게시글 등록
-        memberService.add(member);
+        businessService.add(business);
         
         return "redirect:list";
     }
 
-    @RequestMapping("{no}")
-    public String view(@PathVariable int no, Model model) throws Exception {
+    @RequestMapping("{bus_no}")
+    public String view(@PathVariable int bus_no, Model model) throws Exception {
         
-        model.addAttribute("member", memberService.get(no));
-        return "member/view";
+        model.addAttribute("business", businessService.get(bus_no));
+        return "business/view";
+    }
+    
+    @RequestMapping("modify")
+    public String modoify(int bus_no, Model model) throws Exception {
+        
+        model.addAttribute("business", businessService.get(bus_no));
+        return "business/modify";
+        
     }
 
     @RequestMapping("update")
     public String update(
-            Member member, 
+            Business business, 
             MultipartFile[] file) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
 
-        ArrayList<MemberUploadFile> uploadFiles = new ArrayList<>();
+        ArrayList<BusinessUploadFile> uploadFiles = new ArrayList<>();
         
         for (MultipartFile part : file) {
             if (part.isEmpty())
@@ -126,20 +134,20 @@ public class MemberController {
             
             String filename = this.writeUploadFile(part, uploadDir);
             
-            uploadFiles.add(new MemberUploadFile(filename));
+            uploadFiles.add(new BusinessUploadFile(filename));
         }
         
-        member.setFiles(uploadFiles);
+        business.setFiles(uploadFiles);
 
-        memberService.update(member);
+        businessService.update(business);
         
         return "redirect:list";
     }
 
     @RequestMapping("delete")
-    public String delete(int no) throws Exception {
+    public String delete(int bus_no) throws Exception {
 
-        memberService.delete(no);
+        businessService.delete(bus_no);
         return "redirect:list";
     }
 

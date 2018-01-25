@@ -22,6 +22,12 @@
   </li>
 </ul>
 
+<ul class='navbar-nav mr-auto'>
+  <li class='nav-item'>
+    <a class='nav-link' href='../business/list'>회원가입</a>
+  </li>
+</ul>
+
 <c:choose>
     <c:when test="${sessionScope.loginUser != null}">
         ${sessionScope.loginUser.name}

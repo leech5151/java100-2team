@@ -7,10 +7,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/leech5151/java100-2team.git
 import java100.app.dao.MemberFileDao;
 import java100.app.dao.MemberDao;
 import java100.app.domain.Member;

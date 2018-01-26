@@ -32,7 +32,7 @@
 	<div class='col-sm-10'>
 	<input class='form-control' id='password' type='password' name='password'>
 	</div>
-</div>
+</div>      
 
 <div class='form-group row'>
 	<div class="col-sm-2"></div>

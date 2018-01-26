@@ -29,4 +29,8 @@ public class AuthInterceptor implements HandlerInterceptor {
         
         return true;
     }
+
+    public static void main(String[] args) {
+        System.out.println("1"+1);
+    }
 }

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- DAO 객체를 자동으로 생성하려면,
+     namespace의 값이 인터페이스 이름과 같아야 한다. -->
+<mapper namespace="java100.app.dao.DiagnosisDao">
+
+    <resultMap type="diagnosis" id="diagnosisMap">
+    	<id column="dgn_no" property="diagnosisNo"/>
+        <result column="dgn_cg" property="diagnosisCategory"/>
+        <result column="dgn_name" property="diagnosisName"/>
+        <result column="dgn_conts" property="diagnosisContents"/>
+        <result column="date_rec" property="dateRecording"/>
+        <result column="weight" property="dogweight"/>
+        <result column="recd" property="recorder"/>
+        <result column="rems" property="remarks"/>
+       	
+       	<association property="member" javaType="member">
+			<id column="m_no" property="memberNo"/>
+			<result column="m_name" property="name"/>
+		</association>
+		
+        <association property="hospital" javaType="hospital">
+			<id column="hp_no" property="hospitalNo"/>
+			<result column="hp_name" property="hospitalName"/>
+		</association>
+        
+        
+        
+    </resultMap>
+    <select id="findAll" resultMap="diagnosisMap" parameterType="map">
+         select 
+            d.dgn_no,
+            d.dgn_cg,
+            d.dgn_name,
+            d.dgn_conts,
+            m.name as m_name,
+            h.hp_name as hp_name
+       	 	from dgn as d 
+       	 	left join hp as h on d.hp_no=h.hp_no 
+        	left join memb as m on d.m_no=m.m_no
+
+   <!-- <if test="words != null">
+	        <where>
+	            <foreach collection="words" item="word">
+	                or title like '%${word}%'
+	            </foreach>
+	        </where>
+        </if>
+        
+        정렬 조건에 따라 SQL문을 변경한다.
+        order by 
+        <choose>
+            <when test="orderColumn == 'name' and align == 'desc'">
+                name desc
+            </when>
+            <when test="orderColumn == 'name' and align == 'asc'">
+                name asc
+            </when>
+            <when test="orderColumn == 'nic_name' and align == 'desc'">
+                nic_name desc
+            </when>
+            <when test="orderColumn == 'nic_name' and align == 'asc'">
+                nic_name asc
+            </when>
+            <when test="orderColumn == 'email' and align == 'desc'">
+                email desc
+            </when>
+            <when test="orderColumn == 'email' and align == 'asc'">
+                email asc
+            </when>
+            <when test="orderColumn == 'cre_date' and align == 'desc'">
+                cre_date desc
+            </when>
+            <when test="orderColumn == 'cre_date' and align == 'asc'">
+                cre_date asc
+            </when>
+            <otherwise>
+                m_no desc
+            </otherwise>
+        </choose> -->
+       
+     <!--    페이지징 처리 -->
+        limit #{startIndex}, #{size}
+    </select>
+    
+  <select id="countAll" resultType="int">
+        select count(*) from memb
+    </select>
+    
+   <select id="findByNo" resultMap="diagnosisMap" parameterType="int">
+        select 
+        	d.dgn_no,
+            d.dgn_cg,
+            d.dgn_name,
+            d.dgn_conts,
+            d.weight,
+            d.date_rec,
+            d.recd,
+            d.rems,
+            m.name as m_name,
+            h.hp_name as hp_name
+       	 	from dgn as d 
+       	 	left join hp as h on d.hp_no=h.hp_no 
+        	left join memb as m on d.m_no=m.m_no
+        	where d.dgn_no=#{value}
+    </select>
+    
+  
+    <insert id="insert" parameterType="diagnosis"
+        useGeneratedKeys="true" keyColumn="dgn_no" keyProperty="diagnosisNo">
+       insert into dgn (dgn_cg,dgn_name,dgn_conts,date_rec,recd,rems,m_no,hp_no,weight)
+	   values(#{diagnosisCategory},#{diagnosisName},#{diagnosisContents},now(),#{recorder},#{remarks},#{member.memberNo},#{hospital.hospitalNo},#{dogweight})
+    </insert>
+
+
+    <update id="update" parameterType="diagnosis">
+        update dgn set
+        weight=#{dogweight}, 
+        dgn_cg=#{diagnosisCategory}, 
+        dgn_name=#{diagnosisName}, 
+        dgn_conts=#{diagnosisContents},
+        date_rec=#{dateRecording},
+        recd=#{recorder}, 
+        rems=#{remarks}
+        where dgn_no=#{diagnosisNo}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from dgn	
+        where dgn_no=#{value}
+    </delete> 
+</mapper>  

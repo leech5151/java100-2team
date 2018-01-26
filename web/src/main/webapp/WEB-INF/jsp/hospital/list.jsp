@@ -1,4 +1,4 @@
-<%@page import="java100.app.domain.Lost"%>
+<%@page import="java100.app.domain.Member"%>
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>미아찾기</title>
+<title>병원게시판</title>
 <link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <link rel='stylesheet' href='../../css/common.css'>
 </head>
@@ -17,27 +17,29 @@
 
 <jsp:include page="../header.jsp"/>
 
-<h1>미아찾기</h1>
+<h1>병원 목록</h1>
 
 <jsp:include page="../listToolbar.jsp"/>
 
 <table class='table table-hover'>
 <thead>
 <tr>
-<th>미아번호</th><th>강아지이름</th><th>품종</th><th>조회수</th><th>분실강아지사진</th>
+<th>번호</th><th>병원명</th><th>운영시간</th><th>상세주소</th><th>전화번호</th><th>의료진</th><th>사진</th>
 </tr>
 </thead>
 <tbody>
 
-<c:forEach items="${list}" var="lost">
+<c:forEach items="${list}" var="hospital">
         <tr>
-        <td>${lost.lostNo}</td>
-        <td><a href='${lost.lostNo}'>${lost.petName}</a></td>
-        <td>${lost.breed}</td>
-        <td>${lost.viewCount}</td>
+        <td>${hospital.hospitalNo}</td>
+        <td><a href='${hospital.hospitalNo}'>${hospital.hospitalName}</a></td>
+        <td>${hospital.openTime}~${hospital.closeTime}</td>
+         <td>${hospital.detailAddress}</td>
+        <td>${hospital.hospitalTel}</td>
+        <td>${hospital.medicalStaff}</td>
         <td>
-        <c:forEach items="${lost.files}" var="file">
-        <img src="${contextPath}/download/${file.filename}" alt="${file.filename}" width="50" height="50">
+        <c:forEach items="${hospital.files}" var="file">
+        <img src="${contextPath}/download/${file.filename}" alt="${file.filename}" width="50px" height="50px">
         </c:forEach>
         </td>
         </tr>

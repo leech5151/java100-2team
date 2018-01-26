@@ -64,32 +64,44 @@
         
         order by 
         <choose>
-            <when test="orderColumn == 'name' and align == 'desc'">
-                name desc
+            <when test="orderColumn == 'm_no' and align == 'desc'">
+                m_no desc
             </when>
-            <when test="orderColumn == 'name' and align == 'asc'">
-                name asc
+            <when test="orderColumn == 'm_no' and align == 'asc'">
+                m_no asc
             </when>
-            <when test="orderColumn == 'nic_name' and align == 'desc'">
-                nic_name desc
+            <when test="orderColumn == 'p_name' and align == 'desc'">
+                p_name desc
             </when>
-            <when test="orderColumn == 'nic_name' and align == 'asc'">
-                nic_name asc
+            <when test="orderColumn == 'p_name' and align == 'asc'">
+                p_name asc
             </when>
-            <when test="orderColumn == 'email' and align == 'desc'">
-                email desc
+            <when test="orderColumn == 'brd' and align == 'desc'">
+                brd desc
             </when>
-            <when test="orderColumn == 'email' and align == 'asc'">
-                email asc
+            <when test="orderColumn == 'brd' and align == 'asc'">
+                brd asc
             </when>
-            <when test="orderColumn == 'cre_date' and align == 'desc'">
-                cre_date desc
+            <when test="orderColumn == 'cha' and align == 'desc'">
+                cha desc
             </when>
-            <when test="orderColumn == 'cre_date' and align == 'asc'">
-                cre_date asc
+            <when test="orderColumn == 'cha' and align == 'asc'">
+                cha asc
+            </when>
+            <when test="orderColumn == 'rwd' and align == 'desc'">
+                rwd desc
+            </when>
+            <when test="orderColumn == 'rwd' and align == 'asc'">
+                rwd asc
+            </when>
+            <when test="orderColumn == 'vwcnt' and align == 'desc'">
+                vwcnt desc
+            </when>
+            <when test="orderColumn == 'vwcnt' and align == 'asc'">
+                vwcnt asc
             </when>
             <otherwise>
-                m_no desc
+                l_no asc
             </otherwise>
         </choose>
 
@@ -127,12 +139,6 @@
         where l.l_no=#{value}
     </select>
     
-        
-
-    
-
-
-        
     <update id="updateViewCount" parameterType="int">
         update lost set 
             vwcnt=vwcnt + 1

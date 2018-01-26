@@ -106,7 +106,7 @@ public class Member {
         this.createDate = createDate;
     }
 
-    public boolean isPush() {
+    public boolean getPush() {
         return push;
     }
 

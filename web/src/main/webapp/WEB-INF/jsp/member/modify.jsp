@@ -52,10 +52,10 @@
         </div>
         </div>
  
-        <div class='form-group row'>
+        <div class='form-group row' id="memberLabel"> 
         <label for='memberType' class='col-sm-2 col-form-label'>회원유형</label> 
-        <div class="selectbox">
-        <select class="grouped_select optional form-control" id="memberType" name="memberType">
+        <div class="selectbox" >
+        <select class="grouped_select optional form-control" id="memberType_modify" name="memberType">
         <option value="선택하세요">선택하세요</option>
         <option value="일반유저">일반유저</option>
         <option value="사업자회원">사업자</option>

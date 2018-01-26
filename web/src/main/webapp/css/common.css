@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .container {
-    width: 680px;
+    width: 1000px; !important;
 }
 
 footer {
@@ -18,5 +18,11 @@ footer {
 	float: right;
 }
 
+#memberType_modify {
+	margin-left: 15px;
+}
 
+#memberType_add {
+	margin-left: 15px;
+}
 

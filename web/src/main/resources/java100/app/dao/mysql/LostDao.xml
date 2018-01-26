@@ -60,7 +60,7 @@
                     or title like '%${word}%'
                 </foreach>
             </where>
-        </if>
+            </if>
         
         order by 
         <choose>

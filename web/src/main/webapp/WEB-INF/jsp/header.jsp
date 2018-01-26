@@ -15,10 +15,12 @@
 <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
   <span class='navbar-toggler-icon'></span>
 </button>
+
 <div class='collapse navbar-collapse' id='navbarNav'>
+
 <ul class='navbar-nav mr-auto'>
   <li class='nav-item'>
-    <a class='nav-link' href='../member/list'>회원가입</a>
+    <a class='nav-link' href='../member/list'>회원정보</a>
   </li>
 </ul>
 

@@ -82,19 +82,10 @@
 </div>
 </div>
 
-<!-- 
-<div class='form-group row'>
-<label for='memberType' class='col-sm-2 col-form-label'>카테고리</label>
-<div class='col-sm-10'>
-<input class='form-control' id='memberType' type='text' name='memberType'>
-</div>
-</div>
-  -->
-  
 <div class='form-group row'>
 <label for='memberType' class='col-sm-2 col-form-label'>회원유형</label> 
 <div class="selectbox">
-<select class="grouped_select optional form-control" id="memberType" name="memberType">
+<select class="grouped_select optional form-control" id="memberType_add" name="memberType">
 <option value="선택하세요" selected="selected">선택하세요</option>
 <option value="일반유저">일반유저</option>
 <option value="사업자회원">사업자</option>

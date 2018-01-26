@@ -17,18 +17,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import java100.app.domain.Lost;
-import java100.app.domain.LostUploadFile;
 import java100.app.domain.Member;
-import java100.app.service.LostService;
+import java100.app.domain.Trainning;
+import java100.app.domain.TrainningUploadFile;
+import java100.app.service.TrainningService;
 
 @Controller
-@RequestMapping("/lost")
+@RequestMapping("/trainning")
 @SessionAttributes("loginUser")
-public class LostController {
+public class TrainningController {
     
     @Autowired ServletContext servletContext;
-    @Autowired LostService lostService;
+    @Autowired TrainningService trainningService;
     
     @RequestMapping("list")
     public String list(
@@ -39,6 +39,8 @@ public class LostController {
             @RequestParam(value="al", required=false) String align,
             Model model) throws Exception {
 
+        // UI 제어와 관련된 코드는 이렇게 페이지 컨트롤러에 두어야 한다.
+        //
         if (pageNo < 1) {
             pageNo = 1;
         }
@@ -54,33 +56,35 @@ public class LostController {
         options.put("orderColumn", orderColumn);
         options.put("align", align);
         
-        int totalCount = lostService.getTotalCount();
+        int totalCount = trainningService.getTotalCount();
         int lastPageNo = totalCount / pageSize;
         if ((totalCount % pageSize) > 0) {
             lastPageNo++;
         }
         
+        // view 컴포넌트가 사용할 값을 Model에 담는다.
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("lastPageNo", lastPageNo);
-        model.addAttribute("list", lostService.list(pageNo, pageSize, options));
-        return "lost/list";
+        model.addAttribute("list", trainningService.list(pageNo, pageSize, options));
+        return "trainning/list";
     }
-
+    
     @RequestMapping("form")
     public String form() throws Exception {
-        return "lost/form";
+        return "trainning/form";
+        
     }
-    
-    
+
     @RequestMapping("add")
     public String add(
-            Lost lost,
-            MultipartFile[] file,
-            @ModelAttribute(value="loginUser") Member loginUser) throws Exception {
+            Trainning trainning,
+            @ModelAttribute(value="loginUser") Member loginUser,
+            MultipartFile[] file
+            ) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
-        
-        ArrayList<LostUploadFile> uploadFiles = new ArrayList<>();
+
+        ArrayList<TrainningUploadFile> uploadFiles = new ArrayList<>();
         
         for (MultipartFile part : file) {
             if (part.isEmpty())
@@ -88,33 +92,31 @@ public class LostController {
             
             String filename = this.writeUploadFile(part, uploadDir);
             
-            uploadFiles.add(new LostUploadFile(filename));
+            uploadFiles.add(new TrainningUploadFile(filename));
         }
         
-        lost.setFiles(uploadFiles);
-        
-        lost.setRegistrant(loginUser);
-        
-        lostService.add(lost);
+        trainning.setFiles(uploadFiles);
+        trainning.setMember(loginUser);
+        trainningService.add(trainning);
         
         return "redirect:list";
     }
-    
+
     @RequestMapping("{no}")
     public String view(@PathVariable int no, Model model) throws Exception {
         
-        model.addAttribute("lost", lostService.get(no));
-        return "lost/view";
+        model.addAttribute("trainning", trainningService.get(no));
+        return "trainning/view";
     }
 
     @RequestMapping("update")
     public String update(
-            Lost lost, 
+            Trainning trainning, 
             MultipartFile[] file) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
 
-        ArrayList<LostUploadFile> uploadFiles = new ArrayList<>();
+        ArrayList<TrainningUploadFile> uploadFiles = new ArrayList<>();
         
         for (MultipartFile part : file) {
             if (part.isEmpty())
@@ -122,12 +124,12 @@ public class LostController {
             
             String filename = this.writeUploadFile(part, uploadDir);
             
-            uploadFiles.add(new LostUploadFile(filename));
+            uploadFiles.add(new TrainningUploadFile(filename));
         }
         
-        lost.setFiles(uploadFiles);
+        trainning.setFiles(uploadFiles);
 
-        lostService.update(lost);
+        trainningService.update(trainning);
         
         return "redirect:list";
     }
@@ -135,14 +137,15 @@ public class LostController {
     @RequestMapping("delete")
     public String delete(int no) throws Exception {
 
-        lostService.delete(no);
+        trainningService.delete(no);
         return "redirect:list";
     }
-    
-    
+
     long prevMillis = 0;
     int count = 0;
     
+    // 다른 클라이언트가 보낸 파일명과 중복되지 않도록 
+    // 서버에 파일을 저장할 때는 새 파일명을 만든다.
     synchronized private String getNewFilename(String filename) {
         long currMillis = System.currentTimeMillis();
         if (prevMillis != currMillis) {
@@ -153,6 +156,7 @@ public class LostController {
         return  currMillis + "_" + count++ + extractFileExtName(filename); 
     }
     
+    // 파일명에서 뒤의 확장자명을 추출한다.
     private String extractFileExtName(String filename) {
         int dotPosition = filename.lastIndexOf(".");
         
@@ -167,7 +171,7 @@ public class LostController {
         String filename = getNewFilename(part.getOriginalFilename());
         part.transferTo(new File(path + "/" + filename));
         return filename;
-    }  
+    }    
 }
 
 

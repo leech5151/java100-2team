@@ -20,11 +20,8 @@
   <li class='nav-item'>
     <a class='nav-link' href='../member/list'>회원가입</a>
   </li>
-</ul>
-
-<ul class='navbar-nav mr-auto'>
-  <li class='nav-item'>
-    <a class='nav-link' href='../lost/list'>미아찾기</a>
+    <li class='nav-item'>
+    <a class='nav-link' href='../trainning/list'>훈련</a>
   </li>
 </ul>
 

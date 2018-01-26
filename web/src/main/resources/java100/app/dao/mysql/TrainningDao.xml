@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- DAO 객체를 자동으로 생성하려면,
+     namespace의 값이 인터페이스 이름과 같아야 한다. -->
+<mapper namespace="java100.app.dao.TrainningDao">
+
+    <resultMap type="trainning" id="trainningMap">
+        <id column="t_no" property="trainningNo"/>
+        <result column="ctg" property="category"/>
+        <result column="conts" property="contents"/>
+        <result column="m_conts" property="maintextContents"/>
+        <result column="vwcnt" property="viewCount"/>
+        <result column="rdt" property="registrationDate"/>
+        <result column="m_no" property="memberNo"/>
+        <result column="title" property="title"/>
+        <result column="likes" property="likes"/>
+        
+        <!-- 첨부파일 정보를 담을 수 있도록 설정한다. -->
+        <collection property="files"  ofType="trainningUploadFile">
+            <id     column="mda_no"       property="no"/>
+            <result column="file"   property="filename"/>
+            <result column="t_no"   property="trainningNo"/>
+        </collection>
+        
+    </resultMap>
+
+
+    <select id="findAll" resultMap="trainningMap" parameterType="map">
+          select 
+            t.t_no,
+            t.ctg,
+            t.title,
+            t.conts,
+            t.m_conts,
+            t.vwcnt,
+            t.rdt,
+            t.likes,
+            tm.file,
+            tm.t_no
+        from trainning as t
+        left join t_mda as tm 
+             on t.t_no=tm.t_no 
+
+        <if test="words != null">
+	        <where>
+	            <foreach collection="words" item="word">
+	                or title like '%${word}%'
+	            </foreach>
+	        </where>
+        </if>
+        
+        <!-- 정렬 조건에 따라 SQL문을 변경한다.
+        order by 
+        <choose>
+            <when test="orderColumn == 'name' and align == 'desc'">
+                name desc
+            </when>
+            <when test="orderColumn == 'name' and align == 'asc'">
+                name asc
+            </when>
+            <when test="orderColumn == 'nic_name' and align == 'desc'">
+                nic_name desc
+            </when>
+            <when test="orderColumn == 'nic_name' and align == 'asc'">
+                nic_name asc
+            </when>
+            <when test="orderColumn == 'email' and align == 'desc'">
+                email desc
+            </when>
+            <when test="orderColumn == 'email' and align == 'asc'">
+                email asc
+            </when>
+            <when test="orderColumn == 'cre_date' and align == 'desc'">
+                cre_date desc
+            </when>
+            <when test="orderColumn == 'cre_date' and align == 'asc'">
+                cre_date asc
+            </when>
+            <otherwise>
+                m_no desc
+            </otherwise>
+        </choose>
+        -->
+        <!-- 페이지징 처리 -->
+        limit #{startIndex}, #{size}
+    </select>
+    
+    <select id="countAll" resultType="int">
+        select count(*) from trainning
+    </select>
+    
+    <insert id="insert" parameterType="trainning"
+        useGeneratedKeys="true" keyColumn="t_no" keyProperty="trainningNo">
+        insert into trainning(m_no, ctg, title, conts, m_conts, vwcnt, rdt, likes)
+        values(#{member.memberNo},#{category}, #{title}, #{contents}, #{maintextContents}, #{viewCount}, now(), #{likes})
+    </insert>
+
+    <select id="findByNo" resultMap="trainningMap" parameterType="int">
+        select 
+            t.t_no,
+            t.ctg,
+            t.title,
+            t.conts,
+            t.m_conts,
+            t.vwcnt,
+            t.rdt,
+            t.likes,
+            tm.mda_no,
+            tm.file
+        from 
+            trainning as t 
+            left join t_mda as tm on t.t_no=tm.t_no
+        where t.t_no=#{value}
+         
+    </select>
+        
+    <!-- <select id="findByEmailAndPassword" 
+            resultMap="memberMap" parameterType="map">
+        <include refid="select1"/>
+        from memb
+        where email=#{email} and pwd=password(#{password})
+    </select>
+    -->
+    
+     <update id="updateViewCount" parameterType="int">
+        update trainning set 
+            vwcnt=vwcnt + 1
+        where t_no=#{trainningNo}
+    </update> 
+    
+    
+    <update id="update" parameterType="trainning">
+        update trainning set
+            title=#{title}, 
+            conts=#{contents},
+            m_conts=#{maintextContents},
+            vwcnt=#{viewCount},
+            rdt=#{registrationDate},
+            likes=#{likes} 
+        where t_no=#{trainningNo}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from trainning
+        where t_no=#{value}
+    </delete> 
+</mapper>  
+
+
+
+
+
+
+
+
+

@@ -1,29 +1,29 @@
 package java100.app.domain;
 
-public class LostUploadFile {
+public class TrainningUploadFile {
     int no;
     String filename;
-    int lostNo;
+    int trainningNo;
     
-    public LostUploadFile() {}
+    public TrainningUploadFile() {}
     
-    public LostUploadFile(String filename) {
+    public TrainningUploadFile(String filename) {
         this(0, filename);
     }
 
-    public LostUploadFile(int no, String filename) {
+    public TrainningUploadFile(int no, String filename) {
         this.no = no;
         this.filename = filename;
-    }
-    
+    } 
+
     public int getNo() {
         return no;
     }
-    
+
     public void setNo(int no) {
         this.no = no;
     }
-    
+
     public String getFilename() {
         return filename;
     }
@@ -32,12 +32,14 @@ public class LostUploadFile {
         this.filename = filename;
     }
 
-    public int getLostNo() {
-        return lostNo;
+    public int getTrainningNo() {
+        return trainningNo;
     }
 
-    public void setLostNo(int lostNo) {
-        this.lostNo = lostNo;
+    public void setTrainningNo(int trainningNo) {
+        this.trainningNo = trainningNo;
     }
-
+    
+    
+    
 }

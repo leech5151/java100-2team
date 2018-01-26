@@ -77,7 +77,6 @@ public class MemberController {
     public String add(
             Member member,
             MultipartFile[] file
-//            @ModelAttribute(value="loginUser") Member loginUser
             ) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
@@ -95,10 +94,6 @@ public class MemberController {
         
         member.setFiles(uploadFiles);
 
-        // 게시글 작성자는 로그인 사용자이다. 
-//        member.setWriter(loginUser);
-        
-        // 게시글 등록
         memberService.add(member);
         
         return "redirect:list";
@@ -109,6 +104,13 @@ public class MemberController {
         
         model.addAttribute("member", memberService.get(no));
         return "member/view";
+    }
+    
+    @RequestMapping("modify")
+    public String modify(int no, Model model) throws Exception {
+        
+        model.addAttribute("member", memberService.get(no));
+        return "member/modify";
     }
 
     @RequestMapping("update")
@@ -132,6 +134,10 @@ public class MemberController {
         member.setFiles(uploadFiles);
 
         memberService.update(member);
+        if (member.getPush()) 
+            System.out.println("true");
+        else
+            System.out.println("false");
         
         return "redirect:list";
     }

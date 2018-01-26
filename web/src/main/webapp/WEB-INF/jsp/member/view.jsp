@@ -18,7 +18,6 @@
 <h1>회원 상세정보</h1>
 
 <c:if test="${not empty member}">
-        <form action='update' method='post' enctype="multipart/form-data">
         
         <div class='form-group row'>
         <label for='memberNo' class='col-sm-2 col-form-label'>번호</label>
@@ -39,23 +38,31 @@
         <div class='form-group row'>
         <label for='nicname' class='col-sm-2 col-form-label'>별명</label>
         <div class='col-sm-10'>
-        <input class='form-control' id='nicname' type='text' 
+        <input class='form-control' readonly id='nicname' type='text' 
                 name='nicname' value='${member.nicname}'>
+        </div>
+        </div>
+        
+        <div class='form-group row'>
+        <label for='memberType' class='col-sm-2 col-form-label'>회원유형</label>
+        <div class='col-sm-10'>
+        <input class='form-control' readonly id='memberType' type='text' 
+                name='memberType' value='${member.memberType}'>
         </div>
         </div>
         
         <div class='form-group row'>
         <label for='email' class='col-sm-2 col-form-label'>이메일</label>
         <div class='col-sm-10'>
-        <input class='form-control' id='email' type='text' 
+        <input class='form-control' readonly id='email' type='text' 
                 name='email' value='${member.email}'>
         </div>
         </div>
-        
+ 
         <div class='form-group row'>
         <label for='password' class='col-sm-2 col-form-label'>암호</label>
         <div class='col-sm-10'>
-        <input class='form-control' id='password' type='password' 
+        <input class='form-control' readonly id='password' type='password' 
                 name='password' value='${member.password}'>
         </div>
         </div>
@@ -63,15 +70,23 @@
         <div class='form-group row'>
         <label for='tel' class='col-sm-2 col-form-label'>전화번호</label>
         <div class='col-sm-10'>
-        <input class='form-control' id='tel' type='text' 
+        <input class='form-control' readonly id='tel' type='text' 
                 name='tel' value='${member.tel}'>
         </div>
         </div>
         
         <div class='form-group row'>
+        <label for='push' class='col-sm-2 col-form-label'>알람수신여부</label>
+        <div class='col-sm-10'>
+        <input class='form-control' readonly id='push' type='text' 
+                name='push' value='${member.push}'>
+        </div>
+        </div>
+		
+        <div class='form-group row'>
         <label for='postalNo' class='col-sm-2 col-form-label'>우편번호</label>
         <div class='col-sm-10'>
-        <input class='form-control' id='tel' type='text' 
+        <input class='form-control' readonly id='tel' type='text' 
                 name='postalNo' value='${member.postalNo}'>
         </div>
         </div>
@@ -79,7 +94,7 @@
         <div class='form-group row'>
         <label for='primaryAddress' class='col-sm-2 col-form-label'>기본주소</label>
         <div class='col-sm-10'>
-        <input class='form-control' id='primaryAddress' type='text' 
+        <input class='form-control' readonly id='primaryAddress' type='text' 
                 name='primaryAddress' value='${member.primaryAddress}'>
         </div>
         </div>
@@ -87,16 +102,8 @@
         <div class='form-group row'>
         <label for='detailAddress' class='col-sm-2 col-form-label'>상세주소</label>
         <div class='col-sm-10'>
-        <input class='form-control' id='detailAddress' type='text' 
+        <input class='form-control' readonly id='detailAddress' type='text' 
                 name='detailAddress' value='${member.detailAddress}'>
-        </div>
-        </div>
-        
-        <div class='form-group row'>
-        <label for='memberType' class='col-sm-2 col-form-label'>서비스종류</label>
-        <div class='col-sm-10'>
-        <input class='form-control' id='memberType' type='text' 
-                name='memberType' value='${member.memberType}'>
         </div>
         </div>
         
@@ -118,19 +125,11 @@
         </div>
         
         <div class='form-group row'>
-		<label for='file1' class='col-sm-2 col-form-label'>사진</label>
-		<div class='col-sm-10'>
-		<input type="file" class="form-control-file" id="file1" name="file">
-		</div>
-		</div>
-        
-        <div class='form-group row'>
         <div class='col-sm-10'>
-        <button class='btn btn-primary btn-sm'>변경</button>
-        <a href='delete?no=${member.memberNo}' class='btn btn-primary btn-sm'>삭제</a>
+        <a href="modify?no=${member.memberNo}" class="btn btn-primary btn-sm">변경</a>
+        <a href="list" class="btn btn-primary btn-sm">돌아가기</a>
         </div>
         </div>
-        </form>
         
 </c:if>
 <c:if test="${empty member}">

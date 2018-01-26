@@ -1,10 +1,11 @@
+
 package java100.app.domain;
 
 public class MemberUploadFile {
     int no;
     String filename;
     int memberNo;
-      
+    
     public MemberUploadFile() {}
     
     public MemberUploadFile(String filename) {
@@ -15,15 +16,15 @@ public class MemberUploadFile {
         this.no = no;
         this.filename = filename;
     }
-
+    
     public int getNo() {
         return no;
     }
-
+    
     public void setNo(int no) {
         this.no = no;
     }
-
+    
     public String getFilename() {
         return filename;
     }
@@ -38,6 +39,6 @@ public class MemberUploadFile {
 
     public void setMemberNo(int memberNo) {
         this.memberNo = memberNo;
-    }   
+    }
     
 }

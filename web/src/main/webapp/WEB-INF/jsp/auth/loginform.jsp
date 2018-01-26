@@ -45,7 +45,7 @@
 	</div>
 </div> 
 
-<div class='form-group row'>
+<div class='form-group row' align="left">
 	<div class='col-sm-10'>
 	<button class='btn btn-primary btn-sm'>로그인</button>
 	</div>

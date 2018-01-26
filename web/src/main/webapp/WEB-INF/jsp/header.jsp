@@ -8,7 +8,7 @@
 <nav class='navbar navbar-expand-lg navbar-light bg-light'>
 <a class='navbar-brand' href='../../index.html'>
   <img src='${contextPath}/images/bootstrap-solid.svg' width='30' height='30' class='d-inline-block align-top' alt=''>
-  비트캠프
+  Balance Pet
 </a>
 
 <c:if test="${empty menuVisible or menuVisible == true}">
@@ -29,6 +29,18 @@
 <ul class='navbar-nav mr-auto'>
   <li class='nav-item'>
     <a class='nav-link' href='../diagnosis/list'>진료목록</a>
+  </li>
+</ul>
+
+<ul class='navbar-nav mr-auto'>
+  <li class='nav-item'>
+    <a class='nav-link' href='../business/list'>서비스</a>
+  </li>
+</ul>
+
+<ul class='navbar-nav mr-auto'>
+  <li class='nav-item'>
+    <a class='nav-link' href='../lost/list'>미아찾기</a>
   </li>
 </ul>
 

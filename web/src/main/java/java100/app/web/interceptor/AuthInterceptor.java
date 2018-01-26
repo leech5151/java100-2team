@@ -26,7 +26,6 @@ public class AuthInterceptor implements HandlerInterceptor {
             // 로그인 된 상태가 아니라면 다음 인터셉터의 실행을 모두 멈추고,
             // 즉시 로그인 폼으로 간다.
         }
-        
         return true;
     }
 

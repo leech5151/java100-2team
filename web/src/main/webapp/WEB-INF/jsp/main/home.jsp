@@ -1,7 +1,10 @@
+<%@page import="java100.app.domain.Member"%>
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,6 +33,32 @@
   </head>
 
   <body id="page-top">
+  
+  <table class='table table-hover'>
+<thead>
+<tr>
+<th>번호</th><th>이름</th><th>닉네임</th><th>회원유형</th><th>알람수신여부</th><th>이메일</th><th>등록일자</th><th>회원사진</th><th>강아지정보</th>
+</tr>
+</thead>
+<tbody>
+
+<c:if test="${not empty main_list}">
+        
+        <div class='form-group row'>
+        <label class='col-sm-2 col-form-label'>첨부파일</label>
+        <div class='col-sm-10'>
+        <c:forEach items="${main_list.files}" var="file">
+          <a href="${contextPath}/download/${file.filename}">${file.filename}</a><br>
+        </c:forEach>
+        </div>
+        </div>
+        
+</c:if>
+
+</tbody>
+</table>
+
+  <%-- 
 	<div class='form-group row' align="right" >
 	    <div class='col-sm-10'>
 <!-- 	    <button class='btn btn-primary btn-sm' id="loginbtn" font="">로그인</button> -->
@@ -40,8 +69,8 @@
         <span class="d-block d-lg-none">Start Bootstrap</span>
         <span class="d-none d-lg-block">
         <c:forEach items="${main_list}" var="member">
-        <c:forEach items="${member.files}" var="file">
-          <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="${contextPath}/download/${file.filename}" alt="${file.filename}">
+        <c:forEach items="${member}" var="file">
+        <img src="${contextPath}/download/${file.filename}" alt="${file.filename}" width="50" height="50" >
         </c:forEach>
         </c:forEach>
         </span>
@@ -346,7 +375,7 @@
 
     <!-- Custom scripts for this template -->
     <script src="../../js/resume.min.js"></script>
-
+ --%>
   </body>
 
 </html>

@@ -7,16 +7,20 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java100.app.domain.Diagnosis;
+import java100.app.domain.Member;
 import java100.app.service.DiagnosisService;
 
 
 @Controller
 @RequestMapping("/diagnosis")
+@SessionAttributes("loginUser")
 public class DiagnosisController {
     @Autowired ServletContext servletContext;
     @Autowired DiagnosisService diagnosisService;
@@ -65,18 +69,14 @@ public class DiagnosisController {
 
     @RequestMapping("add")
     public String add(
-            Diagnosis diagnosis
+            Diagnosis diagnosis,
 
-//            @ModelAttribute(value="loginUser") Member loginUser
+            @ModelAttribute(value="loginUser") Member loginUser
             ) throws Exception {
         
-        // 게시글 작성자는 로그인 사용자이다. 
-//        member.setWriter(loginUser);
-        
-        // 게시글 등록
-        //diagnosis.setHospital(hospital);
-        //diagnosis.setMember(member);
-        
+
+        diagnosis.setMember(loginUser);
+        System.out.println(diagnosis.getMember().getMemberNo());
         diagnosisService.add(diagnosis);
         
         return "redirect:list";

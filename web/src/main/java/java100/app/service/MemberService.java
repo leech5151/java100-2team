@@ -18,7 +18,7 @@ import java100.app.domain.MemberUploadFile;
 public interface MemberService {
     List<Member> list(int pageNo, int pageSize, Map<String,Object> options);
     int getTotalCount();
-    int add(Member score);
+    int add(Member member);
     void addFiles(List<MemberUploadFile> files, int memberNo);
     Member get(int no);
     Member get(String email, String password);

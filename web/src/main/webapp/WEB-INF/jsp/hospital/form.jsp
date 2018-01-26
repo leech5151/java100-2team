@@ -4,9 +4,9 @@
 <html>
 <head>
 <title>병원등록</title>
-<link rel='stylesheet'
-	href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <link rel='stylesheet' href='../../css/common.css'>
+
 </head>
 <body>
 	<div class='container'>
@@ -14,9 +14,11 @@
 		<jsp:include page="../header.jsp" />
 
 		<h1>신규병원</h1>
-
+		
+		
+			
 		<form action="add" method='post' enctype="multipart/form-data">
-
+		
 			<div class='form-group row'>
 				<label for='hospitalName' class='col-sm-2 col-form-label'>병원명</label>
 				<div class='col-sm-10'>
@@ -108,13 +110,13 @@
 				</div>
 			</div>
 
-			<div class='form-group row'>
+		<!-- 	<div class='form-group row'>
 				<label for='member.memberNo' class='col-sm-2 col-form-label'>병원회원번호</label>
 				<div class='col-sm-10'>
 					<input class='form-control' id='member.memberNo' type="number"
 						name='member.memberNo'>
 				</div>
-			</div>
+			</div> -->
 
 			<div class='form-group row'>
 				<label for='file1' class='col-sm-2 col-form-label'>사진</label>

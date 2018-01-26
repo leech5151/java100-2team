@@ -18,6 +18,7 @@
 <h1>회원 상세정보</h1>
 
 <c:if test="${not empty diagnosis}">
+
         <form action='update' method='post'>
         
         <div class='form-group row'>

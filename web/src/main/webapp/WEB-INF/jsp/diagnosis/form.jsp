@@ -18,14 +18,14 @@
 
 <form action="add" method='post' enctype="multipart/form-data">
 
- <div class='form-group row'>
+<!--  <div class='form-group row'>
  
         <label for='member.memberNo' class='col-sm-2 col-form-label'>회원번호</label>
         <div class='col-sm-10'>
         <input class='form-control' id='member.memberNo' type='number' 
                 name='member.memberNo'>
         </div>
-        </div>
+        </div> -->
         
         <div class='form-group row'>
         <label for='hospital.hospitalNo' class='col-sm-2 col-form-label'>병원번호</label>

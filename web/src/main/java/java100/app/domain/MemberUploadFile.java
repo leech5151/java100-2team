@@ -4,8 +4,7 @@ public class MemberUploadFile {
     int no;
     String filename;
     int memberNo;
-    
-    
+      
     public MemberUploadFile() {}
     
     public MemberUploadFile(String filename) {
@@ -39,7 +38,6 @@ public class MemberUploadFile {
 
     public void setMemberNo(int memberNo) {
         this.memberNo = memberNo;
-    }
-
+    }   
     
 }

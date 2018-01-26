@@ -10,17 +10,21 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import java100.app.domain.Hospital;
 import java100.app.domain.HospitalUploadFile;
+import java100.app.domain.Member;
 import java100.app.service.HospitalService;
 
 @Controller
 @RequestMapping("/hospital")
+@SessionAttributes("loginUser")
 public class HospitalController {
     
     @Autowired ServletContext servletContext;
@@ -71,8 +75,8 @@ public class HospitalController {
     @RequestMapping("add")
     public String add(
             Hospital hospital,
-            MultipartFile[] file
-//            @ModelAttribute(value="loginUser") Member loginUser
+            MultipartFile[] file,
+            @ModelAttribute(value="loginUser") Member loginUser
             ) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
@@ -91,7 +95,7 @@ public class HospitalController {
         hospital.setFiles(uploadFiles);
 
         // 게시글 작성자는 로그인 사용자이다. 
-//        member.setWriter(loginUser);
+        hospital.setMember(loginUser);
         
         // 게시글 등록
         hospitalService.add(hospital);

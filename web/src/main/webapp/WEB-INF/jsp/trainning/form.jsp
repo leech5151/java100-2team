@@ -15,7 +15,7 @@
 <jsp:include page="../header.jsp"/>
 
 <h1>게시물등록</h1>
-
+ 
 <form action="add" method='post' enctype="multipart/form-data">
 
 

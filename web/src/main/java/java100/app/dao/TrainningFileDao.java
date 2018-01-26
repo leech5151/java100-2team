@@ -12,3 +12,4 @@ public interface TrainningFileDao {
 
     void deleteAllByTrainningNo(int no);
 }
+ 

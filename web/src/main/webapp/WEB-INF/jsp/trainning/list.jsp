@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class='container'>
-
+ 
 <jsp:include page="../header.jsp"/>
 
 <h1>게시물 목록</h1>

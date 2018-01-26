@@ -29,7 +29,7 @@ public class TrainningController {
     
     @Autowired ServletContext servletContext;
     @Autowired TrainningService trainningService;
-    
+     
     @RequestMapping("list")
     public String list(
             @RequestParam(value="pn", defaultValue="1") int pageNo,

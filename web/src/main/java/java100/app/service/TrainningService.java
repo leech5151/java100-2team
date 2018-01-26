@@ -25,7 +25,7 @@ public interface TrainningService {
     int update(Trainning trainning);
     int delete(int no);
 }
-
+ 
 
 
 

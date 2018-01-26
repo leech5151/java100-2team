@@ -44,6 +44,8 @@
             m.m_no,
             m.name,
             m.nic_name,
+            m.m_type,
+            m.push,
             m.email,
             m.cre_date,
             d.file
@@ -59,7 +61,6 @@
 	        </where>
         </if>
         
-        <!-- 정렬 조건에 따라 SQL문을 변경한다.
         order by 
         <choose>
             <when test="orderColumn == 'name' and align == 'desc'">
@@ -86,12 +87,16 @@
             <when test="orderColumn == 'cre_date' and align == 'asc'">
                 cre_date asc
             </when>
+            <when test="orderColumn == 'm_type' and align == 'desc'">
+                m_type desc
+            </when>
+            <when test="orderColumn == 'm_type' and align == 'asc'">
+                m_type asc
+            </when>
             <otherwise>
-                m_no desc
+                m_no asc
             </otherwise>
         </choose>
-        -->
-        <!-- 페이지징 처리 -->
         limit #{startIndex}, #{size}
     </select>
     
@@ -136,6 +141,7 @@
     
     <update id="update" parameterType="member">
         update memb set
+            name=#{name}, 
             nic_name=#{nicname}, 
             email=#{email}, 
             pwd=password(#{password}),

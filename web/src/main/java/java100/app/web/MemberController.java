@@ -60,7 +60,6 @@ public class MemberController {
             lastPageNo++;
         }
         
-        // view 컴포넌트가 사용할 값을 Model에 담는다.
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("lastPageNo", lastPageNo);
         model.addAttribute("list", memberService.list(pageNo, pageSize, options));
@@ -105,6 +104,13 @@ public class MemberController {
         model.addAttribute("member", memberService.get(no));
         return "member/view";
     }
+    
+    @RequestMapping("modify")
+    public String modify(int no, Model model) throws Exception {
+        
+        model.addAttribute("member", memberService.get(no));
+        return "member/modify";
+    }
 
     @RequestMapping("update")
     public String update(
@@ -127,6 +133,10 @@ public class MemberController {
         member.setFiles(uploadFiles);
 
         memberService.update(member);
+        if (member.getPush()) 
+            System.out.println("true");
+        else
+            System.out.println("false");
         
         return "redirect:list";
     }

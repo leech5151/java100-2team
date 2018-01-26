@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>게시판</title>
+<title>회원리스트</title>
 <link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <link rel='stylesheet' href='../../css/common.css'>
 </head>
@@ -17,14 +17,14 @@
 
 <jsp:include page="../header.jsp"/>
 
-<h1>게시물 목록</h1>
+<h1>회원리스트</h1>
 
 <jsp:include page="../listToolbar.jsp"/>
 
 <table class='table table-hover'>
 <thead>
 <tr>
-<th>번호</th><th>이름</th><th>닉네임</th><th>이메일</th><th>등록일자</th><th>회원사진</th><th>강아지정보</th>
+<th>번호</th><th>이름</th><th>닉네임</th><th>회원유형</th><th>알람수신여부</th><th>이메일</th><th>등록일자</th><th>회원사진</th><th>강아지정보</th>
 </tr>
 </thead>
 <tbody>
@@ -34,6 +34,8 @@
         <td>${member.memberNo}</td>
         <td><a href='${member.memberNo}'>${member.name}</a></td>
         <td>${member.nicname}</td>
+        <td>${member.memberType}</td>
+        <td>${member.push}</td>
         <td>${member.email}</td>
         <td>${member.createDate}</td>
         <td>

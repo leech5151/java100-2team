@@ -24,16 +24,15 @@
 <table class='table table-hover'>
 <thead>
 <tr>
-<th>미아번호</th><th>회원번호</th><th>강아지이름</th><th>품종</th><th>조회수</th><th>분실강아지사진</th>
+<th>미아번호</th><th>강아지이름</th><th>품종</th><th>조회수</th><th>분실강아지사진</th>
 </tr>
 </thead>
 <tbody>
 
 <c:forEach items="${list}" var="lost">
         <tr>
-        <td><a href='${lost.lostNo}'>${lost.lostNo}</a></td>
-        <td>${lost.registrant.memberNo}</td>
-        <td>${lost.petName}</td>
+        <td>${lost.lostNo}</td>
+        <td><a href='${lost.lostNo}'>${lost.petName}</a></td>
         <td>${lost.breed}</td>
         <td>${lost.viewCount}</td>
         <td>

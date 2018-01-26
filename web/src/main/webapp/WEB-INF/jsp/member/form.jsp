@@ -47,21 +47,19 @@
 </div>
 
 <div class='form-group row'>
-<label for='tel' class='col-sm-2 col-form-label'>전화</label>
+<label for='tel' class='col-sm-2 col-form-label'>전화번호</label>
 <div class='col-sm-10'>
 <input class='form-control' id='tel' type='text' name='tel'>
 </div>
 </div>
 
-<!-- 
 <div class='form-group row'>
 <label for='push' class='col-sm-2 col-form-label'>알람수신여부</label>
 <div class='col-sm-10'>
-<input class='form-control' id='push' type='checkbox' name='push' value="예">
-<input class='form-control' id='push' type='checkbox' name='push' value="아니오">
+<input id='push' type='radio' name='push' value="yes" checked="checked" />예
+<input id='push' type='radio' name='push' value="no"/>아니오
 </div>
 </div> 
--->
 
 <div class='form-group row'>
 <label for='postalNo' class='col-sm-2 col-form-label'>우편번호</label>
@@ -84,10 +82,24 @@
 </div>
 </div>
 
+<!-- 
 <div class='form-group row'>
 <label for='memberType' class='col-sm-2 col-form-label'>카테고리</label>
 <div class='col-sm-10'>
 <input class='form-control' id='memberType' type='text' name='memberType'>
+</div>
+</div>
+  -->
+  
+<div class='form-group row'>
+<label for='memberType' class='col-sm-2 col-form-label'>회원유형</label> 
+<div class="selectbox">
+<select class="grouped_select optional form-control" id="memberType" name="memberType">
+<option value="선택하세요" selected="selected">선택하세요</option>
+<option value="일반유저">일반유저</option>
+<option value="사업자회원">사업자</option>
+<option value="병원회원">병원</option>
+</select>
 </div>
 </div>
 

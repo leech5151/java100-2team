@@ -127,6 +127,7 @@
         <div class='form-group row'>
         <div class='col-sm-10'>
         <a href="modify?no=${member.memberNo}" class="btn btn-primary btn-sm">변경</a>
+        <a href="list" class="btn btn-primary btn-sm">돌아가기</a>
         </div>
         </div>
         

@@ -44,7 +44,7 @@
         </c:forEach>
         </td>
         <td>
-        <a href='../pet/list' class='btn btn-primary btn-sm'>이동</a>
+        <a href='../pet/list' class='btn btn-primary btn-sm'>보기</a>
         </td>
         </tr>
 </c:forEach>

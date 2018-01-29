@@ -17,7 +17,7 @@
         <result column="m_no" property="memberNo"/>
         <result column="title" property="title"/>
         <result column="likes" property="likes"/>
-        
+         
         <!-- 첨부파일 정보를 담을 수 있도록 설정한다. -->
         <collection property="files"  ofType="trainningUploadFile">
             <id     column="mda_no"       property="no"/>

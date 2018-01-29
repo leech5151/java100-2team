@@ -22,7 +22,7 @@
         delete from t_mda
         where t_no=#{value}
     </delete> 
-
+ 
 </mapper>  
 
 

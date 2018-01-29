@@ -14,7 +14,7 @@
 <div class='container'>
 
 <jsp:include page="../header.jsp"/>
-
+ 
 <h1>게시물 변경</h1>
 
 <c:if test="${not empty trainning}">

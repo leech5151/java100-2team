@@ -1,7 +1,5 @@
 package java100.app.web;
 
-import javax.servlet.ServletContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +16,6 @@ import java100.app.service.MemberService;
 @SessionAttributes("loginUser")
 public class MainController {
     
-//    @Autowired ServletContext servletContext;
     @Autowired MemberService memberService;
     
     @RequestMapping(value="home", method=RequestMethod.GET)
@@ -27,15 +24,13 @@ public class MainController {
         return "main/home";
     }
     
-    @RequestMapping("main_list")
+    @RequestMapping("start")
     public String main_list(
             @ModelAttribute(value="loginUser") Member loginUser,
             Model model) throws Exception {
-        model.addAttribute("main_list", memberService.get(loginUser.getMemberNo()));
-        System.out.println(loginUser.getMemberNo());
+        model.addAttribute("start", memberService.get(loginUser.getMemberNo()));
         return "main/home";
     }
-
 }
  
 

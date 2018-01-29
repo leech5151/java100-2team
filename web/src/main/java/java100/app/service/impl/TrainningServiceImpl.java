@@ -32,7 +32,7 @@ public class TrainningServiceImpl implements TrainningService {
         
         return trainningDao.findAll(params);
     }
-    
+     
     @Override
     public int getTotalCount() {
         return trainningDao.countAll();

@@ -23,7 +23,7 @@ public class TrainningUploadFile {
     public void setNo(int no) {
         this.no = no;
     }
-
+ 
     public String getFilename() {
         return filename;
     }

@@ -2,7 +2,7 @@ package java100.app.domain;
 
 import java.sql.Date;
 import java.util.List;
-
+ 
 public class Trainning {
     protected int trainningNo; //list
     protected String category; //list

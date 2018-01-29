@@ -2,12 +2,19 @@
 
 .home {
 	!important;
-	}
+}
 
 #button_sign {
 	margin: 5px;
 }
 
-#userName {
-	border: 1px;
+.close_div {
+	width: 300px;
+	height: 100px;
+}
+
+.close_popup {
+    position: fixed;
+    left: 50%;
+    top: 50%;
 }

@@ -40,20 +40,15 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
       <a class="navbar-brand js-scroll-trigger" href="#page-top">
         <span class="d-block d-lg-none">Balance Pet</span>
-        <span class="d-none d-lg-block">
 
-        <c:if test="${not empty start}">
-        <div class='form-group row'>
-        <div class='col-sm-10'>
-        <c:forEach items="${start.files}" var="file">
-        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="${contextPath}/download/${file.filename}" alt="${file.filename}">
-        </c:forEach>
-        </div>
-        </div>
-        </c:if>
-
-        </span>
+    <c:if test="${not empty start}">
+    <c:forEach items="${start.files}" var="file">
+    <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="${contextPath}/download/${file.filename}" alt="${file.filename}"
+     style="cursor:pointer" onclick="window.open('../member/view?no=${start.memberNo}','jn.Park','scrollbars=yes,width=800px,height=850px,top=50px,left=250px');"> 
+    </c:forEach>
+    </c:if>
       </a>
+ 
     <jsp:include page="menubar.jsp"></jsp:include>
     </nav>
 

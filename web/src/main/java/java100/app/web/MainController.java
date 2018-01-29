@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -30,6 +31,13 @@ public class MainController {
             Model model) throws Exception {
         model.addAttribute("start", memberService.get(loginUser.getMemberNo()));
         return "main/home";
+    }
+
+    @RequestMapping("{no}")
+    public String view(@PathVariable int no, Model model) throws Exception {
+        
+        model.addAttribute("member", memberService.get(no));
+        return "redirect:../member/view";
     }
 }
  

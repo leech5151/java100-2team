@@ -13,7 +13,9 @@
               </li>
             </ul>
           </h2>
-          <jsp:include page="../lost/list.jsp"></jsp:include>
+          <%--
+           <jsp:include page="../lost/list.jsp"></jsp:include> 
+          --%>
         </div>
       </section>
 

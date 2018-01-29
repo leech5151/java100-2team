@@ -35,9 +35,11 @@
       <div class='form-group row' align="right">
        <c:choose>
        <c:when test="${sessionScope.loginUser != null}">
+       <%-- 
        <p id="userName">
 		${sessionScope.loginUser.name}
-       </p>
+       </p> 
+       --%>
 		<a href="${contextPath}/app/auth/logout" 
         class='btn btn-outline-dark btn-sm' id="button_sign">로그아웃</a>
        </c:when>

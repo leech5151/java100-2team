@@ -9,7 +9,7 @@
           <h2 class="mb-5">
             <ul class='navbar-nav mr-auto'>
               <li class='nav-item'>
-                <a class='nav-link' href='../pet/list'>PET STORY</a>
+                <a class='nav-link' href='..//'>PET STORY</a>
               </li>
             </ul>
           </h2>
@@ -24,7 +24,7 @@
             </li>
             <li class="list-inline-item">
               <i class="devicons devicons-javascript"></i>
-            </li>
+            </li> 
             <li class="list-inline-item">
               <i class="devicons devicons-jquery"></i>
             </li>

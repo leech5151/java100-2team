@@ -126,6 +126,7 @@
         
         <div class='form-group row'>
         <div class='col-sm-10'>
+        <a href='../pet/list' class='btn btn-primary btn-sm'>내 강아지</a>
         <a href="modify?no=${member.memberNo}" class="btn btn-primary btn-sm">변경</a>
         <a href="" class="btn btn-primary btn-sm" onclick="window.close();">돌아가기</a>
         </div>

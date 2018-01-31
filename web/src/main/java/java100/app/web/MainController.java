@@ -34,11 +34,6 @@ public class MainController {
         model.addAttribute("start", memberService.get(loginUser.getMemberNo()));
         return "main/home";
     }
-<<<<<<< HEAD
-    
-
-=======
->>>>>>> branch 'master' of https://github.com/leech5151/java100-2team.git
 
     @RequestMapping("{no}")
     public String view(@PathVariable int no, Model model) throws Exception {

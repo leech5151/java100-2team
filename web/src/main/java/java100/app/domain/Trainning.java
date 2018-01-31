@@ -10,7 +10,7 @@ public class Trainning {
     protected String contents; //list
     protected String maintextContents;
     protected int viewCount;
-    protected Date registrationDate;
+    protected String registrationDate;
     protected int likes;
     protected List<TrainningUploadFile> files;
     protected Member member; //list
@@ -51,10 +51,11 @@ public class Trainning {
     public void setViewCount(int viewCount) {
         this.viewCount = viewCount;
     }
-    public Date getRegistrationDate() {
+
+    public String getRegistrationDate() {
         return registrationDate;
     }
-    public void setRegistrationDate(Date registrationDate) {
+    public void setRegistrationDate(String registrationDate) {
         this.registrationDate = registrationDate;
     }
     public int getLikes() {

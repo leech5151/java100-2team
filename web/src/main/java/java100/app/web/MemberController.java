@@ -10,7 +10,6 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -97,10 +96,10 @@ public class MemberController {
         
         return "redirect:list";
     }
+    
+    @RequestMapping("view")
+    public String view(int no, Model model) throws Exception {
 
-    @RequestMapping("{no}")
-    public String view(@PathVariable int no, Model model) throws Exception {
-        
         model.addAttribute("member", memberService.get(no));
         return "member/view";
     }
@@ -138,7 +137,7 @@ public class MemberController {
         else
             System.out.println("false");
         
-        return "redirect:list";
+        return "member/close";
     }
 
     @RequestMapping("delete")

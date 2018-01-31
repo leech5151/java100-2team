@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+.home {
+	!important;
+}
+
+#button_sign {
+	margin: 5px;
+}
+
+.close_div {
+	width: 300px;
+	height: 100px;
+}
+
+.close_popup {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+}

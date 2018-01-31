@@ -15,12 +15,10 @@
 <body>
 <div class='container'>
 
-<jsp:include page="../header.jsp"/>
-
 <h1>회원 상세정보</h1>
 
 <c:if test="${not empty member}">
-        
+        <%-- 
         <div class='form-group row'>
         <label for='memberNo' class='col-sm-2 col-form-label'>번호</label>
         <div class='col-sm-10'>
@@ -28,7 +26,7 @@
                 name='memberNo' value='${member.memberNo}'>
         </div>
         </div>
-        
+         --%>
         <div class='form-group row'>
         <label for='name' class='col-sm-2 col-form-label'>이름</label>
         <div class='col-sm-10'>
@@ -110,7 +108,7 @@
         </div>
         
         <div class='form-group row'>
-        <label for='createDate' class='col-sm-2 col-form-label'>등록일</label>
+        <label for='createDate' class='col-sm-2 col-form-label'>가입일</label>
         <div class='col-sm-10'>
         <input class='form-control' readonly id='createDate' type='date' 
                 value='${member.createDate}'>
@@ -129,7 +127,7 @@
         <div class='form-group row'>
         <div class='col-sm-10'>
         <a href="modify?no=${member.memberNo}" class="btn btn-primary btn-sm">변경</a>
-        <a href="list" class="btn btn-primary btn-sm">돌아가기</a>
+        <a href="" class="btn btn-primary btn-sm" onclick="window.close();">돌아가기</a>
         </div>
         </div>
         

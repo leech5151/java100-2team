@@ -1,0 +1,16 @@
+element.style {
+    text-align: center;
+}
+.ddm1itemsContainer {
+    width: calc(100% - 0px);
+    height: calc(100% - 2px);
+    white-space: nowrap;
+    display: inline-block;
+    position: relative;
+    overflow: visible;
+    border-top: 1px solid rgb(44, 44, 43);
+    border-bottom: 1px solid rgb(44, 44, 43);
+}
+ol, ul {
+    list-style: none;
+}

@@ -1,54 +1,46 @@
 package java100.app.web;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
+import java100.app.domain.Business;
+import java100.app.domain.BusinessUploadFile;
 import java100.app.domain.Member;
 import java100.app.service.BusinessService;
 import java100.app.service.MemberService;
 
 @Controller
-@RequestMapping("/main")
 @SessionAttributes("loginUser")
-public class MainController {
+public class SetterController {
     
-    @Autowired MemberService memberService;
+    @Autowired ServletContext servletContext;
     @Autowired BusinessService businessService;
+    @Autowired MemberService memberService;
     
-    @RequestMapping(value="home", method=RequestMethod.GET)
-    public String form(Model model) {
-        model.addAttribute("menuVisible", false);
-        return "main/home";
-    }
-    
-    @RequestMapping("start")
-    public String main_list(
+    @RequestMapping("form")
+    public String form(
             @ModelAttribute(value="loginUser") Member loginUser,
             Model model) throws Exception {
         model.addAttribute("start", memberService.get(loginUser.getMemberNo()));
-        return "main/home";
+        return "listToolbar";
     }
-<<<<<<< HEAD
     
-
-=======
->>>>>>> branch 'master' of https://github.com/leech5151/java100-2team.git
-
-    @RequestMapping("{no}")
-    public String view(@PathVariable int no, Model model) throws Exception {
-        
-        model.addAttribute("member", memberService.get(no));
-        return "redirect:../member/view";
-    }
+   
 }
- 
-
 
 
 

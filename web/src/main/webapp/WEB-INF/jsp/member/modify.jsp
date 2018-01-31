@@ -6,21 +6,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>회원가입</title>
+<title>회원정보 변경</title>
 <link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <link rel='stylesheet' href='../../css/common.css'>
 </head>
 <body>
 <div class='container'>
 
-<jsp:include page="../header.jsp"/>
-
-<h1>회원 상세정보</h1>
+<h1>정보 변경</h1>
 
 <c:if test="${not empty member}">
         <form action='update' method='post' enctype="multipart/form-data">
         
-        <div class='form-group row'>
+         <div class='form-group row'>
         <label for='memberNo' class='col-sm-2 col-form-label'>번호</label>
         <div class='col-sm-10'>
         <input class='form-control' readonly id='memberNo' type='number' 
@@ -112,14 +110,16 @@
         </div>
         </div>
         
+        <%-- 
         <div class='form-group row'>
-        <label for='createDate' class='col-sm-2 col-form-label'>등록일</label>
+        <label for='createDate' class='col-sm-2 col-form-label'>가입일</label>
         <div class='col-sm-10'>
         <input class='form-control' readonly id='createDate' type='date' 
                 value='${member.createDate}'>
         </div>
         </div>
-        
+         --%>
+         
         <div class='form-group row'>
 		<label for='file1' class='col-sm-2 col-form-label'>사진</label>
 		<div class='col-sm-10'>
@@ -130,7 +130,8 @@
         <div class='form-group row'>
         <div class='col-sm-10'>
         <button class='btn btn-primary btn-sm'>변경</button>
-        <a href='delete?no=${member.memberNo}' class='btn btn-primary btn-sm'>삭제</a>
+        <a href="view?no=${member.memberNo}" class="btn btn-primary btn-sm">돌아가기</a>
+        <%-- <a href='delete?no=${member.memberNo}' class='btn btn-primary btn-sm'>삭제</a> --%>
         </div>
         </div>
         </form>

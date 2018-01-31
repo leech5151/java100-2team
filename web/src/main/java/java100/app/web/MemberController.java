@@ -97,10 +97,10 @@ public class MemberController {
         
         return "redirect:list";
     }
+    
+    @RequestMapping("view")
+    public String view(int no, Model model) throws Exception {
 
-    @RequestMapping("{no}")
-    public String view(@PathVariable int no, Model model) throws Exception {
-        
         model.addAttribute("member", memberService.get(no));
         return "member/view";
     }
@@ -138,7 +138,7 @@ public class MemberController {
         else
             System.out.println("false");
         
-        return "redirect:list";
+        return "member/close";
     }
 
     @RequestMapping("delete")

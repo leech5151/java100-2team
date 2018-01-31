@@ -10,7 +10,7 @@
 <link rel='stylesheet' href='../../css/common.css'>
 <script type="../_/js/jquery-1.10.2.min.js"></script>
 <script src="../js/jquery-1.3.2-vsdoc2.js" type="text/javascript"></script>
-
+</head>
 <body>
 <div class='container'>
 

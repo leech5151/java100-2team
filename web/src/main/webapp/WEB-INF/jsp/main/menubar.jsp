@@ -43,7 +43,7 @@
 		<a href="${contextPath}/app/auth/logout" 
         class='btn btn-outline-dark btn-sm' id="button_sign">로그아웃</a>
        </c:when>
-       <c:otherwise>
+       <c:otherwise> 
         <a href="${contextPath}/app/auth/login" 
         class='btn btn-outline-dark btn-sm' id="button_sign">로그인</a>
        </c:otherwise>

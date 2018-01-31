@@ -18,7 +18,7 @@
 
 <form action="add" method='post' enctype="multipart/form-data">
 
-<div class='form-group row'> 
+<div class='form-group row'>
 <label for='petName' class='col-sm-2 col-form-label'>강아지이름</label>
 <div class='col-sm-10'>
 <input class='form-control' id='petName' type='text' name='petName'>

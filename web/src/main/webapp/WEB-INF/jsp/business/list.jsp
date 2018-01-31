@@ -11,6 +11,9 @@
 <title>게시판</title>
 <link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <link rel='stylesheet' href='../../css/common.css'>
+<!-- beautiful alert -->
+<script src="alert/dist/sweetalert-dev.js"></script> 
+<link rel="stylesheet" href="alert/dist/sweetalert.css"></head>
 </head>
 <body>
 <div class='container'>
@@ -21,36 +24,11 @@
 
 <jsp:include page="../listToolbar.jsp"/>
 
-<table class='table table-hover'>
-<thead>
-<tr>
-<th>번호</th><th>사진</th><th>주소</th><th>제목</th>
-</tr>
-</thead>
-<tbody>
-<center><h2>실패값</h2></center>
-<c:forEach items="${list}" var="business">
-<c:if test="${ empty business.category}">
-        <tr>
-        <td>${business.businessNo}</td>
-        <td>
-        <c:forEach items="${business.files}" var="file">
-        <img src="${contextPath}/download/${file.filename}" alt="${file.filename}" width="50px" height="50px">
-        </c:forEach>
-        </td>
-        <td><a href='${business.businessNo}'>${business.businessName}</a></td>
-        <td>${business.primary_address}</td>
-        </tr>
-</c:if>
-</c:forEach>
-</tbody>
-</table>
-<jsp:include page="../paging.jsp"/>
 
 <table class='table table-hover'>
 <thead>
 <tr>
-<th>번호</th><th>사진</th><th>주소</th><th>제목</th>
+<th>번호</th><th>업체명</th><th>주소</th><th>사진</th>
 </tr>
 </thead>
 <tbody>
@@ -59,13 +37,13 @@
     <c:if test="${business.category eq '1'}">
 	        <tr>
 	        <td>${business.businessNo}</td>
+	        <td><a href='${business.businessNo}'>${business.businessName}</a></td>
+	        <td>${business.primary_address}</td>
 	        <td>
 	        <c:forEach items="${business.files}" var="file">
 	        <img src="${contextPath}/download/${file.filename}" alt="${file.filename}" width="50px" height="50px">
 	        </c:forEach>
 	        </td>
-	        <td><a href='${business.businessNo}'>${business.businessName}</a></td>
-	        <td>${business.primary_address}</td>
 	        </tr>
     </c:if>
 	</c:forEach>
@@ -76,7 +54,7 @@
 <table class='table table-hover'>
 <thead>
 <tr>
-<th>번호</th><th>사진</th><th>주소</th><th>제목</th>
+<th>번호</th><th>업체명</th><th>주소</th><th>사진</th>
 </tr>
 </thead>
 <tbody>
@@ -85,13 +63,13 @@
 <c:if test="${business.category eq '2'}">
         <tr>
         <td>${business.businessNo}</td>
+        <td><a href='${business.businessNo}'>${business.businessName}</a></td>
+        <td>${business.primary_address}</td>
         <td>
         <c:forEach items="${business.files}" var="file">
         <img src="${contextPath}/download/${file.filename}" alt="${file.filename}" width="50px" height="50px">
         </c:forEach>
         </td>
-        <td><a href='${business.businessNo}'>${business.businessName}</a></td>
-        <td>${business.primary_address}</td>
         </tr>
 </c:if>
 </c:forEach>
@@ -102,7 +80,7 @@
 <table class='table table-hover'>
 <thead>
 <tr>
-<th>번호</th><th>사진</th><th>주소</th><th>제목</th>
+<th>번호</th><th>업체명</th><th>주소</th><th>사진</th>
 </tr>
 </thead>
 <tbody>
@@ -111,17 +89,41 @@
 <c:if test="${business.category eq '3'}">
         <tr>
         <td>${business.businessNo}</td>
+        <td><a href='${business.businessNo}'>${business.businessName}</a></td>
+        <td>${business.primary_address}</td>
         <td>
         <c:forEach items="${business.files}" var="file">
         <img src="${contextPath}/download/${file.filename}" alt="${file.filename}" width="50px" height="50px">
         </c:forEach>
         </td>
-        <td><a href='${business.businessNo}'>${business.businessName}</a></td>
-        <td>${business.primary_address}</td>
         </tr>
 </c:if>
 </c:forEach>
 
+</tbody>
+</table>
+<jsp:include page="../paging.jsp"/>
+
+<table class='table table-hover'>
+<thead>
+<tr>
+<th>번호</th><th>업체명</th><th>주소</th><th>사진</th>
+</tr>
+</thead>
+<tbody>
+<center><h2>실패값</h2></center>
+    <c:forEach items="${list}" var="business">
+            <tr>
+            <td>${business.businessNo}</td>
+            <td><a href='${business.businessNo}'>${business.businessName}</a></td>
+            <td>${business.primary_address}</td>
+            <td>
+            <c:forEach items="${business.files}" var="file">
+            <img src="${contextPath}/download/${file.filename}" alt="${file.filename}" width="50px" height="50px">
+            </c:forEach>
+            </td>
+            </tr>
+    </c:forEach>
 </tbody>
 </table>
 <jsp:include page="../paging.jsp"/>

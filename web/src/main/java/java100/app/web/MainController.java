@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java100.app.domain.Member;
+import java100.app.service.BusinessService;
 import java100.app.service.MemberService;
 
 @Controller
@@ -18,6 +19,7 @@ import java100.app.service.MemberService;
 public class MainController {
     
     @Autowired MemberService memberService;
+    @Autowired BusinessService businessService;
     
     @RequestMapping(value="home", method=RequestMethod.GET)
     public String form(Model model) {

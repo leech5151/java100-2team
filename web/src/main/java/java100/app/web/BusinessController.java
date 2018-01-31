@@ -10,6 +10,7 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java100.app.domain.Business;
 import java100.app.domain.BusinessUploadFile;
+import java100.app.domain.Member;
 import java100.app.service.BusinessService;
+import java100.app.service.MemberService;
 
 @Controller
 @RequestMapping("/business")
@@ -27,6 +30,7 @@ public class BusinessController {
     
     @Autowired ServletContext servletContext;
     @Autowired BusinessService businessService;
+    @Autowired MemberService memberService;
     
     @RequestMapping("list")
     public String list(
@@ -68,9 +72,11 @@ public class BusinessController {
     }
     
     @RequestMapping("form")
-    public String form() throws Exception {
+    public String form(
+            @ModelAttribute(value="loginUser") Member loginUser,
+            Model model) throws Exception {
+        model.addAttribute("start", memberService.get(loginUser.getMemberNo()));
         return "business/form";
-        
     }
    
     @RequestMapping("add")
@@ -181,7 +187,49 @@ public class BusinessController {
         String filename = getNewFilename(part.getOriginalFilename());
         part.transferTo(new File(path + "/" + filename));
         return filename;
-    }    
+    } 
+   
+    @RequestMapping("m_list")
+    public String m_list(
+            @RequestParam(value="pn", defaultValue="1") int pageNo,
+            @RequestParam(value="ps", defaultValue="5") int pageSize,
+            @RequestParam(value="words", required=false) String[] words,
+            @RequestParam(value="oc", required=false) String orderColumn,
+            @RequestParam(value="al", required=false) String align,
+            Model model) throws Exception {
+
+        // UI 제어와 관련된 코드는 이렇게 페이지 컨트롤러에 두어야 한다.
+        //
+        if (pageNo < 1) {
+            pageNo = 1;
+        }
+        
+        if (pageSize < 5 || pageSize > 15) {
+            pageSize = 5;
+        }
+        
+        HashMap<String,Object> options = new HashMap<>();
+        if (words != null && words[0].length() > 0) {
+            options.put("words", words);
+        }
+        options.put("orderColumn", orderColumn);
+        options.put("align", align);
+        
+        int totalCount = businessService.getTotalCount();
+        int lastPageNo = totalCount / pageSize;
+        if ((totalCount % pageSize) > 0) {
+            lastPageNo++;
+        }
+        
+        // view 컴포넌트가 사용할 값을 Model에 담는다.
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("lastPageNo", lastPageNo);
+        model.addAttribute("m_list", businessService.list(pageNo, pageSize, options));
+        System.out.println("asfasdf");
+        return "business/section_together";
+    }
+    
+   
 }
 
 

@@ -19,46 +19,44 @@
 
 <h1>게시물 목록</h1>
 
-<jsp:include page="../listToolbar.jsp"/>
+        <jsp:include page="../listToolbar.jsp" />
 
-<table class='table table-hover'>
-<thead>
-<tr>
-<th>훈련번호</th><th>카테고리</th><th>제목</th><th>설명</th><th>본문내용</th><th>조회수</th><th>등록일시</th><th>추천수</th><th>회원사진</th>
-</tr>
-</thead>
-<tbody>
+
+        
 
 <c:forEach items="${list}" var="trainning">
-        <tr>
-        <td>${trainning.trainningNo}</td>
-        <td>${trainning.category}</td>
-        <td><a href='${trainning.trainningNo}'>${trainning.title}</a></td>
-        <td>${trainning.contents}</td>
-        <td>${trainning.maintextContents}</td>
-        <td>${trainning.viewCount}</td>
-        <td>${trainning.registrationDate}</td>
-        <td>${trainning.likes}</td>
-        <td>
-        <c:forEach items="${trainning.files}" var="file">
-        <img src="${contextPath}/download/${file.filename}" alt="${file.filename}" width="50px" height="50px">
-        </c:forEach>
-        </td>
-        </tr>
+<div class="ss">
+          <div class="card flex-md-row mb-4 box-shadow h-md-250" >
+                     <iframe width="auto" height="auto" src="https://www.youtube.com/embed/vRzkMWZ61Vs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <div class="card-body d-flex flex-column align-items-start">
+              <strong class="d-inline-block mb-2 text-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${trainning.trainningNo}</font></font></strong>
+              <h3 class="mb-0">
+                <a class="text-dark" href='${trainning.trainningNo}'><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${trainning.title}</font></font></a>
+              </h3>
+              <div class="mb-1 text-muted"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${trainning.registrationDate}</font></font></div>
+              <p class="card-text mb-auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${trainning.contents}</font></font></p>
+              <a href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">계속 읽기</font></font></a>
+              <div class="btn-box">
+                     <button type="button" class="btn btn-sm btn-outline-secondary">좋아요</button>
+                     <button type="button" class="btn btn-sm btn-outline-secondary">댓글</button>
+                     </div>
+            </div>
+          </div>
+        </div>
 </c:forEach>
+        
+        
+        
+        <jsp:include page="../paging.jsp" />
 
-</tbody>
-</table>
 
-<jsp:include page="../paging.jsp"/>
+        <jsp:include page="../footer.jsp" />
 
+    </div>
 
-<jsp:include page="../footer.jsp"/>
-
-</div>
-
-<jsp:include page="../jslib.jsp"/>
+    <jsp:include page="../jslib.jsp" />
 
 </body>
 </html>
+
     

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
 import java100.app.domain.Member;
 import java100.app.service.BusinessService;
 import java100.app.service.MemberService;
@@ -34,15 +33,9 @@ public class MainController {
         model.addAttribute("start", memberService.get(loginUser.getMemberNo()));
         return "main/home";
     }
-<<<<<<< HEAD
-    
-
-=======
->>>>>>> branch 'master' of https://github.com/leech5151/java100-2team.git
 
     @RequestMapping("{no}")
     public String view(@PathVariable int no, Model model) throws Exception {
-        
         model.addAttribute("member", memberService.get(no));
         return "redirect:../member/view";
     }

@@ -84,6 +84,7 @@ CREATE TABLE memb (
 	nic_name VARCHAR(50)  NOT NULL, -- 닉네임
 	name     VARCHAR(50)  NOT NULL, -- 이름
 	tel      VARCHAR(30)  NOT NULL, -- 전화번호
+	cre_date DATE         NOT NULL,     -- 가입일자
 	push     BOOLEAN      NOT NULL, -- 알림수신여부
 	pst_no   VARCHAR(6)   NOT NULL, -- 우편번호
 	prm_addr VARCHAR(255) NOT NULL, -- 기본주소

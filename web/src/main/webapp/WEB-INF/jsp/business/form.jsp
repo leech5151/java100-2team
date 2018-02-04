@@ -2,6 +2,8 @@
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,20 +22,8 @@
 
 <form name="form1" action="add" method='post' enctype="multipart/form-data">
 
-<!-- <div style="text-align:right">
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    카테고리
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="" id=>숙박업소</a>
-    <a class="dropdown-item" href="#">식당</a>
-    <a class="dropdown-item" href="#">기타</a>
-  </div>
-</div>
-</div> -->
 <div style="text-align:right">
- <script type="text/javascript">
+    <script type="text/javascript">
         $(document).ready(function () {
             $('#lstFavorites').change(function () {
                 var selectedText = 
@@ -60,12 +50,6 @@
 </select>
 </div>
 <br>
-<!--  <div class='form-group row'>
-<label for='category' class='col-sm-2 col-form-label'>카테고리</label>
-<div class='col-sm-10'>
-<input class='form-control' id='category'  type='hidden' name='category' value="target.options[target.selectedIndex].value">
-</div>
-</div>  -->
 
 <div class='form-group row'>
 <label for='businessName' class='col-sm-2 col-form-label'>업체명</label>

@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import java100.app.domain.Lost;
 import java100.app.domain.Member;
 import java100.app.domain.Pet;
+import java100.app.service.LostService;
 import java100.app.service.PetService;
 
 @Controller
@@ -20,6 +22,7 @@ public class PetController {
     
     @Autowired ServletContext servletContext;
     @Autowired PetService petService;
+    @Autowired LostService lostService;
     
     @RequestMapping("list")
     public String list(
@@ -45,6 +48,14 @@ public class PetController {
         
         pet.setMemberNo(loginUser.getMemberNo());
         petService.add(pet);
+        Lost lost = new Lost();
+        lost.setPetName(pet.getPetName());
+        lost.setLostLocation("강남");
+        lost.setLostDate("2017-11-12");
+        lost.setCharacter("몰라");
+        lost.setReward(1000000);
+        lost.setRegistrant(loginUser);
+        int count = lostService.add(lost);
         return "redirect:list";
     }
 

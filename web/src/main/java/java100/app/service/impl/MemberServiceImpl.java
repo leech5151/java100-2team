@@ -63,6 +63,7 @@ public class MemberServiceImpl implements MemberService {
         params.put("email", email);
         params.put("password", password);
         
+        
         return memberDao.findByEmailAndPassword(params);
     }
     

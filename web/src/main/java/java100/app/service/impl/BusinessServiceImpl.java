@@ -84,7 +84,7 @@ public class BusinessServiceImpl implements BusinessService {
     @Override
     public int delete(int bus_no) {
         
-        businessFileDao.deleteAllByBusinessNo(bus_no);
+        /*businessFileDao.deleteAllByBusinessNo(bus_no);*/
         
         return businessDao.delete(bus_no);
     }
@@ -92,10 +92,10 @@ public class BusinessServiceImpl implements BusinessService {
     
     @Override
     public void addFiles(List<BusinessUploadFile> files, int bus_no) {
-        for (BusinessUploadFile file : files) {
+        /*for (BusinessUploadFile file : files) {
             file.setBusinessNo(bus_no);
             businessFileDao.insert(file);
-        }
+        }*/
     }
 }
 

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>업체등록</title>
+<link rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel='stylesheet' href='../css/common.css'>
+</head>
+<body>
+<div class='container'>
+
+<header>
+<nav class='navbar navbar-expand-lg navbar-light bg-light'>
+<a class='navbar-brand' href='../main/start'>
+  <img src='../images/bootstrap-solid.svg' width='30' height='30' class='d-inline-block align-top' alt=''>
+  Balance Pet
+</a>
+
+
+<button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
+  <span class='navbar-toggler-icon'></span>
+</button>
+
+<div class='collapse navbar-collapse' id='navbarNav'>
+<ul class='navbar-nav mr-auto'>
+  <li class='nav-item'>
+    <a class='nav-link' href='../member/list'>회원목록</a>
+  </li>
+</ul>
+
+<ul class='navbar-nav mr-auto'>
+  <li class='nav-item'>
+    <a class='nav-link' href='../hospital/list'>병원목록</a>
+  </li>
+</ul>
+<ul class='navbar-nav mr-auto'>
+  <li class='nav-item'>
+    <a class='nav-link' href='../diagnosis/list'>진료목록</a>
+  </li>
+</ul>
+
+<ul class='navbar-nav mr-auto'>
+  <li class='nav-item'>
+    <a class='nav-link' href='../business/list'>서비스</a>
+  </li>
+</ul>
+
+<ul class='navbar-nav mr-auto'>
+  <li class='nav-item'>
+    <a class='nav-link' href='../lost/list'>미아찾기</a>
+  </li>
+</ul>
+
+1<a href="/app/auth/logout" 
+           class='btn btn-light btn-sm'>로그아웃</a>
+    </div>
+</nav>
+</header>
+
+    <h1>업체등록</h1>
+
+<form>
+
+<!--  <div style="text-align:right">
+ <script type="text/javascript">
+        $(document).ready(function () {
+            $('#lstFavorites').change(function () {
+                var selectedText = 
+                    $(":selected").text();
+                    $('#txtFavorite').val(selectedText);
+                    
+            });
+        });
+    </script>
+   <script type="text/javascript">
+      function submitFunc() {
+          document.form1.category.value = document.getElementByName("lstFavorites").value
+      }
+   </script>
+<c:forEach items="" var="business">
+<input  class='form-control' id="category" type='hidden' name='category'>
+</c:forEach> 
+    
+<select name="lstFavorites" >
+    <option value="" selected="selected">카테고리</option>
+    <option onclick="submitFunc();" value="1">숙박업소</option>
+    <option onclick="submitFunc();" value="2">식당</option>
+    <option onclick="submitFunc();" value="3">기타</option>
+</select>
+ </div> 
+<br> -->
+<div class='form-group row my-view'>
+<label for='businessNo' class='col-sm-2 col-form-label'>번호</label>
+<div class='col-sm-10'>
+<input class='form-control' readonly id='businessNo' type='number' 
+       name='businessNo'> 
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='category' class='col-sm-2 col-form-label'>카테고리</label>
+<div class='col-sm-10'>
+<input class='form-control' id='category'  type='text' name='category' >
+</div>
+</div>  
+
+<div class='form-group row'>
+<label for='businessName' class='col-sm-2 col-form-label'>업체명</label>
+<div class='col-sm-10'>
+<input class='form-control' id='businessName' type='text' name='businessName' >
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='open_time' class='col-sm-2 col-form-label'>오픈시간</label>
+<div class='col-sm-10'>
+<input class='form-control' id='open_time' type='time' name='open_time'>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='close_time' class='col-sm-2 col-form-label'>마감시간</label>
+<div class='col-sm-10'>
+<input class='form-control' id='close_time' type='time' name='close_time'>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='tel' class='col-sm-2 col-form-label'>전화번호</label>
+<div class='col-sm-10'>
+<input class='form-control' id='tel' type='text' name='tel'>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='menu' class='col-sm-2 col-form-label'>메뉴</label>
+<div class='col-sm-10'>
+<input class='form-control' id='menu' type='text' name='menu'>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='content' class='col-sm-2 col-form-label'>내용</label>
+<div class='col-sm-10'>
+<input class='form-control' id='content' type='text' name='content'>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='url' class='col-sm-2 col-form-label'>홈페이지</label>
+<div class='col-sm-10'>
+<input class='form-control' id='url' type='text' name='url'>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='post_no' class='col-sm-2 col-form-label'>우편번호</label>
+<div class='col-sm-10'>
+<input class='form-control' id='post_no' type="number" name='post_no'>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='primary_address' class='col-sm-2 col-form-label'>기본주소</label>
+<div class='col-sm-10'>
+<input class='form-control' id='primary_address' type='text' name='primary_address'>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='detail_address' class='col-sm-2 col-form-label'>상세주소</label>
+<div class='col-sm-10'>
+<input class='form-control' id='detail_address' type='text' name='detail_address'>
+</div>
+</div>
+<!-- 
+<div class='form-group row'>
+<label for='file2' class='col-sm-2 col-form-label'>사진</label>
+<div class='col-sm-10'>
+<input type="file" class="form-control-file" id="file2" name="file">
+</div>
+</div> -->
+
+<div class='form-group row'>
+<div class='col-sm-10'>
+<button id="addBtn" type="button" class='btn btn-primary btn-sm my-new'>추가</button>
+<button id="updateBtn" type="button" class='btn btn-primary btn-sm my-view'>변경</button>
+<button id="deleteBtn" type="button" class='btn btn-primary btn-sm my-view'>삭제</button>
+</div>
+</div>
+</form>
+
+<footer>
+    비트캠프 자바100기 Balance@2018
+</footer>
+</div>
+
+<script src='../node_modules/jquery/dist/jquery.min.js'></script>
+<script src='../node_modules/popper.js/dist/umd/popper.min.js'></script>
+<script src='../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+<script type="text/javascript">
+var addBtn = $('#addBtn'),
+    updateBtn = $('#updateBtn'),
+    deleteBtn = $('#deleteBtn'),
+    noItem = $('#businessNo'),
+    ctgrItem = $('#category'),
+    nameItem = $('#businessName'),
+    openItem = $('#open_time'),
+    closeItem = $('#close_time'),
+    telItem = $('#tel'),
+    menuItem = $('#menu'),
+    contsItem = $('#content'),
+    urlItem = $('#url'),
+    pstItem = $('#post_no'),
+    prmItem = $('#primary_address'),
+    detItem = $('#detail_address');
+
+var index = location.href.indexOf('?');
+if (index != -1) { // 기존 데이터를 조회할 경우,
+    var qs = location.href.substr(index + 1);
+    var arr = qs.split('=');
+    $('.my-new').css('display', 'none');
+    $(() => {
+        $.ajax('../json/business/' + arr[1], {
+            dataType: 'json',
+            success: (result) => {
+                noItem.val(result.data.businessNo);
+                ctgrItem.val(result.data.category);
+                nameItem.val(result.data.businessName);
+                openItem.val(result.data.open_time);
+                closeItem.val(result.data.close_time);
+                telItem.val(result.data.tel);
+                menuItem.val(result.data.menu);
+                contsItem.val(result.data.content);
+                urlItem.val(result.data.url);
+                pstItem.val(result.data.post_no);
+                prmItem.val(result.data.primary_address);
+                detItem.val(result.data.detail_address);
+            },
+            error: () => {
+                window.alert('서버 실행 오류!');
+            }
+        });
+    });
+    
+} else { // 신규 데이터 입력일 경우,
+    $('.my-view').css('display', 'none');
+}
+
+addBtn.click(() => {
+    $.ajax('../json/business/add', {
+        data: {
+            category: ctgrItem.val(),
+            businessName: nameItem.val(),
+            open_time: openItem.val(),
+            close_time: closeItem.val(),
+            tel: telItem.val(),
+            menu: menuItem.val(),
+            content: contsItem.val(),
+            url: urlItem.val(),
+            post_no: pstItem.val(),
+            primary_address: prmItem.val(),
+            detail_address: detItem.val()
+            
+        },
+        dataType: 'json',
+        method: 'POST',
+        success: (result) => {
+            location.href = "list.html";
+        },
+        error: () => {
+            window.alert('서버 실행 오류2!');
+        }
+    });
+});
+
+updateBtn.click(() => {
+    $.ajax('../json/business/update', {
+        data: {
+            category: ctgrItem.val(),
+            businessName: nameItem.val(),
+            open_time: openItem.val(),
+            close_time: closeItem.val(),
+            tel: telItem.val(),
+            menu: menuItem.val(),
+            content: contsItem.val(),
+            url: urlItem.val(),
+            post_no: pstItem.val(),
+            primary_address: prmItem.val(),
+            detail_address: detItem.val()
+        },
+        dataType: 'json',
+        method: 'POST',
+        success: (result) => {
+            location.href = "list.html";
+        },
+        error: () => {
+            window.alert('서버 실행 오류!');
+        }
+    });
+});
+
+deleteBtn.click(() => {
+    $.ajax('../json/business/delete', {
+        data: {
+            businessNo: noItem.val()
+        },
+        dataType: 'json',
+        success: (result) => {
+            location.href = "list.html";
+        },
+        error: () => {
+            window.alert('서버 실행 오류!');
+        }
+    });
+});
+</script>
+
+</body>
+</html>
+    

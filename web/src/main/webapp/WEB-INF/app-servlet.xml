@@ -43,13 +43,13 @@
     
     
     <!--  인터셉터를 등록 -->
-<!--       <mvc:interceptors>
+     <!--   <mvc:interceptors>
         <mvc:interceptor>
           <mvc:mapping path="/**"/>
           <mvc:exclude-mapping path="/auth/**"/>
           <bean class="java100.app.web.interceptor.AuthInterceptor"/>
         </mvc:interceptor>
-    </mvc:interceptors>   -->
+    </mvc:interceptors>  -->
     
 </beans>
 

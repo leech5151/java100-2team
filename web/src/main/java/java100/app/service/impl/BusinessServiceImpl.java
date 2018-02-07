@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java100.app.dao.BusinessDao;
 import java100.app.dao.BusinessFileDao;
+import java100.app.dao.BusinessReviewDao;
 import java100.app.domain.Business;
+import java100.app.domain.BusinessReview;
 import java100.app.domain.BusinessUploadFile;
 import java100.app.service.BusinessService;
 
@@ -18,6 +20,7 @@ public class BusinessServiceImpl implements BusinessService {
 
     @Autowired BusinessDao businessDao;
     @Autowired BusinessFileDao businessFileDao;
+    @Autowired BusinessReviewDao businessReviewDao;
     
     @Override
     public List<Business> list(int pageNo, int pageSize, Map<String, Object> options) {
@@ -84,18 +87,27 @@ public class BusinessServiceImpl implements BusinessService {
     @Override
     public int delete(int bus_no) {
         
-        /*businessFileDao.deleteAllByBusinessNo(bus_no);*/
+        businessFileDao.deleteAllByBusinessNo(bus_no);
         
         return businessDao.delete(bus_no);
     }
 
     
     @Override
-    public void addFiles(List<BusinessUploadFile> files, int bus_no) {
-        /*for (BusinessUploadFile file : files) {
-            file.setBusinessNo(bus_no);
+    public void addFiles(List<BusinessUploadFile> files, int businessNo) {
+        for (BusinessUploadFile file : files) {
+            file.setBusinessNo(businessNo);
             businessFileDao.insert(file);
-        }*/
+        }
+    }
+
+    @Override
+    public void addReviews(List<BusinessReview> reviews, int memberNo, int businessNo) {
+        for (BusinessReview review : reviews) {
+            review.setBusinessNo(businessNo);
+            review.setMemberNo(memberNo);
+            businessReviewDao.insert(review);
+        }
     }
 }
 

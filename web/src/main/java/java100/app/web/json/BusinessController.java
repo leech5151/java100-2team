@@ -9,6 +9,7 @@ import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +24,7 @@ import java100.app.service.MemberService;
 
 @RestController
 @RequestMapping("/business")
-@SessionAttributes("loginUser")
+/*@SessionAttributes("loginUser")*/
 public class BusinessController {
     
     @Autowired ServletContext servletContext;
@@ -72,55 +73,10 @@ public class BusinessController {
    
     @RequestMapping("add")
     public Object add(
-            Business business
-            /*MultipartFile[] file*/
-//            @ModelAttribute(value="loginUser") Business loginUser
+            Business business,
+            MultipartFile[] file
+            /*@ModelAttribute(value="loginUser") Business loginUser*/
             ) throws Exception {
-        
-     /*   String uploadDir = servletContext.getRealPath("/download");
-
-        ArrayList<BusinessUploadFile> uploadFiles = new ArrayList<>();
-        
-        for (MultipartFile part : file) {
-            if (part.isEmpty())
-                continue;
-            
-            String filename = this.writeUploadFile(part, uploadDir);
-            
-            uploadFiles.add(new BusinessUploadFile(filename));
-        }
-        
-        business.setFiles(uploadFiles);*/
-
-        // 게시글 작성자는 로그인 사용자이다. 
-//        business.setWriter(loginUser);
-        System.out.println("여긴오디???");
-        // 게시글 등록
-        businessService.add(business);
-        HashMap<String,Object> result = new HashMap<>();
-        result.put("status", "success");
-        return result;
-    }
-
-    @RequestMapping("{no}")
-    public Object view(@PathVariable int no, Model model) throws Exception {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("data", businessService.get(no));
-        return result;
-    }
-    
-    @RequestMapping("modify")
-    public Object modoify(int bus_no) throws Exception {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("data", businessService.get(bus_no));
-        return "business/modify";
-        
-    }
-
-    @RequestMapping("update")
-    public String update(
-            Business business, 
-            MultipartFile[] file) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
 
@@ -137,15 +93,61 @@ public class BusinessController {
         
         business.setFiles(uploadFiles);
 
-        businessService.update(business);
+        // 게시글 작성자는 로그인 사용자이다. 
+//        business.setWriter(loginUser);
+        System.out.println("여긴오디???");
+        // 게시글 등록
+        businessService.add(business);
         
-        return "redirect:list";
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("status", "success");
+        return result;
+    }
+
+    @RequestMapping("{no}")
+    public Object view(@PathVariable int no) throws Exception {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("data", businessService.get(no));
+        return result;
+    }
+    
+    @RequestMapping("modify")
+    public Object modoify(int bus_no) throws Exception {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("data", businessService.get(bus_no));
+        return result;
+        
+    }
+
+    @RequestMapping("update")
+    public Object update(
+            Business business ,
+            MultipartFile[] file) throws Exception {
+        
+        String uploadDir = servletContext.getRealPath("/download");
+
+        ArrayList<BusinessUploadFile> uploadFiles = new ArrayList<>();
+        
+        for (MultipartFile part : file) {
+            if (part.isEmpty())
+                continue;
+            
+            String filename = this.writeUploadFile(part, uploadDir);
+            
+            uploadFiles.add(new BusinessUploadFile(filename));
+        }
+        
+        business.setFiles(uploadFiles);
+        businessService.update(business);
+        HashMap<String, Object> result = new HashMap<>();
+        
+        return result;
     }
 
     @RequestMapping("delete")
-    public Object delete(int bus_no) throws Exception {
+    public Object delete(int no) throws Exception {
 
-        businessService.delete(bus_no);
+        businessService.delete(no);
         HashMap<String,Object> result = new HashMap<>();
         return result;
     }

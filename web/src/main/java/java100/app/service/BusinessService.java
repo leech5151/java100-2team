@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import java100.app.domain.Business;
+import java100.app.domain.BusinessReview;
 import java100.app.domain.BusinessUploadFile;
 
 //=> "역할"을 강조할 때는 "객체(object)"라는 말보다는 
@@ -20,6 +21,7 @@ public interface BusinessService {
     int getTotalCount();
     int add(Business business);
     void addFiles(List<BusinessUploadFile> files, int businessNo);
+    void addReviews(List<BusinessReview> reviews, int memberNo, int businessNo);
     Business get(int bus_no);
     Business get(String email, String password);
     int update(Business business);

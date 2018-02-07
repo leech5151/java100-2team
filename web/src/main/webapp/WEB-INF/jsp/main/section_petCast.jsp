@@ -9,7 +9,7 @@
           <h2 class="mb-5">
             <ul class='navbar-nav mr-auto'>
               <li class='nav-item'>
-                <a class='nav-link' href='../pet/list'>PET CAST</a>
+                <a class='nav-link' href='../trainning/list'>PET CAST</a>
               </li>
             </ul>
           </h2>

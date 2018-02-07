@@ -27,6 +27,7 @@ public class PetController {
             Model model) throws Exception {
         int searchNo = loginUser.getMemberNo();
         model.addAttribute("list", petService.list(searchNo));
+        model.addAttribute("member", loginUser);
         return "pet/list";
     }
      

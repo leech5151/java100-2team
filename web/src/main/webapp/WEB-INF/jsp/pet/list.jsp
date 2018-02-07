@@ -43,9 +43,10 @@
 
 </tbody>
 </table>
+<a href='../member/view?no=${member.memberNo}' class='btn btn-primary btn-sm'>돌아가기</a>
 
 <jsp:include page="../paging.jsp"/>
-
+ 
 <jsp:include page="../footer.jsp"/>
 
 </div>

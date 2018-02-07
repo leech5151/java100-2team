@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- DAO 객체를 자동으로 생성하려면, namespace의 값이 인터페이스 이름과 같아야 한다. -->
+<mapper namespace="java100.app.dao.PetEncyclopediaDao">
+
+    <resultMap type="petEncyclopedia" id="petEncyclopediaMap">
+        <id column="ped_no" property="petEncyclopediaNo" />
+        <!-- 컬럼 이름과 프로퍼티 이름이 같아서 생략! -->
+        <!-- <result column="name" property="name"/> <result column="email" property="email"/> -->
+        <result column="title" property="title" />
+        <result column="ctg" property="category" />
+        <result column="conts" property="contents" />
+        <result column="rdt" property="registrationDate" />
+        <result column="vwcnt" property="viewCount" />
+        <result column="m_conts" property="maintextContent" />
+        
+        <association property="member" javaType="member">
+            <id     column="m_no"       property="memberNo"/>
+            <result column="name"     property="name"/>
+        </association>    
+
+        <!-- 첨부파일 정보를 담을 수 있도록 설정한다. -->
+        <collection property="files" ofType="petEncyclopediaUploadFile">
+            <id column="mda_no" property="no" />
+            <result column="file" property="filename" />
+            <result column="ped_no" property="petEncyclopediaNo" />
+        </collection>
+    </resultMap>
+
+    <sql id="select1">
+        select
+        ped_no,
+        ctg,
+        title,
+        conts,
+        rdt,
+        vwcnt,
+        likes,
+        m_conts,
+        m_no
+    </sql>
+
+    <select id="findAll" resultMap="petEncyclopediaMap"
+        parameterType="map">
+        select
+        p.ped_no,
+        p.ctg,
+        p.title,
+        p.conts,
+        p.rdt,
+        p.vwcnt,
+        p.likes,
+        p.m_conts,
+        pd.file,
+        m.m_no
+        from pedia as p
+        left join ped_mda as pd on p.ped_no=pd.ped_no
+        left join memb as m on p.m_no=m.m_no
+        <if test="words != null">
+            <where>
+                <foreach collection="words" item="word">
+                    or title like '%${word}%'
+                </foreach>
+            </where>
+        </if>
+        <!-- <include refid="select1" /> from pedia -->
+        limit #{startIndex}, #{size}
+    </select>
+
+    <select id="countAll" resultType="int">
+        select count(*) from pedia
+    </select>
+
+    <insert id="insert" parameterType="petEncyclopedia"
+        useGeneratedKeys="true" keyColumn="ped_no" keyProperty="petEncyclopediaNo">
+        insert into
+        pedia(ctg,title,conts,rdt,vwcnt,likes,m_conts,m_no)
+        values(#{category},#{title},#{contents},now(),#{viewCount},#{likes},#{maintextContent},#{member.memberNo})
+    </insert>
+
+<!--  view에서 보여지는거-->
+    <select id="findByNo" resultMap="petEncyclopediaMap"
+        parameterType="int">
+        select
+        p.ped_no,
+        p.ctg,
+        p.title,
+        p.conts,
+        p.rdt,
+        p.vwcnt,
+        p.likes,
+        p.m_conts,
+        p.m_no,
+        pd.file
+        from pedia as p
+        left join ped_mda as pd
+        on p.ped_no=pd.ped_no
+
+        <!-- <include refid="select1" /> from pedia -->
+        where p.ped_no=#{value}
+    </select>
+
+    <update id="update" parameterType="petEncyclopedia">
+        update pedia set
+        ctg=#{category},
+        title=#{title},
+        conts=#{contents},
+        rdt=now(),
+        vwcnt=#{viewCount},
+        likes=#{likes},
+        m_conts=#{maintextContent}
+        where
+        ped_no=#{petEncyclopediaNo}
+    </update>
+
+    <update id="updateViewCount" parameterType="int">
+        update pedia set
+        vwcnt=vwcnt + 1
+        where ped_no=#{value}
+    </update>
+    <!--  
+    <update id="updateLikes" parameterType="int">
+        update pedia set
+        likes=likes + 1
+        where ped_no=#{value}
+    </update>
+-->
+    <delete id="delete" parameterType="int">
+        delete from pedia
+        where
+        ped_no=#{value}
+    </delete>
+
+</mapper>

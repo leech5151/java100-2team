@@ -18,10 +18,12 @@ import java100.app.domain.BusinessUploadFile;
 //
 public interface BusinessService {
     List<Business> list(int pageNo, int pageSize, Map<String,Object> options);
+    List<BusinessReview> listReview(int pageNo, int pageSize, Map<String,Object> options);
     int getTotalCount();
     int add(Business business);
+    int addReview(BusinessReview businessReview, int businessNo, int MemberNo);
     void addFiles(List<BusinessUploadFile> files, int businessNo);
-    void addReviews(List<BusinessReview> reviews, int memberNo, int businessNo);
+    /*void addReviews(List<BusinessReview> reviews, int memberNo, int businessNo);*/
     Business get(int bus_no);
     Business get(String email, String password);
     int update(Business business);

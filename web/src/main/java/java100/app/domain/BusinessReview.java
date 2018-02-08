@@ -5,7 +5,7 @@ public class BusinessReview {
      String title;
      String content;
      String createDate;
-     String StarPoint;
+     double StarPoint;
      int viewCount;
      int businessNo;
      int memberNo;
@@ -33,10 +33,10 @@ public class BusinessReview {
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
-    public String getStarPoint() {
+    public Double getStarPoint() {
         return StarPoint;
     }
-    public void setStarPoint(String starPoint) {
+    public void setStarPoint(Double starPoint) {
         StarPoint = starPoint;
     }
     public int getViewCount() {

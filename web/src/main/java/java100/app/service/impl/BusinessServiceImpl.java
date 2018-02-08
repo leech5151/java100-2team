@@ -33,6 +33,15 @@ public class BusinessServiceImpl implements BusinessService {
         }
         return businessDao.findAll(params);
     }
+    @Override // 리뷰 list
+    public List<BusinessReview> listReview(int pageNo, int pageSize, Map<String, Object> options) {
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("startIndex", (pageNo - 1) * pageSize);
+        params.put("size", pageSize);
+        if (options != null) {  
+        }
+        return businessReviewDao.findAll(params);
+    }
     
     @Override
     public int getTotalCount() {
@@ -51,7 +60,15 @@ public class BusinessServiceImpl implements BusinessService {
         
         return count;
     }
-    
+    @Override // 리뷰 add
+    public int addReview(BusinessReview businessReview, int businessNo, int memberNo) {
+        
+        int count = businessReviewDao.insert(businessReview);
+        
+        return count;
+        
+    }
+  
     @Override
     public Business get(int bus_no) {
         Business business = businessDao.findByNo(bus_no);
@@ -100,15 +117,18 @@ public class BusinessServiceImpl implements BusinessService {
             businessFileDao.insert(file);
         }
     }
-
-    @Override
+    
+  /*  @Override
     public void addReviews(List<BusinessReview> reviews, int memberNo, int businessNo) {
         for (BusinessReview review : reviews) {
             review.setBusinessNo(businessNo);
             review.setMemberNo(memberNo);
             businessReviewDao.insert(review);
         }
-    }
+    }*/
+   
+
+   
 }
 
 

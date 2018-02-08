@@ -166,7 +166,7 @@ public class BusinessController {
 //        business.setWriter(loginUser);
         System.out.println("여긴오디???");*/
         // 게시글 등록
-        /*businessService.addReview(businessReview);*/
+        businessService.addReview(businessReview);
         
         HashMap<String,Object> result = new HashMap<>();
         result.put("status", "success");

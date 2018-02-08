@@ -21,7 +21,7 @@ public interface BusinessService {
     List<BusinessReview> listReview(int pageNo, int pageSize, Map<String,Object> options);
     int getTotalCount();
     int add(Business business);
-    int addReview(BusinessReview businessReview, int businessNo, int MemberNo);
+    int addReview(BusinessReview businessReview);
     void addFiles(List<BusinessUploadFile> files, int businessNo);
     /*void addReviews(List<BusinessReview> reviews, int memberNo, int businessNo);*/
     Business get(int bus_no);

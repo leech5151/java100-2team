@@ -61,7 +61,7 @@ public class BusinessServiceImpl implements BusinessService {
         return count;
     }
     @Override // 리뷰 add
-    public int addReview(BusinessReview businessReview, int businessNo, int memberNo) {
+    public int addReview(BusinessReview businessReview) {
         
         int count = businessReviewDao.insert(businessReview);
         
@@ -126,7 +126,6 @@ public class BusinessServiceImpl implements BusinessService {
             businessReviewDao.insert(review);
         }
     }*/
-   
 
    
 }

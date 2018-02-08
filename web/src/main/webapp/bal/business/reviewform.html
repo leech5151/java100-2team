@@ -60,13 +60,34 @@
     <h1>리뷰 등록</h1>
 
 
-<form id='rvfrm' method="post" enctype="multipart/form-data">
-
 <div class='form-group row my-view'>
 <label for='reviewNo' class='col-sm-2 col-form-label'>번호</label>
 <div id="nodiv" class='col-sm-10'></div>
 </div> 
+<div class='form-group row my-view'>
+<label for='businessNo' class='col-sm-2 col-form-label'>사업번호</label>
+<div id="bnodiv" class='col-sm-10'></div>
+</div> 
+<div class='form-group row my-view'>
+<label for='memberNo' class='col-sm-2 col-form-label'>회원번호</label>
+<div id="mnodiv" class='col-sm-10'></div>
+</div> 
+<form id='rvfrm' method="post" enctype="multipart/form-data">
 
+
+<div class='form-group row my-view'>
+<label for='starPoint' class='col-sm-2 col-form-label'>별점</label>
+<div class='col-sm-10'>
+<input class='form-control' id='starPoint' type='number' name='starPoint'  value=0>
+</div>
+</div>
+
+<div class='form-group row my-view'>
+<label for='viewCount' class='col-sm-2 col-form-label'>조회수</label>
+<div class='col-sm-10'>
+<input class='form-control' id='viewCount' type='number' name='viewCount'  value=0>
+</div>
+</div>
 <div class='form-group row my-mo'>
 <label for='memberName' class='col-sm-2 col-form-label'>작성자</label>
 <div class='col-sm-10'>
@@ -119,7 +140,11 @@ var addBtn = $('#addBtn'),
     updateBtn = $('#updateBtn'),
     deleteBtn = $('#deleteBtn'),
     modifyBtn = $('#modifyBtn'),
-    noItem = $('#reviewNo'),
+    mnodItem = $('#mnodiv'),
+    bnodItem = $('#bnodiv'),
+    nodItem = $('#nodiv'),
+    pointItem = $('#starPoint'),
+    vwcntItem = $('#viewCount'),
     titleItem = $('#title'),
     contsItem = $('#content');
     
@@ -137,9 +162,12 @@ if (index != -1) { // 기존 데이터를 조회할 경우,
             success: (result) => {
                 console.log()
                 ctgrItem.val(result.data.category);
-                nodItem.html("<input class='form-control' readonly id='businessNo' " + 
-                             "name='businessNo' value='" + result.data.businessNo + "'> ");
-                /* noItem.val(result.data.businessNo); */
+                nodItem.html("<input class='form-control' readonly id='reviewNo' " + 
+                             "name='reviewNo' value=" + result.data.reviewNo + "> ");
+                mnodItem.html("<input class='form-control' readonly id='memberNo' " + 
+                        "name='memberNo' value=" + 0 + "> ");
+                bnodItem.html("<input class='form-control' readonly id='businessNo' " + 
+                        "name='businessNo' value=" + result.data.businessNo + "> ");
                 nameItem.val(result.data.businessName);
                 openItem.val(result.data.open_time);
                 closeItem.val(result.data.close_time);
@@ -184,12 +212,9 @@ addBtn.click(() => {
          processData : false,
          contentType : false,
          success: (result) => {
-             location.href = "list.html";
+             /* location.href = "list.html"; */
          },
          error: (jqXHR, textStatus, errorThrown) => {
-             console.log(noItem);
-             console.log(titleItem);
-             console.log(contsItem);
              window.alert('서버 실행 오류2!');
          }
      });
@@ -247,69 +272,6 @@ deleteBtn.click(function() {
 });
 </script>
 
-<script type="text/javascript"> // 리뷰 리스트 뽑기
-var words = $('#words'),
-prevBtn = $('#prevBtn'),
-currBtn = $('#currBtn'),
-nextBtn = $('#nextBtn'),
-tbody = $('#reviewList > tbody'),
-currPageNo = 1;
-
-load(1);
-
-prevBtn.click(() => {
-load(currPageNo - 1)
-});
-
-nextBtn.click(() => {
-load(currPageNo + 1)
-});
-
-function load(pageNo, options) {
-
-if (options == undefined) options = {};
-options.pn = pageNo;
-
-$.ajax('../../json/business/review/list', {
-    /*method: 'GET',*/
-    data: options,
-    dataType: 'json',  
-    success: (result) => {
-        tbody.html(""); // <tbody> 콘텐츠를 지운다.
-        
-        for (var data of result.list) {
-            $('<tr>')
-                .html(  
-                    "<td>" + data.reviewNo + "</td>" + 
-                    "<td><a href='form.html?no=" + data.reviewNo + "'>" + data.title + "</a></td>" + 
-                    "<td>" + data.createDate + "</td>" +
-                    "<td>" + data.starPoint + "</td>" +
-                    "<td>" + data.viewCount + "</td>" )
-                    .appendTo(tbody);
-        }
-        
-        currPageNo = result.pageNo;
-        currBtn.html(currPageNo);
-        
-        if (result.pageNo == 1) {
-            $(prevBtn.parent()).addClass("disabled");
-        } else {
-            $(prevBtn.parent()).removeClass("disabled");
-        }
-        
-        if (result.lastPageNo == result.pageNo) {
-            $(nextBtn.parent()).addClass("disabled");
-        } else {
-            $(nextBtn.parent()).removeClass("disabled");
-        }
-    },
-    error: () => {
-        window.alert('서버 실행 오류! list');
-    }
-});
-}
-
-</script>
 </body>
 </html>
     

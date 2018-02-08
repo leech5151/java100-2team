@@ -39,7 +39,8 @@
         class='btn btn-outline-dark btn-sm' id="button_sign">logout</a>
        </c:when>
        <c:otherwise> 
-       <jsp:include page="../auth/logingo.jsp"></jsp:include> 
+        <a href="${contextPath}/app/auth/login" 
+        class='btn btn-outline-dark btn-sm' id="button_sign">login</a>
         
         <a href="../member/form" 
         class='btn btn-outline-dark btn-sm' id="button_sign">signUp</a> 
@@ -47,9 +48,8 @@
        </c:choose>
        
        <%-- 
+       <jsp:include page="../auth/logingo.jsp"></jsp:include> 
 
-        <a href="${contextPath}/app/auth/login" 
-        class='btn btn-outline-dark btn-sm' id="button_sign">login</a>
         --%>
      </div>
 

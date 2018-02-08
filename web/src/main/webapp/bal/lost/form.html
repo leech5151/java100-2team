@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>미아찾기</title>
+<link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel='stylesheet' href='../../css/common.css'>
+</head>
+<body>
+<div class='container'>
+
+<header>
+<nav class='navbar navbar-expand-lg navbar-light bg-light'>
+
+<a class='navbar-brand' href='../main/home.html'>
+  <img src='../../images/bootstrap-solid.svg' width='30' height='30' class='d-inline-block align-top' alt=''>
+  Balance Pet
+</a>
+
+<button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
+  <span class='navbar-toggler-icon'></span>
+</button>
+
+<div class='collapse navbar-collapse' id='navbarNav'>
+
+<ul class='navbar-nav mr-auto'>
+  <li class='nav-item'>
+    <a class='nav-link' href='../hospital/list'>병원목록</a>
+  </li>
+</ul>
+
+<ul class='navbar-nav mr-auto'>
+  <li class='nav-item'>
+    <a class='nav-link' href='../diagnosis/list'>진료목록</a>
+  </li>
+</ul>
+
+<ul class='navbar-nav mr-auto'>
+  <li class='nav-item'>
+    <a class='nav-link' href='../business/list'>서비스</a>
+  </li>
+</ul>
+
+<ul class='navbar-nav mr-auto'>
+  <li class='nav-item'>
+    <a class='nav-link' href='../lost/list.html'>미아찾기</a>
+  </li>
+</ul>
+
+<a id="logout" href="../../json/auth/logout" 
+           class='btn btn-light btn-sm'>로그아웃</a>
+    </div>
+</nav>
+</header>
+    <h1>미아 상세정보</h1>
+    
+<form id="fileForm" enctype="multipart/form-data">
+
+   <div class='form-group row my-view'>
+   <label for='lostNumber' class='col-sm-2 col-form-label'>미아번호</label>
+   <div id="lostNum" class='col-sm-10'>
+   </div>
+   </div>
+
+   <div class='form-group row my-view'>
+   <label for='viewCount' class='col-sm-2 col-form-label'>조회수</label>
+   <div id="viewC" class='col-sm-10'>
+   </div>
+   </div>
+           
+   <div class='form-group row my-view'>
+   <label class='col-sm-2 col-form-label'>첨부파일</label>
+   <div id="attFile" class='col-sm-10'>
+   </div>
+   </div>
+
+
+   <div class='form-group row'>
+   <label for='petName' class='col-sm-2 col-form-label'>강아지이름</label>
+   <div class='col-sm-10'>
+   <input class='form-control' id='petName' type='text' 
+           name='petName'>
+   </div>
+   </div>
+   
+   <div class='form-group row'>
+   <label for='breed' class='col-sm-2 col-form-label'>품종</label>
+   <div class='col-sm-10'>
+   <input class='form-control' id='breed' type='text' 
+           name='breed'>
+   </div>
+   </div>
+   
+   <div class='form-group row'>
+   <label for='lostLocation' class='col-sm-2 col-form-label'>분실장소</label>
+   <div class='col-sm-10'>
+   <input class='form-control' id='lostLocation' type='text' 
+           name='lostLocation'>
+   </div>
+   </div>
+
+   <div class='form-group row'>
+   <label for='lostDate' class='col-sm-2 col-form-label'>분실일</label>
+   <div class='col-sm-10'>
+   <input class='form-control' id='lostDate' type='date' 
+           name='lostDate'>
+   </div>
+   </div>
+
+   <div class='form-group row'>
+   <label for='character' class='col-sm-2 col-form-label'>특징</label>
+   <div class='col-sm-10'>
+   <input class='form-control' id='character' type='text' 
+           name='character'>
+   </div>
+   </div>
+
+   <div class='form-group row'>
+   <label for='reward' class='col-sm-2 col-form-label'>사례금</label>
+   <div class='col-sm-10'>
+   <input class='form-control' id='reward' type='text' 
+           name='reward'>
+   </div>
+   </div>
+
+   <div class='form-group row'>
+   <label for='contents' class='col-sm-2 col-form-label'>기타사항</label>
+   <div class='col-sm-10'>
+   <input class='form-control' id='contents' type='text' 
+           name='contents'>
+   </div>
+   </div>
+   
+   <div class='form-group row'>
+   <label for='file' class='col-sm-2 col-form-label'>사진</label>
+   <div class='col-sm-10'>
+   <input type="file" class="form-control-file" id="file" name="file">
+   </div>
+   </div>
+   
+   <div class='form-group row'>
+   <div class='col-sm-10'>
+   <button id="addBtn" type="button" class='btn btn-primary btn-sm my-new'>추가</button>
+   <button id="updateBtn" type="button" class='btn btn-primary btn-sm my-view'>변경</button>
+   <button id="deleteBtn" type="button" class='btn btn-primary btn-sm my-view'>삭제</button> 
+   </div>
+   </div>
+   </form>
+   
+<footer>
+    비트캠프 자바100기 Balance@2018
+</footer>
+</div>
+
+<script src='../../node_modules/jquery/dist/jquery.js'></script>
+<script src='../../node_modules/popper.js/dist/umd/popper.js'></script>
+<script src='../../node_modules/bootstrap/dist/js/bootstrap.js'></script>
+
+<script type="text/javascript">
+var addBtn = $('#addBtn'),
+    updateBtn = $('#updateBtn'),
+    deleteBtn = $('#deleteBtn'),
+    lostNoItem = $('#lostNo'),
+    petNameItem = $('#petName'),
+    breedItem = $('#breed'),
+    lostLocationItem = $('#lostLocation'),
+    lostDateItem = $('#lostDate'),
+    characterItem = $('#character'),
+    rewardItem = $('#reward'),
+    viewCountItem = $('#viewCount'),
+    contentsItem = $('#contents'),
+    attFile = $('#attFile'),
+    fileItem = $('#file'),
+    lostNum = $('#lostNum');
+    viewC = $('#viewC'),
+    logout = $('#logout');
+
+var index = location.href.indexOf('?');
+
+if (index != -1) {
+    var qs = location.href.substr(index + 1);
+    var arr = qs.split('=');
+    $('.my-new').css('display', 'none');
+    
+    $(function load() {
+        $.ajax('../../json/lost/' + arr[1], {
+            dataType: 'json',
+            success: (result) => {
+            	$('#lostNum').html("<input class='form-control' readonly id='lostNo' type='number' name='lostNo' value='" + result.data.lostNo + "'>")
+            	lostNoItem.val(result.data.lostNo);
+            	$('#viewC').html("<input class='form-control' readonly id='viewCount' type='number' name='viewCount' value='" + result.data.viewCount + "'>")
+            	viewCountItem.val(result.data.viewCount);
+            	petNameItem.val(result.data.petName);
+            	breedItem.val(result.data.breed);
+            	lostLocationItem.val(result.data.lostLocation);
+            	lostDateItem.val(result.data.lostDate);
+            	characterItem.val(result.data.character);
+            	rewardItem.val(result.data.reward);
+            	contentsItem.val(result.data.contents);
+            	for (var file of result.data.files) {
+            		$('#attFile').html("<a href='../../download/" + file.filename + "'>" + file.filename + "</a>")
+            	}
+            	
+            },
+            error: () => {
+                window.alert('서버 실행 오류!');
+            }
+        });
+    });
+    
+} else {
+    $('.my-view').css('display', 'none');
+}
+
+addBtn.click(() => {
+	var formData = new FormData($("#fileForm")[0]);
+    $.ajax('../../json/lost/add', {
+        data: formData,
+        dataType: 'json',
+        method: 'POST',
+        processData : false,
+        contentType : false,
+        success: (result) => {
+        location.href = "list.html";
+        },
+        error: (jqXHR, textStatus, errorThrown) => {
+            window.alert('서버 실행 오류!');
+        }
+    });
+});
+
+updateBtn.click(() => {
+	var formData = new FormData($("#fileForm")[0]);
+    $.ajax('../../json/lost/update', {
+        data: formData,
+        dataType: 'json',
+        method: 'POST',
+        processData : false,
+        contentType : false,
+        success: (result) => {
+        location.href = "list.html";
+        },
+        error: (jqXHR, textStatus, errorThrown) => {
+            window.alert('서버 실행 오류!');
+        }
+    });
+});
+
+deleteBtn.click(() => {
+
+    $.ajax('../../json/lost/delete', {
+        data: {
+        	no: $('#lostNo').val()
+        },
+        dataType: 'json',
+        success: (result) => {
+        location.href = "list.html";
+        },
+        error: () => {
+            window.alert('서버 실행 오류!');
+        }
+    });
+});
+
+logout.click(() => {
+    $.ajax('../../json/auth/logout', {
+        dataType: 'json',
+        success: (result) => {
+            location.href = "../main/home.html";
+        }
+    });
+});
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

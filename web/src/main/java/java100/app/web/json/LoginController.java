@@ -1,4 +1,4 @@
-package java100.app.web;
+package java100.app.web.json;
 
 import java.util.HashMap;
 
@@ -7,34 +7,38 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import java100.app.domain.Member;
 import java100.app.service.MemberService;
 
-@Controller
+@RestController
 @RequestMapping("/auth")
 @SessionAttributes("loginUser")
 public class LoginController {
     @Autowired MemberService memberService;
     
     @RequestMapping(value="login", method=RequestMethod.GET)
-    public String form(Model model) {
-        model.addAttribute("menuVisible", false);
-        return "auth/loginform";
+    public Object form() {
+        
+        HashMap<String, Object> result = new HashMap<>();
+        
+        result.put("menuVisible", false);
+        return result;
     }
 
     @RequestMapping(value="login", method=RequestMethod.POST)
-    public String login(
+    public Object login(
             String email, 
             String password,
             String saveEmail,
             HttpServletResponse response,
+            HttpSession httpSession,
             Model model) {
         
         Member member = memberService.get(email, password);
@@ -49,19 +53,21 @@ public class LoginController {
             response.addCookie(cookie);
         }
         
+        HashMap<String, Object> result = new HashMap<>();
+        
         if (member == null) {
-            model.addAttribute("loginUser", null);
-            model.addAttribute("menuVisible", false);
-            return "auth/loginfail"; 
+            result.put("loginUser", null);
+            result.put("menuVisible", false);
+            result.put("status", "fail");
+        } else {
+            model.addAttribute("loginUser", member);
+            result.put("status", "success");
         }
-        
-        model.addAttribute("loginUser", member);
-        
-        return "redirect:../main/start";
+        return result;
     }
     
     @RequestMapping("logout")
-    public String logout(HttpSession session, SessionStatus status) {
+    public Object logout(HttpSession session, SessionStatus status) {
         
         // @SessionAttributes에서 관리하는 세션 데이터를 모두 제거한다.
         status.setComplete();
@@ -69,8 +75,28 @@ public class LoginController {
         // HttpSession 객체를 무효화시킨다.
         session.invalidate();
         
-        return "redirect:login";
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("status", "success");
+        return result;
     }  
+    
+    @RequestMapping("loginUser")
+    public Object loginUser(HttpSession session) {
+        
+        Member member = (Member)session.getAttribute("loginUser");
+        
+        HashMap<String,Object> result = new HashMap<>();
+        
+        if (member != null) {
+//            result.put("loginInfo", member);
+            result.put("member", memberService.get(member.getMemberNo()));
+//            result.put("status", "success");
+        } else {
+            result.put("status", "fail");
+        }
+            
+        return result;
+    }
     
 }
  

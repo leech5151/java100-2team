@@ -1,3 +1,4 @@
+
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
@@ -5,12 +6,12 @@
     
 <!-- 로그인 -->
  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <style>
   .modal-header, h4, .close {
       background-color: #5cb85c;
-      color:white !important;
+      color: white !important;
       text-align: center;
       font-size: 30px;
   }
@@ -19,19 +20,10 @@
   }
   </style> 
   
-  <script type="text/javascript">
-function postForm() {
-    $('input[name="email"]').val($('#email2').email2('code'));
-    $('input[name="password"]').val($('#password2').password2('code'));
-    $('input[name="saveEmail"]').val($('#saveEmail2').saveEmail2('code'));
-    console.log('값이 들어간다아아아아아아아아아')
-    
-}
-</script>
   <!-- Trigger the modal with a button -->
-  <button type="button" class="btn btn-outline-dark btn-sm" id="button_sign">Login</button>
+  <button id="loginModalBtn" type="button" class="btn btn-outline-dark btn-sm">Login</button>
 
-  <div class="modal fade" id="myModal" role="dialog">
+  <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
     
       <div class="modal-content">
@@ -42,35 +34,33 @@ function postForm() {
         
         <div class="modal-body" style="padding:40px 50px;">
         
-          <form onsubmit="postForm()">
+          <form id="modalForm">
           
             <div class="form-group">
-              <label for="email2"><span class="glyphicon glyphicon-user"></span>Email</label>
-              <input class="form-control" id="email2" type="text" 
-                     name='email2' value='${cookie.email.value}'placeholder="Enter email">
+              <label for="email"><span class="glyphicon glyphicon-user"></span>Email</label>
+              <input id="email" class="form-control" type="text" 
+                     name='email' value='${cookie.email.value}'placeholder="Enter email">
             </div>
             
             <div class="form-group">
-              <label for="password2"><span class="glyphicon glyphicon-eye-open"></span>Password</label>
-              <input class="form-control" id="password2" type="password" 
-                     name='password2' placeholder="Enter password">
+              <label for="password"><span class="glyphicon glyphicon-eye-open"></span>Password</label>
+              <input id="password" class="form-control" type="password" 
+                     name='password' placeholder="Enter password">
             </div>
             
             <div class="checkbox">
-            <input type="checkbox" id="saveEmail2" name="saveEmail2" checked>
+            <input id="saveEmail" type="checkbox" name="saveEmail" checked>
               <label>Remember me</label>
             </div>
             
-              <!-- <a href="../auth/logingo" type="submit" class="btn btn-success btn-block" id="login_submit"> -->
-              <button id="login_submit" class='btn btn-success btn-block'>Login</button>
-              <!-- <span class="glyphicon glyphicon-off"></span>Login</a> -->
+               <button id="loginBtn" type="button" class='btn btn-success btn-default btn-block' data-dismiss="modal"><span class="glyphicon glyphicon-remove">Login</span></button>
               
           </form>
           
         </div>
         
         <div class="modal-footer">
-          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <button type="button" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
           <p>Not a member? <a href="#">Sign Up</a></p>
           <p>Forgot <a href="#">Password?</a></p>
         </div>
@@ -79,47 +69,58 @@ function postForm() {
     </div>
   </div> 
   
-     <form action="logingo" id="postform" method='post' style="display: none;">
-               <input class='form-control' id='email' type='text' name='email'>
-               <input class='form-control' id=password type='text' name='password'>
-               <input class='form-control' id='saveEmail' type='text' name='saveEmail'>
-   </form>
-   
 <script>
 
-$(document).ready(function(){
-    $("#button_sign").click(function(){
-        $("#myModal").modal().appendTo('body')
+var email = $('#email'),
+    password = $('#password'),
+    saveEmail = $('#saveEmail'),
+    loginModalBtn = $('#loginModalBtn'),
+    myModal = $('#myModal'),
+    modalForm = $('#modalForm'),
+    loginBtn = $('#loginBtn'),
+    emailItem = $('#email'),
+    passwordItem = $('#password'),
+    saveEmailItem = $('#saveEmail'),
+    body = $('#body');
+
+$('#loginModalBtn').click(function(){
+    $("#myModal").modal().appendTo('body')
+});
+    
+loginBtn.click(() => {
+    var formData = new FormData($("#modalForm")[0]);
+    $.ajax('../auth/login', {
+        data: formData,
+        dataType: 'json',
+        method: 'POST',
+        processData : false,
+        contentType : false,
+        success: (result) => {
+        location.href = "../main/start";
+        }
+        /* error: (jqXHR, textStatus, errorThrown) => {
+            window.alert('서버 실행 오류!');
+        } */
     });
 });
 
-var email = document.querySelector('#email')
-var password = document.querySelector('#password')
-var saveEmail = document.querySelector('#saveEmail')
-
-login_submit.addEventListener('click', function(event) {
-	email.textContent = this.textContent,
-	password.textContent = this.textContent,
-	saveEmail.textContent = this.textContent
-})
 </script>
-
 <!-- 
 
 $('#login_submit').click(function () {
-	$.ajax({
-		url: '../auth/logingo',
-		type: 'put',
-		dataType: 'text',
-		data: {
-			email = $('#email').val(),
-			password = $('#password').val(),
-			saveEmail = $('#saveEmail').val(),
-		},
-		success: function (data) {
-			$('ddd').val(data);
-		}
-	});
+    $.ajax({
+        url: '../auth/logingo',
+        type: 'put',
+        dataType: 'text',
+        data: {
+            email = $('#email').val(),
+            password = $('#password').val(),
+            saveEmail = $('#saveEmail').val(),
+        },
+        success: function (data) {
+            $('ddd').val(data);
+        }
+    });
 });
  -->
 
@@ -154,3 +155,4 @@ $('#login_submit').click(function () {
          
       
  -->
+

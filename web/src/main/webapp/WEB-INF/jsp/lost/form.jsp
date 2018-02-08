@@ -62,7 +62,7 @@
 
 <div class='form-group row'>
 <label for='contents' class='col-sm-2 col-form-label'>기타사항</label>
-<div class='col-sm-10'>
+<div id="dd" class='col-sm-10'>
 <input class='form-control' id='contents' type='text' name='contents'>
 </div>
 </div>

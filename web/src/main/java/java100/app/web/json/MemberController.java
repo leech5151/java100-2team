@@ -1,4 +1,4 @@
-package java100.app.web;
+package java100.app.web.json;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,28 +8,27 @@ import java.util.HashMap;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import java100.app.domain.Member;
-import java100.app.domain.Trainning;
-import java100.app.domain.TrainningUploadFile;
-import java100.app.service.TrainningService;
+import java100.app.domain.MemberUploadFile;
+import java100.app.service.MemberService;
 
-@Controller
-@RequestMapping("/trainning")
+@RestController
+@RequestMapping("/member")
 @SessionAttributes("loginUser")
-public class TrainningController {
+public class MemberController {
     
     @Autowired ServletContext servletContext;
-    @Autowired TrainningService trainningService;
-     
+    @Autowired MemberService memberService;
+    @Autowired LoginController loginController;
+    
     @RequestMapping("list")
     public String list(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
@@ -39,6 +38,8 @@ public class TrainningController {
             @RequestParam(value="al", required=false) String align,
             Model model) throws Exception {
 
+        // UI 제어와 관련된 코드는 이렇게 페이지 컨트롤러에 두어야 한다.
+        //
         if (pageNo < 1) {
             pageNo = 1;
         }
@@ -54,35 +55,30 @@ public class TrainningController {
         options.put("orderColumn", orderColumn);
         options.put("align", align);
         
-        int totalCount = trainningService.getTotalCount();
+        int totalCount = memberService.getTotalCount();
         int lastPageNo = totalCount / pageSize;
         if ((totalCount % pageSize) > 0) {
             lastPageNo++;
         }
         
-        // view 컴포넌트가 사용할 값을 Model에 담는다.
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("lastPageNo", lastPageNo);
-        model.addAttribute("list", trainningService.list(pageNo, pageSize, options));
-        return "trainning/list";
+        model.addAttribute("list", memberService.list(pageNo, pageSize, options));
+        return "member/list";
     }
     
-    @RequestMapping("form")
-    public String form() throws Exception {
-        return "trainning/form";
-        
-    }
-
+/*
     @RequestMapping("add")
     public String add(
-            Trainning trainning,
-            @ModelAttribute(value="loginUser") Member loginUser,
-            MultipartFile[] file
+            Member member,
+            MultipartFile[] file,
+            Model model,
+            HttpServletResponse response
             ) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
 
-        ArrayList<TrainningUploadFile> uploadFiles = new ArrayList<>();
+        ArrayList<MemberUploadFile> uploadFiles = new ArrayList<>();
         
         for (MultipartFile part : file) {
             if (part.isEmpty())
@@ -90,31 +86,43 @@ public class TrainningController {
             
             String filename = this.writeUploadFile(part, uploadDir);
             
-            uploadFiles.add(new TrainningUploadFile(filename));
+            uploadFiles.add(new MemberUploadFile(filename));
         }
         
-        trainning.setFiles(uploadFiles);
-        trainning.setMember(loginUser);
-        trainningService.add(trainning);
-        
-        return "redirect:list";
-    }
+        member.setFiles(uploadFiles);
 
-    @RequestMapping("{no}")
-    public String view(@PathVariable int no, Model model) throws Exception {
+        memberService.add(member);
         
-        model.addAttribute("trainning", trainningService.get(no));
-        return "trainning/view";
+        model.addAttribute("start", memberService.get(member.getMemberNo()));
+        String path = loginController.login(member.getEmail(), member.getPassword(), member.getEmail(), response, model);
+//        return "redirect:../main/start";
+        return path;
+    }
+    */
+    
+    @RequestMapping("{no}")
+    public Object view(@PathVariable int no) throws Exception {
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("member", memberService.get(no));
+        return result;
+    }
+    
+    @RequestMapping("modify")
+    public Object modify(int no) throws Exception {
+        
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("num", no);
+        return result;
     }
 
     @RequestMapping("update")
-    public String update(
-            Trainning trainning, 
+    public Object update(
+            Member member, 
             MultipartFile[] file) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
 
-        ArrayList<TrainningUploadFile> uploadFiles = new ArrayList<>();
+        ArrayList<MemberUploadFile> uploadFiles = new ArrayList<>();
         
         for (MultipartFile part : file) {
             if (part.isEmpty())
@@ -122,20 +130,26 @@ public class TrainningController {
             
             String filename = this.writeUploadFile(part, uploadDir);
             
-            uploadFiles.add(new TrainningUploadFile(filename));
+            uploadFiles.add(new MemberUploadFile(filename));
         }
         
-        trainning.setFiles(uploadFiles);
+        member.setFiles(uploadFiles);
 
-        trainningService.update(trainning);
+        memberService.update(member);
+        if (member.getPush()) 
+            System.out.println("true");
+        else
+            System.out.println("false");
         
-        return "redirect:list";
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("member", member);
+        return result;
     }
 
     @RequestMapping("delete")
     public String delete(int no) throws Exception {
 
-        trainningService.delete(no);
+        memberService.delete(no);
         return "redirect:list";
     }
 

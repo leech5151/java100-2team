@@ -2,7 +2,9 @@ package java100.app.domain;
 
 import java.util.List;
 
+
 public class Business {
+
     protected int businessNo;
     protected String category;
     protected String businessName;
@@ -16,9 +18,11 @@ public class Business {
     protected String primary_address;
     protected String detail_address;
     protected List<BusinessUploadFile> files;
+    protected List<BusinessReview> reviews;
     public int getBusinessNo() {
         return businessNo;
     }
+    
     public void setBusinessNo(int businessNo) {
         this.businessNo = businessNo;
     }

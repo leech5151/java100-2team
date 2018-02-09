@@ -11,7 +11,8 @@ public class AuthInterceptor implements HandlerInterceptor {
     public boolean preHandle(
             HttpServletRequest request, 
             HttpServletResponse response, 
-            Object handler) throws Exception {
+            Object handler)
+            throws Exception {
         
         // 세션 보관소에 "loginUser"가 저장되었는지 검사한다.
         HttpSession session = request.getSession();

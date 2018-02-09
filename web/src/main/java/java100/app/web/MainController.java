@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
 import java100.app.domain.Member;
 import java100.app.service.BusinessService;
 import java100.app.service.MemberService;
@@ -37,7 +36,6 @@ public class MainController {
 
     @RequestMapping("{no}")
     public String view(@PathVariable int no, Model model) throws Exception {
-        
         model.addAttribute("member", memberService.get(no));
         return "redirect:../member/view";
     }

@@ -1,7 +1,5 @@
 package java100.app.web;
 
-import java.util.HashMap;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -28,7 +26,7 @@ public class LoginController {
         model.addAttribute("menuVisible", false);
         return "auth/loginform";
     }
-
+    
     @RequestMapping(value="login", method=RequestMethod.POST)
     public String login(
             String email, 
@@ -71,7 +69,6 @@ public class LoginController {
         
         return "redirect:login";
     }  
-    
 }
  
 

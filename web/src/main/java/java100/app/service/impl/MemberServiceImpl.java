@@ -51,7 +51,6 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Member get(int no) {
         Member member = memberDao.findByNo(no);
-        
         return member;
     }
 

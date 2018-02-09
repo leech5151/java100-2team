@@ -1,6 +1,5 @@
 package java100.app.domain;
 
-import java.sql.Date;
 import java.util.List;
 
 public class Member {
@@ -15,7 +14,7 @@ public class Member {
     protected String primaryAddress;
     protected String detailAddress;
     protected String memberType;
-    protected Date createDate; // list
+    protected String createDate; // list
     protected List<MemberUploadFile> files;
    
     public int getMemberNo() {
@@ -98,11 +97,11 @@ public class Member {
         this.memberType = memberType;
     }
     
-    public Date getCreateDate() {
+    public String getCreateDate() {
         return createDate;
     }
     
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 

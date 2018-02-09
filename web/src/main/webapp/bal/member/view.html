@@ -17,7 +17,7 @@
         <label for='name' class='col-sm-2 col-form-label'>이름</label>
         <div class='col-sm-10'>
         <input class='form-control' readonly id='name' type='text' 
-                name='name' value="아이유">
+                name='name'>
         </div>
         </div>
         
@@ -72,7 +72,7 @@
         <div class='form-group row'>
         <label for='postalNo' class='col-sm-2 col-form-label'>우편번호</label>
         <div class='col-sm-10'>
-        <input class='form-control' readonly id='tel' type='text' 
+        <input class='form-control' readonly id='postNo' type='text' 
                 name='postalNo'>
         </div>
         </div>
@@ -92,26 +92,27 @@
                 name='detailAddress'>
         </div>
         </div>
-        
+      
         <div class='form-group row'>
         <label for='createDate' class='col-sm-2 col-form-label'>가입일</label>
         <div class='col-sm-10'>
-        <input class='form-control' readonly id='createDate' type='date'>
+        <input class='form-control' readonly id='createDate' type="date"
+                name="createDate">
         </div>
         </div>
-        
+          
         <div class='form-group row'>
         <label class='col-sm-2 col-form-label'>첨부파일</label>
-        <div class='col-sm-10'>
-        <a href="/download/1517390351657_0.jpg">1517390351657_0.jpg</a><br>
+        <div id="attFile" class='col-sm-10'>
+        <br>
         </div>
         </div>
         
         <div class='form-group row'>
         <div class='col-sm-10'>
-        <a href='../pet/list' class='btn btn-primary btn-sm'>내 강아지</a>
-        <a href="modify?no=4" class="btn btn-primary btn-sm">변경</a>
-        <a href="" class="btn btn-primary btn-sm" onclick="window.close();">돌아가기</a>
+        <button id="myPetBtn" type="button" class="btn btn-primary btn-sm">내 강아지</button>
+        <button id="updateBtn" type="button" class="btn btn-primary btn-sm">변경</button>
+        <button id="goBackBtn" type="button" class="btn btn-primary btn-sm">돌아가기</button>
         </div>
         </div>
         
@@ -120,7 +121,85 @@
 </footer>
 </div>
 
-<script src='/node_modules/jquery/dist/jquery.slim.min.js'></script>
+<script src='/node_modules/jquery/dist/jquery.js'></script>
 <script src='/node_modules/popper.js/dist/umd/popper.min.js'></script>
-<script src='/node_modules/bootstrap/dist/js/bootstrap.min.js'></script></body>
+<script src='/node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+
+<script type="text/javascript">
+var nameItem = $('#name'),
+    nicnameItem = $('#nicname'),
+    memberTypeItem = $('#memberType'),
+    emailItem = $('#email'),
+	passwordItem = $('#password'),
+	telItem = $('#tel'),
+	pushItem = $('#push'),
+	postNoItem = $('#postNo'),
+	primaryAddressItem = $('#primaryAddress'),
+	detailAddressItem = $('#detailAddress'),
+	createDateItem = $('#createDate'),
+    memberNo = "",    
+	attFile = $('#attFile'),
+	myPetBtn = $('#myPetBtn'),
+	updateBtn = $('#updateBtn'),
+    goBackBtn = $('#goBackBtn');
+
+var index = location.href.indexOf('?');
+var qs = location.href.substr(index + 1);
+var arr = qs.split('=');
+	memberNo = arr[1];
+$(function load() {
+        $.ajax('../../json/member/' + arr[1], {
+            dataType: 'json',
+            success: (result) => {
+            	console.log(result);
+            	nameItem.val(result.member.name);
+            	nicnameItem.val(result.member.nicname);
+            	memberTypeItem.val(result.member.memberType);
+            	emailItem.val(result.member.email);
+            	passwordItem.val(result.member.password);
+            	telItem.val(result.member.tel);
+            	pushItem.val(result.member.push);
+            	postNoItem.val(result.member.postalNo);
+            	primaryAddressItem.val(result.member.primaryAddress);
+            	detailAddressItem.val(result.member.detailAddress);
+            	createDateItem.val(result.member.createDate);
+                for (var file of result.member.files) {
+                    $('#attFile').html("<a href='../../download/" + file.filename + "'>" + file.filename + "</a>")
+                }
+                
+            },
+            error: () => {
+                window.alert('서버 실행 오류!');
+            }
+        });
+    });
+    
+myPetBtn.click(() => {
+	$.getJSON('../../json/pet/list', (result) => {
+	    location.href = '../pet/list.html'
+	});
+});
+    
+updateBtn.click(() => {
+	$.getJSON('../../json/member/modify', {
+	 data: {
+		 no: memberNo
+	 },
+     success: (result) => {
+     location.href = '../member/modify.html?no=' + memberNo
+     }
+ });
+});
+     
+goBackBtn.click(() => {
+	$.ajax('../main/home.html', {
+     success: (result) => {
+     location.href = "../main/home.html";
+     }
+ });
+});
+
+</script>
+
+</body>
 </html>

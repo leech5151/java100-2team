@@ -108,14 +108,15 @@ public class MemberController {
     }
     
     @RequestMapping("modify")
-    public String modify(int no, Model model) throws Exception {
+    public Object modify(int no) throws Exception {
         
-        model.addAttribute("member", memberService.get(no));
-        return "member/modify";
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("num", no);
+        return result;
     }
 
     @RequestMapping("update")
-    public String update(
+    public Object update(
             Member member, 
             MultipartFile[] file) throws Exception {
         
@@ -140,7 +141,9 @@ public class MemberController {
         else
             System.out.println("false");
         
-        return "member/close";
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("member", member);
+        return result;
     }
 
     @RequestMapping("delete")

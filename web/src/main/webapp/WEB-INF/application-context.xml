@@ -14,17 +14,12 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop.xsd">
-
-    <!-- @Component, @Controller, @Service, @Repository 애노테이션이 붙은 
-         클래를 찾아 인스턴스를 생성한다. 
-         물론 의존 객체도 주입해줄 것이다. -->
+        
     <context:component-scan base-package="java100.app">
-    <context:exclude-filter type="aspectj"
-     expression="java100.app.web.*"/>
-     </context:component-scan>
-
+        <context:exclude-filter type="aspectj"
+            expression="java100.app.web.*"/>
+    </context:component-scan>
     
-    <!-- mybatis의 SQL 실행 객체 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>   
         <property name="mapperLocations" value="classpath*:java100/app/dao/mysql/*Dao.xml"/>
@@ -39,37 +34,40 @@
         <property name="username" value="${jdbc.username}" />
         <property name="password" value="${jdbc.password}" />
     </bean>
-    <!-- 트랜잭션 관리자 추가 -->
-    <bean id="transactionManager"
+    
+     <bean id="transactionManager"     
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
+      <property name="dataSource" ref="dataSource"/>
     </bean>
     
-    
     <context:property-placeholder location="classpath*:java100/app/jdbc.properties"/>
-    
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-  <property name="basePackage" value="java100.app.dao" />
-</bean>
-
+      <property name="basePackage" value="java100.app.dao" />
+    </bean>
     
-   
- <tx:advice id="txAdvice">
+    <tx:advice id="txAdvice">
         <tx:attributes>
             <tx:method name="list*" read-only="true"/>
-            <!-- 
-            <tx:method name="get*" read-only="true"/> -->
+            <tx:method name="get*" read-only="true"/>
+            
+            <tx:method name="*"/>
         </tx:attributes>
     </tx:advice>
     
-    
-<aop:config>
+    <aop:config>
         <aop:pointcut id="serviceOperation"
-         expression="execution(* java100.app.service..*ServiceImpl.*(..))"/>
+                expression="execution(* java100.app.service..ServiceImpl.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation"/>
-</aop:config>
-    
+    </aop:config>
 </beans>
+
+
+
+
+
+
+
+
 
 
 

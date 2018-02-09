@@ -45,3 +45,7 @@ footer {
    position:relative;
 }
 
+#category {
+	float: right;
+	margin-right: -21%;
+}

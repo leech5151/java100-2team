@@ -12,4 +12,3 @@ public interface LostFileDao {
 
     void deleteAllByLostNo(int no);
 }
- 

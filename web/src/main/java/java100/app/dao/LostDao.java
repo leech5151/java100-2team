@@ -14,7 +14,6 @@ public interface LostDao {
     int update(Lost lost);
     int delete(int no);
 }
- 
 
 
 
@@ -24,7 +23,8 @@ public interface LostDao {
 
 
 
- 
+
+
 
 
 

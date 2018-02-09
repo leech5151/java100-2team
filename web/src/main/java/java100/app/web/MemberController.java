@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +26,6 @@ public class MemberController {
     
     @Autowired ServletContext servletContext;
     @Autowired MemberService memberService;
-    @Autowired LoginController loginController;
     
     @RequestMapping("list")
     public String list(
@@ -76,9 +74,7 @@ public class MemberController {
     @RequestMapping("add")
     public String add(
             Member member,
-            MultipartFile[] file,
-            Model model,
-            HttpServletResponse response
+            MultipartFile[] file
             ) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
@@ -98,10 +94,7 @@ public class MemberController {
 
         memberService.add(member);
         
-        model.addAttribute("start", memberService.get(member.getMemberNo()));
-        String path = loginController.login(member.getEmail(), member.getPassword(), member.getEmail(), response, model);
-//        return "redirect:../main/start";
-        return path;
+        return "redirect:list";
     }
     
     @RequestMapping("view")

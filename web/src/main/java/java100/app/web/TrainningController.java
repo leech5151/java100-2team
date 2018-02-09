@@ -39,8 +39,6 @@ public class TrainningController {
             @RequestParam(value="al", required=false) String align,
             Model model) throws Exception {
 
-        // UI 제어와 관련된 코드는 이렇게 페이지 컨트롤러에 두어야 한다.
-        //
         if (pageNo < 1) {
             pageNo = 1;
         }

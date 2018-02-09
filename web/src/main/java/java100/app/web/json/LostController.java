@@ -111,7 +111,8 @@ public class LostController {
     @RequestMapping("update")
     public Object update(
             Lost lost, 
-            MultipartFile[] file) throws Exception {
+            MultipartFile[] file,
+            @ModelAttribute(value="loginUser") Member loginUser) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
 

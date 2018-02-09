@@ -27,11 +27,12 @@
   </head>
 
   <body id="page-top">
-  <img onclick="window.open('../../json/member/4')" alt="dkdldb" src="../../download/1517390351657_0.jpg">
+  
   <div class="home">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
       <a class="navbar-brand js-scroll-trigger" href="#page-top">
         <span class="d-block d-lg-none">Balance Pet</span>
+        <img id="memberPhoto"></img>
         
     </a>
  
@@ -41,7 +42,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
       
         <ul class="navbar-nav">
-          <li id="memberPhoto">
+          <li>
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#about">Home</a>
@@ -65,9 +66,9 @@
       </div>
       
       <div class='form-group row' align="right">
-       <button id="loginBtn" type="button" class='btn btn-outline-dark btn-sm before-login'>login</button>
-       <button id="singUpBtn" type="button" class='btn btn-outline-dark btn-sm before-login'>signUp</button> 
-       <button id="logoutBtn" type="button" class='btn btn-outline-dark btn-sm after-login'>logout</button>
+       <button id="loginBtn" type="button" style="margin: 5px" class='btn btn-outline-dark btn-sm before-login'>login</button>
+       <button id="singUpBtn" type="button" style="margin: 5px" class='btn btn-outline-dark btn-sm before-login'>signUp</button> 
+       <button id="logoutBtn" type="button" style="margin: 5px" class='btn btn-outline-dark btn-sm after-login'>logout</button>
        </div>
 
 </nav>
@@ -338,65 +339,67 @@
 var loginBtn = $('#loginBtn'),
     singUpBtn = $('#singUpBtn'),
     logoutBtn = $('#logoutBtn'),
-    memberPhoto = $('#memberPhoto');
+    memberThumnail = $('#memberThumnail'),
+    memberPhoto = $('#memberPhoto'),
+    memberNo = '';
 
 $.getJSON('../../json/auth/loginUser', (result) => {
 	if (result.status == 'fail') {
-        location.href = '../auth/loginform.html';
+        $('.after-login').css('display', 'none');
         return;
     } else {
-    	console.log(result.member.files);
 		var member = result.member;
+		memberNo = member.memberNo;
+		console.log(memberNo);
+		$('.before-login').css('display', 'none');
 		for (var file of member.files) {
-		        $('#memberPhoto').html("<img class='img-fluid img-profile rounded-circle mx-auto mb-2' src='../../download/" + file.filename + "' alt='" + file.filename + "'" + 
-		        		" onclick='window.open('https://www.w3schools.com');'>").click(() => {
-		        			html(window.open())
-		        		});
-	    }
+	        $('#memberPhoto').attr({
+	        	src: "../../download/" + file.filename,
+	        	class: 'img-fluid img-profile rounded-circle mx-auto mb-2',
+	        	alt: "'" + file.filename + "'",
+	        	onclick: "window.open('../member/view.html?no=" + member.memberNo + "')"
+	        });
+   		}
     }
+
 });
-/* style='cursor:pointer' */
-/*  ,'jn.Park','scrollbars=yes,width=800px,height=850px,top=50px,left=250px' */
-/* ../../json/member/" + member.memberNo + " */
+
 var index = location.href.indexOf('?');
 if (index != -1) {
-var qs = location.href.substr(index + 1);
-var arr = qs.split('=');
-$('.after-login').css('display', 'none');
+	var qs = location.href.substr(index + 1);
+	var arr = qs.split('=');
+    
 
-$(function load() {
-    $.ajax('../../json/main/' + arr[1], {
-        dataType: 'json',
-        success: (result) => {
-        	location.href = "../main/home.html";
-            
-        },
-        error: () => {
-            window.alert('서버 실행 오류!');
-        }
+    $(function load() {
+	    $.ajax('../../json/main/' + arr[1], {
+	        dataType: 'json',
+	        success: (result) => {
+	        	location.href = "../main/home.html";
+	        },
+	        error: () => {
+	            window.alert('서버 실행 오류!');
+	        }
+	    });
     });
-});
 
 } else {
-$('.after-login').css('display', 'none');
+    
 }
 
 loginBtn.click(() => {
-    $.ajax('../../json/auth/login', {
-        dataType: 'json',
-        success: (result) => {
-        location.href = "../auth/loginform.html";
-        }
+    $.getJSON('../../json/auth/login', (result) => {
+        location.href = '../auth/loginform.html';
     });
 });
 
-$('#logoutBtn').click(() => {
-    $.getJSON('../json/auth/logout', (result) => {
-        console.log(result);
+logoutBtn.click(() => {
+    $.getJSON('../../json/auth/logout', (result) => {
         location.href = '../main/home.html';
     });
-})
+});
+
 </script>
+
   </body>
 
 </html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원정보 변경</title>
+<link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel='stylesheet' href='../../css/common.css'>
+</head>
+<body>
+<div class='container'>
+
+<h1>정보 변경</h1>
+
+<form method='post' enctype="multipart/form-data">
+        
+         <div class='form-group row'>
+        <label for='memberNo' class='col-sm-2 col-form-label'>번호</label>
+        <div class='col-sm-10'>
+        <input class='form-control' readonly id='memberNo' type='number' 
+                name='memberNo'>
+        </div>
+        </div>
+        
+        <div class='form-group row'>
+        <label for='name' class='col-sm-2 col-form-label'>이름</label>
+        <div class='col-sm-10'>
+        <input class='form-control' id='name' type='text' 
+                name='name'>
+        </div>
+        </div>
+        
+        <div class='form-group row'>
+        <label for='nicname' class='col-sm-2 col-form-label'>별명</label>
+        <div class='col-sm-10'>
+        <input class='form-control' id='nicname' type='text' 
+                name='nicname'>
+        </div>
+        </div>
+        
+        <div class='form-group row'>
+        <label for='email' class='col-sm-2 col-form-label'>이메일</label>
+        <div class='col-sm-10'>
+        <input class='form-control' id='email' type='text' 
+                name='email'>
+        </div>
+        </div>
+ 
+        <div class='form-group row' id="memberLabel"> 
+        <label for='memberType' class='col-sm-2 col-form-label'>회원유형</label> 
+        <div class="selectbox" >
+        <select class="grouped_select optional form-control" id="memberType_modify" name="memberType">
+        <option value="선택하세요">선택하세요</option>
+        <option value="일반유저">일반유저</option>
+        <option value="사업자회원">사업자</option>
+        <option value="병원회원">병원</option>
+        </select>
+        </div>
+        </div>
+        
+        <div class='form-group row'>
+        <label for='password' class='col-sm-2 col-form-label'>암호</label>
+        <div class='col-sm-10'>
+        <input class='form-control' id='password' type='password' 
+                name='password'>
+        </div>
+        </div>
+        
+        <div class='form-group row'>
+        <label for='tel' class='col-sm-2 col-form-label'>전화번호</label>
+        <div class='col-sm-10'>
+        <input class='form-control' id='tel' type='text' 
+                name='tel'>
+        </div>
+        </div>
+        
+        <div class='form-group row'>
+        <label for='push' class='col-sm-2 col-form-label'>알람수신여부</label>
+        <div class='col-sm-10'>
+        <input id='push' type='radio' name='push' value="yes" checked="checked" />예
+        <input id='push' type='radio' name='push' value="no"/>아니오
+        </div>
+        </div> 
+        
+        <div class='form-group row'>
+        <label for='postalNo' class='col-sm-2 col-form-label'>우편번호</label>
+        <div class='col-sm-10'>
+        <input class='form-control' id='tel' type='text' 
+                name='postalNo'>
+        </div>
+        </div>
+        
+        <div class='form-group row'>
+        <label for='primaryAddress' class='col-sm-2 col-form-label'>기본주소</label>
+        <div class='col-sm-10'>
+        <input class='form-control' id='primaryAddress' type='text' 
+                name='primaryAddress'>
+        </div>
+        </div>
+        
+        <div class='form-group row'>
+        <label for='detailAddress' class='col-sm-2 col-form-label'>상세주소</label>
+        <div class='col-sm-10'>
+        <input class='form-control' id='detailAddress' type='text' 
+                name='detailAddress'>
+        </div>
+        </div>
+        
+        <div class='form-group row'>
+        <label for='file1' class='col-sm-2 col-form-label'>사진</label>
+        <div class='col-sm-10'>
+        <input type="file" class="form-control-file" id="file">
+        </div>
+        </div>
+        
+        <div class='form-group row'>
+        <div class='col-sm-10'>
+        <button id="updateBtn" class='btn btn-primary btn-sm'>변경</button>
+        <button id="goBackBtn" type="button" class="btn btn-primary btn-sm">돌아가기</button>
+        </div>
+        </div>
+        </form>
+        
+<footer>
+    비트캠프 자바100기 Balance@2018
+</footer>
+</div>
+
+<script src='/node_modules/jquery/dist/jquery.slim.min.js'></script>
+<script src='/node_modules/popper.js/dist/umd/popper.min.js'></script>
+<script src='/node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+<script type="text/javascript">
+var memberNoItem = $('#memberNo'),
+    nameItem = $('#name'),
+    nicnameItem = $('#nicname'),
+    memberTypeItem = $('#memberType'),
+    emailItem = $('#email'),
+    passwordItem = $('#password'),
+    telItem = $('#tel'),
+    pushItem = $('#push'),
+    postNoItem = $('#postNo'),
+    primaryAddressItem = $('#primaryAddress'),
+    detailAddressItem = $('#detailAddress'),
+    createDateItem = $('#createDate'),
+    attFile = $('#attFile'),
+    updateBtn = $('#updateBtn'),
+    goBackBtn = $('#goBackBtn');
+
+var index = location.href.indexOf('?');
+var qs = location.href.substr(index + 1);
+var arr = qs.split('=');
+$(function load() {
+        $.ajax('../../json/member/' + arr[1], {
+            dataType: 'json',
+            success: (result) => {
+                console.log(result);
+                $('#memberNo').html("<input class='form-control' readonly id='memberNo' type='number' name='memberNo' value='" + result.member.memberNo + "'>")
+                nameItem.val(result.member.name);
+                nicnameItem.val(result.member.nicname);
+                memberTypeItem.val(result.member.memberType);
+                emailItem.val(result.member.email);
+                passwordItem.val(result.member.password);
+                telItem.val(result.member.tel);
+                pushItem.val(result.member.push);
+                postNoItem.val(result.member.postNo);
+                primaryAddressItem.val(result.member.primaryAddress);
+                detailAddressItem.val(result.member.detailAddress);
+                createDateItem.val(result.member.createDate);
+                for (var file of result.member.files) {
+                    $('#attFile').html("<a href='../../download/" + file.filename + "'>" + file.filename + "</a>")
+                }
+                
+            },
+            error: () => {
+                window.alert('서버 실행 오류!');
+            }
+        });
+    });
+
+updateBtn.click(() => {
+    var formData = new FormData($("#fileForm")[0]);
+    $.ajax('../../json/member/update', {
+        data: formData,
+        dataType: 'json',
+        method: 'POST',
+        processData : false,
+        contentType : false,
+        success: (result) => {
+        location.href = "view.html";
+        },
+        error: (jqXHR, textStatus, errorThrown) => {
+            window.alert('서버 실행 오류!');
+        }
+    });
+});
+
+goBackBtn.click(() => {
+    $.ajax('../member/modify.html', {
+     success: (result) => {
+     location.href = "../member/modify.html";
+     }
+ });
+});
+</script>
+</body>
+</html>

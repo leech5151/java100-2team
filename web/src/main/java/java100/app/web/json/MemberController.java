@@ -108,10 +108,11 @@ public class MemberController {
     }
     
     @RequestMapping("modify")
-    public String modify(int no, Model model) throws Exception {
+    public Object modify(int no) throws Exception {
         
-        model.addAttribute("member", memberService.get(no));
-        return "member/modify";
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("memberNo", no);
+        return result;
     }
 
     @RequestMapping("update")

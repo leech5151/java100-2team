@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>게시판</title>
+<title>훈련 영상 정보</title>
 <link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <link rel='stylesheet' href='../../css/common.css'>
 </head>
@@ -17,7 +17,7 @@
  
 <jsp:include page="../header.jsp"/>
 
-<h1>게시물 목록</h1>
+<h1>훈련 영상</h1>
 
         <jsp:include page="../listToolbar.jsp" />
 

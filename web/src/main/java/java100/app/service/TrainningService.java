@@ -21,7 +21,7 @@ public interface TrainningService {
     int add(Trainning trainning);
     void addFiles(List<TrainningUploadFile> files, int trainningNo);
     Trainning get(int no);
-    Trainning get(String email, String password);
+    /*Trainning get(String email, String password);*/
     int update(Trainning trainning);
     int delete(int no);
 }

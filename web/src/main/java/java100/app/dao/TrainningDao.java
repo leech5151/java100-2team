@@ -1,6 +1,5 @@
 package java100.app.dao;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,9 +10,11 @@ public interface TrainningDao {
     int countAll();
     int insert(Trainning trainning);
     Trainning findByNo(int no);
-    Trainning findByEmailAndPassword(HashMap<String, Object> params);
+   /* Trainning findByEmailAndPassword(HashMap<String, Object> params);*/
     int update(Trainning trainning);
     int delete(int no);
+    int updateViewCount(int no);
+    int updateLikes(int no);
 }
 
 

@@ -490,7 +490,7 @@ loginBtn2.click(() => {
         if (result.status == "success") {
             location.href = "../main/home.html"
         } else {
-            alert('이메일이나 암호가 일치하는 사용자를 찾을 수 없습니다.!')
+        	swal("로그인실패!", "이메일이나 암호를 확인 해주세요!", "error");
         }
     }, 'json');
     

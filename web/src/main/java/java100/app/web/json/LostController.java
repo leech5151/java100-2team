@@ -103,6 +103,7 @@ public class LostController {
         
         HashMap<String, Object> result = new HashMap<>();
         
+        result.put("member", loginUser);
         result.put("status", "success");
         
         return result;

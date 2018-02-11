@@ -187,7 +187,6 @@
             </ul>
         </h2>
 
-            
         <div class="tabs">
             <div class="tab-2" id="t_first">
                 <label for="tab2-1">One</label>
@@ -238,7 +237,7 @@
           <h2 class="mb-5">
             <ul class='navbar-nav mr-auto'>
               <li class='nav-item'>
-                <a class='nav-link' href='../petEncyclopedia/list'>PET STORY</a>
+                <a class='nav-link' href='../petEncyclopedia/list.html'>PET STORY</a>
               </li>
             </ul>
           </h2>
@@ -302,7 +301,7 @@
           <h2 class="mb-5">
             <ul class='navbar-nav mr-auto'>
               <li class='nav-item'>
-                <a class='nav-link' href='../trainning/list'>PET CAST</a>
+                <a class='nav-link' href='../trainning/list.html'>PET CAST</a>
               </li>
             </ul>
           </h2>
@@ -368,7 +367,6 @@ var index = location.href.indexOf('?');
 if (index != -1) {
 	var qs = location.href.substr(index + 1);
 	var arr = qs.split('=');
-    
 
     $(function load() {
 	    $.ajax('../../json/main/' + arr[1], {
@@ -382,9 +380,7 @@ if (index != -1) {
 	    });
     });
 
-} else {
-    
-}
+} else {}
 
 loginBtn.click(() => {
     $.getJSON('../../json/auth/login', (result) => {
@@ -397,6 +393,13 @@ logoutBtn.click(() => {
         location.href = '../main/home.html';
     });
 });
+
+singUpBtn.click(() => {
+	$.getJSON('../../json/main/home', (result) => {
+        location.href = '../member/form.html';
+    });
+})
+
 
 </script>
 

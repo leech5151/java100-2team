@@ -52,6 +52,7 @@
     </div>
 </nav>
 </header>
+
     <h1>미아 상세정보</h1>
     
 <form id="fileForm" enctype="multipart/form-data">
@@ -186,9 +187,10 @@ if (index != -1) {
         $.ajax('../../json/lost/' + arr[1], {
             dataType: 'json',
             success: (result) => {
-            	$('#lostNum').html("<input class='form-control' readonly id='lostNo' type='number' name='lostNo' value='" + result.data.lostNo + "'>")
+            	console.log(result);
+            	$('#lostNum').html("<input class='form-control' readonly id='lostNo' type='number' name='lostNo' value='" + result.data.lostNo + "'>");
             	lostNoItem.val(result.data.lostNo);
-            	$('#viewC').html("<input class='form-control' readonly id='viewCount' type='number' name='viewCount' value='" + result.data.viewCount + "'>")
+            	$('#viewC').html("<input class='form-control' readonly id='viewCount' type='number' name='viewCount' value='" + result.data.viewCount + "'>");
             	viewCountItem.val(result.data.viewCount);
             	petNameItem.val(result.data.petName);
             	breedItem.val(result.data.breed);

@@ -26,28 +26,6 @@ footer {
 #memberType_add {
 	margin-left: 15px;
 }
-<<<<<<< HEAD
-
-.ss {
-    width: 800px;
-    height: auto;
-    margin-left: 80px;
-}
-
-.btn-box {
-   display:block;
-   position:absolute;
-   bottom:10px;
-   right:10px;
-   
-}
-
-.card-body d-flex flex-column align-items-start {
-   position:relative;
-}
-
-=======
->>>>>>> branch 'master' of https://github.com/leech5151/java100-2team.git
 #category {
 	float: right;
 	margin-right: -21%;

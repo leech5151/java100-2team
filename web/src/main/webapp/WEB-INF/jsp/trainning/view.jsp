@@ -63,7 +63,7 @@
         <div class='form-group row'>
         <label for='viewCount' class='col-sm-2 col-form-label'>조회수</label>
         <div class='col-sm-10'>
-        <input readonly class='form-control' id='viewCount' type='number' 
+        <input class='form-control' id='viewCount' type='number' 
                 name='viewCount' value='${trainning.viewCount}'>
         </div>
         </div>
@@ -79,7 +79,7 @@
         <div class='form-group row'>
         <label for='likes' class='col-sm-2 col-form-label'>추천수</label>
         <div class='col-sm-10'>
-        <input readonly class='form-control' id='likes' type='number' 
+        <input class='form-control' id='likes' type='number' 
                 name='likes' value='${trainning.likes}'>
         </div>
         </div>
@@ -94,7 +94,7 @@
         
         </c:forEach>
         </div>
-        </div>
+        </div><iframe width="854" height="480" src="https://www.youtube.com/embed/dFNle5sNTMI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         
         <div class='form-group row'>
 		<label for='file1' class='col-sm-2 col-form-label'>사진</label>
@@ -102,8 +102,6 @@
 		<input type="file" class="form-control-file" id="file1" name="file">
 		</div>
 		</div>
-		
-		
 		
         <div class='form-group row'>
         <div class='col-sm-10'>

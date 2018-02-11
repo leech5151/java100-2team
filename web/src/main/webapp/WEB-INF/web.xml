@@ -6,17 +6,6 @@
   version="3.1"
   metadata-complete="false">
     
-<<<<<<< HEAD
-     <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/application-context.xml</param-value>
-    </context-param>
-    
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-    
-=======
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/application-context.xml</param-value>
@@ -25,7 +14,6 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
->>>>>>> branch 'master' of https://github.com/leech5151/java100-2team.git
     
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
@@ -76,19 +64,12 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-<<<<<<< HEAD
-   <servlet-mapping>
-=======
     <servlet-mapping>
->>>>>>> branch 'master' of https://github.com/leech5151/java100-2team.git
         <servlet-name>app</servlet-name>
         <url-pattern>/app/*</url-pattern>
     </servlet-mapping>
     
-<<<<<<< HEAD
-=======
     
->>>>>>> branch 'master' of https://github.com/leech5151/java100-2team.git
     <servlet>
         <servlet-name>json</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

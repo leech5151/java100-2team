@@ -67,14 +67,11 @@ public class MemberController {
         return "member/list";
     }
     
-/*
     @RequestMapping("add")
-    public String add(
+    public Object add(
             Member member,
             MultipartFile[] file,
-            Model model,
-            HttpServletResponse response
-            ) throws Exception {
+            Model model) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
 
@@ -92,13 +89,14 @@ public class MemberController {
         member.setFiles(uploadFiles);
 
         memberService.add(member);
+        System.out.println(member.getPassword());
+        HashMap<String, Object> result = new HashMap<>();
+        memberService.get(member.getMemberNo());
+        result.put("email", member.getEmail());
+        result.put("password", member.getPassword());
         
-        model.addAttribute("start", memberService.get(member.getMemberNo()));
-        String path = loginController.login(member.getEmail(), member.getPassword(), member.getEmail(), response, model);
-//        return "redirect:../main/start";
-        return path;
+        return result;
     }
-    */
     
     @RequestMapping("{no}")
     public Object view(@PathVariable int no) throws Exception {
@@ -145,14 +143,14 @@ public class MemberController {
         result.put("member", member);
         return result;
     }
-
+/*
     @RequestMapping("delete")
     public String delete(int no) throws Exception {
 
         memberService.delete(no);
         return "redirect:list";
     }
-
+*/ 
     long prevMillis = 0;
     int count = 0;
     
@@ -183,7 +181,8 @@ public class MemberController {
         String filename = getNewFilename(part.getOriginalFilename());
         part.transferTo(new File(path + "/" + filename));
         return filename;
-    }    
+    }  
+
 }
 
 

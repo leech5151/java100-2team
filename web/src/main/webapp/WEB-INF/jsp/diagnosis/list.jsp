@@ -32,8 +32,8 @@
 <c:forEach items="${list}" var="diagnosis">
         <tr>
         <td>${diagnosis.diagnosisNo}</td>
-        <td><a href='${diagnosis.diagnosisNo}'>${diagnosis.member.name}</a></td>
-        <td>${diagnosis.hospital.hospitalName}</td>
+        <td><a href='${diagnosis.diagnosisNo}'>${diagnosis.hospital.hospitalName}</a></td>
+        <td>${diagnosis.member.name}</td>
         <td>${diagnosis.diagnosisCategory}</td>
         <td>${diagnosis.diagnosisName}</td>
         <td>${diagnosis.diagnosisContents}</td>

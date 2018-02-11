@@ -1,39 +1,40 @@
-package java100.app.web;
+package java100.app.web.json;
 
 import java.util.HashMap;
 
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java100.app.domain.Diagnosis;
+import java100.app.domain.Hospital;
 import java100.app.domain.Member;
 import java100.app.service.DiagnosisService;
 
 
-@Controller
+@RestController
 @RequestMapping("/diagnosis")
-@SessionAttributes("loginUser")
+@SessionAttributes("loginUser") 
 public class DiagnosisController {
+    
     @Autowired ServletContext servletContext;
     @Autowired DiagnosisService diagnosisService;
     
     
     @RequestMapping("list")
-    public String list(
+    public Object list(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
             @RequestParam(value="ps", defaultValue="5") int pageSize,
             @RequestParam(value="words", required=false) String[] words,
             @RequestParam(value="oc", required=false) String orderColumn,
-            @RequestParam(value="al", required=false) String align,
-            Model model)throws Exception{  if (pageNo < 1) {
+            @RequestParam(value="al", required=false) String align
+            )throws Exception{  if (pageNo < 1) {
                 pageNo = 1;
             }
             
@@ -54,49 +55,68 @@ public class DiagnosisController {
                 lastPageNo++;
             }
             
-            // view 컴포넌트가 사용할 값을 Model에 담는다.
-            model.addAttribute("pageNo", pageNo);
-            model.addAttribute("lastPageNo", lastPageNo);
-            model.addAttribute("list", diagnosisService.list(pageNo, pageSize, options));
-            return "diagnosis/list";
+            
+            HashMap<String,Object> result = new HashMap<>();
+            
+            result.put("pageNo", pageNo);
+            result.put("lastPageNo", lastPageNo);
+            result.put("list", diagnosisService.list(pageNo, pageSize, options));
+            
+            return result;
     }
     
 
-    @RequestMapping("add")
-    public String add(
+   @RequestMapping("add")
+    public Object add(
             Diagnosis diagnosis,
-
-            @ModelAttribute(value="loginUser") Member loginUser
+            @ModelAttribute(value="loginUser") Member loginUser,Hospital hospital 
             ) throws Exception {
-        
-
         diagnosis.setMember(loginUser);
-        System.out.println(diagnosis.getMember().getMemberNo());
+        diagnosis.setHospital(hospital);
+        System.out.println(hospital.getHospitalNo());
+        
         diagnosisService.add(diagnosis);
-        
-        return "redirect:list";
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("status","success");
+        return result;
     }
-
+   
     @RequestMapping("{no}")
-    public String view(@PathVariable int no, Model model) throws Exception {
-        
-        model.addAttribute("diagnosis", diagnosisService.get(no));
-        return "diagnosis/view";
+    public Object view(@PathVariable int no) throws Exception {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("data", diagnosisService.get(no));
+        return result;
     }
 
     @RequestMapping("update")
-    public String update(Diagnosis diagnosis) throws Exception {
-        diagnosisService.update(diagnosis);
+    public Object update(Diagnosis diagnosis) throws Exception {
         
-        return "redirect:list";
+        diagnosisService.update(diagnosis);
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("status","success");
+        
+        return result;
     }
 
     @RequestMapping("delete")
-    public String delete(int no) throws Exception {
+    public Object delete(int no) throws Exception {
         diagnosisService.delete(no);
-        return "redirect:list";
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("status","success");
+        
+        return result;
+    }
+    
+    
+    
+    @RequestMapping("form")
+    public Object findByMemberNo(@ModelAttribute(value="loginUser") Member loginUser) throws Exception{
+        int no = loginUser.getMemberNo();
+        System.out.println(no);
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("data", diagnosisService.getHospitalNo(no));
+        return result;
     }
 
-    
 
 }

@@ -10,6 +10,7 @@ public interface DiagnosisDao {
     int countAll();
     int insert(Diagnosis diagnosis);
     Diagnosis findByNo(int no);
+    Diagnosis findByHospitalNo(int no);
     int update(Diagnosis diagnosis);
     int delete(int no);
 }

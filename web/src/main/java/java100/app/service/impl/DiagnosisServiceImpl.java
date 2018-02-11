@@ -59,6 +59,16 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     public int delete(int no) {
         return  diagnosisDao.delete(no);
     }
+
+    
+    
+    
+    @Override
+    public Diagnosis getHospitalNo(int no) {
+        return diagnosisDao.findByHospitalNo(no);
+    }
+    
+    
     
     
     

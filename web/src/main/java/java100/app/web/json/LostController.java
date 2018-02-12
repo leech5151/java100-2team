@@ -32,7 +32,7 @@ public class LostController {
     @RequestMapping("list")
     public Object list(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
-            @RequestParam(value="ps", defaultValue="10") int pageSize,
+            @RequestParam(value="ps", defaultValue="7") int pageSize,
             @RequestParam(value="words", required=false) String[] words,
             @RequestParam(value="oc", required=false) String orderColumn,
             @RequestParam(value="al", required=false) String align) throws Exception {
@@ -41,8 +41,8 @@ public class LostController {
             pageNo = 1;
         }
         
-        if (pageSize < 8 || pageSize > 8) {
-            pageSize = 8;
+        if (pageSize < 7 || pageSize > 7) {
+            pageSize = 7;
         }
         
         HashMap<String,Object> options = new HashMap<>();

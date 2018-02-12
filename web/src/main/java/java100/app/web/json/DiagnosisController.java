@@ -72,9 +72,11 @@ public class DiagnosisController {
             @ModelAttribute(value="loginUser") Member loginUser,Hospital hospital 
             ) throws Exception {
         diagnosis.setMember(loginUser);
-        diagnosis.setHospital(hospital);
         System.out.println(hospital.getHospitalNo());
-        
+        diagnosis.setHospital(hospital);
+        System.out.println("----------------------------");
+        System.out.println(diagnosis.getHospital().getHospitalNo());
+        System.out.println("----------------------------");
         diagnosisService.add(diagnosis);
         HashMap<String,Object> result = new HashMap<>();
         result.put("status","success");
@@ -92,6 +94,7 @@ public class DiagnosisController {
     public Object update(Diagnosis diagnosis) throws Exception {
         
         diagnosisService.update(diagnosis);
+        System.out.println(diagnosis.getDiagnosisNo());
         HashMap<String,Object> result = new HashMap<>();
         result.put("status","success");
         

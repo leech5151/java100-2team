@@ -10,9 +10,27 @@ public class Diagnosis {
     protected String dateRecording;
     protected String recorder;
     protected String remarks;
+    protected String memberTel;
+    protected String memberName;
     protected Member member;
     protected Hospital hospital;
     
+    
+    
+    
+    
+    public String getMemberTel() {
+        return memberTel;
+    }
+    public void setMemberTel(String memberTel) {
+        this.memberTel = memberTel;
+    }
+    public String getMemberName() {
+        return memberName;
+    }
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
+    }
     public int getDiagnosisNo() {
         return diagnosisNo;
     }

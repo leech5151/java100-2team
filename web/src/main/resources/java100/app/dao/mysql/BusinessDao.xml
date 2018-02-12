@@ -44,21 +44,21 @@
 
     <select id="findAll" resultMap="businessMap" parameterType="map">
          select 
-	         b.bus_no,
-	         d.file,
-	         b.b_name,
-	         b.prm_addr,
-	         b.ctgr
+            b.bus_no,
+            d.file,
+            b.b_name,
+            b.prm_addr,
+            b.ctgr
         from bus as b
             left join bus_mda as d 
              on b.bus_no=d.bus_no 
 
         <if test="words != null">
-	        <where>
-	            <foreach collection="words" item="word">
-	                or title like '%${word}%'
-	            </foreach>
-	        </where>
+           <where>
+               <foreach collection="words" item="word">
+                   or title like '%${word}%'
+               </foreach>
+           </where>
         </if>
         
         <!-- 정렬 조건에 따라 SQL문을 변경한다.
@@ -109,23 +109,23 @@
     <select id="findByNo" resultMap="businessMap" parameterType="int">
         select 
             b.bus_no,
-		    b.ctgr,
-		    b.b_name,
-		    b.op_time,
-		    b.cl_time,
-		    b.tel,
-		    b.menu,
-		    b.conts,
-		    b.url,
-		    b.pst_no,
-		    b.prm_addr,
-		    b.det_addr,
-		    d.mda_no,
-		    d.file,
-		from 
-		    bus as b 
-		    left join bus_mda as d 
-		     on b.bus_no=d.bus_no
+          b.ctgr,
+          b.b_name,
+          b.op_time,
+          b.cl_time,
+          b.tel,
+          b.menu,
+          b.conts,
+          b.url,
+          b.pst_no,
+          b.prm_addr,
+          b.det_addr,
+          d.mda_no,
+          d.file
+      from 
+          bus as b 
+          left join bus_mda as d 
+           on b.bus_no=d.bus_no
         where b.bus_no=#{value}
     </select>
         
@@ -161,7 +161,6 @@
         where bus_no=#{value}
     </delete>
 </mapper>  
-
 
 
 

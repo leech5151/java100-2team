@@ -53,7 +53,7 @@
     </bean>
     
     <!-- 인터셉터를 등록한다. -->
-    
+    <!--
     <mvc:interceptors>
         <mvc:interceptor>
              <mvc:mapping path="/member/**"/> 
@@ -61,12 +61,11 @@
             <mvc:mapping path="/lost/**"/>
             <mvc:mapping path="/business/**"/>
             <mvc:mapping path="/pet/**"/>
-            <mvc:mapping path="/hospital/**"/>
             <mvc:exclude-mapping path="/auth/**"/>
             <bean class="java100.app.web.interceptor.JsonAuthInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
-   
+    -->
 </beans>
 
 

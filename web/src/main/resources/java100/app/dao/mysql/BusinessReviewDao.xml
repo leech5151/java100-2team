@@ -89,7 +89,7 @@
         insert into bus_rv(m_no,bus_no,title,conts,date)
         values(#{registrant.memberNo},15,#{title},#{content},now())
     </insert>
-
+  
   <!-- 
     <select id="findByNo" resultMap="businessMap" parameterType="int">
         select 

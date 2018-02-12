@@ -15,6 +15,10 @@
         <result column="point" property="StarPoint"/>
         <result column="vwcnt" property="viewCount"/>
         
+        <association property="registrant" javaType="member">
+            <id column="m_no" property="memberNo"/>
+            <result column="m_name" property="memberName"/>
+        </association>
         <!-- 첨부파일 정보를 담을 수 있도록 설정한다. -->
       <!--   <collection property="files"  ofType="businessUploadFile">
             <id     column="mda_no"       property="no"/>
@@ -82,8 +86,8 @@
     </select>
     <insert id="insert" parameterType="businessReview"
         useGeneratedKeys="true" keyColumn="rv_no" keyProperty="reviewNo">
-        insert into bus_rv(m_no,bus_no,title,content,date)
-        values(#{memberNo},#{businessNo},#{title},#{content},now())
+        insert into bus_rv(m_no,bus_no,title,conts,date)
+        values(#{registrant.memberNo},#{businessNo},#{title},#{content},now())
     </insert>
 
   <!-- 

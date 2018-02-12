@@ -8,7 +8,17 @@ public class BusinessReview {
      double StarPoint;
      int viewCount;
      int businessNo;
-     int memberNo;
+     protected Member registrant;
+   
+     public Member getRegistrant() {
+        return registrant;
+    }
+    public void setRegistrant(Member registrant) {
+        this.registrant = registrant;
+    }
+    public void setStarPoint(double starPoint) {
+        StarPoint = starPoint;
+    }
     public int getReviewNo() {
         return reviewNo;
     }
@@ -50,12 +60,6 @@ public class BusinessReview {
     }
     public void setBusinessNo(int businessNo) {
         this.businessNo = businessNo;
-    }
-    public int getMemberNo() {
-        return memberNo;
-    }
-    public void setMemberNo(int memberNo) {
-        this.memberNo = memberNo;
     }
     
   

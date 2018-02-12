@@ -51,7 +51,7 @@
   </li>
 </ul>
 
-1<a href="/app/auth/logout" 
+<a id="logout" href="../../json/auth/logout" 
            class='btn btn-light btn-sm'>로그아웃</a>
     </div>
 </nav>
@@ -151,29 +151,18 @@
 <div class='form-group row my-mo'>
 <label for='filename' class='col-sm-2 col-form-label'>사진</label>
 <div id=filediv class='col-sm-10'>
-<input type='file' class='form-control-file' id='file1' name='file'>
+<input type='file' class='form-control-file' id='filename' name='file'>
 </div>
 </div> 
 
-<div class='form-group row my-view'>
-<label for='title' class='col-sm-2 col-form-label'>리뷰</label>
-<div id=reviewdiv class='col-sm-10'>
-<table id="reviewList" class='table table-hover'>
-<thead>
-<tr>
-<a href='reviewform.html'>리뷰 등록</a>
-</tr>
-<tr>
-<th>번호</th><th>제목</th><th>등록일자</th><th>별점</th><th>조회수</th>
-</tr>
-</thead>
-<tbody></tbody>
-</table>
-</div>
+<div id="inserthere" class='form-group row my-mo'>
+    
 </div> 
+
 
 <div class='form-group row'>
 <div class='col-sm-10'>
+
 <button id="addBtn" type="button" class='btn btn-primary btn-sm my-new'>추가</button>
 <button id="modifyBtn" type="button" class='btn btn-primary btn-sm my-view'>수정</button>
 <button id="updateBtn" type="button" class='btn btn-primary btn-sm my-view'>변경</button>
@@ -190,10 +179,12 @@
 <script src='../../node_modules/jquery/dist/jquery.min.js'></script>
 <script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
 <script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <script type="text/javascript">
 var addBtn = $('#addBtn'),
     updateBtn = $('#updateBtn'),
     deleteBtn = $('#deleteBtn'),
+    addReviewBtn = $('#addRBtn'),
     modifyBtn = $('#modifyBtn'),
     ctgrItem = $('#category'),
     nameItem = $('#businessName'),
@@ -211,6 +202,7 @@ var addBtn = $('#addBtn'),
     fileItem = $('#filename'),
     reviewdItem = $('#reviewdiv'),
     reviewItem = $('#title');
+var number;
     
  
  
@@ -218,17 +210,15 @@ var index = location.href.indexOf('?');
 if (index != -1) { // 기존 데이터를 조회할 경우,
     var qs = location.href.substr(index + 1);
     var arr = qs.split('=');
-    var filename;
     $('.my-new').css('display', 'none');
     $(() => {
         $.ajax('../../json/business/' + arr[1], {
             dataType: 'json',
             success: (result) => {
-                console.log()
                 ctgrItem.val(result.data.category);
                 nodItem.html("<input class='form-control' readonly id='businessNo' " + 
                              "name='businessNo' value='" + result.data.businessNo + "'> ");
-                /* noItem.val(result.data.businessNo); */
+                number = result.data.businessNo;
                 nameItem.val(result.data.businessName);
                 openItem.val(result.data.open_time);
                 closeItem.val(result.data.close_time);
@@ -241,7 +231,6 @@ if (index != -1) { // 기존 데이터를 조회할 경우,
                 detItem.val(result.data.detail_address);
                 for (var file of result.data.files){
                 filedItem.html( "<img src='../../download/" + file.filename + "' alt=" + file.filename + " width='50px' height='50px'>")
-                fileItem.val(filename); 
                 console.log(file.filename)
                 }
                 /* for (var review of result.data.reviews){
@@ -259,6 +248,10 @@ if (index != -1) { // 기존 데이터를 조회할 경우,
 } else { // 신규 데이터 입력일 경우,
     $('.my-view').css('display', 'none');
 }
+addReviewBtn.click(()=> {
+    location.href = "review.html";
+     alert(number)
+ });
 
  addBtn.click(() => {
      if (ctgrItem.val() == 0) {
@@ -330,71 +323,16 @@ deleteBtn.click(function() {
         }
     });
 });
+
+$(document).ready(function(){ // 리뷰 리스트 인클루드
+        
+    $("#inserthere").load("reviewlist.html")
+   /* id 지정을 통해서도 가능합니다. 
+    $("#header").load("header.html #navbar")
+    */       
+ });
 </script>
 
-<script type="text/javascript"> // 리뷰 리스트 뽑기
-var words = $('#words'),
-prevBtn = $('#prevBtn'),
-currBtn = $('#currBtn'),
-nextBtn = $('#nextBtn'),
-tbody = $('#reviewList > tbody'),
-currPageNo = 1;
-
-load(1);
-
-prevBtn.click(() => {
-load(currPageNo - 1)
-});
-
-nextBtn.click(() => {
-load(currPageNo + 1)
-});
-
-function load(pageNo, options) {
-
-if (options == undefined) options = {};
-options.pn = pageNo;
-
-$.ajax('../../json/business/review/list', {
-    /*method: 'GET',*/
-    data: options,
-    dataType: 'json',  
-    success: (result) => {
-        tbody.html(""); // <tbody> 콘텐츠를 지운다.
-        
-        for (var data of result.list) {
-            $('<tr>')
-                .html(  
-                    "<td>" + data.reviewNo + "</td>" + 
-                    "<td><a href='form.html?no=" + data.reviewNo + "'>" + data.title + "</a></td>" + 
-                    "<td>" + data.createDate + "</td>" +
-                    "<td>" + data.starPoint + "</td>" +
-                    "<td>" + data.viewCount + "</td>" )
-                    .appendTo(tbody);
-        }
-        
-        currPageNo = result.pageNo;
-        currBtn.html(currPageNo);
-        
-        if (result.pageNo == 1) {
-            $(prevBtn.parent()).addClass("disabled");
-        } else {
-            $(prevBtn.parent()).removeClass("disabled");
-        }
-        
-        if (result.lastPageNo == result.pageNo) {
-            $(nextBtn.parent()).addClass("disabled");
-        } else {
-            $(nextBtn.parent()).removeClass("disabled");
-        }
-    },
-    error: () => {
-        window.alert('서버 실행 오류! list');
-    }
-});
-}
-
-</script>
 </body>
 </html>
     

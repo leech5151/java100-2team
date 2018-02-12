@@ -49,7 +49,7 @@
     </c:if>
       </a>
  
-    <jsp:include page="menubar.jsp"></jsp:include>
+    <jsp:include page="../menubar.jsp"></jsp:include>
     </nav>
 
     <div class="container-fluid p-0">

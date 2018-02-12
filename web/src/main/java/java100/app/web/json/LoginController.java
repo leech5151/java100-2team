@@ -21,21 +21,30 @@ import java100.app.service.MemberService;
 @RequestMapping("/auth")
 @SessionAttributes("loginUser")
 public class LoginController {
-    
+
     @Autowired MemberService memberService;
     
+    @RequestMapping(value="login", method=RequestMethod.GET)
+    public Object form() {
+        
+        HashMap<String, Object> result = new HashMap<>();
+        
+        result.put("menuVisible", false);
+        return result;
+    }
+
     @RequestMapping(value="login", method=RequestMethod.POST)
     public Object login(
             String email, 
             String password,
-            boolean saveEmail,
+            String saveEmail,
             HttpServletResponse response,
-            HttpSession session, /* 세션 객체가 없을 경우 미리 생성할 필요 있다.*/
+            HttpSession httpSession,
             Model model) {
         
         Member member = memberService.get(email, password);
         
-        if (saveEmail) {
+        if (saveEmail != null) {
             Cookie cookie = new Cookie("email", email);
             cookie.setMaxAge(60 * 60 * 24 * 30);
             response.addCookie(cookie);
@@ -45,11 +54,12 @@ public class LoginController {
             response.addCookie(cookie);
         }
         
-        HashMap<String,Object> result = new HashMap<>();
+        HashMap<String, Object> result = new HashMap<>();
         
         if (member == null) {
-            model.addAttribute("loginUser", null);
-            result.put("status", "fail"); 
+            result.put("loginUser", null);
+            result.put("menuVisible", false);
+            result.put("status", "fail");
         } else {
             model.addAttribute("loginUser", member);
             result.put("status", "success");
@@ -66,10 +76,10 @@ public class LoginController {
         // HttpSession 객체를 무효화시킨다.
         session.invalidate();
         
-        HashMap<String,Object> result = new HashMap<>();
+        HashMap<String, Object> result = new HashMap<>();
         result.put("status", "success");
         return result;
-    }
+    }  
     
     @RequestMapping("loginUser")
     public Object loginUser(HttpSession session) {
@@ -79,14 +89,16 @@ public class LoginController {
         HashMap<String,Object> result = new HashMap<>();
         
         if (member != null) {
-            result.put("status", "success");
-            result.put("member", member);
+//            result.put("loginInfo", member);
+            result.put("member", memberService.get(member.getMemberNo()));
+//            result.put("status", "success");
         } else {
             result.put("status", "fail");
         }
             
         return result;
     }
+    
 }
 
 

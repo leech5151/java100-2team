@@ -36,7 +36,6 @@ public class MainController {
 
     @RequestMapping("{no}")
     public String view(@PathVariable int no, Model model) throws Exception {
-        
         model.addAttribute("member", memberService.get(no));
         return "redirect:../member/view";
     }

@@ -98,6 +98,14 @@ public class Business {
     public void setFiles(List<BusinessUploadFile> files) {
         this.files = files;
     }
+
+    public List<BusinessReview> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<BusinessReview> reviews) {
+        this.reviews = reviews;
+    }
   
 }
 

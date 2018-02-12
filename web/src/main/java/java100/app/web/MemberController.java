@@ -73,9 +73,10 @@ public class MemberController {
     }
 
     @RequestMapping("add")
-    public String add(
+    public Object add(
             Member member,
-            MultipartFile[] file
+            MultipartFile[] file,
+            HttpSession httpSession
             ) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
@@ -93,9 +94,11 @@ public class MemberController {
         
         member.setFiles(uploadFiles);
 
-        memberService.add(member);
-        
-        return "redirect:list";
+        HashMap<String, Object> result = new HashMap<>();
+
+        result.put("member", memberService.add(member));
+        result.put("status", "success");
+        return result;
     }
     
     @RequestMapping("view")

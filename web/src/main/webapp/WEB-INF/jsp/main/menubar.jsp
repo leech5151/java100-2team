@@ -35,20 +35,21 @@
       <div class='form-group row' align="right">
        <c:choose>
        <c:when test="${sessionScope.loginUser != null}">
-       <%-- 
-       <p id="userName">
-		${sessionScope.loginUser.name}
-       </p> 
-       --%>
 		<a href="${contextPath}/app/auth/logout" 
-        class='btn btn-outline-dark btn-sm' id="button_sign">로그아웃</a>
+        class='btn btn-outline-dark btn-sm' id="button_sign">logout</a>
        </c:when>
        <c:otherwise> 
         <a href="${contextPath}/app/auth/login" 
-        class='btn btn-outline-dark btn-sm' id="button_sign">로그인</a>
+        class='btn btn-outline-dark btn-sm' id="button_sign">login</a>
+        
+        <a href="../member/form" 
+        class='btn btn-outline-dark btn-sm' id="button_sign">signUp</a> 
        </c:otherwise>
        </c:choose>
        
-       <button type="button" class="btn btn-outline-dark" id="button_sign">회원가입</button>
+       <%-- 
+       <jsp:include page="../auth/logingo.jsp"></jsp:include> 
+
+        --%>
      </div>
 

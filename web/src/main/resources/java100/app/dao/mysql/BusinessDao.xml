@@ -30,7 +30,7 @@
             <result column="file"   property="filename"/>
             <result column="bus_no"   property="businessNo"/>
         </collection>
-        <!-- 
+        <!--
          <collection property="reviews"  ofType="businessReview">
             <id     column="rv_no"       property="reviewNo"/>
             <result column="title"   property="title"/>
@@ -39,7 +39,7 @@
             <result column="point"   property="businessNo"/>
             <result column="vwcnt"   property="viewCount"/>
         </collection>
-         -->
+        -->
     </resultMap>
 
     <select id="findAll" resultMap="businessMap" parameterType="map">

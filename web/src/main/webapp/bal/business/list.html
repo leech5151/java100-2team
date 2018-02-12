@@ -22,6 +22,7 @@
   Balance Pet
 </a>
 
+
 <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
   <span class='navbar-toggler-icon'></span>
 </button>
@@ -153,7 +154,7 @@ $.ajax('../../json/business/list', {
             $('<tr>')
                 .html(  
                     "<td>" + data.businessNo + "</td>" + 
-                    "<td><a href='../business/form.html?no=" + data.businessNo + "'>" + data.businessName + "</a></td>" + 
+                    "<td><a href='form.html?no=" + data.businessNo + "'>" + data.businessName + "</a></td>" + 
                     "<td>" + data.primary_address + "</td>" +
                     "<td><img src='../../download/" + file.filename + "' alt=" + file.filename + " width='50px' height='50px'></td>")
                     .appendTo(tbody);

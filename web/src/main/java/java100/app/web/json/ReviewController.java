@@ -76,6 +76,7 @@ public class ReviewController {
     public Object reviewAdd(
             BusinessReview businessReview,
             /*MultipartFile[] file,*/
+            @RequestParam(value="b_number") Business b_number,
             @ModelAttribute(value="loginUser") Member loginUser
             ) throws Exception {
         
@@ -95,6 +96,7 @@ public class ReviewController {
         business.setFiles(uploadFiles);
 */
         // 게시글 작성자는 로그인 사용자이다. 
+        businessReview.setBusinessNo(b_number);
         businessReview.setRegistrant(loginUser);
         businessService.addReview(businessReview);
         

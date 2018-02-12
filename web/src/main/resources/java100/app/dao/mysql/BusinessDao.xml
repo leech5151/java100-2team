@@ -46,15 +46,12 @@
          select 
 	         b.bus_no,
 	         d.file,
-	         r.title,
 	         b.b_name,
 	         b.prm_addr,
 	         b.ctgr
         from bus as b
             left join bus_mda as d 
              on b.bus_no=d.bus_no 
-            left join bus_rv as r
-             on b.bus_no=r.bus_no
 
         <if test="words != null">
 	        <where>
@@ -125,14 +122,10 @@
 		    b.det_addr,
 		    d.mda_no,
 		    d.file,
-		    r.rv_no,
-		    r.title
 		from 
 		    bus as b 
 		    left join bus_mda as d 
 		     on b.bus_no=d.bus_no
-		    left join bus_rv as r
-		     on b.bus_no=r.bus_no
         where b.bus_no=#{value}
     </select>
         

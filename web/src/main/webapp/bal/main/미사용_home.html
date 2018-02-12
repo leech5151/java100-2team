@@ -326,21 +326,16 @@
         </div>
       </section>
       
-      
       <link href="../../css/tab.css" rel="stylesheet">
 <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="awards">
         <div class="my-auto">
-        
           <h2 class="mb-5">
             <ul class='navbar-nav mr-auto'>
               <li class='nav-item'>
-                <a class='nav-link' href='#awards'>LOST</a>
+                <a class='nav-link' href='../lost/list.html'>LOST</a>
               </li>
             </ul>
           </h2>
-          
-          <div id="lostList"></div>
-          
           </div>
       </section>
 
@@ -456,6 +451,14 @@ loginBtn.click(() => {
     $("#myModal").modal();
 });
     
+/* 
+ loginBtn.click(() => {
+    $.getJSON('../../json/auth/login', (result) => {
+        location.href = '../auth/loginform2.html';
+    });
+});
+*/
+
  logoutBtn.click(() => {
     $.getJSON('../../json/auth/logout', (result) => {
         location.href = '../main/home.html';
@@ -495,10 +498,6 @@ loginBtn2.click(() => {
     
 });
 
-</script>
-
-<script type="text/javascript">
-$('#lostList').load('../lost/lostList.html');
 </script>
 
   </body>

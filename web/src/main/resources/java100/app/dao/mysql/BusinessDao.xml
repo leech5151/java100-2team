@@ -21,6 +21,9 @@
         <result column="prm_addr" property="primary_address"/>
         <result column="det_addr" property="detail_address"/>
         
+        <association property="registrant" javaType="member">
+            <id column="m_no" property="memberNo"/>
+        </association>
         <!-- 첨부파일 정보를 담을 수 있도록 설정한다. -->
         <collection property="files"  ofType="businessUploadFile">
             <id     column="mda_no"       property="no"/>
@@ -102,8 +105,8 @@
   
     <insert id="insert" parameterType="business"
         useGeneratedKeys="true" keyColumn="bus_no" keyProperty="businessNo">
-        insert into bus(ctgr,b_name,op_time,cl_time,tel,menu,conts,url,pst_no,prm_addr,det_addr)
-        values(#{category},#{businessName},#{open_time},#{close_time},#{tel},#{menu},#{content},#{url},#{post_no},#{primary_address},#{detail_address})
+        insert into bus(m_no,ctgr,b_name,op_time,cl_time,tel,menu,conts,url,pst_no,prm_addr,det_addr)
+        values(#{registrant.memberNo},#{category},#{businessName},#{open_time},#{close_time},#{tel},#{menu},#{content},#{url},#{post_no},#{primary_address},#{detail_address})
     </insert>
 
     <select id="findByNo" resultMap="businessMap" parameterType="int">

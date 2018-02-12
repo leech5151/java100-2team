@@ -156,6 +156,8 @@
 <script src='../../node_modules/jquery/dist/jquery.js'></script>
 <script src='../../node_modules/popper.js/dist/umd/popper.js'></script>
 <script src='../../node_modules/bootstrap/dist/js/bootstrap.js'></script>
+<script src='../../node_modules/sweetalert/dist/sweetalert.min.js'></script>
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
 
 <script type="text/javascript">
 var addBtn = $('#addBtn'),
@@ -223,10 +225,11 @@ addBtn.click(() => {
         processData : false,
         contentType : false,
         success: (result) => {
-        location.href = "list.html";
+        location.href = "../main/home.html#awards";
         },
         error: (jqXHR, textStatus, errorThrown) => {
-            window.alert('서버 실행 오류!');
+            swal("등록 실패!", "정보를 확인해보세요!", "error");
+            /* window.alert('서버 실행 오류!'); */
         }
     });
 });
@@ -240,10 +243,11 @@ updateBtn.click(() => {
         processData : false,
         contentType : false,
         success: (result) => {
-        location.href = "list.html";
+        location.href = "../main/home.html#awards";
         },
         error: (jqXHR, textStatus, errorThrown) => {
-            window.alert('서버 실행 오류!');
+            swal("수정 실패!", "정보를 확인 해보세요!", "error");
+            /* window.alert('서버 실행 오류!'); */
         }
     });
 });
@@ -256,10 +260,10 @@ deleteBtn.click(() => {
         },
         dataType: 'json',
         success: (result) => {
-        location.href = "list.html";
+        location.href = "../main/home.html#awards";
         },
         error: () => {
-            window.alert('서버 실행 오류!');
+            swal("삭제 실패!", "다시 시도해보세요!", "error");
         }
     });
 });

@@ -1,4 +1,4 @@
-package java100.app.web;
+package java100.app.web.json;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,38 +8,39 @@ import java.util.HashMap;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import java100.app.domain.Business;
+import java100.app.domain.BusinessReview;
 import java100.app.domain.BusinessUploadFile;
 import java100.app.domain.Member;
 import java100.app.service.BusinessService;
 import java100.app.service.MemberService;
 
-@Controller
-@RequestMapping("/business")
+@RestController
+@RequestMapping("/review")
 @SessionAttributes("loginUser")
-public class BusinessController {
+public class ReviewController {
     
     @Autowired ServletContext servletContext;
     @Autowired BusinessService businessService;
     @Autowired MemberService memberService;
     
     @RequestMapping("list")
-    public String list(
+    public Object reviewList(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
             @RequestParam(value="ps", defaultValue="5") int pageSize,
             @RequestParam(value="words", required=false) String[] words,
             @RequestParam(value="oc", required=false) String orderColumn,
-            @RequestParam(value="al", required=false) String align,
-            Model model) throws Exception {
+            @RequestParam(value="al", required=false) String align
+            ) throws Exception {
 
         // UI 제어와 관련된 코드는 이렇게 페이지 컨트롤러에 두어야 한다.
         //
@@ -64,29 +65,21 @@ public class BusinessController {
             lastPageNo++;
         }
         
-        // view 컴포넌트가 사용할 값을 Model에 담는다.
-        model.addAttribute("pageNo", pageNo);
-        model.addAttribute("lastPageNo", lastPageNo);
-        model.addAttribute("list", businessService.list(pageNo, pageSize, options));
-        return "business/list";
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("pageNo", pageNo);
+        result.put("lastPageNo", lastPageNo);
+        result.put("list", businessService.listReview(pageNo, pageSize, options));
+        return result;
     }
-
-    @RequestMapping("form")
-    public String form(
-            @ModelAttribute(value="loginUser") Member loginUser,
-            Model model) throws Exception {
-        model.addAttribute("start", memberService.get(loginUser.getMemberNo()));
-        return "business/form";
-    }
-   
-    @RequestMapping("add")
-    public String add(
-            Business business,
-            MultipartFile[] file,
+    
+    @RequestMapping("review/add")
+    public Object reviewAdd(
+            BusinessReview businessReview,
+            /*MultipartFile[] file,*/
             @ModelAttribute(value="loginUser") Member loginUser
             ) throws Exception {
         
-        String uploadDir = servletContext.getRealPath("/download");
+        /*String uploadDir = servletContext.getRealPath("/download");
 
         ArrayList<BusinessUploadFile> uploadFiles = new ArrayList<>();
         
@@ -100,34 +93,33 @@ public class BusinessController {
         }
         
         business.setFiles(uploadFiles);
-
+*/
         // 게시글 작성자는 로그인 사용자이다. 
-        business.setRegistrant(loginUser);
+        businessReview.setRegistrant(loginUser);
+        businessService.addReview(businessReview);
         
-        // 게시글 등록
-        businessService.add(business);
-        
-        return "redirect:list";
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("status", "success");
+        return result;
     }
-
-    @RequestMapping("{bus_no}")
-    public String view(@PathVariable int bus_no, Model model) throws Exception {
-        
-        model.addAttribute("business", businessService.get(bus_no));
-        return "business/view";
+    @RequestMapping("{no}")
+    public Object view(@PathVariable int no) throws Exception {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("data", businessService.get(no));
+        return result;
     }
     
     @RequestMapping("modify")
-    public String modoify(int bus_no, Model model) throws Exception {
-        
-        model.addAttribute("business", businessService.get(bus_no));
-        return "business/modify";
+    public Object modoify(int bus_no) throws Exception {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("data", businessService.get(bus_no));
+        return result;
         
     }
 
     @RequestMapping("update")
-    public String update(
-            Business business, 
+    public Object update(
+            Business business ,
             MultipartFile[] file) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
@@ -144,17 +136,18 @@ public class BusinessController {
         }
         
         business.setFiles(uploadFiles);
-
         businessService.update(business);
+        HashMap<String, Object> result = new HashMap<>();
         
-        return "redirect:list";
+        return result;
     }
 
     @RequestMapping("delete")
-    public String delete(int bus_no) throws Exception {
+    public Object delete(int no) throws Exception {
 
-        businessService.delete(bus_no);
-        return "redirect:list";
+        businessService.delete(no);
+        HashMap<String,Object> result = new HashMap<>();
+        return result;
     }
 
     long prevMillis = 0;
@@ -189,8 +182,7 @@ public class BusinessController {
         return filename;
     } 
    
-  
-    
+
    
 }
 

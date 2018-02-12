@@ -17,6 +17,7 @@ public class Business {
     protected String post_no;
     protected String primary_address;
     protected String detail_address;
+    protected Member registrant;
     protected List<BusinessUploadFile> files;
     protected List<BusinessReview> reviews;
     public int getBusinessNo() {
@@ -105,6 +106,14 @@ public class Business {
 
     public void setReviews(List<BusinessReview> reviews) {
         this.reviews = reviews;
+    }
+
+    public Member getRegistrant() {
+        return registrant;
+    }
+
+    public void setRegistrant(Member registrant) {
+        this.registrant = registrant;
     }
   
 }

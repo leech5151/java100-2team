@@ -9,21 +9,24 @@ import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import java100.app.domain.Business;
 import java100.app.domain.BusinessReview;
 import java100.app.domain.BusinessUploadFile;
+import java100.app.domain.Member;
 import java100.app.service.BusinessService;
 import java100.app.service.MemberService;
 
 @RestController
 @RequestMapping("/business")
-/*@SessionAttributes("loginUser")*/
+@SessionAttributes("loginUser")
 public class BusinessController {
     
     @Autowired ServletContext servletContext;
@@ -68,51 +71,13 @@ public class BusinessController {
         result.put("list", businessService.list(pageNo, pageSize, options));
         return result;
     }
-    @RequestMapping("review/list")
-    public Object reviewList(
-            @RequestParam(value="pn", defaultValue="1") int pageNo,
-            @RequestParam(value="ps", defaultValue="5") int pageSize,
-            @RequestParam(value="words", required=false) String[] words,
-            @RequestParam(value="oc", required=false) String orderColumn,
-            @RequestParam(value="al", required=false) String align
-            ) throws Exception {
-
-        // UI 제어와 관련된 코드는 이렇게 페이지 컨트롤러에 두어야 한다.
-        //
-        if (pageNo < 1) {
-            pageNo = 1;
-        }
-        
-        if (pageSize < 5 || pageSize > 15) {
-            pageSize = 5;
-        }
-        
-        HashMap<String,Object> options = new HashMap<>();
-        if (words != null && words[0].length() > 0) {
-            options.put("words", words);
-        }
-        options.put("orderColumn", orderColumn);
-        options.put("align", align);
-        
-        int totalCount = businessService.getTotalCount();
-        int lastPageNo = totalCount / pageSize;
-        if ((totalCount % pageSize) > 0) {
-            lastPageNo++;
-        }
-        
-        HashMap<String,Object> result = new HashMap<>();
-        result.put("pageNo", pageNo);
-        result.put("lastPageNo", lastPageNo);
-        result.put("list", businessService.listReview(pageNo, pageSize, options));
-        return result;
-    }
-    
+   
    
     @RequestMapping("add")
     public Object add(
             Business business,
-            MultipartFile[] file
-            /*@ModelAttribute(value="loginUser") Business loginUser*/
+            MultipartFile[] file,
+            @ModelAttribute(value="loginUser") Member loginUser
             ) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
@@ -131,47 +96,13 @@ public class BusinessController {
         business.setFiles(uploadFiles);
 
         // 게시글 작성자는 로그인 사용자이다. 
-//        business.setWriter(loginUser);
-        System.out.println("여긴오디???");
-        // 게시글 등록
+        business.setRegistrant(loginUser);
         businessService.add(business);
-        
         HashMap<String,Object> result = new HashMap<>();
         result.put("status", "success");
         return result;
     }
-    @RequestMapping("review/add")
-    public Object reviewAdd(
-            BusinessReview businessReview
-            /*MultipartFile[] file*/
-            /*@ModelAttribute(value="loginUser") Business loginUser*/
-            ) throws Exception {
-        
-       /* String uploadDir = servletContext.getRealPath("/download");
-
-        ArrayList<BusinessUploadFile> uploadFiles = new ArrayList<>();
-        
-        for (MultipartFile part : file) {
-            if (part.isEmpty())
-                continue;
-            
-            String filename = this.writeUploadFile(part, uploadDir);
-            
-            uploadFiles.add(new BusinessUploadFile(filename));
-        }
-        
-        business.setFiles(uploadFiles);
-
-        // 게시글 작성자는 로그인 사용자이다. 
-//        business.setWriter(loginUser);
-        System.out.println("여긴오디???");*/
-        // 게시글 등록
-        businessService.addReview(businessReview);
-        
-        HashMap<String,Object> result = new HashMap<>();
-        result.put("status", "success");
-        return result;
-    }
+  
     @RequestMapping("{no}")
     public Object view(@PathVariable int no) throws Exception {
         HashMap<String, Object> result = new HashMap<>();
@@ -252,46 +183,7 @@ public class BusinessController {
         return filename;
     } 
    
-    @RequestMapping("m_list")
-    public String m_list(
-            @RequestParam(value="pn", defaultValue="1") int pageNo,
-            @RequestParam(value="ps", defaultValue="5") int pageSize,
-            @RequestParam(value="words", required=false) String[] words,
-            @RequestParam(value="oc", required=false) String orderColumn,
-            @RequestParam(value="al", required=false) String align,
-            Model model) throws Exception {
-
-        // UI 제어와 관련된 코드는 이렇게 페이지 컨트롤러에 두어야 한다.
-        //
-        if (pageNo < 1) {
-            pageNo = 1;
-        }
-        
-        if (pageSize < 5 || pageSize > 15) {
-            pageSize = 5;
-        }
-        
-        HashMap<String,Object> options = new HashMap<>();
-        if (words != null && words[0].length() > 0) {
-            options.put("words", words);
-        }
-        options.put("orderColumn", orderColumn);
-        options.put("align", align);
-        
-        int totalCount = businessService.getTotalCount();
-        int lastPageNo = totalCount / pageSize;
-        if ((totalCount % pageSize) > 0) {
-            lastPageNo++;
-        }
-        
-        // view 컴포넌트가 사용할 값을 Model에 담는다.
-        model.addAttribute("pageNo", pageNo);
-        model.addAttribute("lastPageNo", lastPageNo);
-        model.addAttribute("m_list", businessService.list(pageNo, pageSize, options));
-        System.out.println("asfasdf");
-        return "business/section_together";
-    }
-    
+   
    
 }
 

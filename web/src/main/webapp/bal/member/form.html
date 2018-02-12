@@ -125,6 +125,7 @@
 <div class='col-sm-10'>
 <input class='form-control' id='postalNo' type='text' 
         name='postalNo'>
+<input type="button" onclick="addrsearch()" value="우편번호 찾기"><br>
 </div>
 </div>
 
@@ -169,6 +170,7 @@
 <script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
 <script src='../../node_modules/sweetalert/dist/sweetalert.min.js'></script>
 <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <script type="text/javascript">
 var addBtn = $('#addBtn'),
@@ -206,7 +208,7 @@ addBtn.click(() => {
                    	 }, 0);
 	              		
                 } else {
-                    alert('이메일이나 암호가 일치하는 사용자를 찾을 수 없습니다.!')
+                	swal("로그인 실패!", "이메일이나 암호가 일치하는 사용자를 찾을 수 없습니다.!", "error");
                 }
             }, 'json');
         },
@@ -223,6 +225,43 @@ goBackBtn.click(() => {
      }
  });
 });
+
+function addrsearch() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            var fullAddr = ''; // 최종 주소 변수
+            var extraAddr = ''; // 조합형 주소 변수
+
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                fullAddr = data.roadAddress;
+
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                fullAddr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+            if(data.userSelectedType === 'R'){
+                //법정동명이 있을 경우 추가한다.
+                if(data.bname !== ''){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있을 경우 추가한다.
+                if(data.buildingName !== ''){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('postalNo').value = data.zonecode; //5자리 새우편번호 사용
+            document.getElementById('primaryAddress').value = fullAddr;
+
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById('detailAddress').focus();
+        }
+    }).open();
+}
 
 </script>
 

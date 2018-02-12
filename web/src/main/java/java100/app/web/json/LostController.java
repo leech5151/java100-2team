@@ -41,8 +41,8 @@ public class LostController {
             pageNo = 1;
         }
         
-        if (pageSize < 10 || pageSize > 10) {
-            pageSize = 10;
+        if (pageSize < 8 || pageSize > 8) {
+            pageSize = 8;
         }
         
         HashMap<String,Object> options = new HashMap<>();

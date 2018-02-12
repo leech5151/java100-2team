@@ -15,7 +15,6 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     
-
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -59,7 +58,7 @@
         <!--  
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/app-servlet.xml</param-value>
+            <param-value>/WEB-INF/dispatch-servlet.xml</param-value>
         </init-param>
         -->
         <load-on-startup>1</load-on-startup>
@@ -70,7 +69,7 @@
         <url-pattern>/app/*</url-pattern>
     </servlet-mapping>
     
-
+    
     <servlet>
         <servlet-name>json</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -90,13 +89,3 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
-
-
-
-
-
-
-
-
-
-

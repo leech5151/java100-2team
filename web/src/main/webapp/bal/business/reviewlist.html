@@ -14,7 +14,7 @@
 <body>
 <div class='container'>
 
-<button id="addRBtn" type="button" class='btn btn-primary btn-sm my-view'>리뷰 등록</button>
+ <a href='reviewform.html' class='btn btn-primary btn-sm'>리뷰 등록</a><br>
 
 <table id="list" class='table table-hover'>
 <thead>
@@ -74,7 +74,6 @@ $.ajax('../../json/review/list', {
     dataType: 'json',  
     success: (result) => {
         tbody.html(""); // <tbody> 콘텐츠를 지운다.
-        alert(form.number);
         for (var data of result.list) {
             $('<tr>')
                 .html(  

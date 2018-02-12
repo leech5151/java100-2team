@@ -87,7 +87,7 @@
     <insert id="insert" parameterType="businessReview"
         useGeneratedKeys="true" keyColumn="rv_no" keyProperty="reviewNo">
         insert into bus_rv(m_no,bus_no,title,conts,date)
-        values(#{registrant.memberNo},#{business.businessNo},#{title},#{content},now())
+        values(#{registrant.memberNo},15,#{title},#{content},now())
     </insert>
 
   <!-- 

@@ -1,4 +1,4 @@
-package java100.app.web;
+package java100.app.web.json;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,39 +6,37 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import java100.app.domain.Lost;
+import java100.app.domain.LostUploadFile;
 import java100.app.domain.Member;
-import java100.app.domain.MemberUploadFile;
-import java100.app.service.MemberService;
+import java100.app.service.LostService;
 
-@Controller
-@RequestMapping("/member")
+@RestController
+@RequestMapping("/lost")
 @SessionAttributes("loginUser")
-public class MemberController {
+public class LostController {
     
     @Autowired ServletContext servletContext;
-    @Autowired MemberService memberService;
+    @Autowired LostService lostService;
     
     @RequestMapping("list")
-    public String list(
+    public Object list(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
             @RequestParam(value="ps", defaultValue="5") int pageSize,
             @RequestParam(value="words", required=false) String[] words,
             @RequestParam(value="oc", required=false) String orderColumn,
-            @RequestParam(value="al", required=false) String align,
-            Model model) throws Exception {
+            @RequestParam(value="al", required=false) String align) throws Exception {
 
-        // UI 제어와 관련된 코드는 이렇게 페이지 컨트롤러에 두어야 한다.
-        //
         if (pageNo < 1) {
             pageNo = 1;
         }
@@ -54,33 +52,39 @@ public class MemberController {
         options.put("orderColumn", orderColumn);
         options.put("align", align);
         
-        int totalCount = memberService.getTotalCount();
+        int totalCount = lostService.getTotalCount();
         int lastPageNo = totalCount / pageSize;
         if ((totalCount % pageSize) > 0) {
             lastPageNo++;
         }
         
-        model.addAttribute("pageNo", pageNo);
-        model.addAttribute("lastPageNo", lastPageNo);
-        model.addAttribute("list", memberService.list(pageNo, pageSize, options));
-        return "member/list";
+        HashMap<String,Object> result = new HashMap<>();
+        
+        result.put("pageNo", pageNo);
+        result.put("lastPageNo", lastPageNo);
+        result.put("list", lostService.list(pageNo, pageSize, options));
+        return result;
     }
     
-    @RequestMapping("form")
-    public String form() throws Exception {
-        return "member/form";
+    @RequestMapping("{no}")
+    public Object view(@PathVariable int no) throws Exception {
         
+        HashMap<String,Object> result = new HashMap<>();
+        
+        result.put("data", lostService.get(no));
+        
+        return result;
     }
-
+    
     @RequestMapping("add")
-    public String add(
-            Member member,
-            MultipartFile[] file
-            ) throws Exception {
+    public Object add(
+            Lost lost,
+            MultipartFile[] file,
+            @ModelAttribute(value="loginUser") Member loginUser) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
-
-        ArrayList<MemberUploadFile> uploadFiles = new ArrayList<>();
+        
+        ArrayList<LostUploadFile> uploadFiles = new ArrayList<>();
         
         for (MultipartFile part : file) {
             if (part.isEmpty())
@@ -88,38 +92,32 @@ public class MemberController {
             
             String filename = this.writeUploadFile(part, uploadDir);
             
-            uploadFiles.add(new MemberUploadFile(filename));
+            uploadFiles.add(new LostUploadFile(filename));
         }
         
-        member.setFiles(uploadFiles);
-
-        memberService.add(member);
+        lost.setFiles(uploadFiles);
         
-        return "redirect:list";
-    }
-    
-    @RequestMapping("view")
-    public String view(int no, Model model) throws Exception {
-
-        model.addAttribute("member", memberService.get(no));
-        return "member/view";
-    }
-    
-    @RequestMapping("modify")
-    public String modify(int no, Model model) throws Exception {
+        lost.setRegistrant(loginUser);
         
-        model.addAttribute("member", memberService.get(no));
-        return "member/modify";
+        lostService.add(lost);
+        
+        HashMap<String, Object> result = new HashMap<>();
+        
+        result.put("member", loginUser);
+        result.put("status", "success");
+        
+        return result;
     }
 
     @RequestMapping("update")
-    public String update(
-            Member member, 
-            MultipartFile[] file) throws Exception {
+    public Object update(
+            Lost lost, 
+            MultipartFile[] file,
+            @ModelAttribute(value="loginUser") Member loginUser) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
 
-        ArrayList<MemberUploadFile> uploadFiles = new ArrayList<>();
+        ArrayList<LostUploadFile> uploadFiles = new ArrayList<>();
         
         for (MultipartFile part : file) {
             if (part.isEmpty())
@@ -127,32 +125,36 @@ public class MemberController {
             
             String filename = this.writeUploadFile(part, uploadDir);
             
-            uploadFiles.add(new MemberUploadFile(filename));
+            uploadFiles.add(new LostUploadFile(filename));
         }
         
-        member.setFiles(uploadFiles);
+        lost.setFiles(uploadFiles);
 
-        memberService.update(member);
-        if (member.getPush()) 
-            System.out.println("true");
-        else
-            System.out.println("false");
+        lostService.update(lost);
         
-        return "member/close";
+        HashMap<String,Object> result = new HashMap<>();
+        
+        result.put("status", "success");
+        
+        return result;
     }
 
     @RequestMapping("delete")
-    public String delete(int no) throws Exception {
+    public Object delete(int no) throws Exception {
 
-        memberService.delete(no);
-        return "redirect:list";
+        lostService.delete(no);
+        
+        HashMap<String,Object> result = new HashMap<>();
+        
+        result.put("status", "success");
+        
+        return result;
     }
-
+    
+    
     long prevMillis = 0;
     int count = 0;
     
-    // 다른 클라이언트가 보낸 파일명과 중복되지 않도록 
-    // 서버에 파일을 저장할 때는 새 파일명을 만든다.
     synchronized private String getNewFilename(String filename) {
         long currMillis = System.currentTimeMillis();
         if (prevMillis != currMillis) {
@@ -163,7 +165,6 @@ public class MemberController {
         return  currMillis + "_" + count++ + extractFileExtName(filename); 
     }
     
-    // 파일명에서 뒤의 확장자명을 추출한다.
     private String extractFileExtName(String filename) {
         int dotPosition = filename.lastIndexOf(".");
         
@@ -178,7 +179,7 @@ public class MemberController {
         String filename = getNewFilename(part.getOriginalFilename());
         part.transferTo(new File(path + "/" + filename));
         return filename;
-    }    
+    }  
 }
 
 

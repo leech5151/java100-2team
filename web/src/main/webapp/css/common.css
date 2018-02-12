@@ -26,3 +26,7 @@ footer {
 #memberType_add {
 	margin-left: 15px;
 }
+#category {
+	float: right;
+	margin-right: -21%;
+}

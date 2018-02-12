@@ -1,4 +1,4 @@
-package java100.app.web;
+package java100.app.web.json;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,13 +20,14 @@ import java100.app.domain.Member;
 import java100.app.domain.MemberUploadFile;
 import java100.app.service.MemberService;
 
-@Controller
+@RestController
 @RequestMapping("/member")
 @SessionAttributes("loginUser")
 public class MemberController {
     
     @Autowired ServletContext servletContext;
     @Autowired MemberService memberService;
+    @Autowired LoginController loginController;
     
     @RequestMapping("list")
     public String list(
@@ -66,17 +67,11 @@ public class MemberController {
         return "member/list";
     }
     
-    @RequestMapping("form")
-    public String form() throws Exception {
-        return "member/form";
-        
-    }
-
     @RequestMapping("add")
-    public String add(
+    public Object add(
             Member member,
-            MultipartFile[] file
-            ) throws Exception {
+            MultipartFile[] file,
+            Model model) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
 
@@ -94,26 +89,32 @@ public class MemberController {
         member.setFiles(uploadFiles);
 
         memberService.add(member);
+        System.out.println(member.getPassword());
+        HashMap<String, Object> result = new HashMap<>();
+        memberService.get(member.getMemberNo());
+        result.put("email", member.getEmail());
+        result.put("password", member.getPassword());
         
-        return "redirect:list";
+        return result;
     }
     
-    @RequestMapping("view")
-    public String view(int no, Model model) throws Exception {
-
-        model.addAttribute("member", memberService.get(no));
-        return "member/view";
+    @RequestMapping("{no}")
+    public Object view(@PathVariable int no) throws Exception {
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("member", memberService.get(no));
+        return result;
     }
     
     @RequestMapping("modify")
-    public String modify(int no, Model model) throws Exception {
+    public Object modify(int no) throws Exception {
         
-        model.addAttribute("member", memberService.get(no));
-        return "member/modify";
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("num", no);
+        return result;
     }
 
     @RequestMapping("update")
-    public String update(
+    public Object update(
             Member member, 
             MultipartFile[] file) throws Exception {
         
@@ -138,16 +139,18 @@ public class MemberController {
         else
             System.out.println("false");
         
-        return "member/close";
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("member", member);
+        return result;
     }
-
+/*
     @RequestMapping("delete")
     public String delete(int no) throws Exception {
 
         memberService.delete(no);
         return "redirect:list";
     }
-
+*/ 
     long prevMillis = 0;
     int count = 0;
     
@@ -178,7 +181,8 @@ public class MemberController {
         String filename = getNewFilename(part.getOriginalFilename());
         part.transferTo(new File(path + "/" + filename));
         return filename;
-    }    
+    }  
+
 }
 
 

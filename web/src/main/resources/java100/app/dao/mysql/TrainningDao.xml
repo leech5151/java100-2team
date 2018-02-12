@@ -83,7 +83,6 @@
                 m_no desc
             </otherwise>
         </choose>
-        -->
         <!-- 페이지징 처리 -->
         limit #{startIndex}, #{size}
     </select>
@@ -94,8 +93,8 @@
     
     <insert id="insert" parameterType="trainning"
         useGeneratedKeys="true" keyColumn="t_no" keyProperty="trainningNo">
-        insert into trainning(m_no, ctg, title, conts, m_conts, vwcnt, rdt, likes)
-        values(#{member.memberNo},#{category}, #{title}, #{contents}, #{maintextContents}, #{viewCount}, now(), #{likes})
+        insert into trainning(m_no, ctg, title, conts, m_conts, rdt)
+        values(#{member.memberNo},#{category}, #{title}, #{contents}, #{maintextContents}, now())
     </insert>
 
     <select id="findByNo" resultMap="trainningMap" parameterType="int">
@@ -128,7 +127,13 @@
      <update id="updateViewCount" parameterType="int">
         update trainning set 
             vwcnt=vwcnt + 1
-        where t_no=#{trainningNo}
+        where t_no=#{value}
+    </update> 
+    
+    <update id="updateLikes" parameterType="int">
+        update trainning set 
+            likes=likes + 1
+        where t_no=#{value}
     </update> 
     
     

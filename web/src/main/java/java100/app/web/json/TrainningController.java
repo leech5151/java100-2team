@@ -1,4 +1,4 @@
-package java100.app.web;
+package java100.app.web.json;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,36 +6,36 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import java100.app.domain.Member;
-import java100.app.domain.MemberUploadFile;
-import java100.app.service.MemberService;
+import java100.app.domain.Trainning;
+import java100.app.domain.TrainningUploadFile;
+import java100.app.service.TrainningService;
 
-@Controller
-@RequestMapping("/member")
+@RestController
+@RequestMapping("/trainning")
 @SessionAttributes("loginUser")
-public class MemberController {
+public class TrainningController {
     
     @Autowired ServletContext servletContext;
-    @Autowired MemberService memberService;
-    
+    @Autowired TrainningService trainningService;
+     
     @RequestMapping("list")
-    public String list(
+    public Object list(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
             @RequestParam(value="ps", defaultValue="5") int pageSize,
             @RequestParam(value="words", required=false) String[] words,
             @RequestParam(value="oc", required=false) String orderColumn,
-            @RequestParam(value="al", required=false) String align,
-            Model model) throws Exception {
+            @RequestParam(value="al", required=false) String align) throws Exception {
 
         // UI 제어와 관련된 코드는 이렇게 페이지 컨트롤러에 두어야 한다.
         //
@@ -54,33 +54,30 @@ public class MemberController {
         options.put("orderColumn", orderColumn);
         options.put("align", align);
         
-        int totalCount = memberService.getTotalCount();
+        int totalCount = trainningService.getTotalCount();
         int lastPageNo = totalCount / pageSize;
         if ((totalCount % pageSize) > 0) {
             lastPageNo++;
         }
-        
-        model.addAttribute("pageNo", pageNo);
-        model.addAttribute("lastPageNo", lastPageNo);
-        model.addAttribute("list", memberService.list(pageNo, pageSize, options));
-        return "member/list";
+        HashMap<String, Object> result = new HashMap<>();
+        // view 컴포넌트가 사용할 값을 Model에 담는다.
+        result.put("pageNo", pageNo);
+        result.put("lastPageNo", lastPageNo);
+        result.put("list", trainningService.list(pageNo, pageSize, options));
+        return result;
     }
     
-    @RequestMapping("form")
-    public String form() throws Exception {
-        return "member/form";
-        
-    }
 
     @RequestMapping("add")
-    public String add(
-            Member member,
+    public Object add(
+            Trainning trainning,
+           @ModelAttribute(value="loginUser") Member loginUser,
             MultipartFile[] file
             ) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
 
-        ArrayList<MemberUploadFile> uploadFiles = new ArrayList<>();
+        ArrayList<TrainningUploadFile> uploadFiles = new ArrayList<>();
         
         for (MultipartFile part : file) {
             if (part.isEmpty())
@@ -88,38 +85,36 @@ public class MemberController {
             
             String filename = this.writeUploadFile(part, uploadDir);
             
-            uploadFiles.add(new MemberUploadFile(filename));
+            uploadFiles.add(new TrainningUploadFile(filename));
         }
         
-        member.setFiles(uploadFiles);
-
-        memberService.add(member);
+        trainning.setFiles(uploadFiles);
+        trainning.setMember(loginUser);
+        trainningService.add(trainning);
         
-        return "redirect:list";
-    }
-    
-    @RequestMapping("view")
-    public String view(int no, Model model) throws Exception {
-
-        model.addAttribute("member", memberService.get(no));
-        return "member/view";
-    }
-    
-    @RequestMapping("modify")
-    public String modify(int no, Model model) throws Exception {
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("status", "success");
         
-        model.addAttribute("member", memberService.get(no));
-        return "member/modify";
+        return result;
+        
+    }
+
+    @RequestMapping("{no}")
+    public Object view(@PathVariable int no) throws Exception {
+        
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("data", trainningService.get(no));
+        return result;
     }
 
     @RequestMapping("update")
-    public String update(
-            Member member, 
+    public Object update(
+            Trainning trainning, 
             MultipartFile[] file) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
 
-        ArrayList<MemberUploadFile> uploadFiles = new ArrayList<>();
+        ArrayList<TrainningUploadFile> uploadFiles = new ArrayList<>();
         
         for (MultipartFile part : file) {
             if (part.isEmpty())
@@ -127,25 +122,26 @@ public class MemberController {
             
             String filename = this.writeUploadFile(part, uploadDir);
             
-            uploadFiles.add(new MemberUploadFile(filename));
+            uploadFiles.add(new TrainningUploadFile(filename));
         }
         
-        member.setFiles(uploadFiles);
-
-        memberService.update(member);
-        if (member.getPush()) 
-            System.out.println("true");
-        else
-            System.out.println("false");
+        trainning.setFiles(uploadFiles);
+        trainningService.update(trainning);
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("status", "success");
         
-        return "member/close";
+        return result;
     }
 
     @RequestMapping("delete")
-    public String delete(int no) throws Exception {
+    public Object delete(int no) throws Exception {
 
-        memberService.delete(no);
-        return "redirect:list";
+        trainningService.delete(no);
+        
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("status", "success");
+        
+        return result;
     }
 
     long prevMillis = 0;

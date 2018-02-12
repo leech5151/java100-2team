@@ -7,7 +7,7 @@ public class BusinessReview {
      String createDate;
      double StarPoint;
      int viewCount;
-     int businessNo;
+     protected Business business;
      protected Member registrant;
    
      public Member getRegistrant() {
@@ -55,11 +55,11 @@ public class BusinessReview {
     public void setViewCount(int viewCount) {
         this.viewCount = viewCount;
     }
-    public int getBusinessNo() {
-        return businessNo;
+    public Business getBusinessNo() {
+        return business;
     }
-    public void setBusinessNo(int businessNo) {
-        this.businessNo = businessNo;
+    public void setBusinessNo(Business businessNo) {
+        this.business = businessNo;
     }
     
   

@@ -74,7 +74,7 @@ $.ajax('../../json/review/list', {
     dataType: 'json',  
     success: (result) => {
         tbody.html(""); // <tbody> 콘텐츠를 지운다.
-        
+        alert(form.number);
         for (var data of result.list) {
             $('<tr>')
                 .html(  

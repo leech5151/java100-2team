@@ -11,7 +11,7 @@
 
 <header>
 <nav class='navbar navbar-expand-lg navbar-light bg-light'>
-<a class='navbar-brand' href='../main/home.html'>
+<a class='navbar-brand' href='../main/start'>
   <img src='../../images/bootstrap-solid.svg' width='30' height='30' class='d-inline-block align-top' alt=''>
   Balance Pet
 </a>
@@ -155,9 +155,7 @@
 </div>
 </div> 
 
-<div id="inserthere" class='form-group row my-view'>
-    
-</div> 
+<div id="inserthere" class='form-group row my-view'></div> 
 
 
 <div class='form-group row'>
@@ -202,7 +200,7 @@ var addBtn = $('#addBtn'),
     fileItem = $('#filename'),
     reviewdItem = $('#reviewdiv'),
     reviewItem = $('#title');
-var number;
+var b_number;
     
  
  
@@ -210,6 +208,7 @@ var index = location.href.indexOf('?');
 if (index != -1) { // 기존 데이터를 조회할 경우,
     var qs = location.href.substr(index + 1);
     var arr = qs.split('=');
+    b_number = arr[1];
     $('.my-new').css('display', 'none');
     $(() => {
         $.ajax('../../json/business/' + arr[1], {
@@ -324,9 +323,13 @@ deleteBtn.click(function() {
     });
 });
 
-$(document).ready(function(){ // 리뷰 리스트 인클루드
+$(document.body).ready(function(){ // 리뷰 리스트 인클루드
+    $(document.body).trigger('')
+    console.log("b_number = " + b_number);
+    if(b_number == 15){
+        $("#inserthere").load("reviewlist.html")
         
-    $("#inserthere").load("reviewlist.html")
+    }
    /* id 지정을 통해서도 가능합니다. 
     $("#header").load("header.html #navbar")
     */       

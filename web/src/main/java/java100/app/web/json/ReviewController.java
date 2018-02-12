@@ -76,6 +76,7 @@ public class ReviewController {
     public Object reviewAdd(
             BusinessReview businessReview,
             /*MultipartFile[] file,*/
+            @RequestParam(value="b_number") Business b_number,
             @ModelAttribute(value="loginUser") Member loginUser
             ) throws Exception {
         

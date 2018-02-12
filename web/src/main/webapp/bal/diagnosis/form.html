@@ -65,7 +65,7 @@
 			<div class='form-group row'>
 				<label class='col-sm-2 col-form-label'>분류</label>
 				<div class='col-sm-10'>
-					<input class='form-control' id='diagnosisCategory2' type='text'
+					<input class='form-control' id='diagnosisCategory' type='text'
 						name='diagnosisCategory'>
 				</div>
 			</div>
@@ -149,7 +149,7 @@ var addBtn=$('#addBtn'),
 	hospitalNameItem=$('#hospitalName'),
 	hospitalNoItem=$('#hospitalNo'),
 	dogweightItem=$('#dogweight'),
-	categoryItem=$('#diagnosisCategory2'),
+	categoryItem=$('#diagnosisCategory'),
 	nameItem=$('#diagnosisName'),
 	contentsItem=$('#diagnosisContents'),
 	recordingItem=$('#dateRecording'),
@@ -219,6 +219,8 @@ if (index != -1) { // 기존 데이터를 조회할 경우,
     });
 }
  */
+
+ 
 addBtn.click(() => {
     $.ajax('../../json/diagnosis/add', {
         data: {

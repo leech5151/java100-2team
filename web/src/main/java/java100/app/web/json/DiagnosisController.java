@@ -69,9 +69,11 @@ public class DiagnosisController {
    @RequestMapping("add")
     public Object add(
             Diagnosis diagnosis,
-            @ModelAttribute(value="loginUser") Member loginUser,Hospital hospital 
+            Member member,Hospital hospital 
             ) throws Exception {
-        diagnosis.setMember(loginUser);
+        diagnosis.setMember(member);
+        System.out.println(member.getMemberNo());
+        System.out.println(member.getTel());
         diagnosis.setHospital(hospital);
         System.out.println(hospital.getHospitalNo());
         

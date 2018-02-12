@@ -27,10 +27,14 @@
   },
   "dependencies": {
     "bootstrap": "4.0.0",
+    "bootstrap-sweetalert": "^1.0.1",
     "devicons": "^1.8.0",
     "handlebars": "^4.0.11",
     "jquery": "3.3.0",
+<<<<<<< HEAD
     "popper.js": "^1.12.3",
+=======
+>>>>>>> branch 'master' of https://github.com/leech5151/java100-2team.git
     "simple-line-icons": "^2.4.1",
     "sweetalert": "^2.1.0",
     "sweetalert2": "^7.11.0"

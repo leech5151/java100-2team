@@ -74,8 +74,10 @@ public class TrainningServiceImpl implements TrainningService {
     public int update(Trainning trainning) {
         
         int count = trainningDao.update(trainning);
-        //
-       // trainningFileDao.deleteAllByTrainningNo(trainning.getTrainningNo());
+       
+        if(!trainning.getFiles().isEmpty()) {
+            trainningFileDao.deleteAllByTrainningNo(trainning.getTrainningNo());
+        }
         
         addFiles(trainning.getFiles(), trainning.getTrainningNo());
         

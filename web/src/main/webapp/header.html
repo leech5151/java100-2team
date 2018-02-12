@@ -1,5 +1,5 @@
 <nav class='navbar navbar-expand-lg navbar-light bg-light'>
-<a class='navbar-brand' href='../main/start'>
+<a class='navbar-brand' href='../main/home.html'>
   <img src='../../images/bootstrap-solid.svg' width='30' height='30' class='d-inline-block align-top' alt=''>
   Balance Pet
 </a>
@@ -12,30 +12,30 @@
 <div class='collapse navbar-collapse' id='navbarNav'>
 <ul class='navbar-nav mr-auto'>
   <li class='nav-item'>
-    <a class='nav-link' href='../member/list'>회원목록</a>
+    <a class='nav-link' href='../member/list.html'>회원목록</a>
   </li>
 </ul>
 
 <ul class='navbar-nav mr-auto'>
   <li class='nav-item'>
-    <a class='nav-link' href='../hospital/list'>병원목록</a>
+    <a class='nav-link' href='../hospital/list.html'>병원목록</a>
   </li>
 </ul>
 <ul class='navbar-nav mr-auto'>
   <li class='nav-item'>
-    <a class='nav-link' href='../diagnosis/list'>진료목록</a>
-  </li>
-</ul>
-
-<ul class='navbar-nav mr-auto'>
-  <li class='nav-item'>
-    <a class='nav-link' href='../business/list'>서비스</a>
+    <a class='nav-link' href='../diagnosis/list.html'>진료목록</a>
   </li>
 </ul>
 
 <ul class='navbar-nav mr-auto'>
   <li class='nav-item'>
-    <a class='nav-link' href='../lost/list'>미아찾기</a>
+    <a class='nav-link' href='../business/list.html'>서비스</a>
+  </li>
+</ul>
+
+<ul class='navbar-nav mr-auto'>
+  <li class='nav-item'>
+    <a class='nav-link' href='../lost/list.html'>미아찾기</a>
   </li>
 </ul>
 
@@ -48,7 +48,8 @@
 <script type="text/javascript">
 $.getJSON('../../json/auth/loginUser', function(result) {
     if (result.status == 'fail') {
-        location.href = '../auth/form.html';
+    	window.alert('로그인해라');
+        location.href = '../main/home.html';
         return;
     }
     
@@ -58,7 +59,7 @@ $.getJSON('../../json/auth/loginUser', function(result) {
 $('#logoutBtn').click(() => {
     $.getJSON('../../json/auth/logout', (result) => {
 	    console.log(result);
-	    location.href = '../auth/form.html';
+	    location.href = '../main/home.html';
     });
 })
 </script>

@@ -39,16 +39,14 @@
 			<div class='form-group row'>
 				<label for='memberName' class='col-sm-2 col-form-label'>진료회원명</label>
 				<div class='col-sm-10'>
-					<input class='form-control' id='memberName' type='text'
-						name='diagnosis.member.name'>
+					<input class='form-control' id='memberName' type='text' name='memberName'>
 				</div>
 			</div>
 
 			<div class='form-group row'>
 				<label for='memberTel' class='col-sm-2 col-form-label'>진료회원연락처</label>
 				<div class='col-sm-10'>
-					<input class='form-control' id='memberTel' type='text'
-						name='diagnosis.member.tel'>
+					<input class='form-control' id='memberTel' type='text' name='memberTel'>
 				</div>
 			</div>
 
@@ -120,8 +118,7 @@
 				</div>
 			</div>
 
-			<div class='form-group row'>
-				<!-- style="display: none" -->
+			<div class='form-group row' style="display: none">
 				<input class='form-control' readonly id='hospitalNo' type='number'
 					name='diagnosis.hospital.hospitalNo'>
 			</div>
@@ -170,8 +167,8 @@ if (index != -1) { // 기존 데이터를 조회할 경우,
             dataType: 'json',
             success: (result) => {
             	noItem.val(result.data.diagnosisNo);
-				memberNameItem.val(result.data.member.name);
-				memberTelItem.val(result.data.member.tel);
+				memberNameItem.val(result.data.memberName);
+				memberTelItem.val(result.data.memberTel);
 				hospitalNameItem.val(result.data.hospital.hospitalName);
 				dogweightItem.val(result.data.dogweight);
 				categoryItem.val(result.data.diagnosisCategory);
@@ -231,7 +228,9 @@ addBtn.click(() => {
             dateRecording: recordingItem.val(),
             hospitalNo: hospitalNoItem.val(),
             recorder: recorderItem.val(),
-            remarks: remarksItem.val()
+            remarks: remarksItem.val(),
+            memberName: memberNameItem.val(),
+            memberTel: memberTelItem.val()
         },
         dataType: 'json',
         method: 'POST',
@@ -246,13 +245,17 @@ addBtn.click(() => {
 
 
 updateBtn.click(() => {
-    $.ajax('../json/score/update', {
+    $.ajax('../../json/diagnosis/update', {
         data: {
-            no: noItem.val(),
-            name: nameItem.val(),
-            kor: korItem.val(),
-            eng: engItem.val(),
-            math: mathItem.val()
+        
+        	 diagnosisNo: noItem.val(),
+        	 dogweight: dogweightItem.val(),
+             diagnosisCategory: categoryItem.val(),
+             diagnosisName: nameItem.val(),
+             diagnosisContents: contentsItem.val(),
+             remarks: remarksItem.val(),
+             memberName: memberNameItem.val(),
+             memberTel: memberTelItem.val()
         },
         dataType: 'json',
         method: 'POST',
@@ -266,7 +269,7 @@ updateBtn.click(() => {
 });
 
 deleteBtn.click(() => {
-    $.ajax('../json/score/delete', {
+    $.ajax('../../json/diagnosis/delete', {
         data: {
             no: noItem.val()
         },

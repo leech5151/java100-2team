@@ -50,13 +50,17 @@ public class TrainningServiceImpl implements TrainningService {
     
     @Override
     public Trainning get(int no) {
+        trainningDao.updateViewCount(no);
+        trainningDao.updateLikes(no); // 
+       
+        
         Trainning trainning = trainningDao.findByNo(no);
         
         return trainning;
     }
 
     
-    @Override
+   /* @Override
     public Trainning get(String email, String password) {
         
         HashMap<String,Object> params = new HashMap<>();
@@ -64,7 +68,7 @@ public class TrainningServiceImpl implements TrainningService {
         params.put("password", password);
         
         return trainningDao.findByEmailAndPassword(params);
-    }
+    }*/
     
     @Override
     public int update(Trainning trainning) {

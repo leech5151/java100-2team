@@ -12,7 +12,7 @@
 <header>
 <nav class='navbar navbar-expand-lg navbar-light bg-light'>
 
-<a class='navbar-brand' href='../main/start'>
+<a class='navbar-brand' href='../main/home.html'>
   <img src='../../images/bootstrap-solid.svg' width='30' height='30' class='d-inline-block align-top' alt=''>
   Balance Pet
 </a>
@@ -25,30 +25,13 @@
 <div class='collapse navbar-collapse' id='navbarNav'>
 <ul class='navbar-nav mr-auto'>
   <li class='nav-item'>
-    <a class='nav-link' href='../member/list'>회원목록</a>
+    <a class='nav-link' href='../member/list.html'>회원목록</a>
   </li>
 </ul>
 
 <ul class='navbar-nav mr-auto'>
   <li class='nav-item'>
-    <a class='nav-link' href='../hospital/list'>병원목록</a>
-  </li>
-</ul>
-<ul class='navbar-nav mr-auto'>
-  <li class='nav-item'>
-    <a class='nav-link' href='../diagnosis/list'>진료목록</a>
-  </li>
-</ul>
-
-<ul class='navbar-nav mr-auto'>
-  <li class='nav-item'>
-    <a class='nav-link' href='../business/list'>서비스</a>
-  </li>
-</ul>
-
-<ul class='navbar-nav mr-auto'>
-  <li class='nav-item'>
-    <a class='nav-link' href='../lost/list'>미아찾기</a>
+    <a class='nav-link' href='../lost/list.html'>미아찾기</a>
   </li>
 </ul>
 
@@ -60,8 +43,8 @@
 
     <h1>내 강아지</h1>
 
-  <button id="goBackBtn" type="button" class="btn btn-primary btn-sm">돌아가기</button>
 <nav class="navbar navbar-light justify-content-between">
+  <button id="goBackBtn" type="button" class="btn btn-primary btn-sm">돌아가기</button>
   <button id="addBtn" type="button" class="btn btn-primary btn-sm">추가</button>
   <form class="form-inline" action="list">
     <input id="words" name="words"
@@ -79,16 +62,6 @@
 </tr>
 </thead>
 <tbody>
-<!-- 
-<tr>
-        <td>24</td>
-        <td>1번</td>
-        <td>1번품종</td>
-        <td>1</td>
-        <td>2.0</td>
-        <td>3.0</td>
-        
-        </tr> -->
 </tbody>
 </table>
 
@@ -103,6 +76,7 @@
     <li class="page-item ">
         <a id="nextBtn" class="page-link" tabindex="0">다음</a></li>
   </ul>
+  <button onclick=""></button>
 </nav>
 
 <footer>
@@ -110,9 +84,24 @@
 </footer>
 </div>
 
-<script src='/node_modules/jquery/dist/jquery.js'></script>
-<script src='/node_modules/popper.js/dist/umd/popper.min.js'></script>
-<script src='/node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+<script id="template1" type="text/x-handlebars-template">
+{{#each list}}
+<tr>
+  <td>{{petNo}}</td>
+  <td>{{petName}}</td>
+  <td>{{breed}}</td>
+  <td>{{age}}</td>
+  <td>{{weight}}</td>
+  <td>{{goalWeight}}</td>
+  <td><button id='deleteBtn{{petNo}}' class='btn btn-danger btn-sm' type='button'>삭제</button></td>
+</tr>
+{{/each}}
+</script>
+
+<script src='../../node_modules/handlebars/dist/handlebars.min.js'></script>
+<script src='../../node_modules/jquery/dist/jquery.js'></script>
+<script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
+<script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
 <script type="text/javascript">
 var tbody = $('#list > tbody'),
     words = $('#words'),
@@ -120,9 +109,12 @@ var tbody = $('#list > tbody'),
     prevBtn = $('#prevBtn'),
     currBtn = $('#currBtn'),
     nextBtn = $('#nextBtn'),
+    addBtn = $('#addBtn'),
     logout = $('#logout'),
-    currPageNo = 1;
-
+    currPageNo = 1,
+    template1Src = $('#template1').html(),
+    template1Engine = Handlebars.compile(template1Src);
+   
 load(1);
 
 searchBtn.click(() => {
@@ -149,25 +141,16 @@ function load(pageNo, options) {
         data: options,
         dataType: 'json',
         success: (result) => {
-        	console.log(result)
-            tbody.html("");
-            
-            for (var data of result.list) {
-                $('<tr>')
-                    .html(
-                         "<td>" + data.petNo + "</td>" +       
-                         "<td>" + data.petName + "</td>" +       
-                         "<td>" + data.breed + "</td>" +        
-                         "<td>" + data.age + "</td>" +        
-                         "<td>" + data.weight + "</td>" +        
-                         "<td>" + data.goalWeight + "</td>" + 
-                         "<td><a href='../../json/pet/delete?petNo=" + data.petNo + "' class='btn btn-danger btn-sm'>삭제</a></td>")
-                    .appendTo(tbody);
-            }
-
+           	tbody.html(template1Engine(result));
             currPageNo = result.pageNo;
             currBtn.html(currPageNo);
             
+           	var petNo = [];
+           	
+            for (var i = 0; i < result.list.length; i++) {
+            	petNo[i] = result.list[i].petNo;
+            }
+
             if (result.pageNo == 1) {
                 $(prevBtn.parent()).addClass("disabled");
             } else {
@@ -179,13 +162,47 @@ function load(pageNo, options) {
             } else {
                 $(nextBtn.parent()).removeClass("disabled");
             }
+
+            $(document).ready(function(){ 
+           	    $('button').click(function(e){
+           	        var id = e.target.getAttribute('id');
+          	        if ((id != '') && (id != null))  
+                      var newId = '#' + id;
+          	
+    	        if ((newId == '#addBtn')) {
+          		    $.getJSON('../../json/pet/list', (result) => {
+          		        location.href = '/bal/pet/form.html';
+          		    });
+          		    
+          	    } else if ((newId == '#goBackBtn')) {
+           		    $.ajax('../../json/pet/list', {
+           		        success: (result) => {
+           		            console.log(result.member.memberNo)
+           		        location.href = '../member/view.html?no=' + result.member.memberNo
+           		        }
+           		     });
+           		
+	           	} else {
+	                var petNo = newId.substring(10);
+	                $.ajax('../../json/pet/delete', {
+	                    data: {
+	                        petNo: petNo
+	                    },
+	                    dataType: 'json',
+	                    success: (result) => {
+	                    location.href = "list.html";
+	                    }
+	                });
+           		
+	            }
+        	    });
+           	});
         },
         error: () => {
             window.alert("서버 실행 오류!");
         }
     });
 }
-
 </script>
 </body>
 </html>

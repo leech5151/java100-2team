@@ -119,7 +119,7 @@
             mdc_ani=#{medicalAnimal},
             hp_tel=#{hospitalTel},
             mdc_staff=#{medicalStaff},
-            conts=#{summernote},
+            conts=#{contents},
             pst_no=#{postalNo},
             prm_addr=#{primaryAddress}, 
             det_addr=#{detailAddress}

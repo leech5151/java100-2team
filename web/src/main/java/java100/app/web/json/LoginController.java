@@ -21,6 +21,7 @@ import java100.app.service.MemberService;
 @RequestMapping("/auth")
 @SessionAttributes("loginUser")
 public class LoginController {
+
     @Autowired MemberService memberService;
     
     @RequestMapping(value="login", method=RequestMethod.GET)
@@ -99,7 +100,7 @@ public class LoginController {
     }
     
 }
- 
+
 
 
 

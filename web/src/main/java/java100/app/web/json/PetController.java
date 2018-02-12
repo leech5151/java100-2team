@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import java100.app.domain.Lost;
 import java100.app.domain.Member;
 import java100.app.domain.Pet;
 import java100.app.service.LostService;
@@ -33,33 +32,22 @@ public class PetController {
         HashMap<String, Object> result = new HashMap<>();
         result.put("list", petService.list(searchNo));
         result.put("member", loginUser);
+        System.out.println(loginUser.getMemberNo());
         result.put("status", "success");
         return result;
     }
-     
-    @RequestMapping("form")
-    public String form() throws Exception {
-        return "pet/form";
-        
-    }
     
     @RequestMapping("add")
-    public String add(
+    public Object add(
             Pet pet,
             @ModelAttribute(value="loginUser") Member loginUser
             ) throws Exception {
         
+        HashMap<String, Object> result = new HashMap<>();
         pet.setMemberNo(loginUser.getMemberNo());
         petService.add(pet);
-        Lost lost = new Lost();
-        lost.setPetName(pet.getPetName());
-        lost.setLostLocation("강남");
-        lost.setLostDate("2017-11-12");
-        lost.setCharacter("몰라");
-        lost.setReward(1000000);
-        lost.setRegistrant(loginUser);
-        int count = lostService.add(lost);
-        return "redirect:list";
+        result.put("status", "success");
+        return result;
     }
 
     @RequestMapping("delete")

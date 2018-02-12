@@ -21,6 +21,7 @@ public interface DiagnosisService {
     Diagnosis get(int no);
     int update(Diagnosis diagnosis);
     int delete(int no);
+    Object getHospitalNo(int no);
 }
 
 

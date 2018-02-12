@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -72,9 +73,10 @@ public class MemberController {
     }
 
     @RequestMapping("add")
-    public String add(
+    public Object add(
             Member member,
-            MultipartFile[] file
+            MultipartFile[] file,
+            HttpSession httpSession
             ) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
@@ -92,9 +94,11 @@ public class MemberController {
         
         member.setFiles(uploadFiles);
 
-        memberService.add(member);
-        
-        return "redirect:list";
+        HashMap<String, Object> result = new HashMap<>();
+
+        result.put("member", memberService.add(member));
+        result.put("status", "success");
+        return result;
     }
     
     @RequestMapping("view")

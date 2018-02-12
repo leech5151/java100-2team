@@ -4,33 +4,21 @@
 <html>
 <head>
 <title>병원등록</title>
-<link rel='stylesheet'
-	href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <link rel='stylesheet' href='../../css/common.css'>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-<script src="https://code.jquery.com/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link href="../../summernote/summernote.css" rel="stylesheet">
-<script src="../../summernote/summernote.js"></script>
-<script src="../../summernote/lang/summernote-ko-KR.js"></script>
-
-<script type="text/javascript">
-function postForm() {
-    $('textarea[name="contents"]').val($('#summernote').summernote('code'));
-}
-</script>
 
 </head>
 <body>
 	<div class='container'>
+
 		<jsp:include page="../header.jsp" />
 
 		<h1>신규병원</h1>
-
-		<form action="add" onsubmit="postForm()" method='post'
-			enctype="multipart/form-data">
+		
+		
+			
+		<form action="add" method='post' enctype="multipart/form-data">
+		
 			<div class='form-group row'>
 				<label for='hospitalName' class='col-sm-2 col-form-label'>병원명</label>
 				<div class='col-sm-10'>
@@ -38,6 +26,7 @@ function postForm() {
 						name='hospitalName'>
 				</div>
 			</div>
+
 			<div class='form-group row'>
 				<label for='openTime' class='col-sm-2 col-form-label'>오픈시간</label>
 				<div class='col-sm-10'>
@@ -87,7 +76,14 @@ function postForm() {
 				</div>
 			</div>
 
-			<textarea name="contents" id="contents" placeholder="Enter ..." class="form-control" style="display: none;"></textarea>
+			<div class='form-group row'>
+				<label for='contents' class='col-sm-2 col-form-label'>내용</label>
+				<div class='col-sm-10'>
+					<input class='form-control' id='contents' type='text'
+						name='contents'>
+				</div>
+			</div>
+
 
 			<div class='form-group row'>
 				<label for='postalNo' class='col-sm-2 col-form-label'>우편번호</label>
@@ -114,6 +110,14 @@ function postForm() {
 				</div>
 			</div>
 
+		<!-- 	<div class='form-group row'>
+				<label for='member.memberNo' class='col-sm-2 col-form-label'>병원회원번호</label>
+				<div class='col-sm-10'>
+					<input class='form-control' id='member.memberNo' type="number"
+						name='member.memberNo'>
+				</div>
+			</div> -->
+
 			<div class='form-group row'>
 				<label for='file1' class='col-sm-2 col-form-label'>사진</label>
 				<div class='col-sm-10'>
@@ -121,36 +125,18 @@ function postForm() {
 				</div>
 			</div>
 
-				<div class='form-group row'>
+			<div class='form-group row'>
 				<div class='col-sm-10'>
 					<button class='btn btn-primary btn-sm'>등록</button>
 				</div>
-		</div>
-
-		</form>
-		
-		<form>
-			<div class='form-group row'>
-				<label for='contents' class='col-sm-2 col-form-label'>내용</label>
-				<div class='col-sm-10'>
-					<div id="summernote">Hello Summernote</div>
-				</div>
 			</div>
 		</form>
-		
-		
-		<form>
-	
-		</form>
-
 
 		<jsp:include page="../footer.jsp" />
+
 	</div>
 
+	<jsp:include page="../jslib.jsp" />
 
-
-	<script type="text/javascript">
-  			$(document).ready(function() { $('#summernote').summernote(); });
-			</script>
 </body>
 </html>

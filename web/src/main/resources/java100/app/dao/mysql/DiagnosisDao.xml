@@ -135,7 +135,7 @@
         where dgn_no=#{value}
     </delete> 
     
-    <select id="findByBusinessNo" resultMap="diagnosisMap" parameterType="int">
-        select hp_no from hp where m_no=#{member.memberNo}
+    <select id="findByHospitalNo" resultMap="diagnosisMap" parameterType="int">
+    	select hp_no from hp where m_no=#{member.memberNo}
     </select>
 </mapper>  

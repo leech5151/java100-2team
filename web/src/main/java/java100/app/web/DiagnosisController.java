@@ -61,7 +61,11 @@ public class DiagnosisController {
             return "diagnosis/list";
     }
     
-   
+    @RequestMapping("form")
+    public String form() throws Exception {
+        return "diagnosis/form";
+        
+    }
 
     @RequestMapping("add")
     public String add(

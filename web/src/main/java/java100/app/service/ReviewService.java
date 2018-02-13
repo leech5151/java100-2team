@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import java100.app.domain.Business;
+import java100.app.domain.BusinessReview;
 import java100.app.domain.BusinessUploadFile;
 
 //=> "역할"을 강조할 때는 "객체(object)"라는 말보다는 
@@ -15,15 +16,16 @@ import java100.app.domain.BusinessUploadFile;
 //담당하기 때문에 인터페이스에 선언하는 메서드 이름도 
 //가능한 업무 용어를 사용한다.
 //
-public interface BusinessService {
-    List<Business> list(int pageNo, int pageSize, Map<String,Object> options);
+public interface ReviewService {
+    List<BusinessReview> list(int pageNo, int pageSize, Map<String,Object> options);
     int getTotalCount();
-    int add(Business business);
-    void addFiles(List<BusinessUploadFile> files, int businessNo);
-    Business get(int bus_no);
-    Business get(String email, String password);
-    int update(Business business);
-    int delete(int bus_no);
+    int add(BusinessReview businessReview);
+    Object getBusinessNo(int no);
+    void addFiles(List<BusinessUploadFile> files, int ReviewNo);
+    BusinessReview get(int rv_no);
+    BusinessReview get(String email, String password);
+    int update(BusinessReview businessReview);
+    int delete(int rv_no);
 }
 
 

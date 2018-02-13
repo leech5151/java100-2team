@@ -10,10 +10,11 @@ public interface BusinessReviewDao {
     List<BusinessReview> findAll(Map<String,Object> params);
     int countAll();
     int insert(BusinessReview businessReview);
-    BusinessReview findByNo(int no);
+    BusinessReview findByNo(int rv_no);
+    BusinessReview findByBusinessNo(int no);
     BusinessReview findByEmailAndPassword(HashMap<String, Object> params);
     int update(BusinessReview businessReview);
-    int delete(int no);
+    int delete(int rv_no);
 }
 
 

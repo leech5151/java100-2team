@@ -55,11 +55,11 @@ public class BusinessReview {
     public void setViewCount(int viewCount) {
         this.viewCount = viewCount;
     }
-    public Business getBusinessNo() {
+    public Business getBusiness() {
         return business;
     }
-    public void setBusinessNo(Business businessNo) {
-        this.business = businessNo;
+    public void setBusiness(Business business) {
+        this.business = business;
     }
     
   

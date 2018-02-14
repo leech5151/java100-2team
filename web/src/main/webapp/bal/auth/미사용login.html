@@ -1,5 +1,5 @@
-    <!-- 모달땜에 추가 -->
-<style>
+  <!-- <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
+      <!-- <style>
   .modal-header, h4, .close {
       background-color: #5cb85c;
       color:white !important;
@@ -9,20 +9,20 @@
   .modal-footer {
       background-color: #f9f9f9;
   }
-  </style> 
-
-    <!-- Modal 
-    <div class="modal fade" id="myModal" role="dialog">-->
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
+  </style>  -->
+   <!--
+            Modal content-->
+    <div class="modal fade" role="dialog" id="myModal">
+        <div class="modal-dialog" >
             <div class="modal-content">
+            
                 <div class="modal-header" style="padding: 35px 50px;">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4>
                         <span class="glyphicon glyphicon-lock"></span> Login
                     </h4>
                 </div>
+            
                 <div class="modal-body" style="padding: 40px 50px;">
                     <form id="loginForm" method="POST" role="form">
                         <div class="form-group">
@@ -56,8 +56,9 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger btn-default pull-left"
-                        data-dismiss="modal">
+                    <button id="cancelBtn" type="button" 
+                            class="btn btn-danger btn-default pull-left"
+                            data-dismiss="modal">
                         <span class="glyphicon glyphicon-remove"></span> Cancel
                     </button>
                     <p>
@@ -68,9 +69,9 @@
                     </p>
                 </div>
             </div>
-
-        </div>
-    <!-- </div> -->
+     </div>
+    </div>
+    
 <script type="text/javascript">
 var loginForm = $('#loginForm'),
     loginBtn2 = $('#loginBtn2'),
@@ -94,10 +95,6 @@ loginBtn2.click(() => {
         }
     }, 'json');
     
-});
-
-loginBtn.click(() => {
-    myModal.modal();
 });
 
 </script>
@@ -135,7 +132,7 @@ function checkLoginState() {
 
 window.fbAsyncInit = function() {
   FB.init({
-    appId      : '1207028086096146', // 개발자가 등록한 앱 ID
+    appId      : '1608875912532374', // 개발자가 등록한 앱 ID
     cookie     : true,  
     xfbml      : true,  
     version    : 'v2.12' 

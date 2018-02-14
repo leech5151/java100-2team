@@ -22,6 +22,7 @@ import java100.app.service.DiagnosisService;
 @RequestMapping("/diagnosis")
 @SessionAttributes("loginUser")
 public class DiagnosisController {
+    
     @Autowired ServletContext servletContext;
     @Autowired DiagnosisService diagnosisService;
     
@@ -74,9 +75,10 @@ public class DiagnosisController {
             @ModelAttribute(value="loginUser") Member loginUser
             ) throws Exception {
         
-
+        
         diagnosis.setMember(loginUser);
         System.out.println(diagnosis.getMember().getMemberNo());
+        
         diagnosisService.add(diagnosis);
         
         return "redirect:list";
@@ -90,16 +92,16 @@ public class DiagnosisController {
     }
 
     @RequestMapping("update")
-    public String update(Diagnosis diagnosis) throws Exception {
+    public String update(Diagnosis diagnosis,@ModelAttribute(value="loginUser") Member loginUser) throws Exception {
         
-        diagnosisService.update(diagnosis);
+        diagnosisService.update(diagnosis,loginUser.getMemberNo());
         
         return "redirect:list";
     }
 
     @RequestMapping("delete")
-    public String delete(int no) throws Exception {
-        diagnosisService.delete(no);
+    public String delete(int no, @ModelAttribute(value="loginUser") Member loginUser) throws Exception {
+        diagnosisService.delete(no,loginUser.getMemberNo());
         return "redirect:list";
     }
 

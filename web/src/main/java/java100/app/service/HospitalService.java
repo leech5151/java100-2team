@@ -18,11 +18,12 @@ import java100.app.domain.HospitalUploadFile;
 public interface HospitalService {
     List<Hospital> list(int pageNo, int pageSize, Map<String,Object> options);
     int getTotalCount();
+    int getHospitalBymemberNo(Hospital hospital);
     int add(Hospital hospital);
     void addFiles(List<HospitalUploadFile> files, int hospitalNo);
     Hospital get(int no);
     int update(Hospital hospital);
-    int delete(int no);
+    int delete(int no,int no2);
 }
 
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java100.app.dao.DiagnosisDao;
+import java100.app.dao.HospitalDao;
 import java100.app.domain.Diagnosis;
 import java100.app.service.DiagnosisService;
 
@@ -15,6 +16,7 @@ import java100.app.service.DiagnosisService;
 public class DiagnosisServiceImpl implements DiagnosisService {
 
     @Autowired DiagnosisDao diagnosisDao;
+    @Autowired HospitalDao hospitalDao;
     
     
     @Override
@@ -39,7 +41,15 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     @Override
     public int add(Diagnosis diagnosis) {
         int count = diagnosisDao.insert(diagnosis);
+        System.out.println(count);
         return count;
+    }
+
+    @Override
+    public int get(String tel) {
+        int j = diagnosisDao.CountMember(tel);
+        System.out.println("j=" + j);
+        return j;
     }
 
     @Override
@@ -49,21 +59,51 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     }
     
     @Override
-    public int update(Diagnosis diagnosis) {
-        int count = diagnosisDao.update(diagnosis);
+    public int update(Diagnosis diagnosis,int no) {
         
+        Diagnosis diagnosis2 = diagnosisDao.findByHospitalNo(no);
+        diagnosis.setHospital(diagnosis2.getHospital());
+        
+        int count = diagnosisDao.update(diagnosis);
+        System.out.println("count=" + count);
         return count;
     }
     
     @Override
-    public int delete(int no) {
-        return  diagnosisDao.delete(no);
+    public int delete(int no,int no2) {
+        int k = 0;
+        
+        try {
+            k = diagnosisDao.findByHospitalNo(no2).getHospital().getHospitalNo();    
+        } catch (Exception e) {
+            return 2;
+        }
+        
+
+        int i = diagnosisDao.countAll();
+        System.out.print("i=");
+        System.out.println(i);
+        diagnosisDao.delete(no,k);
+        int j = diagnosisDao.countAll();
+        System.out.print("j=");
+        System.out.println(j);
+        
+        if(i==j) {
+            return 0;
+        }else {
+            return 1;
+        }
+        
     }
 
     @Override
     public Object getHospitalNo(int no) {
-
         return diagnosisDao.findByHospitalNo(no);
+    }
+
+    @Override
+    public int deleteAll(int no) {
+        return diagnosisDao.deleteAll(no);
     }
     
     

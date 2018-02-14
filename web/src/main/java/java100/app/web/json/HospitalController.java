@@ -28,6 +28,7 @@ public class HospitalController {
     
     @Autowired ServletContext servletContext;
     @Autowired HospitalService hospitalService;
+ 
     
     
     @RequestMapping("list")
@@ -104,7 +105,7 @@ public class HospitalController {
     public Object add(
             Hospital hospital,
             MultipartFile[] file,
-            @ModelAttribute(value="loginUser") Member loginUser ) throws Exception {
+            @ModelAttribute(value="loginUser") Member loginUser) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
 
@@ -123,13 +124,26 @@ public class HospitalController {
 
         // 게시글 작성자는 로그인 사용자이다. 
         hospital.setMember(loginUser);
+        HashMap<String,Object> result = new HashMap<>();
+        
+     try {
+         hospitalService.add(hospital);
+         result.put("status", "success");
+    } catch (Exception e) {
+         result.put("status", "fail");
+    }
         
         // 게시글 등록
-        hospitalService.add(hospital);
+        /*    int count = hospitalService.add(hospital);
         
         HashMap<String,Object> result = new HashMap<>();
-        result.put("status", "success");
+        if(count == 0) {
+            result.put("status", "fail");
+        }else {
+            result.put("status", "success");
+        }*/
         
+      
         return result;
     }
 
@@ -143,7 +157,7 @@ public class HospitalController {
     @RequestMapping("update")
     public Object update(
             Hospital hospital, 
-            MultipartFile[] file) throws Exception {
+            MultipartFile[] file, @ModelAttribute(value="loginUser") Member loginUser) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
 
@@ -158,24 +172,38 @@ public class HospitalController {
             uploadFiles.add(new HospitalUploadFile(filename));
         }
         
-        hospital.setFiles(uploadFiles);
-
-        hospitalService.update(hospital);
         HashMap<String,Object> result = new HashMap<>();
-        result.put("status", "success");
         
-        return result;
+        
+        
+        try {
+            hospital.setFiles(uploadFiles);
+            hospital.setMember(loginUser);
+            hospitalService.update(hospital);
+            result.put("status", "success");
+            return result;
+        } catch (Exception e) {
+            result.put("status", "fail");
+            return result;
+        }
+        
+      
     }
 
     @RequestMapping("delete")
-    public Object delete(int no) throws Exception {
-        
-        
-        hospitalService.delete(no);
+    public Object delete(int no, @ModelAttribute(value="loginUser") Member loginUser) throws Exception {
         HashMap<String,Object> result = new HashMap<>();
-        result.put("status", "success");
         
-        return result;
+        
+        try {
+            hospitalService.delete(no,loginUser.getMemberNo());
+            result.put("status", "success");
+            return result;
+        } catch (Exception e) {
+            result.put("status", "fail");
+            return result;
+        }
+        
     }
 
     long prevMillis = 0;
@@ -208,6 +236,6 @@ public class HospitalController {
         String filename = getNewFilename(part.getOriginalFilename());
         part.transferTo(new File(path + "/" + filename));
         return filename;
-    }    
-
+    }
+    
 }

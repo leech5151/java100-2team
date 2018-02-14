@@ -99,8 +99,9 @@ public class HospitalController {
         
         // 게시글 등록
         hospitalService.add(hospital);
-        
         return "redirect:list";
+        
+      
     }
 
     @RequestMapping("{no}")
@@ -136,18 +137,18 @@ public class HospitalController {
     }
 
     @RequestMapping("delete")
-    public String delete(int no) throws Exception {
-        
-        
-        hospitalService.delete(no);
+    public String delete(int no,@ModelAttribute(value="loginUser") Member loginUser) throws Exception {
+        hospitalService.delete(no,loginUser.getMemberNo());
         return "redirect:list";
     }
 
+    
+    
+    
+    
     long prevMillis = 0;
     int count = 0;
     
-    // 다른 클라이언트가 보낸 파일명과 중복되지 않도록 
-    // 서버에 파일을 저장할 때는 새 파일명을 만든다.
     synchronized private String getNewFilename(String filename) {
         long currMillis = System.currentTimeMillis();
         if (prevMillis != currMillis) {

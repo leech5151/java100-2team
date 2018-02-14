@@ -22,6 +22,16 @@ public class Hospital {
     
     
     
+    
+    
+    @Override
+    public String toString() {
+        return "Hospital [hospitalNo=" + hospitalNo + ", hospitalName=" + hospitalName + ", openTime=" + openTime
+                + ", closeTime=" + closeTime + ", medicalSubject=" + medicalSubject + ", medicalAnimal=" + medicalAnimal
+                + ", hospitalTel=" + hospitalTel + ", contents=" + contents + ", postalNo=" + postalNo
+                + ", primaryAddress=" + primaryAddress + ", detailAddress=" + detailAddress + ", medicalStaff="
+                + medicalStaff + ", member=" + member + ", files=" + files + "]";
+    }
     public String getOpenTime() {
         return openTime;
     }

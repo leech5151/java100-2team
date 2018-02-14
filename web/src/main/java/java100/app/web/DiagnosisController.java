@@ -103,6 +103,13 @@ public class DiagnosisController {
         return "redirect:list";
     }
 
-    
+    @RequestMapping("form")
+    public Object findByMemberNo(@ModelAttribute(value="loginUser") Member loginUser) throws Exception{
+        int no = loginUser.getMemberNo();
+        System.out.println(no);
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("data", diagnosisService.getHospitalNo(no));
+        return result;
+    }
 
 }

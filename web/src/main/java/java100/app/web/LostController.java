@@ -43,7 +43,7 @@ public class LostController {
             pageNo = 1;
         }
         
-        if (pageSize < 5 || pageSize > 15) {
+        if (pageSize < 5 || pageSize > 5) {
             pageSize = 5;
         }
         

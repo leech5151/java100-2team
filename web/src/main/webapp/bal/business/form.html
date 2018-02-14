@@ -57,7 +57,8 @@
 </nav>
 </header>
 
-    <h1>업체등록</h1>
+    <h1 class='my-new'>업체등록</h1>
+    <h1 class='my-view'>업체 상세정보</h1>
 
 
 <form id='frm' method="post" enctype="multipart/form-data">
@@ -219,7 +220,6 @@ if (index != -1) { // 기존 데이터를 조회할 경우,
                 ctgrItem.val(result.data.category);
                 nodItem.html("<input class='form-control' readonly id='businessNo' " + 
                              "name='businessNo' value='" + result.data.businessNo + "'> ");
-                number = result.data.businessNo;
                 nameItem.val(result.data.businessName);
                 openItem.val(result.data.open_time);
                 closeItem.val(result.data.close_time);
@@ -234,10 +234,6 @@ if (index != -1) { // 기존 데이터를 조회할 경우,
                 filedItem.html( "<img src='../../download/" + file.filename + "' alt=" + file.filename + " width='50px' height='50px'>")
                 console.log(file.filename)
                 }
-                /* for (var review of result.data.reviews){
-                reviewdItem.html("<input class='form-control-review' id='title' name='title' value='" + review.title + "'>")
-                console.log("리뷰 = " + review.title);
-                } */
             },
             error: () => {
                 
@@ -245,10 +241,10 @@ if (index != -1) { // 기존 데이터를 조회할 경우,
             }
         });
     });
-    
 } else { // 신규 데이터 입력일 경우,
     $('.my-view').css('display', 'none');
 }
+
 addReviewBtn.click(()=> {
     location.href = "review.html";
      alert(number)
@@ -326,15 +322,20 @@ deleteBtn.click(function() {
 });
 
 $(document.body).ready(function(){ // 리뷰 리스트 인클루드
-    $(document.body).trigger('')
-    console.log("b_number = " + b_number);
-    if(b_number == 15){
+        console.log(b_number);
         $("#inserthere").load("reviewlist.html")
-        
-    }
-   /* id 지정을 통해서도 가능합니다. 
-    $("#header").load("header.html #navbar")
-    */       
+        $.ajax('../../json/review/form', {
+            data: {
+                no: $('#businessNo').val()
+            },
+            dataType: 'json',
+            success: (result) => {
+                location.href = "list.html";
+            },
+            error: () => {
+                window.alert('서버 실행 오류! review');
+            }
+        });
  });
 </script>
 

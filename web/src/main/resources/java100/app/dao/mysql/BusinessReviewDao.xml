@@ -44,7 +44,8 @@
 	         b.bus_no,
 	         r.bus_no
         from bus_rv as r
-        left join bus as b on r.bus_no=b.bus_no
+            left join bus as b on r.bus_no=b.bus_no
+        where r.bus_no=b.bus_no
 
         <if test="words != null">
 	        <where>

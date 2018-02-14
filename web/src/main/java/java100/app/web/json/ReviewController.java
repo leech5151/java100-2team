@@ -100,7 +100,7 @@ public class ReviewController {
         return result;
     }
     
-    @RequestMapping("form")
+    /*@RequestMapping("form")
     public Object findByBusinessNo(@ModelAttribute(value="loginUser") Member loginUser) throws Exception{
         int no = loginUser.getMemberNo();
         System.out.println("로그인 번호다다다다 : " + no);
@@ -108,8 +108,20 @@ public class ReviewController {
         HashMap<String,Object> result = new HashMap<>();
         result.put("data", reviewService.getBusinessNo(no));
         return result;
+    }*/
+    @RequestMapping("form")
+    public Object findByBusinessNo(int no) throws Exception{
+        System.out.println("사업체 번호다다다다 : " + no);
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("data", reviewService.getBusinessNo(no));
+        return result;
     }
-    
+    /*public Object delete(int no) throws Exception {
+
+        reviewService.delete(no);
+        HashMap<String,Object> result = new HashMap<>();
+        return result;
+    }*/
     @RequestMapping("{no}")
     public Object view(@PathVariable int no) throws Exception {
         HashMap<String, Object> result = new HashMap<>();

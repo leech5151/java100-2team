@@ -57,7 +57,8 @@
 </nav>
 </header>
 
-    <h1>업체등록</h1>
+    <h1 class='my-new'>업체등록</h1>
+    <h1 class='my-view'>업체 상세정보</h1>
 
 
 <form id='frm' method="post" enctype="multipart/form-data">
@@ -157,7 +158,7 @@
 </div>
 </div>  
 
-<div id="inserthere" class='form-group row my-mo'></div> 
+<div id="inserthere" class='form-group row my-view'></div> 
 
 
 <div class='form-group row'>
@@ -321,7 +322,20 @@ deleteBtn.click(function() {
 });
 
 $(document.body).ready(function(){ // 리뷰 리스트 인클루드
+        console.log(b_number);
         $("#inserthere").load("reviewlist.html")
+        $.ajax('../../json/review/form', {
+            data: {
+                no: $('#businessNo').val()
+            },
+            dataType: 'json',
+            success: (result) => {
+                location.href = "list.html";
+            },
+            error: () => {
+                window.alert('서버 실행 오류! review');
+            }
+        });
  });
 </script>
 

@@ -13,7 +13,7 @@ public interface MemberDao {
     Member findByNo(int no);
     Member findByEmailAndPassword(HashMap<String, Object> params);
     int update(Member member);
-    int delete(int no);
+    int delete(int no); 
 }
 
 

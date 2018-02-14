@@ -22,7 +22,6 @@ import java100.app.service.DiagnosisService;
 @RequestMapping("/diagnosis")
 @SessionAttributes("loginUser")
 public class DiagnosisController {
-    
     @Autowired ServletContext servletContext;
     @Autowired DiagnosisService diagnosisService;
     
@@ -78,7 +77,6 @@ public class DiagnosisController {
         
         diagnosis.setMember(loginUser);
         System.out.println(diagnosis.getMember().getMemberNo());
-        
         diagnosisService.add(diagnosis);
         
         return "redirect:list";

@@ -18,9 +18,11 @@ public interface DiagnosisService {
     List<Diagnosis> list(int pageNo, int pageSize, Map<String,Object> options);
     int getTotalCount();
     int add(Diagnosis diagnosis);
+    int get(String tel);
     Diagnosis get(int no);
-    int update(Diagnosis diagnosis);
-    int delete(int no);
+    int update(Diagnosis diagnosis,int no);
+    int deleteAll(int no);
+    int delete(int no,int no2);
     Object getHospitalNo(int no);
 }
 

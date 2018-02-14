@@ -19,6 +19,15 @@ public class Diagnosis {
     
     
     
+    @Override
+    public String toString() {
+        return "Diagnosis [diagnosisNo=" + diagnosisNo + ", diagnosisCategory=" + diagnosisCategory + ", diagnosisName="
+                + diagnosisName + ", diagnosisContents=" + diagnosisContents + ", dogweight=" + dogweight
+                + ", dateRecording=" + dateRecording + ", recorder=" + recorder + ", remarks=" + remarks
+                + ", memberTel=" + memberTel + ", memberName=" + memberName + ", member=" + member + ", hospital="
+                + hospital + "]";
+    }
+    
     public String getMemberTel() {
         return memberTel;
     }

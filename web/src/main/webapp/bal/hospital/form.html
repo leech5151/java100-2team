@@ -224,7 +224,12 @@ addBtn.click(() => {
     		processData: false,
     		contentType: false,
     		success: (result) => {
-    			location.href = "list.html";
+    			if(result.status=='success'){
+    				location.href = "list.html";	
+    			}else{
+    				window.alert('한회원당 하나임');
+    			}
+    			
     		},
     		error: () => {
     			window.alert('서버 실행 오류!');
@@ -271,11 +276,15 @@ updateBtn.click(() => {
          processData : false,
          contentType : false,
          success: (result) => {
-             location.href = "list.html";
-         },
-         error: () => {
-             window.alert('서버 실행 오류!');
-         }
+        	   	if(result.status=='success'){
+    				location.href = "list.html";	
+    			}else{
+    				window.alert('왜 지것도 아닌 병원을 변경하려 하시나');
+    			}
+    		},
+    		error: () => {
+    			window.alert('서버 실행 오류!');
+    		}
      });
  });
  
@@ -286,11 +295,16 @@ deleteBtn.click(() => {
         },
         dataType: 'json',
         success: (result) => {
-            location.href = "list.html";
-        },
-        error: () => {
-            window.alert('서버 실행 오류!');
-        }
+        	if(result.status=='success'){
+				location.href = "list.html";	
+			}else{
+				window.alert('왜 지것도 아닌 병원을 삭제하려 하시나');
+			}
+			
+		},
+		error: () => {
+			window.alert('서버 실행 오류!');
+		}
     });
 });
 

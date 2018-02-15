@@ -5,24 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
     
-    <!-- 모달땜에 추가 -->
-    <!-- 
-  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
-      <style>
-  .modal-header, h4, .close {
-      background-color: #5cb85c;
-      color:white !important;
-      text-align: center;
-      font-size: 30px;
-  }
-  .modal-footer {
-      background-color: #f9f9f9;
-  }
-  </style> 
-   -->
-  <!-- 여기까지 -->
-  
     <title>Balance Pet</title>
 
     <!-- Bootstrap core CSS -->
@@ -90,15 +75,14 @@
 
 </nav>
 
-    <div class="container-fluid p-0">
+<div class="container-fluid p-0">
 <section class="resume-section p-3 p-lg-5 d-flex d-column" id="first"></section>
 <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="care"></section>
 <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="together"></section>
 <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="story"></section>
 <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="cast"></section>
 <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="lost"></section>
-
-        </div>
+</div>
 
     </div>
     <!-- Modal -->
@@ -152,6 +136,8 @@
                         onlogin="checkLoginState();">
                         </fb:login-button>  
                         </p>
+                        <a id="kakaoLoginBtn"></a>
+                        <a href="http://developers.kakao.com/logout"></a>
                     </form>
                 </div>
 
@@ -284,7 +270,7 @@ loginBtn2.click(() => {
         saveEmail: saveEmail.is(':checked') 
     }, function(result) {
         if (result.status == "success") {
-            location.href = "../main/home.html"
+            location.href = "home.html"
         } else {
             swal("로그인실패!", "이메일이나 암호를 확인 해주세요!", "error");
         }
@@ -295,21 +281,40 @@ loginBtn2.click(() => {
 </script>
 
 <script type="text/javascript">
+/* 
+function getUserInfo(accessToken) {
+    FB.api('/me', {fields: 'email,name'}, function(response) {
+        console.log(response);
+    });
+}
+function statusChangeCallback(response) {
+	  console.log(response);
+
+	  if (response.status === 'connected') { // 로그인이 정상적으로 되었을 때,
+	      getUserInfo(response.authResponse.accessToken);
+	  
+	  } else { // 로그인이 되지 않았을 때,
+	      console.log("로그인 되지 않았음");
+	  }
+	}
+*/
+
 function autoServerLogin(accessToken) {
     $.getJSON(
-        '../json/auth/facebookLogin', 
+        '../../json/auth/facebookLogin', 
         {'accessToken': accessToken}, 
         function(result) {
+        	console.log(result.status);
           if (result.status == 'success') {
-              location.href = '../score/list.html';
+              location.href = 'home.html';
           } else {
-              window.alert('로그인 실패입니다!');
+        	  swal("로그인실패!", "로그인에 실패하였습니다.", "error");
           }
     });
 }
 
+ 
 function statusChangeCallback(response) {
-  console.log(response);
 
   if (response.status === 'connected') { // 로그인이 정상적으로 되었을 때,
       autoServerLogin(response.authResponse.accessToken);
@@ -318,6 +323,7 @@ function statusChangeCallback(response) {
       console.log("로그인 되지 않았음");
   }
 }
+
   
 function checkLoginState() {
     FB.getLoginStatus(function(response) { 
@@ -343,5 +349,32 @@ window.fbAsyncInit = function() {
     }(document, 'script', 'facebook-jssdk'));
 </script>
 
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+<script type='text/javascript'>
+    Kakao.init('ff1cbf9468f0d7759d24a8472491276e');
+    Kakao.Auth.createLoginButton({
+      container: '#kakaoLoginBtn',
+      success: function(authObj) {
+        //alert(JSON.stringify(authObj));
+        console.log(authObj.accessToken);
+    	  $.getJSON(
+   		        '../../json/auth/kakaotalkLogin', 
+   		        {'accessToken': authObj.accessToken}, 
+   		        function(result) {
+   		            console.log(result);
+   		          if (result.status == 'success') {
+   		              location.href = 'home.html';
+   		          } else {
+   		              swal("로그인실패!", "로그인에 실패하였습니다.", "error");
+   		          }
+   		    });
+      },
+      fail: function(err) {
+         alert(JSON.stringify(err));
+      }
+    });
+    
+</script>
 </body>
 </html>

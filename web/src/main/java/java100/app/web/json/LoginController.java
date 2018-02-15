@@ -109,25 +109,24 @@ public class LoginController {
             return result;
         }
     }
-    /*
+    
     @RequestMapping(value="kakaotalkLogin")
     public Object kakaotalkLogin(
-            String refreshToken, 
+            String access_token, 
             HttpSession session,
             Model model) {
-        
+
         try {
+
             @SuppressWarnings("rawtypes")
-            Map userInfo = kakaotalkService.me(refreshToken, Map.class);
-            
+            Map userInfo = kakaotalkService.me(access_token, Map.class);
             Member member = memberService.get(
-                    (String)userInfo.get("email"));
-            
+                    (String)userInfo.get("kaccount_email"));
             if (member == null) { // 등록된 회원이 아니면,
                 // 페이스북에서 받은 정보로 회원을 자동 등록한다.
                 member = new Member();
-                member.setName((String)userInfo.get("name"));
-                member.setEmail((String)userInfo.get("email"));
+                member.setName((String)userInfo.get("kaccount_email"));
+                member.setEmail((String)userInfo.get("kaccount_email"));
                 member.setPassword("1111");
                 memberService.add(member);
             }
@@ -145,7 +144,7 @@ public class LoginController {
             return result;
         }
     }
-    */
+    
     @RequestMapping("logout")
     public Object logout(HttpSession session, SessionStatus status) {
         

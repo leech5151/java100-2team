@@ -137,7 +137,6 @@
                         </fb:login-button>  
                         </p>
                         <a id="kakaoLoginBtn"></a>
-                        <a href="http://developers.kakao.com/logout"></a>
                     </form>
                 </div>
 
@@ -357,12 +356,11 @@ window.fbAsyncInit = function() {
       container: '#kakaoLoginBtn',
       success: function(authObj) {
         //alert(JSON.stringify(authObj));
-        console.log(authObj.accessToken);
+        console.log(authObj.access_token);
     	  $.getJSON(
    		        '../../json/auth/kakaotalkLogin', 
-   		        {'accessToken': authObj.accessToken}, 
+     		    {"access_token":authObj.access_token},
    		        function(result) {
-   		            console.log(result);
    		          if (result.status == 'success') {
    		              location.href = 'home.html';
    		          } else {

@@ -1,57 +1,49 @@
 
+<div class="my-auto">
+	<h2 class="mb-5">
+		<ul class='navbar-nav mr-auto'>
+			<li class='nav-item'>병원목록</li>
+		</ul>
+	</h2>
 
-                <div class="my-auto">
-                    <h2 class="mb-5">
-                        <ul class='navbar-nav mr-auto'>
-                            <li class='nav-item'>PET CARE</li>
-                        </ul>
-                    </h2>
-
-                    <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                        <div class="resume-content mr-auto">
-                            <h3 class="mb-0">병원 바로가기</h3>
-                            <div class="subheading mb-3"><a class='nav-link'href='../hospital/list.html'>PET CARE</a></div>
-                            <p></p>
-                        </div>
-                        <div class="resume-date text-md-right">
-                            <span class="text-primary">March 2013 - Present</span>
-                        </div>
-                    </div>
-
-                    <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                        <div class="resume-content mr-auto">
-                            <h3 class="mb-0">진료기록 바로가기</h3>
-                            <div class="subheading mb-3"><a class='nav-link' href='../diagnosis/list.html'>PET DIAGNOSIS</a></div>
-                            <p></p>
-                        </div>
-                        <div class="resume-date text-md-right">
-                            <span class="text-primary">December 2011 - March 2013</span>
-                        </div>
-                    </div>
-
-                    <div class="resume-item d-flex flex-column flex-md-row mb-5">
-                        <div class="resume-content mr-auto">
-                            <h3 class="mb-0">Junior Web Designer</h3>
-                            <div class="subheading mb-3">Shout! Media Productions</div>
-                            <p></p>
-                        </div>
-                        <div class="resume-date text-md-right">
-                            <span class="text-primary">July 2010 - December 2011</span>
-                        </div>
-                    </div>
-
-                    <div class="resume-item d-flex flex-column flex-md-row">
-                        <div class="resume-content mr-auto">
-                            <h3 class="mb-0">Web Design Intern</h3>
-                            <div class="subheading mb-3">Shout! Media Productions</div>
-                            <p></p>
-                        </div>
-                        <div class="resume-date text-md-right">
-                            <span class="text-primary">September 2008 - June 2010</span>
-                        </div>
-                    </div>
-
-                </div>
+	<div id="hospital"></div>
+</div>
 
 
-            
+<div class="my-auto">
+	<h2 class="mb-5"> 
+		<ul class='navbar-nav mr-auto'>
+			<li class='nav-item'>최근 진료자료</li>
+		</ul>
+	</h2>
+
+	<div id="diagnosis"></div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+
+/* $(window).load(function(){
+	$('#List').load('../diagnosis/mainlist.html');
+});  */
+
+$(document).ready(function(){
+	$('#hospital').load('../hospital/mainlist.html');
+	
+});
+$(document).ready(function(){
+	$('#diagnosis').load('../diagnosis/mainlist.html');
+	
+});
+/* 
+$(window).load(function(){
+	$('#diagnosis').load('../hospital/mainlist.html');
+	}); 
+ */
+
+
+</script>

@@ -60,14 +60,16 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     
     @Override
     public int update(Diagnosis diagnosis,int no) {
+        int count = 0;
         
-        Diagnosis diagnosis2 = diagnosisDao.findByHospitalNo(no);
-        diagnosis.setHospital(diagnosis2.getHospital());
-        
-        int count = diagnosisDao.update(diagnosis);
-        System.out.println("count=" + count);
-        return count;
+            Diagnosis diagnosis2 = diagnosisDao.findByHospitalNo(no);
+            diagnosis.setHospital(diagnosis2.getHospital());
+            count = diagnosisDao.update(diagnosis);
+            System.out.println("count=" + count);
+            return count;
     }
+      
+    
     
     @Override
     public int delete(int no,int no2) {

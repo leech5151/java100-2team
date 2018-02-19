@@ -1,50 +1,48 @@
-    <div class="my-auto">
-        <h2 class="mb-5">
-            <ul class='navbar-nav mr-auto'>
-                <li class='nav-item'><a class='nav-link'
-                    href='../hospital/list.html'>PET CARE</a></li>
-            </ul>
-        </h2>
-        <div class="tabs">
-            <div class="tab-2" id="t_first">
-                <label for="tab2-1">HOSPITAL</label>
-                <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
-                <div>
-                <table id="table-1">
-                <tr>
-                    <td><img src="../../download/together_main.jpg" width=100%></td>
-                </tr>
-                </table>
-                </div>
-            </div>
-            <div class="tab-2" id="t_second">
-                <label for="tab2-2">DIAGNOSIS</label>
-                <input id="tab2-2" name="tabs-two" type="radio">
-                <div>
-                <table>
-                <tr>
-                    <td><img src="../../download/together_two.png" width=px></td>
-                </tr>
-                </table>
-                </div>
-            </div>
-            <div class="tab-2" id="t_third">
-                <label for="tab2-3">Three</label>
-                <input id="tab2-3" name="tabs-two" type="radio">
-                <div>
-                    <h4>Tab Two</h4>
-                    <p>Quisque sit amet turpis leo. Maecenas sed dolor mi. Pellentesque varius elit in neque ornare commodo ac non tellus. Mauris id iaculis quam. Donec eu felis quam. Morbi tristique lorem eget iaculis consectetur. Class aptent taciti sociosqu ad litora
-                        torquent per conubia nostra, per inceptos himenaeos. Aenean at tellus eget risus tempus ultrices. Nam condimentum nisi enim, scelerisque faucibus lectus sodales at.</p>
-                </div>
-            </div>
-            <div class="tab-2" id="t_last">
-                <label for="tab2-4">four</label>
-                <input id="tab2-4" name="tabs-two" type="radio">
-                <div>
-                    <h4>Tab Two</h4>
-                    <p>Quisque sit amet turpis leo. Maecenas sed dolor mi. Pellentesque varius elit in neque ornare commodo ac non tellus. Mauris id iaculis quam. Donec eu felis quam. Morbi tristique lorem eget iaculis consectetur. Class aptent taciti sociosqu ad litora
-                        torquent per conubia nostra, per inceptos himenaeos. Aenean at tellus eget risus tempus ultrices. Nam condimentum nisi enim, scelerisque faucibus lectus sodales at.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+
+<div class="my-auto">
+	<h2 class="mb-5">
+		<ul class='navbar-nav mr-auto'>
+			<li class='nav-item'>병원목록</li>
+		</ul>
+	</h2>
+
+	<div id="hospital"></div>
+</div>
+
+
+<div class="my-auto">
+	<h2 class="mb-5"> 
+		<ul class='navbar-nav mr-auto'>
+			<li class='nav-item'>최근 진료자료</li>
+		</ul>
+	</h2>
+
+	<div id="diagnosis"></div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+
+/* $(window).load(function(){
+	$('#List').load('../diagnosis/mainlist.html');
+});  */
+
+$(document).ready(function(){
+	$('#hospital').load('../hospital/mainlist.html');
+	
+});
+$(document).ready(function(){
+	$('#diagnosis').load('../diagnosis/mainlist.html');
+	
+});
+/* 
+$(window).load(function(){
+	$('#diagnosis').load('../hospital/mainlist.html');
+	}); 
+ */
+
+
+</script>

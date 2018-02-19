@@ -17,7 +17,7 @@ import java100.app.domain.Hospital;
 import java100.app.domain.Member;
 import java100.app.service.DiagnosisService;
 
-//@RestController
+@RestController
 @RequestMapping("/diagnosis")
 @SessionAttributes("loginUser")
 public class DiagnosisController {
@@ -108,7 +108,9 @@ public class DiagnosisController {
         
         int count = diagnosisService.update(diagnosis,loginUser.getMemberNo());
         HashMap<String, Object> result = new HashMap<>();
-
+        
+        System.out.println(count);
+        
         if(count != 0) {
             result.put("status", "success");
             return result;
@@ -116,7 +118,6 @@ public class DiagnosisController {
             result.put("status", "fail");
             return result;
         }
-
     }
 
     @RequestMapping("delete")

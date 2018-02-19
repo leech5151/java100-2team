@@ -58,10 +58,10 @@ $.getJSON('../../json/auth/loginUser', function(result) {
 
 
 $('#logoutBtn').click(() => {
-    $.getJSON('../../json/auth/logout', function(result) => {
+    $.getJSON('../../json/auth/logout', (result) => {
 	if(result.status == 'success'){
 		window.alert('메인으로갑니다');
-		location.href = '../bal/main/home.html';
+		location.href = '../main/home.html';
 	}
     	
     });

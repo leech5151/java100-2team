@@ -68,6 +68,8 @@ public class DiagnosisServiceImpl implements DiagnosisService {
             System.out.println("count=" + count);
             return count;
     }
+      
+    
     
     @Override
     public int delete(int no,int no2) {

@@ -17,7 +17,7 @@ import java100.app.domain.Hospital;
 import java100.app.domain.Member;
 import java100.app.service.DiagnosisService;
 
-@RestController
+//@RestController
 @RequestMapping("/diagnosis")
 @SessionAttributes("loginUser")
 public class DiagnosisController {

@@ -5,23 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
     
-    <!-- 모달땜에 추가 -->
-  <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
-      <style>
-  .modal-header, h4, .close {
-      background-color: #5cb85c;
-      color:white !important;
-      text-align: center;
-      font-size: 30px;
-  }
-  .modal-footer {
-      background-color: #f9f9f9;
-  }
-  </style> 
-  
-  <!-- 여기까지 -->
-  
     <title>Balance Pet</title>
 
     <!-- Bootstrap core CSS -->
@@ -33,10 +19,9 @@
     <link href="../../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="../../vendor/devicons/css/devicons.min.css" rel="stylesheet">
     <link href="../../vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
-    
+
     <!-- Custom styles for this template -->
     <link href="../../css/resume.min.css" rel="stylesheet">
-    <link href="../../css/tab.css" rel="stylesheet">
     
     <!-- 자체 작업 CSS -->
     <link href="../../css/home.css" rel="stylesheet">
@@ -58,7 +43,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
       
-        <ul class="navbar-nav">
+        <ul class="navbar-nav" id="menubar">
           <li>
           </li>
           <li class="nav-item">
@@ -78,7 +63,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#lost">Lost</a>
-          </li>
+          </li> 
         </ul>
       </div>
       
@@ -90,23 +75,31 @@
 
 </nav>
 
-    <div id="sectionGroup" class="container-fluid p-0">
-    
+<div class="container-fluid p-0">
 <section class="resume-section p-3 p-lg-5 d-flex d-column" id="first"></section>
 <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="care"></section>
 <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="together"></section>
 <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="story"></section>
 <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="cast"></section>
 <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="lost"></section>
-        </div>
+</div>
 
     </div>
-
     <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
+     <style>
+  .modal-header, h4, .close {
+      background-color: #5cb85c;
+      color:white !important;
+      text-align: center;
+      font-size: 30px;
+  }
+  .modal-footer {
+      background-color: #f9f9f9;
+  }
+  </style> 
+    <div class="modal fade" role="dialog" id="myModal">
+        <div class="modal-dialog" >
 
-            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header" style="padding: 35px 50px;">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -138,6 +131,12 @@
                             class="btn btn-success btn-block">
                             <span class="glyphicon glyphicon-off"></span> Login
                         </button>
+                        <p>
+                        <fb:login-button scope="public_profile,email" 
+                        onlogin="checkLoginState();">
+                        </fb:login-button>  
+                        </p>
+                        <a id="kakaoLoginBtn"></a>
                     </form>
                 </div>
 
@@ -172,7 +171,18 @@
         <script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
         <script src='../../node_modules/sweetalert/dist/sweetalert.min.js'></script>
         <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
-        
+    
+    
+<script type="text/javascript">
+ 
+$('#first').load('section_first.html');
+$('#care').load('section_pet_care.html');
+$('#together').load('section_pet_together.html');
+$('#story').load('section_pet_story.html');
+$('#cast').load('section_pet_cast.html');
+$('#lost').load('section_lost.html');
+</script>
+    
 <script type="text/javascript">
     
 var loginBtn = $('#loginBtn'),
@@ -189,11 +199,16 @@ $.getJSON('../../json/auth/loginUser', (result) => {
     } else {
         var member = result.member;
         memberNo = member.memberNo;
-        console.log(memberNo);
+
         $('.before-login').css('display', 'none');
         for (var file of member.files) {
+        	if (file.filename == null) {
+        		var srcpath = "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Snoopy_Peanuts.png/200px-Snoopy_Peanuts.png";
+        	} else {
+        		var srcpath = "../../download/" + file.filename;
+        	}
             $('#memberPhoto').attr({
-                src: "../../download/" + file.filename,
+                src: srcpath,
                 class: 'img-fluid img-profile rounded-circle mx-auto mb-2',
                 alt: "'" + file.filename + "'",
                 onclick: "window.open('../member/view.html?no=" + member.memberNo + "')"
@@ -259,7 +274,7 @@ loginBtn2.click(() => {
         saveEmail: saveEmail.is(':checked') 
     }, function(result) {
         if (result.status == "success") {
-            location.href = "../main/home.html"
+            location.href = "home.html"
         } else {
             swal("로그인실패!", "이메일이나 암호를 확인 해주세요!", "error");
         }
@@ -269,16 +284,100 @@ loginBtn2.click(() => {
 
 </script>
 
-
 <script type="text/javascript">
-$('#first').load('section_first.html');
-$('#care').load('section_pet_care.html');
-$('#together').load('section_pet_together.html');
-$('#story').load('section_pet_story.html');
-$('#cast').load('section_pet_cast.html'); 
-$('#lost').load('section_lost.html');
+/* 
+function getUserInfo(accessToken) {
+    FB.api('/me', {fields: 'email,name'}, function(response) {
+        console.log(response);
+    });
+}
+function statusChangeCallback(response) {
+	  console.log(response);
+
+	  if (response.status === 'connected') { // 로그인이 정상적으로 되었을 때,
+	      getUserInfo(response.authResponse.accessToken);
+	  
+	  } else { // 로그인이 되지 않았을 때,
+	      console.log("로그인 되지 않았음");
+	  }
+	}
+*/
+
+function autoServerLogin(accessToken) {
+    $.getJSON(
+        '../../json/auth/facebookLogin', 
+        {'accessToken': accessToken}, 
+        function(result) {
+        	console.log(result.status);
+          if (result.status == 'success') {
+              location.href = 'home.html';
+          } else {
+        	  swal("로그인실패!", "로그인에 실패하였습니다.", "error");
+          }
+    });
+}
+
+ 
+function statusChangeCallback(response) {
+
+  if (response.status === 'connected') { // 로그인이 정상적으로 되었을 때,
+      autoServerLogin(response.authResponse.accessToken);
+  
+  } else { // 로그인이 되지 않았을 때,
+      console.log("로그인 되지 않았음");
+  }
+}
+
+  
+function checkLoginState() {
+    FB.getLoginStatus(function(response) { 
+      statusChangeCallback(response);
+    });
+}
+
+window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '1608875912532374', // 개발자가 등록한 앱 ID
+    cookie     : true,  
+    xfbml      : true,  
+    version    : 'v2.12' 
+  });
+};
+
+(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
 </script>
 
-  </body>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
+<script type='text/javascript'>
+    Kakao.init('ff1cbf9468f0d7759d24a8472491276e');
+    Kakao.Auth.createLoginButton({
+      container: '#kakaoLoginBtn',
+      success: function(authObj) {
+        //alert(JSON.stringify(authObj));
+        console.log(authObj.access_token);
+    	  $.getJSON(
+   		        '../../json/auth/kakaotalkLogin', 
+     		    {"access_token":authObj.access_token},
+   		        function(result) {
+   		          if (result.status == 'success') {
+   		              location.href = 'home.html';
+   		          } else {
+   		              swal("로그인실패!", "로그인에 실패하였습니다.", "error");
+   		          }
+   		    });
+      },
+      fail: function(err) {
+         alert(JSON.stringify(err));
+      }
+    });
+    
+</script>
+</body>
 </html>

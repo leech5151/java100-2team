@@ -163,10 +163,9 @@ $(function load() {
             	primaryAddressItem.val(result.member.primaryAddress);
             	detailAddressItem.val(result.member.detailAddress);
             	createDateItem.val(result.member.createDate);
-                for (var file of result.member.files) {
+          		for (var file of result.member.files) {
                     $('#attFile').html("<a href='../../download/" + file.filename + "'>" + file.filename + "</a>")
-                }
-                
+                };
             },
             error: () => {
                 window.alert('서버 실행 오류!');

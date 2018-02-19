@@ -65,6 +65,13 @@ public class MemberServiceImpl implements MemberService {
         return memberDao.findByEmailAndPassword(params);
     }
     
+    
+    @Override
+    public Member get(String email) {
+        
+        return memberDao.findByEmail(email);
+    }
+    
     @Override
     public int update(Member member) {
         

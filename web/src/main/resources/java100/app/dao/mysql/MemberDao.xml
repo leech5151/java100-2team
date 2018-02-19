@@ -138,6 +138,12 @@
         from memb
         where email=#{email} and pwd=password(#{password})
     </select>
+        
+    <select id="findByEmail" resultMap="memberMap" parameterType="String">
+        <include refid="select1"/>
+        from memb
+        where email=#{email}
+    </select>
     
     <update id="update" parameterType="member">
         update memb set

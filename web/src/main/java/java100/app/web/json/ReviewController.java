@@ -1,5 +1,8 @@
 package java100.app.web.json;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletContext;
@@ -15,15 +18,18 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java100.app.domain.Business;
 import java100.app.domain.BusinessReview;
+import java100.app.domain.BusinessReviewUploadFile;
 import java100.app.domain.Member;
+import java100.app.service.BusinessService;
 import java100.app.service.ReviewService;
 
 @RestController
 @RequestMapping("/review")
 @SessionAttributes("loginUser")
 public class ReviewController {
-    
+    int b_number;
     @Autowired ServletContext servletContext;
+    @Autowired BusinessService businessService;
     @Autowired ReviewService reviewService;
     
     @RequestMapping("list")
@@ -67,15 +73,13 @@ public class ReviewController {
     
     @RequestMapping("add")
     public Object add(
-            Business business,
             BusinessReview businessReview,
-            @ModelAttribute(value="loginUser") Member loginUser
-            /*MultipartFile[] file,*/
+            @ModelAttribute(value="loginUser") Member loginUser,
+            MultipartFile[] file
             ) throws Exception {
         
-        /*String uploadDir = servletContext.getRealPath("/download");
-
-        ArrayList<BusinessUploadFile> uploadFiles = new ArrayList<>();
+        String uploadDir = servletContext.getRealPath("/download");
+        ArrayList<BusinessReviewUploadFile> uploadFiles = new ArrayList<>();
         
         for (MultipartFile part : file) {
             if (part.isEmpty())
@@ -83,20 +87,17 @@ public class ReviewController {
             
             String filename = this.writeUploadFile(part, uploadDir);
             
-            uploadFiles.add(new BusinessUploadFile(filename));
+            uploadFiles.add(new BusinessReviewUploadFile(filename));
         }
         
-        business.setFiles(uploadFiles);
-*/
-        businessReview.setBusiness(business);;
-        System.out.println("----------------------------");
-        System.out.println(businessReview.getBusiness().getBusinessNo());
-        System.out.println("----------------------------");
+        businessReview.setFiles(uploadFiles);
+        businessReview.setB_number(b_number);
         businessReview.setRegistrant(loginUser);
         reviewService.add(businessReview);
         
         HashMap<String,Object> result = new HashMap<>();
         result.put("status", "success");
+        result.put("data", businessService.get(b_number));
         return result;
     }
     
@@ -110,18 +111,11 @@ public class ReviewController {
         return result;
     }*/
     @RequestMapping("form")
-    public Object findByBusinessNo(int no) throws Exception{
-        System.out.println("사업체 번호다다다다 : " + no);
-        HashMap<String,Object> result = new HashMap<>();
-        result.put("data", reviewService.getBusinessNo(no));
-        return result;
+    public Object form(int b_number) throws Exception {
+        System.out.println("asdfasdfasdfasdf>>>>>>>>>>>>>>" + b_number);
+        this.b_number = b_number;
+        return b_number;
     }
-    /*public Object delete(int no) throws Exception {
-
-        reviewService.delete(no);
-        HashMap<String,Object> result = new HashMap<>();
-        return result;
-    }*/
     @RequestMapping("{no}")
     public Object view(@PathVariable int no) throws Exception {
         HashMap<String, Object> result = new HashMap<>();
@@ -142,9 +136,9 @@ public class ReviewController {
             BusinessReview businessReview ,
             MultipartFile[] file) throws Exception {
         
-       /* String uploadDir = servletContext.getRealPath("/download");
+       String uploadDir = servletContext.getRealPath("/download");
 
-        ArrayList<BusinessUploadFile> uploadFiles = new ArrayList<>();
+        ArrayList<BusinessReviewUploadFile> uploadFiles = new ArrayList<>();
         
         for (MultipartFile part : file) {
             if (part.isEmpty())
@@ -152,12 +146,13 @@ public class ReviewController {
             
             String filename = this.writeUploadFile(part, uploadDir);
             
-            uploadFiles.add(new BusinessUploadFile(filename));
+            uploadFiles.add(new BusinessReviewUploadFile(filename));
         }
         
-        businessReview.setFiles(uploadFiles);*/
+        businessReview.setReviewFiles(uploadFiles);
         reviewService.update(businessReview);
         HashMap<String, Object> result = new HashMap<>();
+        result.put("data", businessService.get(b_number));
         return result;
     }
 
@@ -166,6 +161,7 @@ public class ReviewController {
 
         reviewService.delete(no);
         HashMap<String,Object> result = new HashMap<>();
+        result.put("data", businessService.get(b_number));
         return result;
     }
 
@@ -174,7 +170,7 @@ public class ReviewController {
     
     // 다른 클라이언트가 보낸 파일명과 중복되지 않도록 
     // 서버에 파일을 저장할 때는 새 파일명을 만든다.
-/*    synchronized private String getNewFilename(String filename) {
+    synchronized private String getNewFilename(String filename) {
         long currMillis = System.currentTimeMillis();
         if (prevMillis != currMillis) {
             count = 0;
@@ -201,7 +197,7 @@ public class ReviewController {
         return filename;
     } 
    
-*/
+
    
 }
 

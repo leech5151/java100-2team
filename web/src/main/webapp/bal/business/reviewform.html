@@ -12,17 +12,11 @@
 <header></header>
 
     <h1>리뷰 등록</h1>
+<form id='rv_frm' method="post" enctype="multipart/form-data">
 
-<div class='form-group row my-mo'>
+<div class='form-group row my-view'>
+<label for='reviewNo' class='col-sm-2 col-form-label'>리뷰번호</label>
 <div id="rnodiv" class='col-sm-10'></div>
-</div> 
-
- <div class='form-group row my-mo' style="display: none">
-<label for='businessNo' class='col-sm-2 col-form-label'>사업번호</label>
-<div id="bnodiv" class='col-sm-10'>
-<input class='form-control' readonly id='businessNo' type='number' 
-        name='businessReview.business.businessNo' >
-</div>
 </div> 
 
 <div class='form-group row my-mo'>
@@ -39,6 +33,17 @@
 </div>
 </div> 
 
+<div class='form-group row my-view'>
+<label for='filename' class='col-sm-2 col-form-label'>사진</label>
+<div id=filediv class='col-sm-10'>
+</div>
+</div>
+
+<div class='form-group row my-mo'>
+<div class='col-sm-10'>
+<input type='file' class='form-control-file' id='filename' name='file'>
+</div>
+</div>
 
 
 <div class='form-group row'>
@@ -49,6 +54,7 @@
 <button id="deleteBtn" type="button" class='btn btn-primary btn-sm my-view'>삭제</button>
 </div>
 </div>
+</form>
 <footer></footer>
 </div>
 
@@ -60,9 +66,11 @@ var addBtn = $('#addBtn'),
     updateBtn = $('#updateBtn'),
     deleteBtn = $('#deleteBtn'),
     bnameItem = $('#businessName'),
-    rnoItem = $('#reviewNo'),
-    bnoItem = $('#businessNo'),
+    rnodItem = $('#rnodiv'),
+    rv_bnoItem = $('#businessNo'),
     titleItem = $("#title"),
+    filedItem = $('#filediv'),
+    fileItem = $('#filename'),
     contsItem = $('#content');
  
 $('header').load('../../header.html');
@@ -77,13 +85,16 @@ if (index != -1) { // 기존 데이터를 조회할 경우,
         $.ajax('../../json/review/' + arr[1], {
             dataType: 'json',
             success: (result) => {
-                bnameItem.val(result.data.business.bisinessName);
-                bnoItem.val(result.data.business.bisinessNo);
+                rnodItem.html("<input class='form-control' readonly id='reviewNo' " + 
+                        "name='reviewNo' value='" + result.data.reviewNo + "'> ");
                 titleItem.val(result.data.title);
                 contsItem.val(result.data.content);
+                for (var file of result.data.files){
+                    filedItem.html( "<img src='../../download/" + file.filename + "' alt=" + file.filename + " width='50px' height='50px'>")
+                    console.log(file.filename)
+                    }
             },
             error: () => {
-                
                 window.alert('서버 실행 오류!');
             }
         });
@@ -91,31 +102,19 @@ if (index != -1) { // 기존 데이터를 조회할 경우,
     
 } else {
     $('.my-view').css('display', 'none');
-    $(() => {
-        $.ajax('../../json/review/form' ,{
-            dataType: 'json',
-            success: (result) => {
-                bnoItem.val(result.data.business.businessNo);
-            },
-            error: () => {
-                window.alert('서버 실행 오류!');
-            }
-        });
-    });
-    
 }
 
 addBtn.click(() => {
+    var formData = new FormData($("#rv_frm")[0]);
      $.ajax('../../json/review/add', {
-         data: {
-             businessNo: bnoItem.val(),
-             title: titleItem.val(),
-             content: contsItem.val()
-             },
+         data: formData,
          dataType: 'json',
          method: 'POST',
+         processData : false,
+         contentType : false,
          success: (result) => {
-              location.href = "form.html";
+             console.log(fileItem.val())
+             location.href = "form.html?no=" + result.data.businessNo;
          },
          error: (jqXHR, textStatus, errorThrown) => {
              window.alert('서버 실행 오류2!');
@@ -125,18 +124,15 @@ addBtn.click(() => {
 
  updateBtn.click(() => {
      
-     var formData = new FormData($("#frm")[0]);
+     var formData = new FormData($("#rv_frm")[0]);
      $.ajax('../../json/review/update', {
-         data: {
-             reviewNo: arr[1],
-             businessNo: bnoItem.val(),
-             title: titleItem.val(),
-             content: contsItem.val()
-         },
+         data: formData,
          dataType: 'json',
          method: 'POST',
+         processData : false,
+         contentType : false,
          success: (result) => {
-             location.href = "form.html";
+             location.href = "form.html?no=" + result.data.businessNo;
          },
          error: () => {
              alert(rnoItem.val());
@@ -147,15 +143,16 @@ addBtn.click(() => {
 
 
 deleteBtn.click(function() {
-    $.ajax('../../json/business/delete', {
+    $.ajax('../../json/review/delete', {
         data: {
             no: arr[1]
         },
         dataType: 'json',
         success: (result) => {
-            location.href = "list.html";
+            location.href = "form.html?no=" + result.data.businessNo;
         },
         error: () => {
+            
             window.alert('서버 실행 오류! delete');
         }
     });

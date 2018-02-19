@@ -19,7 +19,7 @@
 <table id="list" class='table table-hover'>
 <thead>
 <tr>
-<th>번호</th><th>제목</th><th>등록일자</th><th>별점</th><th>조회수</th>
+<th>번호</th><th>사진</th><th>제목</th><th>등록일자</th><th>별점</th><th>조회수</th>
 </tr>
 </thead>
 <tbody></tbody>
@@ -75,14 +75,18 @@ $.ajax('../../json/review/list', {
     success: (result) => {
         tbody.html(""); // <tbody> 콘텐츠를 지운다.
         for (var data of result.list) {
+            for(var file of data.files){
+                console.log("리뷰" + file.filename); 
             $('<tr>')
                 .html(  
                     "<td>" + data.reviewNo + "</td>" + 
+                    "<td><img src='../../download/" + file.filename + "' alt=" + file.filename + " width='50px' height='50px'></td>" +
                     "<td><a href='reviewform.html?no=" + data.reviewNo + "'>" + data.title + "</a></td>" + 
                     "<td>" + data.createDate + "</td>" +
                     "<td>" + data.starPoint + "</td>" +
                     "<td>" + data.viewCount + "</td>" )
                     .appendTo(tbody);
+            }
         }
         
         currPageNo = result.pageNo;

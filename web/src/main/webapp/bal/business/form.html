@@ -153,10 +153,11 @@
 <label for='filename' class='col-sm-2 col-form-label'>사진</label>
 <div id=filediv class='col-sm-10'>
 </div>
-<div class='col-sm-10 my-view'>
+</div>
+
+<div class='col-sm-10 my-mo'>
 <input type='file' class='form-control-file' id='filename' name='file'>
 </div>
-</div>  
 
 <div id="inserthere" class='form-group row my-view'></div> 
 
@@ -180,7 +181,7 @@
 <script src='../../node_modules/jquery/dist/jquery.min.js'></script>
 <script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
 <script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 var addBtn = $('#addBtn'),
     updateBtn = $('#updateBtn'),
@@ -213,6 +214,7 @@ if (index != -1) { // 기존 데이터를 조회할 경우,
     var arr = qs.split('=');
     b_number = arr[1];
     $('.my-new').css('display', 'none');
+    $("#inserthere").load("reviewlist.html");
     $(() => {
         $.ajax('../../json/business/' + arr[1], {
             dataType: 'json',
@@ -234,12 +236,17 @@ if (index != -1) { // 기존 데이터를 조회할 경우,
                 filedItem.html( "<img src='../../download/" + file.filename + "' alt=" + file.filename + " width='50px' height='50px'>")
                 console.log(file.filename)
                 }
+                $.get('../../json/review/form',{
+                    b_number: b_number
+                },  
+                )
             },
             error: () => {
                 
                 window.alert('서버 실행 오류!');
             }
         });
+       
     });
 } else { // 신규 데이터 입력일 경우,
     $('.my-view').css('display', 'none');
@@ -321,22 +328,15 @@ deleteBtn.click(function() {
     });
 });
 
-$(document.body).ready(function(){ // 리뷰 리스트 인클루드
+/*   $(document.body).ready(function(){ // 리뷰 리스트 인클루드
         console.log(b_number);
-        $("#inserthere").load("reviewlist.html")
-        $.ajax('../../json/review/form', {
-            data: {
-                no: $('#businessNo').val()
-            },
+        $.ajax('../../json/review/form',{
             dataType: 'json',
-            success: (result) => {
-                location.href = "list.html";
-            },
-            error: () => {
-                window.alert('서버 실행 오류! review');
-            }
-        });
- });
+            data: b_number,
+            
+        })
+        
+ }); */
 </script>
 
 </body>

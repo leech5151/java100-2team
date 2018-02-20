@@ -17,19 +17,17 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import java100.app.domain.Member;
-import java100.app.domain.Trainning;
-import java100.app.domain.TrainningUploadFile;
-import java100.app.service.MemberService;
-import java100.app.service.TrainningService;
+import java100.app.domain.Pet_Stargram;
+import java100.app.domain.Pet_StargramUploadFile;
+import java100.app.service.Pet_StargramService;
 
 @RestController
-@RequestMapping("/trainning")
+@RequestMapping("/pet_stargram")
 @SessionAttributes("loginUser")
-public class TrainningController {
+public class Pet_StargramController {
     
     @Autowired ServletContext servletContext;
-    @Autowired TrainningService trainningService;
-    @Autowired MemberService memberService;
+    @Autowired Pet_StargramService pet_stargramService;
      
     @RequestMapping("list")
     public Object list(
@@ -45,8 +43,8 @@ public class TrainningController {
             pageNo = 1;
         }
         
-        if (pageSize < 6 || pageSize > 15) {
-            pageSize = 6;
+        if (pageSize < 5 || pageSize > 15) {
+            pageSize = 5;
         }
         
         HashMap<String,Object> options = new HashMap<>();
@@ -56,7 +54,7 @@ public class TrainningController {
         options.put("orderColumn", orderColumn);
         options.put("align", align);
         
-        int totalCount = trainningService.getTotalCount();
+        int totalCount = pet_stargramService.getTotalCount();
         int lastPageNo = totalCount / pageSize;
         if ((totalCount % pageSize) > 0) {
             lastPageNo++;
@@ -65,7 +63,7 @@ public class TrainningController {
         // view 컴포넌트가 사용할 값을 Model에 담는다.
         result.put("pageNo", pageNo);
         result.put("lastPageNo", lastPageNo);
-        result.put("list", trainningService.list(pageNo, pageSize, options));
+        result.put("list", pet_stargramService.list(pageNo, pageSize, options));
         return result;
     }
     
@@ -73,14 +71,14 @@ public class TrainningController {
 
     @RequestMapping("add")
     public Object add(
-            Trainning trainning,
+            Pet_Stargram pet_stargram,
            @ModelAttribute(value="loginUser") Member loginUser,
             MultipartFile[] file
             ) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
 
-        ArrayList<TrainningUploadFile> uploadFiles = new ArrayList<>();
+        ArrayList<Pet_StargramUploadFile> uploadFiles = new ArrayList<>();
         
         for (MultipartFile part : file) {
             if (part.isEmpty())
@@ -88,16 +86,16 @@ public class TrainningController {
             
             String filename = this.writeUploadFile(part, uploadDir);
             
-            uploadFiles.add(new TrainningUploadFile(filename));
+            uploadFiles.add(new Pet_StargramUploadFile(filename));
         }
         
-        trainning.setFiles(uploadFiles);
-        trainning.setMember(loginUser);
-        trainningService.add(trainning);
+        pet_stargram.setFiles(uploadFiles);
+        pet_stargram.setMember(loginUser);
+        pet_stargramService.add(pet_stargram);
+        
         HashMap<String,Object> result = new HashMap<>();
         result.put("status", "success");
-        result.put("data", memberService.get(trainning.getMember().getMemberNo()));
-        System.out.println(memberService.get(trainning.getMember().getMemberNo()));
+        
         return result;
         
     }
@@ -106,18 +104,18 @@ public class TrainningController {
     public Object view(@PathVariable int no) throws Exception {
         
         HashMap<String,Object> result = new HashMap<>();
-        result.put("data", trainningService.get(no));
+        result.put("data", pet_stargramService.get(no));
         return result;
     }
 
     @RequestMapping("update")
     public Object update(
-            Trainning trainning, 
+            Pet_Stargram pet_stargram, 
             MultipartFile[] file) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
 
-        ArrayList<TrainningUploadFile> uploadFiles = new ArrayList<>();
+        ArrayList<Pet_StargramUploadFile> uploadFiles = new ArrayList<>();
         
         for (MultipartFile part : file) {
             if (part.isEmpty())
@@ -125,11 +123,11 @@ public class TrainningController {
             
             String filename = this.writeUploadFile(part, uploadDir);
             
-            uploadFiles.add(new TrainningUploadFile(filename));
+            uploadFiles.add(new Pet_StargramUploadFile(filename));
         }
         
-        trainning.setFiles(uploadFiles);
-        trainningService.update(trainning);
+        pet_stargram.setFiles(uploadFiles);
+        pet_stargramService.update(pet_stargram);
         HashMap<String,Object> result = new HashMap<>();
         result.put("status", "success");
         
@@ -139,7 +137,7 @@ public class TrainningController {
     @RequestMapping("delete")
     public Object delete(int no) throws Exception {
 
-        trainningService.delete(no);
+        pet_stargramService.delete(no);
         
         HashMap<String,Object> result = new HashMap<>();
         result.put("status", "success");

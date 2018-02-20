@@ -63,7 +63,7 @@ public class DiagnosisController {
 
         return result;
     }
-
+    
     @RequestMapping("add")
     public Object add(Diagnosis diagnosis, @ModelAttribute(value = "loginUser") Member loginUser, Hospital hospital)
             throws Exception {
@@ -154,4 +154,28 @@ public class DiagnosisController {
         result.put("data", diagnosisService.getHospitalNo(no));
         return result;
     }
+    
+    @RequestMapping("mylist")
+    public Object myList(Diagnosis diagnosis,@ModelAttribute(value = "loginUser") Member loginUser) throws Exception{
+        String nowDate = diagnosis.getNowDateRecording();
+        String selectDate = diagnosis.getDateRecording();
+        System.out.println("nowDate=" + nowDate);
+        System.out.println("date = " + selectDate);
+        
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("list", diagnosisService.myList(loginUser.getName(),selectDate,nowDate));
+        return result;
+        
+    }
+    
+    @RequestMapping("myAlllist")
+    public Object myAllList(@ModelAttribute(value = "loginUser") Member loginUser) throws Exception{
+        
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("list", diagnosisService.myAllList(loginUser.getName()));
+        return result;
+        
+    }
+    
+    
 }

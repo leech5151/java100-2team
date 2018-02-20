@@ -1,10 +1,22 @@
 <table id="list" class='table table-hover'>
 	<thead>
+		<div>
+		<input type="text" id="selectDate" class="selectDate"><a> ~ </a>
+		<input type="text" id="nowDate"  class="nowDate">
+		<button id="allDateList" type="button">전체 진료자료 보기</button>
+		</div>
+		<div>
+		 
+		</div>
+	
+		<br>
+		<br>
+		
 		<tr>
 			<th>진료번호</th>
 			<th>병원명</th>
 			<th>회원명</th>
-			<th>회원전화번호</th>
+			<th>진료날짜</th>
 			<th>진료분류</th>
 			<th>진료명</th>
 			<th>진료내용</th>
@@ -14,21 +26,158 @@
 	</tbody>
 </table>
 
+<link rel="stylesheet" href='../../node_modules/jquery-ui-dist/jquery-ui.css' /> 
+<script src='../../node_modules/jquery-ui-dist/jquery-ui.js'></script> 
+
+<script>
+//$('#date').val($.datepicker.formatDate($.datepicker.ATOM, new Date())); 
+
+var nowDate = new Date();
+
+var date = new Date();
+var year = nowDate.getFullYear();
+var month = nowDate.getMonth()+1
+var day = nowDate.getDate();
+if(month < 10){
+    month = "0"+month;
+}
+if(day < 10){
+    day = "0"+day;
+}
+
+var resultNowDate = year+"-"+month+"-"+day;
+
+var selectDate = nowDate.getTime() - (30*24*60*60*1000);
+nowDate.setTime(selectDate);
+
+var selectYear = nowDate.getFullYear();
+var selectMonth = nowDate.getMonth() +1;
+var selectDay = nowDate.getDate();
+if(selectMonth < 10){ selectMonth = "0" + selectMonth}
+if(selectDay < 10) {selectDay = "0"+selectDay}
+
+var resultSelectDate = selectYear+"-"+selectMonth+"-" + selectDay;
+
+
+document.getElementById('selectDate').value = resultSelectDate;
+document.getElementById('nowDate').value = resultNowDate;
+</script>
+
 <script type="text/javascript">
+var dateItem=$('#selectDate'),
+	nowDateItem=$('#nowDate'),
+	allDateBtn=$('#allDateList');
+
+$.datepicker.regional['kr'] = {
+			dateFormat: 'yy-mm-dd',
+	        prevText: '이전 달',
+	        nextText: '다음 달',
+	        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+	        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+	        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+	        showMonthAfterYear: true,
+	        yearSuffix: '년'
+	};
+
+	// Seeting up default language, Korean
+	$.datepicker.setDefaults($.datepicker.regional['kr']);
+
+	// Start Datepicker UI
+$(function(){
+	$(".selectDate").datepicker({
+		onSelect: function (dateText, inst) {
+			  $.ajax('../../json/diagnosis/mylist', {
+		        	data: { 
+		        		  dateRecording: dateItem.val(),
+					       nowDateRecording: nowDateItem.val()
+		        	},
+		            dataType: 'json',
+		            method: 'POST',
+		            success: (result) => {
+		            	$('#diagnosisbody').html("");
+		                for (var data of result.list) {
+		                    $('<tr>')
+		                        .html(  
+		                            "<td>" + data.diagnosisNo + "</td>" + 
+		                            "<td><a href='../diagnosis/form.html?no=" + data.diagnosisNo + "'>"+ data.hospital.hospitalName + "</a></td>" + 
+		                            "<td>" + data.memberName + "</td>" +
+		                            "<td>" + data.dateRecording + "</td>" +
+		                            "<td>" + data.diagnosisCategory + "</td>" +
+		                            "<td>" + data.diagnosisName + "</td>" +
+		                            "<td>" + data.diagnosisContents + "</td>")
+		                            .appendTo('#diagnosisbody');
+		                }
+		            },
+		            error: () => {
+		            }
+		        });
+		            }
+		
+	});
+})	
+	
+	
+$(function(){
+	$(".nowDate").datepicker({
+		onSelect: function (dateText, inst) {
+			  $.ajax('../../json/diagnosis/mylist', {
+		        	data: { 
+		        		  dateRecording: dateItem.val(),
+					       nowDateRecording: nowDateItem.val()
+		        	},
+		            dataType: 'json',
+		            method: 'POST',
+		            success: (result) => {
+		            	$('#diagnosisbody').html("");
+		                for (var data of result.list) {
+		                    $('<tr>')
+		                        .html(  
+		                            "<td>" + data.diagnosisNo + "</td>" + 
+		                            "<td><a href='../diagnosis/form.html?no=" + data.diagnosisNo + "'>"+ data.hospital.hospitalName + "</a></td>" + 
+		                            "<td>" + data.memberName + "</td>" +
+		                            "<td>" + data.dateRecording + "</td>" +
+		                            "<td>" + data.diagnosisCategory + "</td>" +
+		                            "<td>" + data.diagnosisName + "</td>" +
+		                            "<td>" + data.diagnosisContents + "</td>")
+		                            .appendTo('#diagnosisbody');
+		                }
+		            },
+		            error: () => {
+		            }
+		        });
+		            }
+		
+	});
+})
+
+ 
+</script>
+
+<script type="text/javascript">
+var dateItem=$('#selectDate'),
+	nowDateItem=$('#nowDate'),
+	allDateBtn=$('#allDateList');
+
 var tbody = $('#list > tbody');
 load();
 function load(){
-        $.ajax('../../json/diagnosis/list', {
+        $.ajax('../../json/diagnosis/mylist', {
+        	data: { 
+			       dateRecording: dateItem.val(),
+			       nowDateRecording: nowDateItem.val()
+        	},
             dataType: 'json',
+            method: 'POST',
             success: (result) => {
-                
                 for (var data of result.list) {
                     $('<tr>')
                         .html(  
                             "<td>" + data.diagnosisNo + "</td>" + 
                             "<td><a href='../diagnosis/form.html?no=" + data.diagnosisNo + "'>"+ data.hospital.hospitalName + "</a></td>" + 
                             "<td>" + data.memberName + "</td>" +
-                            "<td>" + data.memberTel + "</td>" +
+                            "<td>" + data.dateRecording + "</td>" +
                             "<td>" + data.diagnosisCategory + "</td>" +
                             "<td>" + data.diagnosisName + "</td>" +
                             "<td>" + data.diagnosisContents + "</td>")
@@ -39,6 +188,28 @@ function load(){
             }
         });
     }
+    
+allDateBtn.click(() =>{
+	 $.ajax('../../json/diagnosis/myAlllist', {
+         dataType: 'json',
+         success: (result) => {
+        	 $('#diagnosisbody').html("");
+             for (var data of result.list) {
+                 $('<tr>')
+                     .html(  
+                         "<td>" + data.diagnosisNo + "</td>" + 
+                         "<td><a href='../diagnosis/form.html?no=" + data.diagnosisNo + "'>"+ data.hospital.hospitalName + "</a></td>" + 
+                         "<td>" + data.memberName + "</td>" +
+                         "<td>" + data.dateRecording + "</td>" +
+                         "<td>" + data.diagnosisCategory + "</td>" +
+                         "<td>" + data.diagnosisName + "</td>" +
+                         "<td>" + data.diagnosisContents + "</td>")
+                         .appendTo('#diagnosisbody');
+             }
+         },
+         error: () => {
+         }
+     });
+	
+})    
 </script>
-
-

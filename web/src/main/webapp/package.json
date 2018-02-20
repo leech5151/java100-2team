@@ -31,6 +31,8 @@
     "devicons": "^1.8.0",
     "handlebars": "^4.0.11",
     "jquery": "3.3.0",
+    "jquery-ui": "^1.12.1",
+    "jquery-ui-dist": "^1.12.1",
     "popper.js": "^1.12.3",
     "simple-line-icons": "^2.4.1",
     "sweetalert": "^2.1.0",

@@ -148,4 +148,40 @@
     <select id="CountMember" parameterType="string" resultType="int">
     	select count(*) from memb where tel=#{param2} 
     </select>
+    
+    
+     <select id="findMyAll" resultMap="diagnosisMap" parameterType="map">
+         <![CDATA[select 
+          d.dgn_no,
+            d.dgn_cg,
+            d.dgn_name,
+            d.dgn_conts,
+            d.date_rec,
+            d.m_name,
+            m.m_no as m_no,
+            h.hp_name as hp_name
+       	 	from dgn as d 
+       	 	left join hp as h on d.hp_no=h.hp_no 
+        	left join memb as m on d.m_no=m.m_no
+        	where m_name=#{arg0} and d.date_rec between #{arg1} and #{arg2} order by d.date_rec DESC]]>
+    </select>
+    
+         <select id="findMyAllList" resultMap="diagnosisMap" parameterType="map">
+          select 
+          d.dgn_no,
+            d.dgn_cg,
+            d.dgn_name,
+            d.dgn_conts,
+            d.date_rec,
+            d.m_name,
+            m.m_no as m_no,
+            h.hp_name as hp_name
+       	 	from dgn as d 
+       	 	left join hp as h on d.hp_no=h.hp_no 
+        	left join memb as m on d.m_no=m.m_no
+        	where m_name=#{value} 
+    </select>
+    
+    
+    
 </mapper>  

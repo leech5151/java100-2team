@@ -51,7 +51,7 @@ public class TrainningServiceImpl implements TrainningService {
     @Override
     public Trainning get(int no) {
         trainningDao.updateViewCount(no);
-        trainningDao.updateLikes(no); // 
+        /*trainningDao.updateLikes(no);*/ // 
        
         
         Trainning trainning = trainningDao.findByNo(no);

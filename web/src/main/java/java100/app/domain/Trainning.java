@@ -4,6 +4,7 @@ import java.util.List;
  
 public class Trainning {
     protected int trainningNo; //list
+    protected int memberNo;
     protected String category; //list
     protected String title; //list
     protected String contents; //list
@@ -14,6 +15,14 @@ public class Trainning {
     protected List<TrainningUploadFile> files;
     protected Member member; //list
     
+    
+    
+    public int getMemberNo() {
+        return memberNo;
+    }
+    public void setMemberNo(int memberNo) {
+        this.memberNo = memberNo;
+    }
     public int getTrainningNo() {
         return trainningNo;
     }

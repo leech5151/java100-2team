@@ -13,7 +13,7 @@ public interface DiagnosisDao {
     Diagnosis findByNo(int no);
     Diagnosis findByHospitalNo(int no);
     int update(Diagnosis diagnosis);
-    int delete(int no,int no2);
+    int delete(int no,int no2); 
     int deleteAll(int no);
 }
 

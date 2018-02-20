@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java100.app.domain.Member;
 import java100.app.domain.Trainning;
 import java100.app.domain.TrainningUploadFile;
+import java100.app.service.MemberService;
 import java100.app.service.TrainningService;
 
 @RestController
@@ -28,6 +29,7 @@ public class TrainningController {
     
     @Autowired ServletContext servletContext;
     @Autowired TrainningService trainningService;
+    @Autowired MemberService memberService;
      
     @RequestMapping("list")
     public Object list(
@@ -43,8 +45,8 @@ public class TrainningController {
             pageNo = 1;
         }
         
-        if (pageSize < 5 || pageSize > 15) {
-            pageSize = 5;
+        if (pageSize < 6 || pageSize > 15) {
+            pageSize = 6;
         }
         
         HashMap<String,Object> options = new HashMap<>();
@@ -66,6 +68,7 @@ public class TrainningController {
         result.put("list", trainningService.list(pageNo, pageSize, options));
         return result;
     }
+    
     
 
     @RequestMapping("add")
@@ -91,10 +94,10 @@ public class TrainningController {
         trainning.setFiles(uploadFiles);
         trainning.setMember(loginUser);
         trainningService.add(trainning);
-        
         HashMap<String,Object> result = new HashMap<>();
         result.put("status", "success");
-        
+        result.put("data", memberService.get(trainning.getMember().getMemberNo()));
+        System.out.println(memberService.get(trainning.getMember().getMemberNo()));
         return result;
         
     }

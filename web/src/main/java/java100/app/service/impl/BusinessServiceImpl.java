@@ -98,16 +98,6 @@ public class BusinessServiceImpl implements BusinessService {
         }
     }
     
-  /*  @Override
-    public void addReviews(List<BusinessReview> reviews, int memberNo, int businessNo) {
-        for (BusinessReview review : reviews) {
-            review.setBusinessNo(businessNo);
-            review.setMemberNo(memberNo);
-            businessReviewDao.insert(review);
-        }
-    }*/
-
-   
 }
 
 

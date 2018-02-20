@@ -18,6 +18,12 @@
         <result column="title" property="title"/>
         <result column="likes" property="likes"/>
          
+         <!-- 게시글 작성자 정보를 담을 수 있도록 설정한다 -->
+         <association property="member" javaType="member">
+         	<id column="m_no" property="memberNo"/>
+         	<id column="nic_name" property="nicname"/>
+         </association>
+         
         <!-- 첨부파일 정보를 담을 수 있도록 설정한다. -->
         <collection property="files"  ofType="trainningUploadFile">
             <id     column="mda_no"       property="no"/>
@@ -39,8 +45,11 @@
             t.rdt,
             t.likes,
             tm.file,
-            tm.t_no
-        from trainning as t
+            tm.t_no,
+            m.m_no,
+            m.nic_name
+        	from 
+        	trainning as t join memb as m on t.m_no=m.m_no
         left join t_mda as tm 
              on t.t_no=tm.t_no 
 
@@ -107,9 +116,11 @@
             t.rdt,
             t.likes,
             tm.mda_no,
-            tm.file
+            tm.file,
+            m.m_no,
+            m.nic_name
         from 
-            trainning as t 
+            trainning as t join memb as m on t.m_no=m.m_no
             left join t_mda as tm on t.t_no=tm.t_no
         where t.t_no=#{value}
          
@@ -129,11 +140,11 @@
         where t_no=#{value}
     </update> 
     
-    <update id="updateLikes" parameterType="int">
+    <!-- <update id="updateLikes" parameterType="int">
         update trainning set 
             likes=likes + 1
         where t_no=#{value}
-    </update> 
+    </update>  -->
     
     
     <update id="update" parameterType="trainning">

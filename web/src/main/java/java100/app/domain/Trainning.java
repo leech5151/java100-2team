@@ -14,6 +14,14 @@ public class Trainning {
     protected List<TrainningUploadFile> files;
     protected Member member; //list
     
+    
+    
+    public int getMemberNo() {
+        return memberNo;
+    }
+    public void setMemberNo(int memberNo) {
+        this.memberNo = memberNo;
+    }
     public int getTrainningNo() {
         return trainningNo;
     }

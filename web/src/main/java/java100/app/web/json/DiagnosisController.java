@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import javax.servlet.ServletContext;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -153,6 +154,7 @@ public class DiagnosisController {
         HashMap<String, Object> result = new HashMap<>();
         result.put("data", diagnosisService.getHospitalNo(no));
         return result;
+        
     }
     
     @RequestMapping("mylist")

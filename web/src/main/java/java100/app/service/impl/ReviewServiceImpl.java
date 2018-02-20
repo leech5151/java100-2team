@@ -8,14 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java100.app.dao.BusinessReviewDao;
+import java100.app.dao.BusinessReviewFileDao;
 import java100.app.domain.BusinessReview;
-import java100.app.domain.BusinessUploadFile;
+import java100.app.domain.BusinessReviewUploadFile;
 import java100.app.service.ReviewService;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
 
     @Autowired BusinessReviewDao businessReviewDao;
+    @Autowired BusinessReviewFileDao businessReviewFileDao;
 
     @Override // 리뷰 list
     public List<BusinessReview> list(int pageNo, int pageSize, Map<String, Object> options) {
@@ -36,8 +38,7 @@ public class ReviewServiceImpl implements ReviewService {
     public int add(BusinessReview businessReview) {
         
         int count = businessReviewDao.insert(businessReview);
-        
-        /*this.addFiles(businessReview.getFiles(), businessReview.getBusinessNo());*/
+        this.addFiles(businessReview.getReviewFiles(), businessReview.getReviewNo());
         
         return count;
     }
@@ -66,28 +67,23 @@ public class ReviewServiceImpl implements ReviewService {
         
         int count = businessReviewDao.update(businessReview);
         
-       /* if(!business.getFiles().isEmpty()) {
-            businessFileDao.deleteAllByBusinessNo(business.getBusinessNo());
+       if(!businessReview.getReviewFiles().isEmpty()) {
+            businessReviewFileDao.deleteAllByReviewNo(businessReview.getReviewNo());
         }
         
         // 다시 게시물 첨부파일을 저장한다.
-        addFiles(business.getFiles(), business.getBusinessNo());*/
+        addFiles(businessReview.getReviewFiles(), businessReview.getReviewNo());
         
         return count;
     }
     @Override
     public int delete(int rv_no) {
         
-        /*businessFileDao.deleteAllByBusinessNo(bus_no);*/
-        
+        businessReviewFileDao.deleteAllByReviewNo(rv_no);
+        System.out.println(rv_no);
         return businessReviewDao.delete(rv_no);
     }
 
-    @Override
-    public void addFiles(List<BusinessUploadFile> files, int ReviewNo) {
-        // TODO Auto-generated method stub
-        
-    }
 
     @Override
     public Object getBusinessNo(int no) {
@@ -95,13 +91,13 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     
-/*    @Override
-    public void addFiles(List<BusinessUploadFile> files, int businessNo) {
-        for (BusinessUploadFile file : files) {
-            file.setBusinessNo(businessNo);
-            businessFileDao.insert(file);
+    @Override
+    public void addFiles(List<BusinessReviewUploadFile> reviewFiles, int reviewNo) {
+        for (BusinessReviewUploadFile file : reviewFiles) {
+            file.setReviewNo(reviewNo);
+            businessReviewFileDao.insertReview(file);
         }
-    }*/
+    }
     
 
    

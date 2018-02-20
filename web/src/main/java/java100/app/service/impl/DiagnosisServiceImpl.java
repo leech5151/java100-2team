@@ -102,6 +102,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     public Object getHospitalNo(int no) {
         return diagnosisDao.findByHospitalNo(no);
     }
+    
 
     @Override
     public int deleteAll(int no) {

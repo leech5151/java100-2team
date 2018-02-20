@@ -26,6 +26,7 @@ public interface DiagnosisService {
     Object getHospitalNo(int no);
     List<Diagnosis> myList(String string,String selectDate,String nowDate);
     List<Diagnosis> myAllList(String name);
+    
 }
 
 

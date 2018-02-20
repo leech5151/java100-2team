@@ -17,6 +17,7 @@ public interface DiagnosisDao {
     int update(Diagnosis diagnosis);
     int delete(int no,int no2);
     int deleteAll(int no);
+    
 }
 
 

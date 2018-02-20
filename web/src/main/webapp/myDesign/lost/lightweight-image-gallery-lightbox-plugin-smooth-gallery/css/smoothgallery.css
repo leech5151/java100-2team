@@ -1,9 +1,11 @@
 .sg {
+	border: 1px;
+	border-color: gray;
     font-size:0;
     line-height:0;
     overflow:hidden;
     position:relative;
-    background:#eee;
+/*     background:#eee; */
     border-radius:6px;
     /* Prevent flash of unstyled content  
     display:none;*/
@@ -18,7 +20,7 @@
     border: 2px solid #666;
     width: 40px;
     height: 19px;
-    padding: 7px 0 0 0;
+/*     padding: 7px 0 0 0; */
     margin: 3px;
     border-radius: 7px;
     font-size: 10px;

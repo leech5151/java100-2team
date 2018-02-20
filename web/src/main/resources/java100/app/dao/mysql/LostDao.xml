@@ -107,7 +107,6 @@
             </otherwise>
         </choose>
 
-        limit #{startIndex}, #{size}
     </select>
 
     
@@ -134,10 +133,12 @@
 		    l.conts,
 		    l.brd,
 		    lm.mda_no,
-		    lm.file
+		    lm.file,
+ 		    m.tel
 		from 
 		    lost as l 
 		    left join lost_mda as lm on l.l_no=lm.l_no
+	        join memb as m on l.m_no=m.m_no
         where l.l_no=#{value}
     </select>
     

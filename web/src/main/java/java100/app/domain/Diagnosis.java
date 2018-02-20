@@ -40,6 +40,7 @@ public class Diagnosis {
     public String getMemberTel() {
         return memberTel;
     }
+    
     public void setMemberTel(String memberTel) {
         this.memberTel = memberTel;
     }

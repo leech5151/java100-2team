@@ -1,10 +1,9 @@
-<div id="list" class="sg" style="width:1200px; height:700px; margin:0 ">
-
-	<br>
-</div>
 <div style="width: 1200px;" class="sg-paginate"> 
-<a style="text-align: center;" id="sg-up" href="#" class="sg-up">▲</a>
-<a id="sg-down" href="#" class="sg-down">▼</a> 
+<a style="text-align: center;" id="sg-up" href="#" class="sg-up">Up</a>
+<a id="sg-down" href="#" class="sg-down">Down</a> 
+</div>
+<div id="list" class="sg" style="width:1200px; height:700px; margin:0 ">
+<br>
 </div>
 <br>
 <br>
@@ -44,18 +43,17 @@
         <li>품종 : {{breed}}</li>
         <li>연락처 : {{registrant.tel}}</li>
     </ul> 
+        <button style="float: right; color: #8B8B8B;" type="button" id="viewBtn{{lostNo}}" class="btn btn-sm btn-light">+상세보기</button>
  </div>
 {{/each}}
 </script>
-    
     
 <script src="../../myDesign/lost/lightweight-image-gallery-lightbox-plugin-smooth-gallery/jquery/jquery-1.11.3.js"></script>
 <script src="../../myDesign/lost/lightweight-image-gallery-lightbox-plugin-smooth-gallery/jquery/jquery.easing.js"></script>
 <script type='text/javascript' src="../../myDesign/lost/lightweight-image-gallery-lightbox-plugin-smooth-gallery/js/smoothgallery.min.js"></script>
 
 <script type="text/javascript">
-$(window).load( function() {
-    // use default options
+$(window).load(function() {
     $(document).smoothGallery({
         animSpeed:300, 
         delaySpeed:50,
@@ -80,13 +78,25 @@ function load() {
         dataType: 'json',
         success: (result) => {
         	list.html(templateEngine(result));
-            //console.log(result);
+            $(document).ready(function(){ 
+                $('button').click(function(e){
+                    var id = e.target.getAttribute('id');
+                    if ((id != '') && (id != null))  
+                    var newId = '#' + id;
+	                var lostNo = newId.substring(8);
+	                $.ajax('../../json/lost/' + lostNo, {
+	                    dataType: 'json',
+	                    success: (result) => {
+	                    location.href = "../lost/lostForm.html?no=" + lostNo;
+	                    }
+	                });
+                });
+            });
         },
         error: () => {
-            window.alert("서버 실행 오류!");
+            window.alert("lost 실행 오류");
         }
     });
 }
-
 </script>
 

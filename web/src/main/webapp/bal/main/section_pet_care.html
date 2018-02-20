@@ -1,0 +1,49 @@
+
+<div class="my-auto">
+	<h2 class="mb-5">
+		<ul class='navbar-nav mr-auto'>
+			<li class='nav-item'>병원목록</li>
+		</ul>
+	</h2>
+
+	<div id="hospital"></div>
+</div>
+
+
+<div class="my-auto">
+	<h2 class="mb-5"> 
+		<ul class='navbar-nav mr-auto'>
+			<li class='nav-item'>최근 진료자료</li>
+		</ul>
+	</h2>
+
+	<div id="diagnosis"></div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+
+/* $(window).load(function(){
+	$('#List').load('../diagnosis/mainlist.html');
+});  */
+
+$(document).ready(function(){
+	$('#hospital').load('../hospital/mainlist.html');
+	
+});
+$(document).ready(function(){
+	$('#diagnosis').load('../diagnosis/mainlist.html');
+	
+});
+/* 
+$(window).load(function(){
+	$('#diagnosis').load('../hospital/mainlist.html');
+	}); 
+ */
+
+
+</script>

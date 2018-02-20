@@ -26,6 +26,19 @@
     <!-- 자체 작업 CSS -->
     <link href="../../css/home.css" rel="stylesheet">
 
+<style>
+  .modal-header, h4, .close {
+      background-color: #5cb85c;
+      color:white !important;
+      text-align: center;
+      font-size: 30px;
+  }
+  .modal-footer {
+      background-color: #f9f9f9;
+      margin-bottom: 10px;
+  } 
+</style>
+  
   </head>
 
   <body id="page-top">
@@ -83,63 +96,34 @@
 <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="cast"></section>
 <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="lost"></section>
 </div>
-
-    </div>
+</div>
     <!-- Modal -->
-     <style>
-  .modal-header, h4, .close {
-      background-color: #5cb85c;
-      color:white !important;
-      text-align: center;
-      font-size: 30px;
-  }
-  .modal-footer {
-      background-color: #f9f9f9;
-  }
-  </style> 
-    <div class="modal fade" role="dialog" id="myModal">
-        <div class="modal-dialog" >
 
-            <div class="modal-content">
-                <div class="modal-header" style="padding: 35px 50px;">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4>
-                        <span class="glyphicon glyphicon-lock"></span> Login
-                    </h4>
-                </div>
-                <div class="modal-body" style="padding: 40px 50px;">
-                    <form id="loginForm" method="POST" role="form">
-                        <div class="form-group">
-                            <label for="email"><span class="glyphicon glyphicon-user"></span>
-                                이메일</label> <input type="text" class="form-control" id="email"
-                                placeholder="Enter email">
-                        </div>
+<div class="modal fade" role="dialog" id="loginModal">
+<div class="modal-dialog">    
+	<div class="modal-content">
+	</div>
+</div>
+</div>
+                
+<div class="modal fade" role="dialog" id="memberViewModal">
+<div class="modal-dialog">
+  <div class="modal-content" style="width: 800px; height: 700px; overflow: scroll;">
+  </div>
+</div>
+</div>
 
-                        <div class="form-group">
-                            <label for="password"><span
-                                class="glyphicon glyphicon-eye-open"></span> 암호</label> <input
-                                type="password" class="form-control" id="password"
-                                placeholder="Enter password">
-                        </div>
+<!-- Bootstrap core JavaScript -->
+<script src="../../vendor/jquery/jquery.min.js"></script>
+<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-                        <div class="checkbox">
-                            <label><input type="checkbox" checked id="saveEmail"
-                                name="saveEmail">Remember me</label>
-                        </div>
+<!-- Plugin JavaScript -->
+<script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
-                        <button id="loginBtn2" type="button"
-                            class="btn btn-success btn-block">
-                            <span class="glyphicon glyphicon-off"></span> Login
-                        </button>
-                        <p>
-                        <fb:login-button scope="public_profile,email" 
-                        onlogin="checkLoginState();">
-                        </fb:login-button>  
-                        </p>
-                        <a id="kakaoLoginBtn"></a>
-                    </form>
-                </div>
+<!-- Custom scripts for this template -->
+<script src="../../js/resume.min.js"></script>
 
+<<<<<<< HEAD
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-danger btn-default pull-left"
                         data-dismiss="modal">
@@ -172,6 +156,13 @@
         <script src='../../node_modules/sweetalert/dist/sweetalert.min.js'></script>
         <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
     
+=======
+<script src='../../node_modules/jquery/dist/jquery.js'></script>
+<script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+<script src='../../node_modules/sweetalert/dist/sweetalert.min.js'></script>
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+>>>>>>> branch 'master' of https://github.com/leech5151/java100-2team.git
     
     
 <script type="text/javascript">
@@ -183,7 +174,8 @@ $('#story').load('section_pet_story.html');
 $('#cast').load('section_pet_cast.html');
 $('#lost').load('section_lost.html');
 </script>
-    
+
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
     
 var loginBtn = $('#loginBtn'),
@@ -205,18 +197,27 @@ $.getJSON('../../json/auth/loginUser', (result) => {
         for (var file of member.files) {
         	if (file.filename == null) {
         		var srcpath = "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Snoopy_Peanuts.png/200px-Snoopy_Peanuts.png";
-        	} else {
+         	} else {
         		var srcpath = "../../download/" + file.filename;
         	}
             $('#memberPhoto').attr({
                 src: srcpath,
                 class: 'img-fluid img-profile rounded-circle mx-auto mb-2',
                 alt: "'" + file.filename + "'",
-                onclick: "window.open('../member/view.html?no=" + member.memberNo + "')"
+                id: 'memberInfo'
             });
         }
     }
-
+    
+    var memberViewModal = $('#memberViewModal');
+    var memberViewModalContent = $('#memberViewModal .modal-content');
+    $(document).ready(function(){ 
+        $('#memberInfo').click(function(e){
+	        memberViewModalContent.load('../member/memberForm.html', () => {
+	        	memberViewModal.modal();
+	        });
+        });
+    });
 });
 
 var index = location.href.indexOf('?');
@@ -238,10 +239,13 @@ if (index != -1) {
 
 } else {}
 
-var myModal = $('#myModal');
-
+var loginModal = $('#loginModal');
+var loginModalContent = $('#loginModal .modal-content');
 loginBtn.click(() => {
-    myModal.modal();
+	loginModalContent.load('../auth/login.html', () => {
+		console.log('111');
+		loginModal.modal();
+	});
 });
     
 logoutBtn.click(() => {
@@ -258,127 +262,5 @@ singUpBtn.click(() => {
 
 </script>
 
-<script type="text/javascript">
-var loginForm = $('#loginForm'),
-    loginBtn2 = $('#loginBtn2'),
-    email = $('#email'),
-    password = $('#password'),
-    saveEmail = $('#saveEmail');
-
-
-loginBtn2.click(() => {
-    console.log(email.val(), password.val() , saveEmail.is(':checked'));
-    
-    $.post('../../json/auth/login', {
-        email: email.val(),
-        password: password.val(),
-        saveEmail: saveEmail.is(':checked') 
-    }, function(result) {
-        if (result.status == "success") {
-            location.href = "home.html"
-        } else {
-            swal("로그인실패!", "이메일이나 암호를 확인 해주세요!", "error");
-        }
-    }, 'json');
-    
-});
-
-</script>
-
-<script type="text/javascript">
-/* 
-function getUserInfo(accessToken) {
-    FB.api('/me', {fields: 'email,name'}, function(response) {
-        console.log(response);
-    });
-}
-function statusChangeCallback(response) {
-	  console.log(response);
-
-	  if (response.status === 'connected') { // 로그인이 정상적으로 되었을 때,
-	      getUserInfo(response.authResponse.accessToken);
-	  
-	  } else { // 로그인이 되지 않았을 때,
-	      console.log("로그인 되지 않았음");
-	  }
-	}
-*/
-
-function autoServerLogin(accessToken) {
-    $.getJSON(
-        '../../json/auth/facebookLogin', 
-        {'accessToken': accessToken}, 
-        function(result) {
-        	console.log(result.status);
-          if (result.status == 'success') {
-              location.href = 'home.html';
-          } else {
-        	  swal("로그인실패!", "로그인에 실패하였습니다.", "error");
-          }
-    });
-}
-
- 
-function statusChangeCallback(response) {
-
-  if (response.status === 'connected') { // 로그인이 정상적으로 되었을 때,
-      autoServerLogin(response.authResponse.accessToken);
-  
-  } else { // 로그인이 되지 않았을 때,
-      console.log("로그인 되지 않았음");
-  }
-}
-
-  
-function checkLoginState() {
-    FB.getLoginStatus(function(response) { 
-      statusChangeCallback(response);
-    });
-}
-
-window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '1608875912532374', // 개발자가 등록한 앱 ID
-    cookie     : true,  
-    xfbml      : true,  
-    version    : 'v2.12' 
-  });
-};
-
-(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-
-<script type='text/javascript'>
-    Kakao.init('ff1cbf9468f0d7759d24a8472491276e');
-    Kakao.Auth.createLoginButton({
-      container: '#kakaoLoginBtn',
-      success: function(authObj) {
-        //alert(JSON.stringify(authObj));
-        console.log(authObj.access_token);
-    	  $.getJSON(
-   		        '../../json/auth/kakaotalkLogin', 
-     		    {"access_token":authObj.access_token},
-   		        function(result) {
-   		          if (result.status == 'success') {
-   		              location.href = 'home.html';
-   		          } else {
-   		              swal("로그인실패!", "로그인에 실패하였습니다.", "error");
-   		          }
-   		    });
-      },
-      fail: function(err) {
-         alert(JSON.stringify(err));
-      }
-    });
-    
-</script>
 </body>
 </html>

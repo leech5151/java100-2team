@@ -4,6 +4,7 @@ import java.util.List;
  
 public class Trainning {
     protected int trainningNo; //list
+    protected int memberNo;
     protected String category; //list
     protected String title; //list
     protected String contents; //list

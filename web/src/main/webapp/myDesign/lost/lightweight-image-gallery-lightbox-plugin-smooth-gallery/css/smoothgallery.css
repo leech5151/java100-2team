@@ -116,9 +116,8 @@
     text-decoration: none;
     border: 2px solid #fff;
     width: 31px;
-    height: 24px;
+    /* height: 24px; */
     display: inline-block;
-    padding-top: 7px;
     border-radius: 17px;
     position: absolute;
     top: 8px;

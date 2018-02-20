@@ -52,7 +52,6 @@ public class LostServiceImpl implements LostService {
         lostDao.updateViewCount(no);
         
         Lost lost = lostDao.findByNo(no);
-        
         return lost;
     }
     

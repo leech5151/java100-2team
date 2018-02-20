@@ -1,4 +1,4 @@
-package java100.app.web;
+package java100.app.web.json;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,36 +6,36 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import java100.app.domain.Member;
-import java100.app.domain.MemberUploadFile;
-import java100.app.service.MemberService;
+import java100.app.domain.Pet_Stargram;
+import java100.app.domain.Pet_StargramUploadFile;
+import java100.app.service.Pet_StargramService;
 
-@Controller
-@RequestMapping("/member")
+@RestController
+@RequestMapping("/pet_stargram")
 @SessionAttributes("loginUser")
-public class MemberController {
+public class Pet_StargramController {
     
     @Autowired ServletContext servletContext;
-    @Autowired MemberService memberService;
-    
+    @Autowired Pet_StargramService pet_stargramService;
+     
     @RequestMapping("list")
-    public String list(
+    public Object list(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
             @RequestParam(value="ps", defaultValue="5") int pageSize,
             @RequestParam(value="words", required=false) String[] words,
             @RequestParam(value="oc", required=false) String orderColumn,
-            @RequestParam(value="al", required=false) String align,
-            Model model) throws Exception {
+            @RequestParam(value="al", required=false) String align) throws Exception {
 
         // UI 제어와 관련된 코드는 이렇게 페이지 컨트롤러에 두어야 한다.
         //
@@ -54,34 +54,31 @@ public class MemberController {
         options.put("orderColumn", orderColumn);
         options.put("align", align);
         
-        int totalCount = memberService.getTotalCount();
+        int totalCount = pet_stargramService.getTotalCount();
         int lastPageNo = totalCount / pageSize;
         if ((totalCount % pageSize) > 0) {
             lastPageNo++;
         }
-        
-        model.addAttribute("pageNo", pageNo);
-        model.addAttribute("lastPageNo", lastPageNo);
-        model.addAttribute("list", memberService.list(pageNo, pageSize, options));
-        return "member/list";
+        HashMap<String, Object> result = new HashMap<>();
+        // view 컴포넌트가 사용할 값을 Model에 담는다.
+        result.put("pageNo", pageNo);
+        result.put("lastPageNo", lastPageNo);
+        result.put("list", pet_stargramService.list(pageNo, pageSize, options));
+        return result;
     }
     
-    @RequestMapping("form")
-    public String form() throws Exception {
-        return "member/form";
-        
-    }
+    
 
     @RequestMapping("add")
     public Object add(
-            Member member,
-            MultipartFile[] file,
-            HttpSession httpSession
+            Pet_Stargram pet_stargram,
+           @ModelAttribute(value="loginUser") Member loginUser,
+            MultipartFile[] file
             ) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
 
-        ArrayList<MemberUploadFile> uploadFiles = new ArrayList<>();
+        ArrayList<Pet_StargramUploadFile> uploadFiles = new ArrayList<>();
         
         for (MultipartFile part : file) {
             if (part.isEmpty())
@@ -89,40 +86,36 @@ public class MemberController {
             
             String filename = this.writeUploadFile(part, uploadDir);
             
-            uploadFiles.add(new MemberUploadFile(filename));
+            uploadFiles.add(new Pet_StargramUploadFile(filename));
         }
         
-        member.setFiles(uploadFiles);
-
-        HashMap<String, Object> result = new HashMap<>();
-
-        result.put("member", memberService.add(member));
-        result.put("status", "success");
-        return result;
-    }
-    
-    @RequestMapping("view")
-    public String view(int no, Model model) throws Exception {
-
-        model.addAttribute("member", memberService.get(no));
-        return "member/view";
-    }
-    
-    @RequestMapping("modify")
-    public String modify(int no, Model model) throws Exception {
+        pet_stargram.setFiles(uploadFiles);
+        pet_stargram.setMember(loginUser);
+        pet_stargramService.add(pet_stargram);
         
-        model.addAttribute("member", memberService.get(no));
-        return "member/modify";
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("status", "success");
+        
+        return result;
+        
+    }
+
+    @RequestMapping("{no}")
+    public Object view(@PathVariable int no) throws Exception {
+        
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("data", pet_stargramService.get(no));
+        return result;
     }
 
     @RequestMapping("update")
-    public String update(
-            Member member, 
+    public Object update(
+            Pet_Stargram pet_stargram, 
             MultipartFile[] file) throws Exception {
         
         String uploadDir = servletContext.getRealPath("/download");
 
-        ArrayList<MemberUploadFile> uploadFiles = new ArrayList<>();
+        ArrayList<Pet_StargramUploadFile> uploadFiles = new ArrayList<>();
         
         for (MultipartFile part : file) {
             if (part.isEmpty())
@@ -130,25 +123,26 @@ public class MemberController {
             
             String filename = this.writeUploadFile(part, uploadDir);
             
-            uploadFiles.add(new MemberUploadFile(filename));
+            uploadFiles.add(new Pet_StargramUploadFile(filename));
         }
         
-        member.setFiles(uploadFiles);
-
-        memberService.update(member);
-        if (member.getPush()) 
-            System.out.println("true");
-        else
-            System.out.println("false");
+        pet_stargram.setFiles(uploadFiles);
+        pet_stargramService.update(pet_stargram);
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("status", "success");
         
-        return "member/close";
+        return result;
     }
 
     @RequestMapping("delete")
-    public String delete(int no) throws Exception {
+    public Object delete(int no) throws Exception {
 
-        memberService.delete(no);
-        return "redirect:list";
+        pet_stargramService.delete(no);
+        
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("status", "success");
+        
+        return result;
     }
 
     long prevMillis = 0;

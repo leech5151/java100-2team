@@ -69,6 +69,7 @@ public class TrainningController {
         return result;
     }
     
+    
 
     @RequestMapping("add")
     public Object add(
@@ -93,10 +94,10 @@ public class TrainningController {
         trainning.setFiles(uploadFiles);
         trainning.setMember(loginUser);
         trainningService.add(trainning);
-        
         HashMap<String,Object> result = new HashMap<>();
         result.put("status", "success");
-        
+        result.put("data", memberService.get(trainning.getMember().getMemberNo()));
+        System.out.println(memberService.get(trainning.getMember().getMemberNo()));
         return result;
         
     }

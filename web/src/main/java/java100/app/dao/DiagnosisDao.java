@@ -8,11 +8,13 @@ import java100.app.domain.Diagnosis;
 public interface DiagnosisDao {
     List<Diagnosis> findAll(Map<String,Object> params);
     int countAll();
+    int CountMember(String tel);
     int insert(Diagnosis diagnosis);
     Diagnosis findByNo(int no);
     Diagnosis findByHospitalNo(int no);
     int update(Diagnosis diagnosis);
-    int delete(int no);
+    int delete(int no,int no2); 
+    int deleteAll(int no);
 }
 
 

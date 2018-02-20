@@ -17,6 +17,7 @@
         
         <association property="registrant" javaType="member">
             <id column="m_no" property="memberNo"/>
+            <result column="tel"   property="tel"/>
         </association>
         
         <collection property="files"  ofType="lostUploadFile">

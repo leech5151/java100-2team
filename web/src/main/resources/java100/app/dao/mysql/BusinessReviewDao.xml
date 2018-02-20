@@ -14,6 +14,7 @@
         <result column="date" property="createDate"/>
         <result column="point" property="StarPoint"/>
         <result column="vwcnt" property="viewCount"/>
+        <result column="bus_no" property="b_number"/>
         
         <association property="registrant" javaType="member">
             <id column="m_no" property="memberNo"/>

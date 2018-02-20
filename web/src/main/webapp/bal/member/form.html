@@ -191,7 +191,7 @@ addBtn.click(() => {
         success: (result) => {
         	$.post('../../json/auth/login', {
                 email: result.email,
-                password: result.password,
+                password: result.password
             }, (result) => {
                 if (result.status == "success") {
                 	setTimeout(() => {	

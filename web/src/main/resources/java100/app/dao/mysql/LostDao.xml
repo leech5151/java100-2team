@@ -51,10 +51,11 @@
             l.cha,
             l.rwd,
             l.vwcnt,
+            m.tel,
             lm.file
         from lost as l 
-        left join lost_mda as lm 
-             on l.l_no=lm.l_no
+        join memb as m on l.m_no=m.m_no
+        left join lost_mda as lm on l.l_no=lm.l_no
              <if test="words != null">
             <where>
                 <foreach collection="words" item="word">

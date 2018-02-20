@@ -59,7 +59,11 @@
             <a class="nav-link js-scroll-trigger" href="#story">Pet Story</a>
           </li>
           <li class="nav-item">
+<<<<<<< HEAD
             <a id="pc" class="nav-link js-scroll-trigger" href="#interests">Pet Cast</a>
+=======
+            <a class="nav-link js-scroll-trigger" href="#cast">Pet Cast</a>
+>>>>>>> branch 'master' of https://github.com/leech5151/java100-2team.git
           </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#lost">Lost</a>
@@ -157,6 +161,7 @@
         </div>
     </div>
 
+<<<<<<< HEAD
 <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="skills">
         <div class="my-auto">
           <h2 class="mb-5">
@@ -166,10 +171,16 @@
               </li>
             </ul>
           </h2>
+=======
+        <!-- Bootstrap core JavaScript -->
+        <script src="../../vendor/jquery/jquery.min.js"></script>
+        <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+>>>>>>> branch 'master' of https://github.com/leech5151/java100-2team.git
 
         <!-- Plugin JavaScript -->
         <script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
+<<<<<<< HEAD
           <div class="subheading mb-3">Workflow</div>
           <ul class="fa-ul mb-0">
             <li>
@@ -222,6 +233,10 @@
           
           </div>
       </section>
+=======
+        <!-- Custom scripts for this template -->
+        <script src="../../js/resume.min.js"></script>
+>>>>>>> branch 'master' of https://github.com/leech5151/java100-2team.git
 
         <script src='../../node_modules/jquery/dist/jquery.js'></script>
         <script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
@@ -249,7 +264,7 @@ var loginBtn = $('#loginBtn'),
     memberNo = '';
 
 $.getJSON('../../json/auth/loginUser', (result) => {
-	if (result.status == 'fail') {
+    if (result.status == 'fail') {
         $('.after-login').css('display', 'none');
         return;
     } else {
@@ -342,11 +357,80 @@ loginBtn2.click(() => {
 
 
 <script type="text/javascript">
+<<<<<<< HEAD
 
      $('#lostList').load('../lost/lostList.html') 
      $('#trainningList').load('../trainning/trainningList.html') 
     
     
+=======
+/* 
+function getUserInfo(accessToken) {
+    FB.api('/me', {fields: 'email,name'}, function(response) {
+        console.log(response);
+    });
+}
+function statusChangeCallback(response) {
+	  console.log(response);
+
+	  if (response.status === 'connected') { // 로그인이 정상적으로 되었을 때,
+	      getUserInfo(response.authResponse.accessToken);
+	  
+	  } else { // 로그인이 되지 않았을 때,
+	      console.log("로그인 되지 않았음");
+	  }
+	}
+*/
+
+function autoServerLogin(accessToken) {
+    $.getJSON(
+        '../../json/auth/facebookLogin', 
+        {'accessToken': accessToken}, 
+        function(result) {
+        	console.log(result.status);
+          if (result.status == 'success') {
+              location.href = 'home.html';
+          } else {
+        	  swal("로그인실패!", "로그인에 실패하였습니다.", "error");
+          }
+    });
+}
+
+ 
+function statusChangeCallback(response) {
+
+  if (response.status === 'connected') { // 로그인이 정상적으로 되었을 때,
+      autoServerLogin(response.authResponse.accessToken);
+  
+  } else { // 로그인이 되지 않았을 때,
+      console.log("로그인 되지 않았음");
+  }
+}
+
+  
+function checkLoginState() {
+    FB.getLoginStatus(function(response) { 
+      statusChangeCallback(response);
+    });
+}
+
+window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '1608875912532374', // 개발자가 등록한 앱 ID
+    cookie     : true,  
+    xfbml      : true,  
+    version    : 'v2.12' 
+  });
+};
+
+(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+>>>>>>> branch 'master' of https://github.com/leech5151/java100-2team.git
 </script>
 
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>

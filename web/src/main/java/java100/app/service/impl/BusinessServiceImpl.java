@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java100.app.dao.BusinessDao;
 import java100.app.dao.BusinessFileDao;
-import java100.app.dao.BusinessReviewDao;
 import java100.app.domain.Business;
-import java100.app.domain.BusinessReview;
 import java100.app.domain.BusinessUploadFile;
 import java100.app.service.BusinessService;
 
@@ -20,7 +18,6 @@ public class BusinessServiceImpl implements BusinessService {
 
     @Autowired BusinessDao businessDao;
     @Autowired BusinessFileDao businessFileDao;
-    @Autowired BusinessReviewDao businessReviewDao;
     
     @Override
     public List<Business> list(int pageNo, int pageSize, Map<String, Object> options) {
@@ -32,15 +29,6 @@ public class BusinessServiceImpl implements BusinessService {
         if (options != null) {  
         }
         return businessDao.findAll(params);
-    }
-    @Override // 리뷰 list
-    public List<BusinessReview> listReview(int pageNo, int pageSize, Map<String, Object> options) {
-        HashMap<String,Object> params = new HashMap<>();
-        params.put("startIndex", (pageNo - 1) * pageSize);
-        params.put("size", pageSize);
-        if (options != null) {  
-        }
-        return businessReviewDao.findAll(params);
     }
     
     @Override
@@ -59,14 +47,6 @@ public class BusinessServiceImpl implements BusinessService {
         this.addFiles(business.getFiles(), business.getBusinessNo());
         
         return count;
-    }
-    @Override // 리뷰 add
-    public int addReview(BusinessReview businessReview) {
-        
-        int count = businessReviewDao.insert(businessReview);
-        
-        return count;
-        
     }
   
     @Override
@@ -118,16 +98,6 @@ public class BusinessServiceImpl implements BusinessService {
         }
     }
     
-  /*  @Override
-    public void addReviews(List<BusinessReview> reviews, int memberNo, int businessNo) {
-        for (BusinessReview review : reviews) {
-            review.setBusinessNo(businessNo);
-            review.setMemberNo(memberNo);
-            businessReviewDao.insert(review);
-        }
-    }*/
-
-   
 }
 
 

@@ -105,6 +105,7 @@ public class BusinessController {
   
     @RequestMapping("{no}")
     public Object view(@PathVariable int no) throws Exception {
+        findByBusinessNo(no);
         HashMap<String, Object> result = new HashMap<>();
         result.put("data", businessService.get(no));
         return result;
@@ -182,7 +183,9 @@ public class BusinessController {
         part.transferTo(new File(path + "/" + filename));
         return filename;
     } 
-   
+    public Object findByBusinessNo(int no) throws Exception{
+        return no;
+    }
    
    
 }

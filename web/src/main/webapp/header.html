@@ -56,15 +56,17 @@ $.getJSON('../../json/auth/loginUser', function(result) {
     $('#username').html(result.member.name);
 });
 
+
 $('#logoutBtn').click(() => {
     $.getJSON('../../json/auth/logout', (result) => {
-	    console.log(result);
-	    location.href = '../main/home.html';
+	if(result.status == 'success'){
+		window.alert('메인으로갑니다');
+		location.href = '../main/home.html';
+	}
+    	
     });
 })
 </script>
-
-
 
 
 

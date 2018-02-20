@@ -12,6 +12,7 @@ public interface HospitalDao {
     Hospital findByNo(int no);
     int update(Hospital hospital);
     int delete(int no);
+    int hospitalNoByMemberNo(int no);
 }
 
 

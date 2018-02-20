@@ -1,5 +1,7 @@
 package java100.app.domain;
 
+import java.util.List;
+
 public class BusinessReview {
      int reviewNo;
      String title;
@@ -7,10 +9,30 @@ public class BusinessReview {
      String createDate;
      double StarPoint;
      int viewCount;
-     protected Business business;
+     int b_number;
      protected Member registrant;
+     protected List<BusinessReviewUploadFile> files;
    
-     public Member getRegistrant() {
+     
+     public int getB_number() {
+        return b_number;
+    }
+    public void setB_number(int b_number) {
+        this.b_number = b_number;
+    }
+    public List<BusinessReviewUploadFile> getFiles() {
+        return files;
+    }
+    public void setFiles(List<BusinessReviewUploadFile> files) {
+        this.files = files;
+    }
+    public List<BusinessReviewUploadFile> getReviewFiles() {
+        return files;
+    }
+    public void setReviewFiles(List<BusinessReviewUploadFile> files) {
+        this.files = files;
+    }
+    public Member getRegistrant() {
         return registrant;
     }
     public void setRegistrant(Member registrant) {
@@ -54,12 +76,6 @@ public class BusinessReview {
     }
     public void setViewCount(int viewCount) {
         this.viewCount = viewCount;
-    }
-    public Business getBusinessNo() {
-        return business;
-    }
-    public void setBusinessNo(Business businessNo) {
-        this.business = businessNo;
     }
     
   

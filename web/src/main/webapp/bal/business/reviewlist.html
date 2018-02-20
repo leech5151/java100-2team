@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>게시판</title>
-<link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
-<link rel='stylesheet' href='../../css/common.css'>
-<link rel='stylesheet' href='../../css/business.css'>
 
-<!-- beautiful alert -->
-<!-- <script src="alert/dist/sweetalert-dev.js"></script> --> 
-<!-- <link rel="stylesheet" href="alert/dist/sweetalert.css"></head> -->
-</head>
-<body>
 <div class='container'>
 
  <a href='reviewform.html' class='btn btn-primary btn-sm'>리뷰 등록</a><br>
@@ -19,7 +6,7 @@
 <table id="list" class='table table-hover'>
 <thead>
 <tr>
-<th>번호</th><th>제목</th><th>등록일자</th><th>별점</th><th>조회수</th>
+<th>번호</th><th>사진</th><th>제목</th><th>등록일자</th><th>별점</th><th>조회수</th>
 </tr>
 </thead>
 <tbody></tbody>
@@ -43,8 +30,21 @@
 <script src='../../node_modules/handlebars/dist/handlebars.min.js'></script>
 <script src='../../node_modules/jquery/dist/jquery.min.js'></script>
 <script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
-<script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script></body>
-
+<script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+<script id="template" type="text/x-handlebars-template">
+{{#each list}}
+<tr>
+<td>{{reviewNo}}</td>
+{{#each files}}
+<td><img src="../../download/{{filename}}" alt={{filename}} width='50px' height='50px'></td>
+{{/each}}
+<td><a href="reviewform.html?no={{reviewNo}}">{{title}}</a></td> 
+<td>{{createDate}}</td>
+<td>{{starPoint}}</td>
+<td>{{viewCount}}</td>
+<tr>
+{{/each}}
+</script>
 <script type="text/javascript"> // 리뷰 리스트 뽑기
 var words = $('#words'),
 prevBtn = $('#prevBtn'),
@@ -52,15 +52,17 @@ currBtn = $('#currBtn'),
 nextBtn = $('#nextBtn'),
 tbody = $('#list > tbody'),
 currPageNo = 1;
+templateSrc = $('#template').html(),
+templateEngine = Handlebars.compile(templateSrc);
 
 load(1);
 
 prevBtn.click(() => {
-load(currPageNo - 1)
+    load(currPageNo - 1)
 });
 
 nextBtn.click(() => {
-load(currPageNo + 1)
+    load(currPageNo + 1)    
 });
 
 function load(pageNo, options) {
@@ -73,36 +75,30 @@ $.ajax('../../json/review/list', {
     data: options,
     dataType: 'json',  
     success: (result) => {
-        tbody.html(""); // <tbody> 콘텐츠를 지운다.
-        for (var data of result.list) {
-            $('<tr>')
-                .html(  
-                    "<td>" + data.reviewNo + "</td>" + 
-                    "<td><a href='form.html?no=" + data.reviewNo + "'>" + data.title + "</a></td>" + 
-                    "<td>" + data.createDate + "</td>" +
-                    "<td>" + data.starPoint + "</td>" +
-                    "<td>" + data.viewCount + "</td>" )
-                    .appendTo(tbody);
-        }
         
-        currPageNo = result.pageNo;
-        currBtn.html(currPageNo);
-        if (result.pageNo == 1) {
-            $(prevBtn.parent()).addClass("disabled");
-        } else {
-            $(prevBtn.parent()).removeClass("disabled");
+            tbody.html(templateEngine(result));
+        
+            currPageNo = result.pageNo;
+            currBtn.html(currPageNo);
+            
+            if (result.pageNo == 1) {
+                $(prevBtn.parent()).addClass("disabled");
+            } else {
+                $(prevBtn.parent()).removeClass("disabled");
+            }
+            
+            if (result.lastPageNo == result.pageNo) {
+                $(nextBtn.parent()).addClass("disabled");
+            } else {
+                $(nextBtn.parent()).removeClass("disabled");
+            }
+        },
+        error: () => {
+            window.alert('서버 실행 오류!');
+           
         }
-        if (result.lastPageNo == result.pageNo) {
-            $(nextBtn.parent()).addClass("disabled");
-        } else {
-            $(nextBtn.parent()).removeClass("disabled");
-        }
-    },
-    error: () => {
-        window.alert('서버 실행 오류! list');
-    }
-});
+    });
 }
 </script>
-</html>
+
     

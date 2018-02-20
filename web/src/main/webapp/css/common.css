@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+.bs-list {
+    width: 2000px; !important;
+    height: 1500px; !important;
+    margin-top: 20px;
+}
+
 .container {
     width: 1000px; !important;
     margin-top: 20px;

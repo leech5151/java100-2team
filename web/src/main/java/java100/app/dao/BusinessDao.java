@@ -14,6 +14,7 @@ public interface BusinessDao {
     Business findByEmailAndPassword(HashMap<String, Object> params);
     int update(Business business);
     int delete(int bus_no);
+    
 }
 
 

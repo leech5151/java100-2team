@@ -39,9 +39,12 @@
 	         r.point, 
 	         r.vwcnt,
 	         b.bus_no,
-	         r.bus_no
+	         r.bus_no,
+	         m.file,
+	         m.rv_no
         from bus_rv as r
             left join bus as b on r.bus_no=b.bus_no
+            left join bus_rv_mda as m on r.rv_no=m.rv_no
         where r.bus_no=b.bus_no
 
         <if test="words != null">
@@ -52,8 +55,8 @@
 	        </where>
         </if>
         
-        <!-- 정렬 조건에 따라 SQL문을 변경한다.
-        order by 
+        <!-- 정렬 조건에 따라 SQL문을 변경한다.-->
+       <!--  order by 
         <choose>
             <when test="orderColumn == 'name' and align == 'desc'">
                 name desc
@@ -82,13 +85,13 @@
             <otherwise>
                 m_no desc
             </otherwise>
-        </choose>
+        </choose> -->
        
-        limit #{startIndex}, #{size}-->
+        limit #{startIndex}, #{size}
     </select> 
     
     <select id="countAll" resultType="int">
-        select count(*) from bus
+        select count(*) from bus_rv
     </select>
     <insert id="insert" parameterType="businessReview"
         useGeneratedKeys="true" keyColumn="rv_no" keyProperty="reviewNo">

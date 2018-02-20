@@ -94,7 +94,7 @@ public class ReviewController {
         businessReview.setB_number(b_number);
         businessReview.setRegistrant(loginUser);
         reviewService.add(businessReview);
-        
+        System.out.println(businessReview.getFiles());
         HashMap<String,Object> result = new HashMap<>();
         result.put("status", "success");
         result.put("data", businessService.get(b_number));

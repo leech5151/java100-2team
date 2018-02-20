@@ -9,54 +9,6 @@
 <body>
 <div class='container'>
 
-<header>
-<nav class='navbar navbar-expand-lg navbar-light bg-light'>
-<a class='navbar-brand' href='../main/start'>
-  <img src='../../images/bootstrap-solid.svg' width='30' height='30' class='d-inline-block align-top' alt=''>
-  Balance Pet
-</a>
-
-
-<button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
-  <span class='navbar-toggler-icon'></span>
-</button>
-
-<div class='collapse navbar-collapse' id='navbarNav'>
-<ul class='navbar-nav mr-auto'>
-  <li class='nav-item'>
-    <a class='nav-link' href='../member/list'>회원목록</a>
-  </li>
-</ul>
-
-<ul class='navbar-nav mr-auto'>
-  <li class='nav-item'>
-    <a class='nav-link' href='../hospital/list'>병원목록</a>
-  </li>
-</ul>
-<ul class='navbar-nav mr-auto'>
-  <li class='nav-item'>
-    <a class='nav-link' href='../diagnosis/list'>진료목록</a>
-  </li>
-</ul>
-
-<ul class='navbar-nav mr-auto'>
-  <li class='nav-item'>
-    <a class='nav-link' href='../business/list'>서비스</a>
-  </li>
-</ul>
-
-<ul class='navbar-nav mr-auto'>
-  <li class='nav-item'>
-    <a class='nav-link' href='../lost/list'>미아찾기</a>
-  </li>
-</ul>
-
-<a id="logout" href="../../json/auth/logout" 
-           class='btn btn-light btn-sm'>로그아웃</a>
-    </div>
-</nav>
-</header>
-
     <h1 class='my-new'>업체등록</h1>
     <h1 class='my-view'>업체 상세정보</h1>
 
@@ -169,13 +121,10 @@
 <button id="modifyBtn" type="button" class='btn btn-primary btn-sm my-view'>수정</button>
 <button id="updateBtn" type="button" class='btn btn-primary btn-sm my-view'>변경</button>
 <button id="deleteBtn" type="button" class='btn btn-primary btn-sm my-view'>삭제</button>
+<a href='main.html#listlist' class='btn btn-primary btn-sm' style="float: right;">목록</a><br>
 </div>
 </div>
 </form>
-
-<footer>
-    비트캠프 자바100기 Balance@2018
-</footer>
 </div>
 
 <script src='../../node_modules/jquery/dist/jquery.min.js'></script>

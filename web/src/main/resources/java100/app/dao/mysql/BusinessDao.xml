@@ -61,7 +61,7 @@
            </where>
         </if>
         
-        <!-- 정렬 조건에 따라 SQL문을 변경한다.
+        <!-- 정렬 조건에 따라 SQL문을 변경한다.-->
         order by 
         <choose>
             <when test="orderColumn == 'name' and align == 'desc'">
@@ -93,7 +93,7 @@
             </otherwise>
         </choose>
        
-        limit #{startIndex}, #{size}-->
+        limit #{startIndex}, #{size}
     </select> 
     
     <select id="countAll" resultType="int">

@@ -111,24 +111,28 @@
    <div class='form-group row'>
    <label for='character' class='col-sm-2 col-form-label'>특징</label>
    <div class='col-sm-10'>
-   <input class='form-control' id='character' type='text' 
-           name='character'>
+   <input class='form-control' id='character' type='text' name='character'>
    </div>
    </div>
 
    <div class='form-group row'>
    <label for='reward' class='col-sm-2 col-form-label'>사례금</label>
    <div class='col-sm-10'>
-   <input class='form-control' id='reward' type='text' 
-           name='reward'>
+   <input class='form-control' id='reward' type='text' name='reward'>
    </div>
    </div>
 
    <div class='form-group row'>
    <label for='contents' class='col-sm-2 col-form-label'>기타사항</label>
    <div class='col-sm-10'>
-   <input class='form-control' id='contents' type='text' 
-           name='contents'>
+   <input class='form-control' id='contents' type='text' name='contents'>
+   </div>
+   </div>
+
+   <div class='form-group row'>
+   <label for='tel' class='col-sm-2 col-form-label'>연락처</label>
+   <div class='col-sm-10'>
+   <input class='form-control' id='tel' type='text' name='tel' required>
    </div>
    </div>
    
@@ -172,6 +176,7 @@ var addBtn = $('#addBtn'),
     rewardItem = $('#reward'),
     viewCountItem = $('#viewCount'),
     contentsItem = $('#contents'),
+    telItem = $('#tel'),
     attFile = $('#attFile'),
     fileItem = $('#file'),
     lostNum = $('#lostNum');
@@ -189,22 +194,30 @@ if (index != -1) {
         $.ajax('../../json/lost/' + arr[1], {
             dataType: 'json',
             success: (result) => {
-            	console.log(result);
-            	$('#lostNum').html("<input class='form-control' readonly id='lostNo' type='number' name='lostNo' value='" + result.data.lostNo + "'>");
-            	lostNoItem.val(result.data.lostNo);
-            	$('#viewC').html("<input class='form-control' readonly id='viewCount' type='number' name='viewCount' value='" + result.data.viewCount + "'>");
-            	viewCountItem.val(result.data.viewCount);
-            	petNameItem.val(result.data.petName);
-            	breedItem.val(result.data.breed);
-            	lostLocationItem.val(result.data.lostLocation);
-            	lostDateItem.val(result.data.lostDate);
-            	characterItem.val(result.data.character);
-            	rewardItem.val(result.data.reward);
-            	contentsItem.val(result.data.contents);
-            	for (var file of result.data.files) {
-            		$('#attFile').html("<a href='../../download/" + file.filename + "'>" + file.filename + "</a>")
-            	}
-            	
+      	       $('#lostNum').html("<input class='form-control' readonly id='lostNo' type='number' name='lostNo' value='" + result.data.lostNo + "'>");
+               lostNoItem.val(result.data.lostNo);
+               $('#viewC').html("<input class='form-control' readonly id='viewCount' type='number' name='viewCount' value='" + result.data.viewCount + "'>");
+               viewCountItem.val(result.data.viewCount);
+               petNameItem.attr('readonly', 'readonly');
+               petNameItem.val(result.data.petName);
+               breedItem.attr('readonly', 'readonly');
+               breedItem.val(result.data.breed);
+               lostLocationItem.attr('readonly', 'readonly');
+               lostLocationItem.val(result.data.lostLocation);
+               lostDateItem.attr('readonly', 'readonly');
+               lostDateItem.val(result.data.lostDate);
+               characterItem.attr('readonly', 'readonly');
+               characterItem.val(result.data.character);
+               rewardItem.attr('readonly', 'readonly');
+               rewardItem.val(result.data.reward);
+               contentsItem.attr('readonly', 'readonly');
+               contentsItem.val(result.data.contents);
+               telItem.attr('readonly', 'readonly');
+               telItem.val(result.data.registrant.tel);
+               for (var file of result.data.files) {
+                   $('#attFile').html("<a href='../../download/" + file.filename + "'>" + file.filename + "</a>")
+               }
+            		
             },
             error: () => {
                 window.alert('서버 실행 오류!');
@@ -214,24 +227,39 @@ if (index != -1) {
     
 } else {
     $('.my-view').css('display', 'none');
+    $.getJSON('../../json/auth/loginUser', (result) => {
+        if (result.status != 'fail') {
+            var member = result.member;
+           if (member.tel == null || member.tel == '') {
+               swal("연락처를 등록 해주세요.");
+           } else {
+               telItem.val(member.tel);
+           }
+            
+        } else {
+            swal("조회 실패!", "정보 조회에 실패하였습니다.", 'error');
+        }
+    });
 }
 
 addBtn.click(() => {
-	var formData = new FormData($("#fileForm")[0]);
-    $.ajax('../../json/lost/add', {
-        data: formData,
-        dataType: 'json',
-        method: 'POST',
-        processData : false,
-        contentType : false,
-        success: (result) => {
-        location.href = "../main/home.html#awards";
+var formData = new FormData($("#fileForm")[0]);
+
+	$.ajax('../../json/lost/add', {
+	    data: formData,
+	    dataType: 'json',
+	    method: 'POST',
+	    processData : false,
+	    contentType : false,
+	    success: (result) => {
+     	    location.href = "../main/home.html#lost";
         },
-        error: (jqXHR, textStatus, errorThrown) => {
-            swal("등록 실패!", "정보를 확인해보세요!", "error");
-            /* window.alert('서버 실행 오류!'); */
-        }
-    });
+	    error: (jqXHR, textStatus, errorThrown) => {
+	        swal("등록 실패!", "정보를 확인해보세요!", "error");
+	    }
+	});
+
+  
 });
 
 updateBtn.click(() => {
@@ -243,7 +271,7 @@ updateBtn.click(() => {
         processData : false,
         contentType : false,
         success: (result) => {
-        location.href = "../main/home.html#awards";
+        location.href = "../main/home.html#lost";
         },
         error: (jqXHR, textStatus, errorThrown) => {
             swal("수정 실패!", "정보를 확인 해보세요!", "error");
@@ -260,7 +288,7 @@ deleteBtn.click(() => {
         },
         dataType: 'json',
         success: (result) => {
-        location.href = "../main/home.html#awards";
+        location.href = "../main/home.html#lost";
         },
         error: () => {
             swal("삭제 실패!", "다시 시도해보세요!", "error");

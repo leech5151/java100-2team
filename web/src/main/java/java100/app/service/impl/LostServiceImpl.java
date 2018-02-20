@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java100.app.dao.LostDao;
 import java100.app.dao.LostFileDao;
+import java100.app.dao.MemberDao;
 import java100.app.domain.Lost;
 import java100.app.domain.LostUploadFile;
 import java100.app.service.LostService;
@@ -20,11 +21,9 @@ public class LostServiceImpl implements LostService {
     @Autowired LostFileDao lostFileDao;
     
     @Override
-    public List<Lost> list(int pageNo, int pageSize, Map<String, Object> options) {
+    public List<Lost> list(Map<String, Object> options) {
         
         HashMap<String,Object> params = new HashMap<>();
-        params.put("startIndex", (pageNo - 1) * pageSize);
-        params.put("size", pageSize);
         
         if (options != null) {
             params.putAll(options);
@@ -53,7 +52,6 @@ public class LostServiceImpl implements LostService {
         lostDao.updateViewCount(no);
         
         Lost lost = lostDao.findByNo(no);
-        
         return lost;
     }
     

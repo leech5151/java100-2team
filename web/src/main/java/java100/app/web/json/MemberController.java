@@ -117,7 +117,10 @@ public class MemberController {
     public Object update(
             Member member, 
             MultipartFile[] file) throws Exception {
-        
+        System.out.println("컨트롤러");
+        System.out.println(member.getMemberNo());
+        System.out.println(member.getName());
+        System.out.println("컨트롤러end");
         String uploadDir = servletContext.getRealPath("/download");
 
         ArrayList<MemberUploadFile> uploadFiles = new ArrayList<>();

@@ -20,6 +20,7 @@ import java100.app.domain.Lost;
 import java100.app.domain.LostUploadFile;
 import java100.app.domain.Member;
 import java100.app.service.LostService;
+import java100.app.service.MemberService;
 
 @RestController
 @RequestMapping("/lost")
@@ -28,22 +29,14 @@ public class LostController {
     
     @Autowired ServletContext servletContext;
     @Autowired LostService lostService;
+    @Autowired MemberService memberService;
     
     @RequestMapping("list")
     public Object list(
-            @RequestParam(value="pn", defaultValue="1") int pageNo,
-            @RequestParam(value="ps", defaultValue="7") int pageSize,
             @RequestParam(value="words", required=false) String[] words,
             @RequestParam(value="oc", required=false) String orderColumn,
             @RequestParam(value="al", required=false) String align) throws Exception {
 
-        if (pageNo < 1) {
-            pageNo = 1;
-        }
-        
-        if (pageSize < 7 || pageSize > 7) {
-            pageSize = 7;
-        }
         
         HashMap<String,Object> options = new HashMap<>();
         if (words != null && words[0].length() > 0) {
@@ -53,16 +46,10 @@ public class LostController {
         options.put("align", align);
         
         int totalCount = lostService.getTotalCount();
-        int lastPageNo = totalCount / pageSize;
-        if ((totalCount % pageSize) > 0) {
-            lastPageNo++;
-        }
         
         HashMap<String,Object> result = new HashMap<>();
         
-        result.put("pageNo", pageNo);
-        result.put("lastPageNo", lastPageNo);
-        result.put("list", lostService.list(pageNo, pageSize, options));
+        result.put("list", lostService.list(options));
         return result;
     }
     
@@ -70,15 +57,14 @@ public class LostController {
     public Object view(@PathVariable int no) throws Exception {
         
         HashMap<String,Object> result = new HashMap<>();
-        
         result.put("data", lostService.get(no));
-        
         return result;
     }
     
     @RequestMapping("add")
     public Object add(
             Lost lost,
+            String tel,
             MultipartFile[] file,
             @ModelAttribute(value="loginUser") Member loginUser) throws Exception {
         
@@ -98,7 +84,8 @@ public class LostController {
         lost.setFiles(uploadFiles);
         
         lost.setRegistrant(loginUser);
-        
+        loginUser.setTel(tel);
+        memberService.update(loginUser);
         lostService.add(lost);
         
         HashMap<String, Object> result = new HashMap<>();

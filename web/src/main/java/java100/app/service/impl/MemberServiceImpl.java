@@ -74,7 +74,10 @@ public class MemberServiceImpl implements MemberService {
     
     @Override
     public int update(Member member) {
-        
+        System.out.println("여기서부터");
+        System.out.println(member.getMemberNo());
+        System.out.println(member.getName());
+        System.out.println("여기까지");
         int count = memberDao.update(member);
         
         memberFileDao.deleteAllByMemberNo(member.getMemberNo());

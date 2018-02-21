@@ -216,7 +216,6 @@ var loginModal = $('#loginModal');
 var loginModalContent = $('#loginModal .modal-content');
 loginBtn.click(() => {
 	loginModalContent.load('../auth/login.html', () => {
-		console.log('111');
 		loginModal.modal();
 	});
 });

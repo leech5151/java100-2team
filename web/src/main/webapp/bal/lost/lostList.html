@@ -1,8 +1,8 @@
 <div style="width: 1200px;" class="sg-paginate"> 
-<a style="text-align: center;" id="sg-up" href="#" class="sg-up">Up</a>
-<a id="sg-down" href="#" class="sg-down">Down</a> 
 </div>
-<div id="list" class="sg" style="width:1200px; height:700px; margin:0 ">
+<div id="lostListUp" class="sg" style="width:1200px; height:700px; margin:0 ">
+<a style="text-align: center;" id="sg-up" class="sg-up">Up</a>
+<a id="sg-down" class="sg-down">Down</a> 
 <br>
 </div>
 <br>
@@ -50,34 +50,28 @@
     
 <script src="../../myDesign/lost/lightweight-image-gallery-lightbox-plugin-smooth-gallery/jquery/jquery-1.11.3.js"></script>
 <script src="../../myDesign/lost/lightweight-image-gallery-lightbox-plugin-smooth-gallery/jquery/jquery.easing.js"></script>
-<script type='text/javascript' src="../../myDesign/lost/lightweight-image-gallery-lightbox-plugin-smooth-gallery/js/smoothgallery.min.js"></script>
-
-<script type="text/javascript">
-$(window).load(function() {
-    $(document).smoothGallery({
-        animSpeed:300, 
-        delaySpeed:50,
-        visibleRows: 2,
-        animEasing: 'easeOutQuart'
-    });
-});
-</script>
+<script src="../../myDesign/lost/lightweight-image-gallery-lightbox-plugin-smooth-gallery/js/smoothgallery.min.js"></script>
 
 <script src='../../node_modules/handlebars/dist/handlebars.min.js'></script>
 <script type="text/javascript">
 
-var list = $('#list'),
+var lostListUp = $('#lostListUp'),
     templateSrc = $('#template').html(),
     templateEngine = Handlebars.compile(templateSrc);
 
+$(document).smoothGallery({
+	animSpeed: 180,
+    delaySpeed: 50,
+    visibleRows: 2,
+    animEasing: 'easeOutQuart'
+});
 load();
-
 function load() {
        
     $.ajax('../../json/lost/list', {
         dataType: 'json',
         success: (result) => {
-        	list.html(templateEngine(result));
+        	lostListUp.html(templateEngine(result));
             $(document).ready(function(){ 
                 $('button').click(function(e){
                     var id = e.target.getAttribute('id');

@@ -8,6 +8,7 @@ public class Diagnosis {
     protected String diagnosisContents;
     protected double dogweight;
     protected String dateRecording;
+    protected String nowDateRecording;
     protected String recorder;
     protected String remarks;
     protected String memberTel;
@@ -28,9 +29,18 @@ public class Diagnosis {
                 + hospital + "]";
     }
     
+    public String getNowDateRecording() {
+        return nowDateRecording;
+    }
+
+    public void setNowDateRecording(String nowDateRecording) {
+        this.nowDateRecording = nowDateRecording;
+    }
+
     public String getMemberTel() {
         return memberTel;
     }
+    
     public void setMemberTel(String memberTel) {
         this.memberTel = memberTel;
     }

@@ -87,6 +87,7 @@ $.datepicker.regional['kr'] = {
 
 	// Start Datepicker UI
 $(function(){
+    console.log('mainlist.html....... ok! - 11111111')
 	$(".selectDate").datepicker({
 		onSelect: function (dateText, inst) {
 			  $.ajax('../../json/diagnosis/mylist', {
@@ -121,6 +122,7 @@ $(function(){
 	
 	
 $(function(){
+    console.log('mainlist.html....... ok! - 222222')
 	$(".nowDate").datepicker({
 		onSelect: function (dateText, inst) {
 			  $.ajax('../../json/diagnosis/mylist', {

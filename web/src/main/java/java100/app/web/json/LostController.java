@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import java100.app.domain.Diagnosis;
 import java100.app.domain.Lost;
 import java100.app.domain.LostUploadFile;
 import java100.app.domain.Member;
@@ -82,7 +83,6 @@ public class LostController {
         }
         
         lost.setFiles(uploadFiles);
-        
         lost.setRegistrant(loginUser);
         loginUser.setTel(tel);
         memberService.update(loginUser);

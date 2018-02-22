@@ -1,4 +1,4 @@
-<!-- <meta charset="UTF-8"> -->
+<meta charset="UTF-8">
 <link rel="stylesheet" href="../../sliding-panels/css/reset.css">
 <link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <link rel='stylesheet' href='../../css/common.css'>
@@ -21,10 +21,12 @@
 <table id="list" class='table table-hover'>
 <thead>
 <tr>
-<th>번호</th><th>업체명</th><th>주소</th><th>사진</th>
+<th>번호</th><th>카테고리</th><th>업체명</th><th>주소</th><th>사진</th>
 </tr>
 </thead>
-<tbody></tbody>
+<tbody id=ctg_pention></tbody>
+<tbody id=ctg_restaurant></tbody>
+<tbody id=ctg_ect></tbody>
 </table>
 <nav aria-label="Page navigation">
   <ul class="pagination justify-content-center">
@@ -41,13 +43,15 @@
 </div>
 
 <script src='../../node_modules/handlebars/dist/handlebars.min.js'></script>
-<script src='../../node_modules/jquery/dist/jquery.min.js'></script>
+<script src='../../node_modules/jquery/dist/jquery.min.js'></script> -
 <script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
 <script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
 <script id="template" type="text/x-handlebars-template">
+
 {{#each list}}
 <tr>
 <td>{{businessNo}}</td>
+<td>{{category}}</td>
 <td><a href="form.html?no={{businessNo}}">{{businessName}}</a></td> 
 <td>{{primary_address}}</td>
 {{#each files}}
@@ -62,7 +66,9 @@ searchBtn = $('#searchBtn'),
 prevBtn = $('#prevBtn'),
 currBtn = $('#currBtn'),
 nextBtn = $('#nextBtn'),
-tbody = $('#list > tbody'),
+tbodyP = $('#list > #ctg_pention'),
+tbodyR = $('#list > #ctg_restaurant'),
+tbodyE = $('#list > #ctg_ect'),
 currPageNo = 1;
 templateSrc = $('#template').html(),
 templateEngine = Handlebars.compile(templateSrc);
@@ -90,13 +96,24 @@ function load(pageNo, options) {
 if (options == undefined) options = {};
 options.pn = pageNo;
 
+var count;
 $.ajax('../../json/business/list', {
     /*method: 'GET',*/
     data: options,
     dataType: 'json',  
     success: (result) => {
-        
-        tbody.html(templateEngine(result));
+        for(var data of result.list){
+	        if (data.category == '1'){
+	            tbodyP.html(templateEngine(result));
+	        }  else if (data.category == '2') {
+	            console.log("식당");
+	            tbodyR.html(templateEngine(result));
+	        } else {
+	            console.log(data.category);
+	            console.log("기타");
+	            tbodyE.html(templateEngine(result));
+	        } 
+        }
         
         currPageNo = result.pageNo;
         currBtn.html(currPageNo);

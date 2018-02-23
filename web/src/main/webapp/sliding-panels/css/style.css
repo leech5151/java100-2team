@@ -26,7 +26,7 @@ a #together {
  	margin-left: -88px;
 	/* margin-right: -48px; */
 /*     margin-bottom: -49px;  */
-	margin-top: -60px;
+	margin-top: -49px;
   	width: 110%; !important; 
  	height: 115%;!important;  
 }
@@ -196,7 +196,7 @@ Projects
 .cd-projects-container {
   position: relative;
   z-index: 2;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 .cd-projects-container.project-open {
   /* smooth scroll on iOS devices */
@@ -464,7 +464,7 @@ Projects
 @media only screen and (min-width: 1024px) {
   .cd-project-title {
     width: 25%;
-    top: 50vh;
+    top: 5vh;
     -webkit-transform: translateX(0%);
     -moz-transform: translateX(0%);
     -ms-transform: translateX(0%);
@@ -549,8 +549,17 @@ li.selected .cd-project-title,
     -moz-transform: translateX(150%);
     -ms-transform: translateX(150%);
     -o-transform: translateX(150%);
-    transform: translateX(150%);
-    margin-left: -88px;
+    transform: translateX(500%);
+    transition: transform 1.5s 0s;
+    margin-left: -88px; 
+  }
+  
+  li.selected .cd-project-conts,
+  .cd-projects > li:nth-of-type(2).selected .cd-project-title,
+  .cd-projects > li:nth-of-type(3).selected .cd-project-title,
+  .cd-projects > li:nth-of-type(4).selected .cd-project-title {
+  margin-top: -8px;
+  height: 100%;
   }
 }
 
@@ -572,8 +581,11 @@ li.selected .cd-project-title,
 }
 
 .cd-project-info {
+  width:100%;
+  height:100%;
   display: none;
   padding: 4em 0;
+  margin-top:-8.5px;
   background-color: #ffffff;
   color: #7d7c7b;
 }

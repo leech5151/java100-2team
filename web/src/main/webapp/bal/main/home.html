@@ -14,6 +14,7 @@
     <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="../../sliding-panels/js/modernizr.js"></script>
     <!-- Custom fonts for this template -->
+    <link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
     <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
     <link href="../../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -38,6 +39,12 @@
       background-color: #f9f9f9;
       margin-bottom: 10px;
   } 
+  #business_form {
+    height: 50%;
+    margin-top: -102px;
+   
+  }
+ 
 </style>
   
   </head>
@@ -52,7 +59,8 @@
         
     </a>
  
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+            style="background-color: #BD5D38 !important;">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -212,6 +220,16 @@ if (index != -1) {
     });
 
 } else {}
+
+var businessViewModal = $('#businessViewModal');
+var businessViewModalContent = $('#businessViewModal .modal-content');
+$(document).ready(function(){ 
+    $('#businessInfo').click(function(e){
+    businessViewModalContent.load('../business/view.html', () => {
+            businessViewModal.modal();
+        });
+    });
+});
 
 var loginModal = $('#loginModal');
 var loginModalContent = $('#loginModal .modal-content');

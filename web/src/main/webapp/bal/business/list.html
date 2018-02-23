@@ -1,10 +1,8 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../../sliding-panels/css/reset.css">
-<link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
-<link rel='stylesheet' href='../../css/common.css'>
 <link rel='stylesheet' href='../../css/business.css'>
 
-<div class='container bs-list'>
+<div id='bs_list' class='container bs-list'>
 <h1>펫과 함께</h1>
 
 <nav class="navbar navbar-light justify-content-between">
@@ -21,6 +19,7 @@
 <table id="list" class='table table-hover'>
 <thead>
 <tr>
+
 <th>번호</th><th>카테고리</th><th>업체명</th><th>주소</th><th>사진</th>
 </tr>
 </thead>
@@ -52,7 +51,7 @@
 <tr>
 <td>{{businessNo}}</td>
 <td>{{category}}</td>
-<td><a href="form.html?no={{businessNo}}">{{businessName}}</a></td> 
+<td><a href="../business/form.html?no={{businessNo}}">{{businessName}}</a></td> 
 <td>{{primary_address}}</td>
 {{#each files}}
 <td><img src="../../download/{{filename}}" alt={{filename}} width='50px' height='50px'></td>
@@ -135,6 +134,5 @@ $.ajax('../../json/business/list', {
     }
 });
 }
-
 </script>
     

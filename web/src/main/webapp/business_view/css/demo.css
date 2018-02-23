@@ -37,7 +37,12 @@
 #business_form button:focus {
 	outline: none;
 }
-
+#modal_view_content {
+	width: 220%;
+	margin-left: -50px;
+	font-size: 0.75em;
+	box-shadow: 20px 20px 0px rgba(0, 0, 0, 0.16);
+}
 .hidden {
 	position: absolute;
 	overflow: hidden;
@@ -53,14 +58,14 @@
 
 /* Header */
 .codrops-header {
-	padding: 3em 1em 4em;
+	padding: 1em 1em 4em;
 	text-align: center;
 }
 
 .codrops-header h1 {
 	margin: 0.5em 0 0 0;
 	font-weight: 400;
-	font-size: 3em;
+	font-size: 2em;
 	line-height: 1;
 	font-family: 'Lustria', 'Goudy Old Style', Garamond, 'Big Caslon', 'Times New Roman', serif;
 }
@@ -131,8 +136,8 @@
 
 /* Demo links */
 .codrops-demos {
-	margin: 2em 0 0;
-	font-size: 1.35em;
+	margin: 1em 0 0;
+	font-size: 0.8em;
 }
 
 .codrops-demos a {

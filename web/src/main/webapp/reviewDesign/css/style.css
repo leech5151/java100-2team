@@ -10,10 +10,10 @@ body .container_Review {
   text-align: center;
   height: 500px;
   position: fixed;
-  margin-left: 50px;
+  margin-left: -550px;
   margin-bottom: 100px;
   bottom: 100%;
-  top: 200px;
+  top: 180px;
   left: 0;
   right: 0; 
 

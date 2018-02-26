@@ -15,7 +15,7 @@
 .clearfix:before, .clearfix:after {display: table;  content: ''; }
 .clearfix:after { clear: both; }
 
-#business_form {
+#view_form {
 	/* background: #52545A; */
 	color: #B2B5BD;
 	font-size: 1em;
@@ -24,17 +24,17 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-#business_form a {
+#view_form a {
 	color: #999;
 	text-decoration: none;
 }
 
-#business_form a:hover, #business_form a:focus {
+#view_form a:hover, #business_form a:focus {
 	color: #7D87AE;
 	outline: none;
 }
 
-#business_form button:focus {
+#view_form button:focus {
 	outline: none;
 }
 #modal_view_content {

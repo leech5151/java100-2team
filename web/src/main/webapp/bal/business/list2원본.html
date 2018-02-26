@@ -1,11 +1,9 @@
 <meta charset="UTF-8">
 <h2>Welcome home!</h2>
  <div id="blist-container">
-    <div id="portfolio">
+    <div id="portfolio"></div>
 	    <ul id="portfolio-item">
-	    
 	    </ul>
-	</div>    
     <nav aria-label="Page navigation">
 	  <ul class="pagination justify-content-center">
 	    <li class="page-item">
@@ -27,27 +25,28 @@
 <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
 <script id="template" type="text/x-handlebars-template">
 {{#each list}}
-<li>
 {{#each files}}
-  <img src="../../download/{{filename}}" alt="{{businessName}}" />
-{{/each}}  
-</li>
+<div style="background:url({{filename}})"> <span>{{businessName}}</span></div>
+
+
+{{/each}}
 {{/each}}
 </script>
+<!-- <li><img src="../../download/{{filename}}" alt={{businessName}} /></li>
+<li>{{businessName}}</li> -->
 <script type="text/javascript">
 /* words = $('#words'),
 searchBtn = $('#searchBtn'), */
 var prevBtn = $('#prevBtn'),
 currBtn = $('#currBtn'),
 nextBtn = $('#nextBtn'),
-ulP = $('#portfolio-item'),
+ulP = $('#portfolio > #portfolio-item'),
 ulF = $('#food-list > #portfolio-item'),
 ulE = $('#ect-list > #portfolio-item'),
 currPageNo = 1;
 templateSrc = $('#template').html(),
 templateEngine = Handlebars.compile(templateSrc);
 load(1);
-
 
 /* searchBtn.click(() => {
 //event.preventDefault();
@@ -76,15 +75,8 @@ $.ajax('../../json/business/list', {
     data: options,
     dataType: 'json',  
     success: (result) => {
-        for (var item of result.list) {
-            for (var files of item.files) {
-                files.businessName = item.businessName;
-            }
-        }
-        console.log(result);
     	ulP.html(templateEngine(result));
-        
-    	for(var data of result.list){
+    	 for(var data of result.list){
     	 
         var b_name = data.businessName;
         var b_no = data.businessNo;

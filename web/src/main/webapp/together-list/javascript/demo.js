@@ -1,5 +1,6 @@
 $(document).ready(function() {
-  
+    console.log("값이 넘어오냐2");
+    console.log("값이 넘어오냐3")
   //Initiliaze
   itemShow         = 8;
   indexedItemShow  = itemShow - 1

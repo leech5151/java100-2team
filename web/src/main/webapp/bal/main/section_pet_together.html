@@ -1,53 +1,96 @@
-<link href="../../css/tab.css" rel="stylesheet">
 
-    <div class="my-auto">
-        <h2 class="mb-5">
-            <ul class='navbar-nav mr-auto'>
-                <li class='nav-item'><a class='nav-link'
-                    href='../business/main.html'>PET TOGETHER</a></li>
-            </ul>
-        </h2>
+<meta charset="UTF-8">
+<!-- <meta name="viewport" content="width=device-width,initial-scale=1.0"> -->
+<link rel="stylesheet" href="../../together-tab/css/font-awesome.css">
+<link rel="stylesheet" href="../../together-tab/css/style.css">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="../../together-tab/image/png" href="/favicon.png">
+ 
+<!-- list -->
+<link rel="stylesheet" href="../../together-list/demo.css?v=2">
+<script src="../../together-list/javascript/modernizr.custom.34807.js"></script>
+ 
+<main class="o-main">
+<div class="o-container">
 
-        <div class="tabs">
-            <div class="tab-2" id="t_first">
-                <label for="tab2-1">One</label>
-                <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
-                <div>
-                <table>
-                <tr>
-                    <td><img src="../../download/together_main.jpg" width=100%></td>
-                </tr>
-                </table>
-                </div>
-            </div> 
-            <div class="tab-2" id="t_second">
-                <label for="tab2-2">Two</label>
-                <input id="tab2-2" name="tabs-two" type="radio">
-                <div>
-                <table>
-                <tr>
-                    <td><img src="../../download/together_two.png" width=px></td>
-                </tr>
-                </table>
-                </div>
-            </div>
-            <div class="tab-2" id="t_third">
-                <label for="tab2-3">Three</label>
-                <input id="tab2-3" name="tabs-two" type="radio">
-                <div>
-                    <h4>Tab Two</h4>
-                    <p>Quisque sit amet turpis leo. Maecenas sed dolor mi. Pellentesque varius elit in neque ornare commodo ac non tellus. Mauris id iaculis quam. Donec eu felis quam. Morbi tristique lorem eget iaculis consectetur. Class aptent taciti sociosqu ad litora
-                        torquent per conubia nostra, per inceptos himenaeos. Aenean at tellus eget risus tempus ultrices. Nam condimentum nisi enim, scelerisque faucibus lectus sodales at.</p>
-                </div>
-            </div>
-            <div class="tab-2" id="t_last">
-                <label for="tab2-4">four</label>
-                <input id="tab2-4" name="tabs-two" type="radio">
-                <div>
-                    <h4>Tab Two</h4>
-                    <p>Quisque sit amet turpis leo. Maecenas sed dolor mi. Pellentesque varius elit in neque ornare commodo ac non tellus. Mauris id iaculis quam. Donec eu felis quam. Morbi tristique lorem eget iaculis consectetur. Class aptent taciti sociosqu ad litora
-                        torquent per conubia nostra, per inceptos himenaeos. Aenean at tellus eget risus tempus ultrices. Nam condimentum nisi enim, scelerisque faucibus lectus sodales at.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="o-section">
+		<div id="tabs" class="c-tabs no-js">
+			<div class="c-tabs-nav">
+				<a href="#" class="c-tabs-nav__link is-active"> <i
+					class="fa fa-home"></i> <span>Home</span>
+				</a> <a href="#" class="c-tabs-nav__link"> <i class="fa fa-book"></i>
+					<span>Pentions</span>
+				</a> <a href="#" class="c-tabs-nav__link"> <i class="fa fa-heart"></i>
+					<span>Foods</span>
+				</a> <a href="#" class="c-tabs-nav__link"> <i class="fa fa-calendar"></i>
+					<span>Fun</span>
+				</a> <a href="#" class="c-tabs-nav__link"> <i class="fa fa-cog"></i>
+					<span>Insert</span>
+				</a>
+			</div>
+			<div class="c-tab is-active">
+				<div class="c-tab__content" >
+					<h2>Welcome home!</h2>
+					<p>Home ipsum dolor sit amet, consectetur adipisicing elit. Ipsam quo minus voluptate unde tempore eveniet consequuntur in, quod animi libero rem similique pariatur quos, et eum nisi ducimus, architecto voluptatibus!</p>
+            		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto aspernatur natus dolorem fuga cumque optio saepe corrupti earum. Ipsam quaerat asperiores similique omnis excepturi temporibus ab eum magnam ipsa, odio.</p>
+          
+				</div>
+			</div>
+			<div class="c-tab">
+				<div class="c-tab__content" id="pention-list">
+				</div>
+			</div>
+			<div class="c-tab">
+				<div class="c-tab__content" id="food-list">
+				</div>
+			</div>
+			<div class="c-tab">
+				<div class="c-tab__content" id="ect-list">
+				</div>
+			</div>
+			<div class="c-tab">
+				<div class="c-tab__content">
+					<a href="../business/view.html"><h2>Change It Up</h2></a>
+					<p>Settings ipsum dolor sit amet, consectetur adipisicing elit.
+						Ipsam quo minus voluptate unde tempore eveniet consequuntur in,
+						quod animi libero rem similique pariatur quos, et eum nisi
+						ducimus, architecto voluptatibus!</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+						Iusto aspernatur natus dolorem fuga cumque optio saepe corrupti
+						earum. Ipsam quaerat asperiores similique omnis excepturi
+						temporibus ab eum magnam ipsa, odio.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+</main>
+
+<script src="../../together-tab/js/src/tabs.js"></script>
+<script>
+  var myTabs = tabs({
+    el: '#tabs',
+    tabNavigationLinks: '.c-tabs-nav__link',
+    tabContentContainers: '.c-tab'
+  });
+
+  myTabs.init();
+</script>
+
+<!-- EXTERNAL SCRIPTS FOR CALLMENICK.COM, PLEASE DO NOT INCLUDE -->
+<script src="../../together-tab/js/lib/githubicons.js"></script>
+<script src="../../together-tab/js/lib/carbonad.js"></script>
+
+<!-- list -->
+<script> if(!Modernizr.csstransforms3d) document.getElementById('information').style.display = 'block'; </script>
+<script>!window.jQuery && document.write(unescape('%3Cscript src="../../together-list/javascript/jquery-1.7.2.min.js"%3E%3C/script%3E'))</script>
+<script src="../../together-list/javascript/demo.js"></script>
+
+<script type="text/javascript">
+	$('#pention-list').load('../business/list.html');
+	$('#food-list').load('../business/list.html');
+	$('#ect-list').load('../business/list.html');
+</script>
+

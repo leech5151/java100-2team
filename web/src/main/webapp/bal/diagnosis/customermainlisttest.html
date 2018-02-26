@@ -1,0 +1,367 @@
+<html>
+<link rel='stylesheet'
+	href='../../node_modules/slick-carousel/slick/slick.css'>
+<link rel='stylesheet' href='../../css/lsstablestyle.css'>
+
+
+<div id="wrap" style="width: 100%; height: 750px;">
+
+	<div id="contentswrap"
+		style="width: 76%; height: 100%; float: left; border: solid 1px green;">
+		<div class="dgncontents"
+			style="width: 100%; height: 100%; float: left; position: relative;">
+
+			<div class='col-sm-10'>
+				<input class='form-control' readonly id='hospitalName' type='text'
+					name='diagnosis.hospital.hospitalName'>
+			</div>
+
+			<div class='col-sm-10'>
+				<input class='form-control' id='memberName' type='text'
+					name='memberName'>
+			</div>
+
+			<div class='col-sm-10'>
+				<input class='form-control' id='memberTel' type='text'
+					name='memberTel'>
+			</div>
+
+
+			<div class='col-sm-10'>
+				<input class='form-control' id='dogweight' type='number'
+					name='dogweight'>
+			</div>
+
+
+			<div class='col-sm-10'>
+				<input class='form-control' id='diagnosisCategory' type='text'
+					name='diagnosisCategory'>
+			</div>
+
+			<div class='col-sm-10'>
+				<input class='form-control' id='diagnosisName' type='text'
+					name='diagnosisName'>
+			</div>
+
+			<div class='col-sm-10'>
+				<input class='form-control' id='diagnosisContents' type='text'
+					name='diagnosisContents'>
+			</div>
+
+
+			<div class='col-sm-10'>
+				<input class='form-control my-recordData' id='dateRecording'
+					type='date' name='dateRecording'>
+			</div>
+
+			<div class='col-sm-10'>
+				<input class='form-control my-recordData' id='recorder' type='text'
+					name='recorder'>
+			</div>
+
+			<div class='col-sm-10'>
+				<input class='form-control' id='remarks' type='text' name='remarks'>
+			</div>
+
+
+		</div>
+		<!-- <div class="dgncontents"
+			style="width: 100%; height: 100%; float: left; position: relative;">
+           
+            <div class='form-group row my-view' style="background-color: green">
+                <label for='hospitalName' class='col-sm-2 col-form-label'>병원명</label>
+                <div class='col-sm-10'>
+                    <input class='form-control' readonly id='hospitalName' type='text'
+                        name='diagnosis.hospital.hospitalName'>
+                </div>
+            </div>
+
+            <div class='form-group row'>
+                <label for='memberName' class='col-sm-2 col-form-label'>진료회원명</label>
+                <div class='col-sm-10'>
+                    <input class='form-control' id='memberName' type='text' name='memberName'>
+                </div>
+            </div>
+
+            <div class='form-group row'>
+                <label for='memberTel' class='col-sm-2 col-form-label'>진료회원연락처</label>
+                <div class='col-sm-10'>
+                    <input class='form-control' id='memberTel' type='text' name='memberTel'>
+                </div>
+            </div>
+
+
+            <div class='form-group row'>
+                <label for='dogweight' class='col-sm-2 col-form-label'>강아지무게</label>
+                <div class='col-sm-10'>
+                    <input class='form-control' id='dogweight' type='number'
+                        name='dogweight'>
+                </div>
+            </div>
+
+
+            <div class='form-group row'>
+                <label class='col-sm-2 col-form-label'>분류</label>
+                <div class='col-sm-10'>
+                    <input class='form-control' id='diagnosisCategory' type='text'
+                        name='diagnosisCategory'>
+                </div>
+            </div>
+
+            <div class='form-group row'>
+                <label for='diagnosisName' class='col-sm-2 col-form-label'>진료명</label>
+                <div class='col-sm-10'>
+                    <input class='form-control' id='diagnosisName' type='text'
+                        name='diagnosisName'>
+                </div>
+            </div>
+
+            <div class='form-group row'>
+                <label for='diagnosisContents' class='col-sm-2 col-form-label'>진료내용</label>
+                <div class='col-sm-10'>
+                    <input class='form-control' id='diagnosisContents' type='text'
+                        name='diagnosisContents'>
+                </div>
+            </div>
+
+
+            <div class='form-group row my-view'>
+                <label for='dateRecording' class='col-sm-2 col-form-label'>기록일자</label>
+                <div class='col-sm-10'>
+                    <input class='form-control my-recordData' id='dateRecording'
+                        type='date' name='dateRecording'>
+                </div>
+            </div>
+
+            <div class='form-group row'>
+                <label for='recorder' class='col-sm-2 col-form-label'>기록자</label>
+                <div class='col-sm-10'>
+                    <input class='form-control my-recordData' id='recorder' type='text'
+                        name='recorder'>
+                </div>
+            </div>
+
+            <div class='form-group row'>
+                <label for='remarks' class='col-sm-2 col-form-label'>비고</label>
+                <div class='col-sm-10'>
+                    <input class='form-control' id='remarks' type='text' name='remarks'>
+                </div>
+            </div>
+			
+			
+			</div> -->
+	</div>
+
+
+	<div style="float: left; width: 4%; height: 100%; margin-left: 5%">
+
+		<div style="height: 20%"></div>
+		<div style="height: 15%"></div>
+		<div style="height: 25%;">
+
+			<img class='prev' src="../../images/button/arrow_top_thin.png"
+				height="60px" width="60px"></img> <br> <br> <img
+				class='next' src="../../images/button/arrow_bottom_thin.png"
+				height="60px" width="60px"></img>
+
+		</div>
+		<div style="height: 20%"></div>
+		<div style="height: 20%"></div>
+	</div>
+
+	<div id="rightcontentswrap"
+		style="width: 15%; height: 100%; float: right;">
+		<div id="slickslider" class="slider"
+			style="width: 100%; height: 100%; float: right; border: double 2px #d2691e">라이트
+			콘텐츠</div>
+	</div>
+
+
+
+
+</div>
+
+<script src='../../node_modules/slick-carousel/slick/slick.js'></script>
+
+<script type="text/javascript">
+
+var noItem=$('#diagnosisNo'),
+memberNameItem=$('#memberName'),
+memberTelItem=$('#memberTel'),
+hospitalNameItem=$('#hospitalName'),
+hospitalNoItem=$('#hospitalNo'),
+dogweightItem=$('#dogweight'),
+categoryItem=$('#diagnosisCategory'),
+nameItem=$('#diagnosisName'),
+contentsItem=$('#diagnosisContents'),
+recordingItem=$('#dateRecording'),
+recorderItem=$('#recorder'),
+remarksItem=$('#remarks');
+
+
+load();
+
+//$(document).ready(function(){
+function load(){	
+console.log("으아아아아아아아")
+$.ajax('../../json/diagnosis/myAlllist', {
+	async: false,
+    dataType: 'json',
+    success: (result) => {
+        for (var data of result.list) {
+            $('<div class="plan" style="margin-top: 8px">')
+                .html(  
+                    "<h3 class='plan-title'>"+ data.hospital.hospitalName + "</h3>" + 
+                    "<div class='plan-feature'>"+'Date'+ "</div>" +
+                    "<div class='plan-feature-name'>" + data.dateRecording + "</div>" +
+                    "<div class='plan-feature'>"+'Category'+ "</div>"+
+                    "<div class='plan-feature-name'>" + data.diagnosisCategory + "</div>"+
+                    "<input type='text' class='dgnno'style='display: none' value="+data.diagnosisNo+">" +  
+                    "<a href='../diagnosis/list.html' class='plan-button' style='display: none'>모든 진료기록 보기</a>"
+                	)
+                    .appendTo('.slider');
+        }
+        load2();
+        
+    error: () => {
+    }
+    },
+});
+}
+
+$('.next').click(function(){
+    $("#slickslider").slick('slickNext');
+});
+$('.prev').click(function(){
+    $("#slickslider").slick('slickPrev');
+});
+
+
+
+function load2(){	
+    
+	console.log("dmdkdkdkdkdkdkdkdk333333333333")
+	$('.slider').slick({
+		vertical: true,
+		slidesToShow: 6,
+		slidesToScroll: 1,
+		verticalSwiping: true,
+		infinite: false,
+		prevArrow: '.prev',
+		nextArrow: '.next',
+		adaptiveHeight: true
+		});
+    
+    $('.slick-track').children().first().children().children().addClass("plan-highlight");
+    $('.slick-track').children().first().children().children().children(".plan-button").css("display","block");		
+	 
+	 
+	//slick slider 리스트의 첫번째 value값 뽑기
+ var k = $('.slick-track').children().first().children().children().children().last().prev().attr('value');
+ console.log(k);
+	$.ajax('../../json/diagnosis/'+ k, {
+	async: false,
+   dataType: 'json',
+   success: (result) => {
+       memberNameItem.val(result.data.memberName);
+       memberTelItem.val(result.data.memberTel);
+       hospitalNameItem.val(result.data.hospital.hospitalName);
+       dogweightItem.val(result.data.dogweight);
+       categoryItem.val(result.data.diagnosisCategory);
+       nameItem.val(result.data.diagnosisName);
+       contentsItem.val(result.data.diagnosisContents);
+       recordingItem.val(result.data.dateRecording);
+       recorderItem.val(result.data.recorder);
+       remarksItem.val(result.data.remarks);
+   },
+     error: () => {
+   	  window.alert('서버 실행 오류!');
+     }
+     });
+ };
+
+
+
+
+
+
+
+
+
+
+
+
+
+      $( document ).ready( function() {
+      
+    	  $(".prev")
+          .mouseover( function() { 
+            $(this).attr( 'src', '../../images/button/arrow_top.png')
+          } )
+          .mouseout( function() {
+            $(this).attr( 'src', '../../images/button/arrow_top_thin.png');
+          } ).mousedown( function(){
+        	  $(this).attr( 'src', '../../images/button/arrow_top_white.png');
+        	  $(this).css("background-color","black");
+          }).mouseup( function(){
+          	  $(this).attr( 'src', '../../images/button/arrow_top.png');
+          	$(this).css("background-color","inherit");
+          });
+        $(".next")
+        .mouseover( function() { 
+          $(this).attr( 'src', '../../images/button/arrow_bottom.png' );
+        } )
+        .mouseout( function() {
+          $(this).attr( 'src', '../../images/button/arrow_bottom_thin.png' );
+        } ).mousedown( function(){
+      	  $(this).attr( 'src', '../../images/button/arrow_bottom_white.png');
+      	  $(this).css("background-color","black");
+        }).mouseup( function(){
+      	  $(this).attr( 'src', '../../images/button/arrow_bottom.png');
+      	$(this).css("background-color","inherit");
+        });
+        
+     	   $(".plan").mouseover( function(){
+     	      	
+     	      	$('.slick-track').children().children().children(".plan").removeClass("plan-highlight");
+     	        $('.slick-track').children().children().children().children(".plan-button").css("display","none");	
+     	      	
+     			$(this).addClass("plan-highlight");
+     			$(this).children(".plan-button").css("display","block");
+     			//////////////////////////////////////////////////////////
+	     		var k = $(this).children().last().prev().attr('value');
+    			console.log(k);
+    			$.ajax('../../json/diagnosis/'+ k, {
+    			async: false,
+           		dataType: 'json',
+            	success: (result) => {
+                memberNameItem.val(result.data.memberName);
+                memberTelItem.val(result.data.memberTel);
+                hospitalNameItem.val(result.data.hospital.hospitalName);
+                dogweightItem.val(result.data.dogweight);
+                categoryItem.val(result.data.diagnosisCategory);
+                nameItem.val(result.data.diagnosisName);
+                contentsItem.val(result.data.diagnosisContents);
+                recordingItem.val(result.data.dateRecording);
+                recorderItem.val(result.data.recorder);
+                remarksItem.val(result.data.remarks);
+            },
+    	      error: () => {
+    	    	  window.alert('서버 실행 오류!');
+    	     	 }
+    	      });	
+     	   })
+      });
+      
+
+      
+
+     
+      
+      
+      
+</script>
+</html>
+
+
+

@@ -1,0 +1,63 @@
+<html>
+<body>
+	<div id="wrap" style="width: 100%; height: 650px; border:solid 1px red; ">
+	
+			<div id="contentswrap" style="width: 70%; height: 100%; float:left; border:solid 1px green;">
+				<div style=" width: 100%; height: 70px; float: left; position: relative; border:solid 1px black;">콘텐츠 헤드</div>
+				<div style=" width: 100%; height: 580px; float: left; position: relative; border:solid 1px yellow;">콘텐츠</div>
+			</div>
+			
+			<div id="rightcontentswrap" style=" width: 20%; height: 650px; text-align: center; float: right; position: relative;">
+				<div style="width: 100%; height: 70px; text-align: center; float: right; border:solid 1px magenta;">라이트 헤드</div>
+				<div style="width: 100%; height: 580px; text-align: center; float: right; border:solid 1px gray;">라이트 콘텐츠
+				<table id="list" class='table table-hover'>
+	<thead>
+		<tr>
+		
+		</tr>
+	</thead>
+
+	<tbody id="hospitalbody"></tbody>
+
+</table>
+				
+				</div>
+			</div>
+			
+			
+	</div>
+</html>
+
+<script type="text/javascript">
+var tbody = $('#list > tbody');   
+load();
+
+
+function load() {
+    
+    $.ajax('../../json/hospital/list', {
+        dataType: 'json',
+        success: (result) => {
+            
+            
+            for (var data of result.list) {
+            	for (var file of data.files) {
+                $('<tr>')
+                    .html(  
+	                    "<td>" + data.hospitalNo + "</td>" + 
+	                    "<td><a href='../hospital/form.html?no=" + data.hospitalNo + "'>" + data.hospitalName + "</a></td>" + 
+	                    "<td>" + data.openTime + "</td>" +
+	                    "<td>" + data.detailAddress + "</td>" +
+	                    "<td>" + data.hospitalTel + "</td>" +
+	                    "<td>" + data.medicalStaff + "</td>"   +
+	                    "<td><img src='../../download/" + file.filename + "' alt=" + file.filename + " width='50px' height='50px'></td>")
+	                    .appendTo('#hospitalbody');
+            	}
+            }
+        },
+        error: () => {
+        }
+    });
+}
+
+</script>

@@ -67,6 +67,7 @@ public class ReviewController {
         HashMap<String,Object> result = new HashMap<>();
         result.put("pageNo", pageNo);
         result.put("lastPageNo", lastPageNo);
+        result.put("totalCount", totalCount);
         result.put("list", reviewService.list(pageNo, pageSize, options));
         return result;
     }

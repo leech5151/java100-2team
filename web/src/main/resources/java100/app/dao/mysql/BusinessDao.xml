@@ -47,6 +47,7 @@
             b.bus_no,
             d.file,
             b.b_name,
+            b.ctgr,
             b.prm_addr,
             b.ctgr
         from bus as b

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
+
+<title>Balance Pet</title>
+
+<!-- Bootstrap core CSS -->
+<link href="../../vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+<script src="../../sliding-panels/js/modernizr.js"></script>
+<!-- Custom fonts for this template -->
+<link rel='stylesheet'
+	href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link
+	href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
+	rel="stylesheet">
+<link href="../../vendor/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet">
+<link href="../../vendor/devicons/css/devicons.min.css" rel="stylesheet">
+<link href="../../vendor/simple-line-icons/css/simple-line-icons.css"
+	rel="stylesheet">
+
+
+<!-- Custom styles for this template -->
+<link href="../../css/resume.min.css" rel="stylesheet">
+
+<!-- 자체 작업 CSS -->
+<link href="../../css/home.css" rel="stylesheet">
+
+<style>
+.modal-header, h4, .close {
+	background-color: #5cb85c;
+	color: white !important;
+	text-align: center;
+	font-size: 30px;
+}
+
+.modal-footer {
+	background-color: #f9f9f9;
+	margin-bottom: 10px;
+}
+
+#business_form {
+	height: 50%;
+	margin-top: -102px;
+}
+</style>
+
+</head>
+
+<body id="page-top">
+
+	<div class="home">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top"
+			id="sideNav" style="float:left">
+			<a class="navbar-brand js-scroll-trigger" href="#page-top"> <span
+				class="d-block d-lg-none">Balance Pet</span> <img id="memberPhoto"></img>
+
+			</a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation"
+				style="background-color: #BD5D38 !important;">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+				<ul class="navbar-nav" id="menubar">
+					<li></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="#first">Home</a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="#care">Pet Care</a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="#together">Pet Together</a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="#story">Pet Story</a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="#cast">Pet Cast</a></li>
+					<li class="nav-item"><a class="nav-link js-scroll-trigger"
+						href="#lost">Lost</a></li>
+				</ul>
+			</div>
+
+			<div class='form-group row' align="right">
+				<button id="loginBtn" type="button" style="margin: 5px"
+					class='btn btn-outline-dark btn-sm before-login'>login</button>
+				<button id="singUpBtn" type="button" style="margin: 5px"
+					class='btn btn-outline-dark btn-sm before-login'>signUp</button>
+				<button id="logoutBtn" type="button" style="margin: 5px"
+					class='btn btn-outline-dark btn-sm after-login'>logout</button>
+			</div>
+
+		</nav>
+	    <div style=”clear:both;”></div> 
+		
+		<div class="container-fluid" id="p-0">
+			<section class="resume-section p-3 p-lg-5 d-flex d-column" id="first"></section>
+			<section class="resume-section p-3 p-lg-5 d-flex flex-column"
+				id="care"></section>
+			<section class="resume-section p-3 p-lg-5 d-flex flex-column"
+				id="together"></section>
+			<section class="resume-section p-3 p-lg-5 d-flex flex-column"
+				id="story"></section>
+			<section class="resume-section p-3 p-lg-5 d-flex flex-column"
+				id="cast"></section>
+			<section class="resume-section p-3 p-lg-5 d-flex flex-column"
+				id="lost"></section>
+		</div>
+	</div>
+	<!-- Modal -->
+
+	<div class="modal fade" role="dialog" id="loginModal">
+		<div class="modal-dialog">
+			<div class="modal-content"></div>
+		</div>
+	</div>
+
+	<div class="modal fade" role="dialog" id="memberViewModal">
+		<div class="modal-dialog">
+			<div class="modal-content"
+				style="width: 650px; height: 800px; overflow: auto;"></div>
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="../../vendor/jquery/jquery.min.js"></script>
+	<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Plugin JavaScript -->
+	<script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for this template -->
+	<script src="../../js/resume.min.js"></script>
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="../../vendor/jquery/jquery.min.js"></script>
+	<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Plugin JavaScript -->
+	<script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- Custom scripts for this template -->
+	<script src="../../js/resume.min.js"></script>
+	
+	<script src='../../node_modules/handlebars/dist/handlebars.min.js'></script>
+	<script src='../../node_modules/jquery/dist/jquery.js'></script>
+	<script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+	<script src='../../node_modules/sweetalert/dist/sweetalert.min.js'></script>
+	<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
+
+	<script type="text/javascript">
+ 
+$('#first').load('section_first.html');
+$('#care').load('section_pet_care.html');
+$('#together').load('section_pet_together.html');
+$('#story').load('section_pet_story.html');
+$('#cast').load('section_pet_cast.html');
+$('#lost').load('section_lost.html');
+</script>
+
+	<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+	<script type="text/javascript">
+    
+var loginBtn = $('#loginBtn'),
+    singUpBtn = $('#singUpBtn'),
+    logoutBtn = $('#logoutBtn'),
+    memberThumnail = $('#memberThumnail'),
+    memberPhoto = $('#memberPhoto'),
+    memberNo = '';
+
+$.getJSON('../../json/auth/loginUser', (result) => {
+    if (result.status == 'fail') {
+        $('.after-login').css('display', 'none');
+        return;
+    } else {
+        var member = result.member;
+        memberNo = member.memberNo;
+
+        $('.before-login').css('display', 'none');
+        for (var file of member.files) {
+        	if (file.filename == null) {
+        		var srcpath = "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Snoopy_Peanuts.png/200px-Snoopy_Peanuts.png";
+         	} else {
+        		var srcpath = "../../download/" + file.filename;
+        	}
+            $('#memberPhoto').attr({
+                src: srcpath,
+                class: 'img-fluid img-profile rounded-circle mx-auto mb-2',
+                alt: "'" + file.filename + "'",
+                id: 'memberInfo'
+            });
+        }
+    }
+    
+    var memberViewModal = $('#memberViewModal');
+    var memberViewModalContent = $('#memberViewModal .modal-content');
+    $(document).ready(function(){ 
+        $('#memberInfo').click(function(e){
+	        memberViewModalContent.load('../member/memberForm.html', () => {
+	        	memberViewModal.modal();
+	        });
+        });
+    });
+});
+
+var index = location.href.indexOf('?');
+if (index != -1) {
+    var qs = location.href.substr(index + 1);
+    var arr = qs.split('=');
+
+    $(function load() {
+        $.ajax('../../json/main/' + arr[1], {
+            dataType: 'json',
+            success: (result) => {
+                location.href = "../main/home.html";
+            },
+            error: () => {
+                window.alert('서버 실행 오류!');
+            }
+        });
+    });
+
+} else {}
+
+var businessViewModal = $('#businessViewModal');
+var businessViewModalContent = $('#businessViewModal .modal-content');
+$(document).ready(function(){ 
+    $('#businessInfo').click(function(e){
+    businessViewModalContent.load('../business/view.html', () => {
+            businessViewModal.modal();
+        });
+    });
+});
+
+var loginModal = $('#loginModal');
+var loginModalContent = $('#loginModal .modal-content');
+loginBtn.click(() => {
+	loginModalContent.load('../auth/login.html', () => {
+		loginModal.modal();
+	});
+});
+    
+logoutBtn.click(() => {
+   $.getJSON('../../json/auth/logout', (result) => {
+       location.href = '../main/home.html';
+   });
+});
+
+singUpBtn.click(() => {
+    $.getJSON('../../json/main/home', (result) => {
+        location.href = '../member/form.html';
+    });
+})
+
+</script>
+
+</body>
+</html>

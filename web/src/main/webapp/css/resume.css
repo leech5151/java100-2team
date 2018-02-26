@@ -59,7 +59,12 @@ h2 {
 .list-icons .list-inline-item i:hover {
   color: #BD5D38;
 }
-
+#p-0 {
+	padding: 0!important;
+    float: left;
+    position: relative;
+    left: 22%;
+}
 #sideNav .navbar-nav .nav-item .nav-link {
   font-weight: 600;
   text-transform: uppercase; 
@@ -75,6 +80,7 @@ h2 {
     flex-direction: column;
     width: 17rem;
     height: 100vh;
+    float: left;
   }
   #sideNav .navbar-brand {
     display: flex;
@@ -126,8 +132,8 @@ section.resume-section .resume-item .resume-date {
 
 @media (min-width: 992px) {
   section.resume-section {
-    padding-top: 3rem !important;
-    padding-bottom: 3rem !important;
+    padding-top: 3.8rem !important;
+    padding-bottom: 0rem !important;
   }
 }
 

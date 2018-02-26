@@ -11,11 +11,9 @@ public class Trainning {
     protected String maintextContents;
     protected int viewCount;
     protected String registrationDate;
-    protected int likes;
     protected List<TrainningUploadFile> files;
     protected Member member; //list
-    
-    
+    protected int liked;
     
     public int getMemberNo() {
         return memberNo;
@@ -66,13 +64,6 @@ public class Trainning {
     public void setRegistrationDate(String registrationDate) {
         this.registrationDate = registrationDate;
     }
-    public int getLikes() {
-        return likes;
-    }
-    public void setLikes(int likes) {
-        this.likes = likes;
-    }
-    
     
     public List<TrainningUploadFile> getFiles() {
         return files;
@@ -86,8 +77,12 @@ public class Trainning {
     public void setMember(Member member) {
         this.member = member;
     }
- 
-    
+    public int getLiked() {
+        return liked;
+    }
+    public void setLiked(int liked) {
+        this.liked = liked;
+    }
 }
 
 

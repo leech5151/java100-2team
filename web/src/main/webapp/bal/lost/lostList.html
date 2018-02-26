@@ -54,12 +54,12 @@
 
 <script type="text/javascript">
 $(window).load(function() {
-    $(document).smoothGallery({
+   /*  $(document).smoothGallery({
         animSpeed:300, 
         delaySpeed:50,
         visibleRows: 2,
         animEasing: 'easeOutQuart'
-    });
+    }); */
 });
 </script>
 
@@ -77,19 +77,25 @@ function load() {
     $.ajax('../../json/lost/list', {
         dataType: 'json',
         success: (result) => {
-        	list.html(templateEngine(result));
+           list.html(templateEngine(result));
+            $(document).smoothGallery({
+                animSpeed:300, 
+                delaySpeed:50,
+                visibleRows: 2,
+                animEasing: 'easeOutQuart'
+            });
             $(document).ready(function(){ 
                 $('button').click(function(e){
                     var id = e.target.getAttribute('id');
                     if ((id != '') && (id != null))  
                     var newId = '#' + id;
-	                var lostNo = newId.substring(8);
-	                $.ajax('../../json/lost/' + lostNo, {
-	                    dataType: 'json',
-	                    success: (result) => {
-	                    location.href = "../lost/lostForm.html?no=" + lostNo;
-	                    }
-	                });
+                   var lostNo = newId.substring(8);
+                   $.ajax('../../json/lost/' + lostNo, {
+                       dataType: 'json',
+                       success: (result) => {
+                       location.href = "../lost/lostForm.html?no=" + lostNo;
+                       }
+                   });
                 });
             });
         },
@@ -100,4 +106,3 @@ function load() {
 }
 
 </script>
-

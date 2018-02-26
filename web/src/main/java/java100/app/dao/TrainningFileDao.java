@@ -11,5 +11,6 @@ public interface TrainningFileDao {
     void insert(TrainningUploadFile file);
 
     void deleteAllByTrainningNo(int no);
+    
 }
  

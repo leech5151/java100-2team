@@ -24,6 +24,10 @@ public interface TrainningService {
     /*Trainning get(String email, String password);*/
     int update(Trainning trainning);
     int delete(int no);
+    int like(Trainning trainning);
+    int dislike(Trainning trainning);
+    Integer checkLike(Trainning trainning);
+    int countLikes();
 }
  
 

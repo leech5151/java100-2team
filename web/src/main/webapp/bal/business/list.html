@@ -6,7 +6,12 @@
 	    
 	    </ul>
 	</div>    
-    <nav aria-label="Page navigation">
+	<nav id="navigation">
+		<a id="prevBtn" class="page-link" tabindex="-1">이전</a></li>
+	    <a id="currBtn" href="#" class="nav selected" data-page="#">1</a>
+	    <a id="nextBtn" class="page-link" tabindex="0">다음</a></li>
+    </nav>
+    <!-- <nav aria-label="Page navigation">
 	  <ul class="pagination justify-content-center">
 	    <li class="page-item">
 	        <a id="prevBtn" class="page-link" tabindex="-1">이전</a></li>
@@ -17,7 +22,7 @@
 	    <li class="page-item">
 	        <a id="nextBtn" class="page-link" tabindex="0">다음</a></li>
 	  </ul>
-	</nav>
+	</nav> -->
   </div> 
   <!-- <a href="../business/form.html?no={{businessNo}}"></a> -->
 <script src='../../node_modules/handlebars/dist/handlebars.min.js'></script>
@@ -29,7 +34,7 @@
 {{#each list}}
 <li>
 {{#each files}}
-  <img src="../../download/{{filename}}" alt="{{businessName}}" />
+<img src="../../download/{{filename}}" onClick="location.href='../business/form.html?no={{businessNo}}'" alt="{{businessName}}" />
 {{/each}}  
 </li>
 {{/each}}
@@ -84,11 +89,6 @@ $.ajax('../../json/business/list', {
         console.log(result);
     	ulP.html(templateEngine(result));
         
-    	for(var data of result.list){
-    	 
-        var b_name = data.businessName;
-        var b_no = data.businessNo;
-    	 }
         currPageNo = result.pageNo;
         currBtn.html(currPageNo);
         

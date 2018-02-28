@@ -16,13 +16,14 @@
         <result column="rdt" property="registrationDate"/>
         <result column="m_no" property="memberNo"/>
         <result column="title" property="title"/>
-        <result column="likes" property="likes"/>
          
          <!-- 게시글 작성자 정보를 담을 수 있도록 설정한다 -->
          <association property="member" javaType="member">
          	<id column="m_no" property="memberNo"/>
          	<id column="nic_name" property="nicname"/>
          </association>
+ 
+         
          
         <!-- 첨부파일 정보를 담을 수 있도록 설정한다. -->
         <collection property="files"  ofType="trainningUploadFile">
@@ -43,7 +44,6 @@
             t.m_conts,
             t.vwcnt,
             t.rdt,
-            t.likes,
             tm.file,
             tm.t_no,
             m.m_no,
@@ -114,7 +114,6 @@
             t.m_conts,
             t.vwcnt,
             t.rdt,
-            t.likes,
             tm.mda_no,
             tm.file,
             m.m_no,
@@ -140,20 +139,59 @@
         where t_no=#{value}
     </update> 
     
-    <!-- <update id="updateLikes" parameterType="int">
-        update trainning set 
-            likes=likes + 1
-        where t_no=#{value}
-    </update>  -->
+    <select id="countLikes" resultType="int">
+    	select count(*) from likes
+    </select>
     
+    <insert id="like" parameterType="trainning">
+    	insert into likes(m_no, t_no, liked) values(#{memberNo}, #{trainningNo}, 1)
+    </insert>
+    
+    <delete id="dislike" parameterType="trainning">
+    	delete from likes where m_no=#{memberNo} and t_no=#{trainningNo}
+    </delete>
+    
+    <select id="checkLike" parameterType="trainning" resultType="int">
+    	select liked from likes where m_no=#{memberNo} and t_no=#{trainningNo}
+    	<if test="liked == null">
+    	liked=0
+    	</if>
+    </select>
+        
+    <!-- <select id="findByLikes" resultMap="trainningMap" parameterType="trainning">
+    select 
+		    l.l_no,
+		    m.m_no,
+		    t.t_no,
+		    l.like
+		    
+	from 
+			likes as l  join memb as m on l.m_no=m.m_no
+						join trainning as t on l.t_no=t.t_no
+	where 
+			t.t_no=#{t_no} 
+	  and 
+	  		m.m_no=#{m_no}
+	 </select> 
+	 
+	 <select id="findByLikeCount" resultMap="trainningMap" parameterType="trainning">
+    select 
+		    count(l.like) as likeCount
+		    
+	from 
+			likes as l  join memb as m on l.m_no=m.m_no
+						join trainning as t on l.t_no=t.t_no
+	where 
+			t.t_no=#{t_no} 	 
+	 </select>  -->
+
     
     <update id="update" parameterType="trainning">
         update trainning set
             title=#{title}, 
             conts=#{contents},
             m_conts=#{maintextContents},
-            vwcnt=#{viewCount},
-            likes=#{likes} 
+            vwcnt=#{viewCount}
         where t_no=#{trainningNo}
     </update>
 

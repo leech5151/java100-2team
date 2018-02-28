@@ -14,7 +14,10 @@ public interface TrainningDao {
     int update(Trainning trainning);
     int delete(int no);
     int updateViewCount(int no);
-    /*int updateLikes(int no);*/
+    int countLikes();
+    int like(Trainning trainning);
+    int dislike(Trainning trainning);
+    Integer checkLike(Trainning trainning);
 }
 
 

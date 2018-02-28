@@ -100,7 +100,25 @@ public class TrainningServiceImpl implements TrainningService {
         }
     }
 
+    @Override
+    public int like(Trainning trainning) {
+        return trainningDao.like(trainning);
+    }
     
+    @Override
+    public int dislike(Trainning trainning) {
+        return trainningDao.dislike(trainning);
+    }
+    
+    @Override
+    public Integer checkLike(Trainning trainning) {
+        return trainningDao.checkLike(trainning);
+    }
+    
+    @Override
+    public int countLikes() {
+        return trainningDao.countLikes();
+    }
 }
 
 

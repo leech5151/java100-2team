@@ -186,7 +186,7 @@ if (index != -1) { // 기존 데이터를 조회할 경우,
                 prmItem.val(result.data.primary_address);
                 detItem.val(result.data.detail_address);
                 for (var file of result.data.files){
-                filedItem1.html( "<img src='../../download/" + file.filename + "' alt=" + file.filename + " width='50px' height='50px'>")
+                filedItem1.html( "<img src='../../download/" + file.filename + "' alt=" + file.filename + ">")
                 console.log(file.filename)
                 }
                 $.get('../../json/review/form',{

@@ -3,6 +3,26 @@
 <link rel='stylesheet' href='../../css/common.css'>
 <link rel='stylesheet' href='../../css/business.css'>
 
+<style>
+
+.b {
+	border-bottom: 1px solid gray;
+	padding-bottom: 30px;
+}
+
+.c {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.d {
+	position: absolute;
+	right: 650px;
+}
+
+</style>
+
+
 <div class="modal-header"  style="padding: 40px 50px;">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
@@ -10,8 +30,9 @@
 <div class="modal-body" style="padding: 40px 50px;">
 <div class='container'>
 
-    <h1 class='my-new'>영상등록</h1>
-    <h1 class='my-view'>영상 상세정보</h1>
+
+   <!--  <h1 class='my-new'>영상등록</h1>-->
+    <h1 class='my-view'>영상 상세정보</h1> 
 
 
 <form id='form' method="post" enctype="multipart/form-data">
@@ -43,7 +64,7 @@
 				<div class='col-sm-10'>
 					<input class='form-control' id='title' type='text' name='title'>
 				</div>
-			</div> -->
+			</div> 
 
 
 
@@ -60,7 +81,8 @@
 
 			<div id='viewno' class='form-group row b'>
 				<span id='view' class='col-sm-2 col-form-label c'>조회수</span>
-				<button style="border: 0; background: transparent" class='d'
+				<span class='col-sm-2 col-form-label c' id='reg'>게시일</span>
+         				<button style="border: 0; background: transparent" class='d'
 					id='like-btn' type='button'>
 					<img id='likeb' src="../../download/nolike.png" alt='좋아요' />
 					<div id='count' style="display: inline-block"></div>
@@ -74,9 +96,6 @@
 				<div class='col-sm-10'>
 					<input class='form-control' id='nicname' type='text' name='nicname'>
 				</div>
-			</div>
-			<div class='form-group row c'>
-				<div id='reg'>게시일</div>
 			</div>
 			<div class='form-group row b'>
 				<label for='contents' class='col-sm-2 col-form-label'>내용</label>
@@ -109,6 +128,8 @@
        				name='TrainningNo'> -->
 
 
+
+
 </form>
 </div>
 </div>
@@ -129,19 +150,16 @@ var addBtn = $('#addBtn'),
 updateBtn = $('#updateBtn'),
 deleteBtn = $('#deleteBtn'),
 likesBtn = $('#likesBtn'),
-/* t_noItem = $('#trainningNo'), */
 ctgItem = $('#category'),
 titleItem = $('#title'),
 contsItem = $('#contents'),
 m_contsItem = $('#maintextContents'),
 vwcntItem = $('#viewCount'),
 rdtItem = $('#registrationDate'),
-/* likesItem = $('#likes'), */
 nodItem = $('#nodiv'),
 nod1Item = $('#nodiv1'),
 nic_nameItem = $('#nicname'),
-/* vwcnItem = $('#vwcndiv'),
-likesItem = $('#likesdiv'), */
+likesItem = $('#likesdiv'),
 filedItem = $('#filediv'),
 fileItem = $('#file1'),
 videoItem = $('#file1')

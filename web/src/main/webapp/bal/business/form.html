@@ -22,7 +22,7 @@
 			<h1>Motion Blur Effect with SVG<span>by <a href="../main/home.html#together">pet together</a></span></h1>
 			<nav class="codrops-demos">
 
-				<a href="../business/list.html">Menu</a><br>
+				<a href="../main/home.html#together">Menu</a><br>
 				
 				<a data-toggle="modal" id="businessInfo" class="open-modal" href="#businessViewModal">information</a><br>
 				<div class="modal fade" role="dialog" id="businessViewModal">
@@ -38,38 +38,8 @@
 		 </header>
 		<div class="content">
 			<div class="gallery">
-				<ul class="gallery-pictures">
-					<li class="gallery-picture">
-						<img src="../../business_view/img/1.jpg" alt="img01">
-					</li>
-					<li class="gallery-picture">
-						<img src="../../business_view/img/2.jpg" alt="img02">
-					</li>
-					<li class="gallery-picture">
-						<img src="../../business_view/img/3.jpg" alt="img03">
-					</li>
-					<li class="gallery-picture">
-						<img src="../../business_view/img/4.jpg" alt="img04">
-					</li>
-					<li class="gallery-picture">
-						<img src="../../business_view/img/5.jpg" alt="img05">
-					</li>
-					<li class="gallery-picture">
-						<img src="../../business_view/img/6.jpg" alt="img06">
-					</li>
-					<li class="gallery-picture">
-						<img src="../../business_view/img/7.jpg" alt="img07">
-					</li>
-				</ul>
+			    <div align="center" id="vi"></div> 
 				<div class="gallery-pagination">
-					<button class="gallery-pagination-dot"></button>
-					<button class="gallery-pagination-dot"></button>
-					<button class="gallery-pagination-dot"></button>
-					<button class="gallery-pagination-dot"></button>
-					<button class="gallery-pagination-dot"></button>
-					<button class="gallery-pagination-dot"></button>
-					<button class="gallery-pagination-dot"></button>
-					<button class="gallery-pagination-dot"></button>
 					<button class="gallery-pagination-dot"></button>
 				</div>
 			</div>
@@ -85,16 +55,40 @@
 <script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script> 
 <script src="../../business_view/js/gallery.js"></script>
 <script type="text/javascript">
-
-   var businessViewModal = $('#businessViewModal');
-   var businessViewModalContent = $('#businessViewModal .modal-content');
-   $(document).ready(function(){ 
-       $('#businessInfo').click(function(e){
-       businessViewModalContent.load('../business/view.html', () => {
-               businessViewModal.modal();
+   var index = location.href.indexOf('?');
+   if (index != -1) { // 기존 데이터를 조회할 경우,
+       var qs = location.href.substr(index + 1);
+       var arr = qs.split('=');
+       $('.my-new').css('display', 'none');
+       $(() => {
+           $.ajax('../../json/business/' + arr[1], {
+               dataType: 'json',
+               success: (result) => {
+                console.log(result)                
+                   for (var file of result.data.files){
+                   $('#vi').html('<img src="../../download/' + file.filename + '" width="700px" height="300px"></img>')
+                   }
+                   
+            console.log(result.data.member.valueOf().nicname)
+               },
+               error: () => {
+                   window.alert('서버 실행 오류!');
+               }
            });
-       });
-   });
-   
+       }); 
+ 
+
+
+       var businessViewModal = $('#businessViewModal');
+      var businessViewModalContent = $('#businessViewModal .modal-content');
+      $(document).ready(function(){ 
+          $('#businessInfo').click(function(e){
+          businessViewModalContent.load('../business/view.html', () => {
+              businessViewModalViewModal.modal();
+              });
+          });
+      }); 
+       
+   }
    
 </script>

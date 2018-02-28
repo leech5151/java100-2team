@@ -11,18 +11,6 @@
 	    <a id="currBtn" href="#" class="nav selected" data-page="#">1</a>
 	    <a id="nextBtn" class="page-link" tabindex="0">다음</a></li>
     </nav>
-    <!-- <nav aria-label="Page navigation">
-	  <ul class="pagination justify-content-center">
-	    <li class="page-item">
-	        <a id="prevBtn" class="page-link" tabindex="-1">이전</a></li>
-	        
-	    <li class="page-item">
-	        <a id="currBtn" class="page-link" href="#">1</a></li>
-	    
-	    <li class="page-item">
-	        <a id="nextBtn" class="page-link" tabindex="0">다음</a></li>
-	  </ul>
-	</nav> -->
   </div> 
   <!-- <a href="../business/form.html?no={{businessNo}}"></a> -->
 <script src='../../node_modules/handlebars/dist/handlebars.min.js'></script>
@@ -46,8 +34,6 @@ var prevBtn = $('#prevBtn'),
 currBtn = $('#currBtn'),
 nextBtn = $('#nextBtn'),
 ulP = $('#portfolio-item'),
-ulF = $('#food-list > #portfolio-item'),
-ulE = $('#ect-list > #portfolio-item'),
 currPageNo = 1;
 templateSrc = $('#template').html(),
 templateEngine = Handlebars.compile(templateSrc);

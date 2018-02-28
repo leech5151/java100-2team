@@ -1,4 +1,3 @@
-
 @import url(http://fonts.googleapis.com/css?family=Quattrocento+Sans:400,700|Lustria);
 
 @font-face {
@@ -16,30 +15,31 @@
 .clearfix:before, .clearfix:after {display: table;  content: ''; }
 .clearfix:after { clear: both; }
 
-#view_form {
+#business_form {
 	/* background: #52545A; */
 	color: #B2B5BD;
-	font-size: 1em;
+	font-size: 1.8em;
 	font-family: 'Quattrocento Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
-#view_form a {
+#business_form a {
 	color: #999;
 	text-decoration: none;
 }
 
-#view_form a:hover, #view_form a:focus {
+#business_form a:hover, #business_form a:focus {
 	color: #7D87AE;
 	outline: none;
 }
 
-#view_form button:focus {
+#business_form button:focus {
 	outline: none;
 }
 #modal_view_content {
 	width: 220%;
+	margin-left: -50px;
 	font-size: 0.75em;
 	box-shadow: 20px 20px 0px rgba(0, 0, 0, 0.16);
 }

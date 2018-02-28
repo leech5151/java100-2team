@@ -99,7 +99,7 @@ var prevBtn = $('#prevBtn'),
 currBtn = $('#currBtn'),
 nextBtn = $('#nextBtn'),
 currPageNo =1,
-pagesize =5;
+pageSize = 1000;
 
 var nowDate = new Date();
 var date = new Date();
@@ -159,20 +159,11 @@ $.datepicker.regional['kr'] = {
 	};
 
 	$.datepicker.setDefaults($.datepicker.regional['kr']);
-
 	$("#navigation-list").hide();
-
 	$("#123").click(function() {
 	$("#navigation-list").toggle();
+	
 	});
-	
-	
-	
-
-
-	
-	
-	
 	
 	// 페이지 시작 ajax로딩
 	
@@ -199,6 +190,20 @@ $.datepicker.regional['kr'] = {
 			                            "<div style='width:20%; display:inline-block;; '>" + data.diagnosisContents + "</div>")
 			                            .appendTo('#diagnosisbody'); 
 	                }
+	                currPageNo = result.pageNo;
+	                currBtn.html(currPageNo);
+	                
+	                if (result.pageNo == 1) {
+	                    $(prevBtn.parent()).addClass("disabled"); 
+	                } else {
+	                    $(prevBtn.parent()).removeClass("disabled");
+	                }
+	                
+	                if (result.lastPageNo == result.pageNo) {
+	                    $(nextBtn.parent()).addClass("disabled");
+	                } else {
+	                    $(nextBtn.parent()).removeClass("disabled");
+	                }
 	            },
 	            error: () => {
 	            }
@@ -211,19 +216,28 @@ $.datepicker.regional['kr'] = {
 	// 데이트피커 선택날짜 리스트
 	$(".selectDate").datepicker({
 		onSelect:  function selectdatepicker(dateText, inst) {
-			  $.ajax('../../json/diagnosis/mylist', {
-			      	data: { 
-			      		  dateRecording: dateItem.val(),
-						       nowDateRecording: nowDateItem.val()
-			      	},
-			          dataType: 'json',
-			          method: 'POST',
-			          success: (result) => {
-			          	$('#diagnosisbody').html("");
-			              for (var data of result.list) {
-			                	$('<div style="width:70%; margin-left:15%; margin-right:10%; margin-bottom:0.5%;text-align:center">')
-			                      .html(  
-			                              "<div style='width:10%; display:inline-block'>" + data.diagnosisNo + "</div>" + 
+			load(1);
+			function load(pageNo, options){
+				
+			    if (options == undefined) options = {};
+			       options.pn = pageNo;
+			       $.ajax('../../json/diagnosis/mypagesizelist', {
+			           data: { 
+			        	   options,
+			        	   pageNo: pageNo,
+			        	   pageSize: pageSize,
+					       dateRecording: dateItem.val(),
+					       nowDateRecording: nowDateItem.val()
+			    			},
+						       
+			           dataType: 'json',
+			           success: (result) => {
+			               
+			           	$('#diagnosisbody').html("");
+			               for (var data of result.list) {
+			               	 $('<div style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
+			                       .html(  
+			                       		 "<div style='width:10%; display:inline-block'>" + data.diagnosisNo + "</div>" + 
 				                            "<div style='width:20%; display:inline-block'>"+ data.hospital.hospitalName + "</div>" + 
 				                            "<div style='width:10%; display:inline-block'>" + data.memberName + "</div>" +
 				                            "<div style='width:20%; display:inline-block'>" + data.dateRecording + "</div>" +
@@ -231,30 +245,55 @@ $.datepicker.regional['kr'] = {
 				                            "<div style='width:10%; display:inline-block'>" + data.diagnosisName + "</div>" +
 				                            "<div style='width:20%; display:inline-block'>" + data.diagnosisContents + "</div>")
 				                            .appendTo('#diagnosisbody');
-			              }
-			          },
-			          error: () => {
-			          }
-			      });
+			               }
+			               
+			               currPageNo = result.pageNo;
+			               currBtn.html(currPageNo);
+			               
+			               if (result.pageNo == 1) {
+			                   $(prevBtn.parent()).addClass("disabled"); 
+			               } else {
+			                   $(prevBtn.parent()).removeClass("disabled");
+			               }
+			               
+			               if (result.lastPageNo == result.pageNo) {
+			                   $(nextBtn.parent()).addClass("disabled");
+			               } else {
+			                   $(nextBtn.parent()).removeClass("disabled");
+			               }
+			           },
+			           error: () => {
+			           }
+			       });
+			   }
 			}
 	});
 	
 	// 데이트피커 현재날짜 선택시  
 	$(".nowDate").datepicker({
 		onSelect: function selectdatepicker(dateText, inst) {
-			  $.ajax('../../json/diagnosis/mylist', {
-			      	data: { 
-			      		  dateRecording: dateItem.val(),
-						       nowDateRecording: nowDateItem.val()
-			      	},
-			          dataType: 'json',
-			          method: 'POST',
-			          success: (result) => {
-			          	$('#diagnosisbody').html("");
-			              for (var data of result.list) {
-			                	$('<div style="width:70%; margin-left:15%; margin-right:10%; margin-bottom:0.5%;text-align:center">')
-			                      .html(  
-			                              "<div style='width:10%; display:inline-block'>" + data.diagnosisNo + "</div>" + 
+			load(1);
+			function load(pageNo, options){
+				
+			    if (options == undefined) options = {};
+			       options.pn = pageNo;
+			       $.ajax('../../json/diagnosis/mypagesizelist', {
+			           data: { 
+			        	   options,
+			        	   pageNo: pageNo,
+			        	   pageSize: pageSize,
+					       dateRecording: dateItem.val(),
+					       nowDateRecording: nowDateItem.val()
+			    			},
+						       
+			           dataType: 'json',
+			           success: (result) => {
+			               
+			           	$('#diagnosisbody').html("");
+			               for (var data of result.list) {
+			               	 $('<div style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
+			                       .html(  
+			                       		 "<div style='width:10%; display:inline-block'>" + data.diagnosisNo + "</div>" + 
 				                            "<div style='width:20%; display:inline-block'>"+ data.hospital.hospitalName + "</div>" + 
 				                            "<div style='width:10%; display:inline-block'>" + data.memberName + "</div>" +
 				                            "<div style='width:20%; display:inline-block'>" + data.dateRecording + "</div>" +
@@ -262,11 +301,27 @@ $.datepicker.regional['kr'] = {
 				                            "<div style='width:10%; display:inline-block'>" + data.diagnosisName + "</div>" +
 				                            "<div style='width:20%; display:inline-block'>" + data.diagnosisContents + "</div>")
 				                            .appendTo('#diagnosisbody');
-			              }
-			          },
-			          error: () => {
-			          }
-			      });
+			               }
+			               
+			               currPageNo = result.pageNo;
+			               currBtn.html(currPageNo);
+			               
+			               if (result.pageNo == 1) {
+			                   $(prevBtn.parent()).addClass("disabled"); 
+			               } else {
+			                   $(prevBtn.parent()).removeClass("disabled");
+			               }
+			               
+			               if (result.lastPageNo == result.pageNo) {
+			                   $(nextBtn.parent()).addClass("disabled");
+			               } else {
+			                   $(nextBtn.parent()).removeClass("disabled");
+			               }
+			           },
+			           error: () => {
+			           }
+			       });
+			   }
 			}
 	});
 
@@ -341,18 +396,9 @@ $.ajax('../../json/diagnosis/myAlllist', {
         }
         currPageNo = result.pageNo;
         currBtn.html(currPageNo);
-        
-        if (result.pageNo == 1) {
-            $(prevBtn.parent()).addClass("disabled");
-        } else {
-            $(prevBtn.parent()).removeClass("disabled");
-        }
-        
-        if (result.lastPageNo == result.pageNo) {
-            $(nextBtn.parent()).addClass("disabled");
-        } else {
-            $(nextBtn.parent()).removeClass("disabled");
-        }
+        	$(prevBtn.parent()).css("display","none");
+        	$(currBtn.parent()).css("display","none");
+            $(nextBtn.parent()).css("display","none");
     },
     error: () => {
     }
@@ -360,12 +406,11 @@ $.ajax('../../json/diagnosis/myAlllist', {
 }
 
 function load(pageNo, options){
-	
     if (options == undefined) options = {};
-       options.pn = pageNo;
        $.ajax('../../json/diagnosis/mypagesizelist', {
            data: { 
         	   options,
+        	   pageNo: pageNo,
         	   pageSize: pageSize,
 		       dateRecording: dateItem.val(),
 		       nowDateRecording: nowDateItem.val()
@@ -390,6 +435,10 @@ function load(pageNo, options){
                
                currPageNo = result.pageNo;
                currBtn.html(currPageNo);
+               
+               $(prevBtn.parent()).css("display","block");
+           	   $(currBtn.parent()).css("display","block");
+               $(nextBtn.parent()).css("display","block");
                
                if (result.pageNo == 1) {
                    $(prevBtn.parent()).addClass("disabled"); 

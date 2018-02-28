@@ -10,6 +10,7 @@ public interface DiagnosisDao {
     List<Diagnosis> findMyPageSizeAll(Map<String,Object> params);
     List<Diagnosis> findMyAll(String name,String selectDate,String nowDate);
     List<Diagnosis> findMyAllList(String name);
+    int dateCountAll(String name,String selectDate,String nowDate);
     int countAll();
     int CountMember(String tel);
     int insert(Diagnosis diagnosis);

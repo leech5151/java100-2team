@@ -12,6 +12,8 @@
 
 <title>Balance Pet</title>
 
+<script src='../../node_modules/slick-carousel/slick/slick.js'></script>
+<link rel='stylesheet' href='../../css/hospitalproducermainlist.css'> 
 <!-- Bootstrap core CSS -->
 <link href="../../vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -262,7 +264,7 @@ logoutBtn.click(() => {
 
 singUpBtn.click(() => {
     $.getJSON('../../json/main/home', (result) => {
-        location.href = '../member/form.html';
+        location.href = '../member/form_add.html';
     });
 })
 

@@ -8,17 +8,13 @@ ol, ul, li{
 }
 
 .plan {
+  height: 100%;
   width: 90% !important;
-  margin-left: 11px;
-  background: white;
-  border: 2px solid #e5ded6;
-  border-color: rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
   padding-top: 5px;
 }
 
 .plan-title {
-	text-align:center;
+  text-align:center;
   font-size: 24px;
   color: #99badd;
 }
@@ -50,7 +46,6 @@ ol, ul, li{
 }
 
 .plan-button {
-  position: relative;
   display: block;
   font-size: 14px  !important;
   font-weight: 500;
@@ -77,8 +72,6 @@ ol, ul, li{
 .plan-highlight .plan-button {
   font-size: 18px;
   line-height: 25px;
-  margin-left: 10px;
-  margin-right: 10px;
   margin-bottom: 10px;
   background: #37bce5;
   border-color: #3996b3;

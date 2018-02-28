@@ -166,7 +166,7 @@
         	where m_name=#{arg0} and d.date_rec between #{arg1} and #{arg2} order by d.date_rec DESC]]>
     </select>
     
-         <select id="findMyAllList" resultMap="diagnosisMap" parameterType="map">
+    <select id="findMyAllList" resultMap="diagnosisMap" parameterType="map">
           select 
           d.dgn_no,
             d.dgn_cg,
@@ -182,6 +182,21 @@
         	where m_name=#{value} 
     </select>
     
-    
+       <select id="findMyPageSizeAll" resultMap="diagnosisMap" parameterType="map">
+         select 
+            d.dgn_no,
+            d.dgn_cg,
+            d.dgn_name,
+            d.dgn_conts,
+            d.m_tel,
+            d.m_name,
+            m.m_no as m_no,
+            h.hp_name as hp_name
+       	 	from dgn as d 
+       	 	left join hp as h on d.hp_no=h.hp_no 
+        	left join memb as m on d.m_no=m.m_no
+			where m_name=#{name} <!-- and d.date_rec between #{selectDate} and #{nowDate} order by d.date_rec DESC -->
+       		limit #{startIndex}, #{size}
+	    </select>
     
 </mapper>  

@@ -32,6 +32,9 @@ public class DiagnosisServiceImpl implements DiagnosisService {
         
         return diagnosisDao.findAll(params);
     }
+    
+
+    
 
     @Override
     public int getTotalCount() {
@@ -113,9 +116,30 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     public List<Diagnosis> myList(String name,String selectDate,String nowDate) {
         return diagnosisDao.findMyAll(name,selectDate,nowDate);
     }
+    
+    
+    @Override
+    public List<Diagnosis> myPageSizeList(String name, String selectDate, String nowDate,int pageNo, int pageSize) {
+        
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("startIndex", (pageNo - 1) * pageSize);
+        params.put("size", pageSize);
+        params.put("name", name);
+        params.put("selectDate", selectDate);
+        params.put("nowDate", nowDate);
+        
+        ///////////////
+        
+        //////////////////
+        
+        return diagnosisDao.findMyPageSizeAll(params);
+    
+    }
+    
 
     @Override
     public List<Diagnosis> myAllList(String name) {
         return diagnosisDao.findMyAllList(name);
     }
+
 }

@@ -25,6 +25,7 @@ public interface DiagnosisService {
     int delete(int no,int no2);
     Object getHospitalNo(int no);
     List<Diagnosis> myList(String string,String selectDate,String nowDate);
+    List<Diagnosis> myPageSizeList(String name, String selectDate,String nowDate,int pageNo, int pageSize);
     List<Diagnosis> myAllList(String name);
     
 }

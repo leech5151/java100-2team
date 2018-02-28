@@ -135,8 +135,6 @@ window.fbAsyncInit = function() {
     Kakao.Auth.createLoginButton({
       container: '#kakaoLoginBtn',
       success: function(authObj) {
-        console.log('로그인 성공?');
-        
         console.log(authObj.access_token);
           $.getJSON(
                 '../../json/auth/kakaotalkLogin', 
@@ -150,7 +148,6 @@ window.fbAsyncInit = function() {
             });
       },
       fail: function(err) {
-         alert('sddffd');
          alert(JSON.stringify(err));
       }
     });

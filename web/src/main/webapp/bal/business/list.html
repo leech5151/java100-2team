@@ -1,52 +1,51 @@
+<meta charset="UTF-8">
 <h2>Welcome home!</h2>
  <div id="blist-container">
-    <div id="portfolio"></div>
-    <ul id="portfolio-item">
-    </ul>
-    
-    <nav aria-label="Page navigation">
-	  <ul class="pagination justify-content-center">
-	    <li class="page-item">
-	        <a id="prevBtn" class="page-link" tabindex="-1">ÀÌÀü</a></li>
-	        
-	    <li class="page-item">
-	        <a id="currBtn" class="page-link" href="#">1</a></li>
+    <div id="portfolio">
+	    <ul id="portfolio-item">
 	    
-	    <li class="page-item">
-	        <a id="nextBtn" class="page-link" tabindex="0">´ÙÀ½</a></li>
-	  </ul>
-	</nav>
+	    </ul>
+	</div>    
+	<nav id="navigation">
+		<a id="prevBtn" class="page-link" tabindex="-1">ì´ì „</a></li>
+	    <a id="currBtn" href="#" class="nav selected" data-page="#">1</a>
+	    <a id="nextBtn" class="page-link" tabindex="0">ë‹¤ìŒ</a></li>
+    </nav>
   </div> 
+  <!-- <a href="../business/form.html?no={{businessNo}}"></a> -->
+<script src='../../node_modules/handlebars/dist/handlebars.min.js'></script>
+<script src='../../node_modules/jquery/dist/jquery.js'></script>
+<script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+<script src='../../node_modules/sweetalert/dist/sweetalert.min.js'></script>
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
 <script id="template" type="text/x-handlebars-template">
 {{#each list}}
+<li>
 {{#each files}}
-<a href="../business/form.html?no={{businessNo}}">
-<li><img src="../../download/{{filename}}" alt={{title}} /></li>
-</a>
-{{/each}}
+<img src="../../download/{{filename}}" onClick="location.href='../business/form.html?no={{businessNo}}'" alt="{{businessName}}" />
+{{/each}}  
+</li>
 {{/each}}
 </script>
 <script type="text/javascript">
-var words = $('#words'),
-searchBtn = $('#searchBtn'),
-prevBtn = $('#prevBtn'),
+/* words = $('#words'),
+searchBtn = $('#searchBtn'), */
+var prevBtn = $('#prevBtn'),
 currBtn = $('#currBtn'),
 nextBtn = $('#nextBtn'),
-ulP = $('#pention-list > #portfolio-item'),
-ulF = $('#food-list > #portfolio-item'),
-ulE = $('#ect-list > #portfolio-item'),
+ulP = $('#portfolio-item'),
 currPageNo = 1;
 templateSrc = $('#template').html(),
 templateEngine = Handlebars.compile(templateSrc);
-//¼­¹ö¿¡¼­ ¸ñ·Ï µ¥ÀÌÅÍ¸¦ °¡Á®¿Â´Ù.
 load(1);
 
-searchBtn.click(() => {
+
+/* searchBtn.click(() => {
 //event.preventDefault();
 load(1, {
     "words": words.value
 })
-});
+}); */
 
 prevBtn.click(() => {
 load(currPageNo - 1)
@@ -68,6 +67,12 @@ $.ajax('../../json/business/list', {
     data: options,
     dataType: 'json',  
     success: (result) => {
+        for (var item of result.list) {
+            for (var files of item.files) {
+                files.businessName = item.businessName;
+            }
+        }
+        console.log(result);
     	ulP.html(templateEngine(result));
         
         currPageNo = result.pageNo;
@@ -86,9 +91,12 @@ $.ajax('../../json/business/list', {
         }
     },
     error: () => {
-        window.alert('¼­¹ö ½ÇÇà ¿À·ù! blist');
+        window.alert('ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½! blist');
     }
 });
 }
+
+
 </script>
+<script src="../../together-list/javascript/demo.js"></script>
 					  

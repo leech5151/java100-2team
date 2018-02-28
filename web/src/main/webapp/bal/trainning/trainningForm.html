@@ -9,11 +9,11 @@
 		<link rel="stylesheet" type="text/css" href="../../business_view/fonts/font-awesome-4.3.0/css/font-awesome.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../business_view/css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="../../business_view/css/gallery.css" />
- <style>          
+<!--  <style>          
 .b { .align-center { text-align: center; }
 
 }
-</style>  
+</style>   -->
  
 <div id=view_form>
    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="filters hidden">
@@ -25,7 +25,7 @@
            
            
    </svg>
-	<div class="container_b">
+	<div class="container">
 		<header class="codrops-header">
 			<h1>Motion Blur Effect with SVG<span>by <a href="../main/home.html#together">pet together</a></span></h1>
 			<nav class="codrops-demos">
@@ -70,18 +70,11 @@
 <script src="../../business_view/js/gallery.js"></script>
 <script type="text/javascript">
 
-
-
-
-   
-   
-   
-   
    var index = location.href.indexOf('?');
    if (index != -1) { // 기존 데이터를 조회할 경우,
        var qs = location.href.substr(index + 1);
        var arr = qs.split('=');
-       $('.my-new').css('display', 'none');
+       /*  $('.my-new').css('display', 'none');  */
        $(() => {
            $.ajax('../../json/trainning/' + arr[1], {
                dataType: 'json',
@@ -97,7 +90,7 @@
                    window.alert('서버 실행 오류!');
                }
            });
-       }); 
+       });  
  
 
 
@@ -106,7 +99,7 @@
       $(document).ready(function(){ 
           $('#trainningInfo').click(function(e){
           trainningViewModalContent.load('../trainning/trainningView.html', () => {
-              trainningViewModalViewModal.modal();
+              trainningViewModal.modal();
               });
           });
       }); 

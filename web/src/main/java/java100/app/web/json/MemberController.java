@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import javax.servlet.ServletContext;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +30,7 @@ public class MemberController {
     @Autowired MemberService memberService;
     @Autowired LoginController loginController;
     
+    
     @RequestMapping("list")
     public String list(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
@@ -38,6 +40,7 @@ public class MemberController {
             @RequestParam(value="al", required=false) String align,
             Model model) throws Exception {
 
+        
         // UI 제어와 관련된 코드는 이렇게 페이지 컨트롤러에 두어야 한다.
         //
         if (pageNo < 1) {

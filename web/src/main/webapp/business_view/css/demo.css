@@ -29,7 +29,7 @@
 	text-decoration: none;
 }
 
-#view_form a:hover, #business_form a:focus {
+#view_form a:hover, #view_form a:focus {
 	color: #7D87AE;
 	outline: none;
 }
@@ -39,7 +39,6 @@
 }
 #modal_view_content {
 	width: 220%;
-	margin-left: -50px;
 	font-size: 0.75em;
 	box-shadow: 20px 20px 0px rgba(0, 0, 0, 0.16);
 }

@@ -33,7 +33,7 @@
 
 
 <!-- Custom styles for this template -->
-<link href="../../css/resume.min.css" rel="stylesheet">
+<link href="../../css/resume.css" rel="stylesheet">
 
 <!-- 자체 작업 CSS -->
 <link href="../../css/home.css" rel="stylesheet">
@@ -62,20 +62,15 @@
 <body id="page-top">
 
 	<div class="home">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top"
-			id="sideNav" style="float:left">
+
+<div id="menubarEntrance" style="background-color: #BD5D38; height: 10%; width: 1%; position: fixed; padding: 10px; top: 30%; left: 0; border-radius: 0px 20px 20px 0px;"></div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" 
+		 id="sideNav" style="float:left;">
 			<a class="navbar-brand js-scroll-trigger" href="#page-top"> <span
-				class="d-block d-lg-none">Balance Pet</span> <img id="memberPhoto"></img>
+				class="d-block d-lg-none">Balance Pet</span> 
+				<img id="memberPhoto"></img>
 
 			</a>
-
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation"
-				style="background-color: #BD5D38 !important;">
-				<span class="navbar-toggler-icon"></span>
-			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 
 				<ul class="navbar-nav" id="menubar">
@@ -105,7 +100,6 @@
 			</div>
 
 		</nav>
-	    <div style=”clear:both;”></div> 
 		
 		<div class="container-fluid" id="p-0">
 			<section class="resume-section p-3 p-lg-5 d-flex d-column" id="first"></section>
@@ -144,18 +138,9 @@
 	<script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
 	<!-- Custom scripts for this template -->
-	<script src="../../js/resume.min.js"></script>
-
-	<!-- Bootstrap core JavaScript -->
-	<script src="../../vendor/jquery/jquery.min.js"></script>
-	<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-	<!-- Plugin JavaScript -->
-	<script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+	<script src="../../js/resume.js"></script>
 
 	<!-- Custom scripts for this template -->
-	<script src="../../js/resume.min.js"></script>
-	
 	<script src='../../node_modules/handlebars/dist/handlebars.min.js'></script>
 	<script src='../../node_modules/jquery/dist/jquery.js'></script>
 	<script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
@@ -172,8 +157,8 @@ $('#cast').load('section_pet_cast.html');
 $('#lost').load('section_lost.html');
 </script>
 
-	<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-	<script type="text/javascript">
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type="text/javascript">
     
 var loginBtn = $('#loginBtn'),
     singUpBtn = $('#singUpBtn'),
@@ -209,8 +194,8 @@ $.getJSON('../../json/auth/loginUser', (result) => {
     var memberViewModal = $('#memberViewModal');
     var memberViewModalContent = $('#memberViewModal .modal-content');
     $(document).ready(function(){ 
-        $('#memberInfo').click(function(e){
-	        memberViewModalContent.load('../member/memberForm.html', () => {
+        $('#memberInfo').click(() => {
+    			memberViewModalContent.load('../member/memberForm.html', () => {
 	        	memberViewModal.modal();
 	        });
         });
@@ -266,6 +251,19 @@ singUpBtn.click(() => {
     });
 })
 
+$('#menubarEntrance').mouseenter(() => {
+    document.getElementById("sideNav").style.transform = "translateX(0%)";
+    document.getElementById("sideNav").style.transition = "1s";
+    document.getElementById("p-0").style.marginLeft = "17rem";
+    document.getElementById("p-0").style.transition = "1s";
+});
+ 
+$('#sideNav').mouseleave(() => {
+    document.getElementById("sideNav").style.transform = "translateX(-99.9%)";
+    document.getElementById("sideNav").style.transition = "1s";
+    document.getElementById("p-0").style.marginLeft = "0";
+    document.getElementById("p-0").style.transition = "1s";
+});
 </script>
 
 </body>

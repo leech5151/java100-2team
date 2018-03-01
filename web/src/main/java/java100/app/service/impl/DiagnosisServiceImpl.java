@@ -34,7 +34,10 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     }
     
 
-    
+    @Override
+    public int getDateTotalCount(String name,String selectDate,String nowDate) {
+        return diagnosisDao.dateCountAll(name,selectDate,nowDate);
+    }
 
     @Override
     public int getTotalCount() {

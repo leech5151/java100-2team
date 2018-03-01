@@ -19,6 +19,7 @@ public interface DiagnosisService {
     int getTotalCount();
     int add(Diagnosis diagnosis);
     int get(String tel);
+    int getDateTotalCount(String name,String selectDate,String nowDate);
     Diagnosis get(int no);
     int update(Diagnosis diagnosis,int no);
     int deleteAll(int no);

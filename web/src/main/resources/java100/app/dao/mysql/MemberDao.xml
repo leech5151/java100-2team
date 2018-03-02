@@ -152,6 +152,7 @@
             email=#{email}, 
             pwd=password(#{password}),
             tel=#{tel}, 
+            push=#{push},
             pst_no=#{postalNo}, 
             prm_addr=#{primaryAddress}, 
             det_addr=#{detailAddress}, 

@@ -7,7 +7,6 @@ import java.util.HashMap;
 
 import javax.servlet.ServletContext;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -104,7 +103,9 @@ public class MemberController {
     @RequestMapping("{no}")
     public Object view(@PathVariable int no) throws Exception {
         HashMap<String,Object> result = new HashMap<>();
-        result.put("member", memberService.get(no));
+        Member member = memberService.get(no);
+        
+        result.put("member", member);
         return result;
     }
     
@@ -135,13 +136,8 @@ public class MemberController {
         }
         
         member.setFiles(uploadFiles);
-
         memberService.update(member);
-        if (member.getPush()) 
-            System.out.println("true");
-        else
-            System.out.println("false");
-        
+
         HashMap<String, Object> result = new HashMap<>();
         result.put("member", member);
         return result;

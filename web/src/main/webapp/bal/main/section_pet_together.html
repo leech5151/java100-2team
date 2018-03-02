@@ -69,12 +69,19 @@
 <div class="item col-md-3" data-item-id="1" data-item-tags="{{category}}">
         <div class="wrapper">
             <div id="blist-img">
+            <a href="../business/form.html?no={{businessNo}}"">
             {{#each files}}
-            <img src="../../download/{{filename}}" alt="facebook" style="height:100%">
+                {{#if @first}}
+                     <img src="../../download/{{filename}}" alt="facebook" style="height:100%">
+                {{/if}}
             {{/each}}
+            </a>
             </div>
-            <div id="blist-conts">
-            <a href="../business/form.html?no={{businessNo}}">{{businessName}}</a>
+            <div id="blist-conts" style="text-align:center;">
+            <h5>{{businessName}}</h5>
+            <p>{{post_address}}</p>
+            <p>{{primary_address}}</p>
+            <p>{{detail_address}}</p>
             <p class="item-tags"></p>
             </div>
         </div>
@@ -153,8 +160,6 @@ $.ajax('../../json/business/list', {
 <script src="../../tagsort/demo/scripts/tagsort.min.js" type="text/javascript" charset="utf-8"></script>
 <script>
 $(function(){
-    // Inclusive = when multiple tags are selected, all elements that contain ANY of those tags will be shown
-    // Exclusive = when multiple tags are selected, only elements that contain ALL of those tags will be shown
     $('div.tags-container').tagSort({selector:'.item',displaySelector: '.item-tags', displaySeperator: ' / ', inclusive: false, fadeTime:200});
 });
 </script>

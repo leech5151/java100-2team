@@ -13,46 +13,47 @@
 }
 
 
-.my-auto {
+.bal-my-auto {
     width: 90%;
-    height: 50%;
+    height: 8%;
+    margin-top:8%; 
     margin-left:5%;
     margin-right:5%;
     position: absolute;
     background-color: rgb(244, 236, 225);
 }
-.my-table {
+.bal-my-table {
 	margin-top: 20px;
 }
-.my-table-img{
+.bal-my-table-img{
 	text-align:center; 
 }
-.mb-0 {
+.bal-mb-0 {
     text-align:center; 
     line-height:0.9em;
     font-family: titlefont;
-    font-size: 80px;
+    font-size: 200px;
     margin-bottom: 0px;
     margin-top: 0px;
     overflow: hidden;
     
 }
-.mb-0-img {
+.bal-mb-0-img {
 	text-align:center; 
 	margin-top: 10px;
-    width:50px; 
-    height:50px;
+    width:100x; 
+    height:100px;
 }
-.mb-1-img {
+.bal-mb-1-img {
 	float: right;
     width:50px; 
     height:50px;
     margin-top:5%;
     margin-right:30%;
 }
-.mb-5 {
+.bal-mb-5 {
 	clear: both;
     text-align:center; 
     font-family: contsfont;
-    
+    font-size: 40px;
 }

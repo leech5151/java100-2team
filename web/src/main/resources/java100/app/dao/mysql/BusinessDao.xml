@@ -48,7 +48,9 @@
             d.file,
             b.b_name,
             b.ctgr,
+            b.pst_no,
             b.prm_addr,
+            b.det_addr,
             b.ctgr
         from bus as b
             left join bus_mda as d 

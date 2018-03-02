@@ -38,10 +38,9 @@
             </form>
         </div>
         
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-danger btn-default pull-left"
-                data-dismiss="modal">
-                <span class="glyphicon glyphicon-remove"></span> Cancel
+        <footer>
+            <button id="cancelBtn" type="button" class="btn btn-danger btn-default pull-left">
+                Cancel
             </button>
             <p>
                 Not a member? <a href="#">Sign Up</a>
@@ -49,7 +48,7 @@
             <p>
                 Forgot <a href="#">Password?</a>
             </p>
-        </div>
+        </footer>
 
 <script type="text/javascript">
 var loginForm = $('#loginForm'),
@@ -59,7 +58,6 @@ var loginForm = $('#loginForm'),
     saveEmail = $('#saveEmail');
 
 loginBtn2.click(() => {
-    console.log(email.val(), password.val() , saveEmail.is(':checked'));
     
     $.post('../../json/auth/login', {
         email: email.val(),
@@ -135,7 +133,6 @@ window.fbAsyncInit = function() {
     Kakao.Auth.createLoginButton({
       container: '#kakaoLoginBtn',
       success: function(authObj) {
-        console.log(authObj.access_token);
           $.getJSON(
                 '../../json/auth/kakaotalkLogin', 
                 {"access_token":authObj.access_token},
@@ -152,4 +149,14 @@ window.fbAsyncInit = function() {
       }
     });
     
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+    $('#cancelBtn').click(() => {
+    	$.getJSON('../../json/main/home', (result) => {
+    	    location.href = '../main/home.html';
+    	});
+    });
+});
 </script>

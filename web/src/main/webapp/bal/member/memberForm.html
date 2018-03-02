@@ -1,4 +1,4 @@
-<div class="modal-header"  style="padding: 5% 0 5% 0;">
+<div class="modal-header"  style="padding: 5% 5% 5% 5%;">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
     <h4>
         <span class="glyphicon glyphicon-lock"></span> 회원 상세정보
@@ -8,122 +8,100 @@
 <div class="modal-body" style="padding: 1%; 10%; 5%;">
 <div class='container'>
 
-
 <form id="fileForm" enctype="multipart/form-data">
 
 <div class='form-group row' id="memberNoDiv">
-<label for='memberNo' class='col-sm-2 col-form-label'>번호</label>
+<label for='memberNo' class='col-sm-3 col-form-label'>번호</label>
 <div id="memberNo" class='col-sm-7'>
 </div>
 </div>
 
 <div class='form-group row'>
-<label for='name' class='col-sm-2 col-form-label'>이름</label>
-<div class='col-sm-7'>
+<label for='name' class='col-sm-3 col-form-label'>이름</label>
+<div class='col-sm-7' style="padding-right: 5%;">
 <input class='form-control' id='name' type='text' name='name'>
 </div>
 </div>
 
 <div class='form-group row'>
-<label for='nicname' class='col-sm-2 col-form-label'>별명</label>
-<div class='col-sm-7'>
+<label for='nicname' class='col-sm-3 col-form-label'>별명</label>
+<div class='col-sm-7' style="padding-right: 5%;">
 <input class='form-control' id='nicname' type='text' name='nicname'>
 </div>
 </div>
 
 <div class='form-group row'>
-<label for='memberType' class='col-sm-2 col-form-label'>회원유형</label>
-<div class='col-sm-7'>
+<label id="memberTypeLabel" for='memberType' class='col-sm-3 col-form-label'>회원유형</label>
+<div id="memberTypeView" class='col-sm-7' style="padding-right: 5%;">
 <input class='form-control' id='memberType' type='text' name='memberType'>
 </div>
 </div>
-<!-- 
-<div class='form-group row my-modify' id="memberLabel"> 
-<label for='memberType' class='col-sm-2 col-form-label'>회원유형</label> 
-<div class="selectbox" style="display: inline-block; margin-bottom: 20px;">
-<select style="margin-left: 15px; width: 150px;" class="grouped_select optional form-control" id="memberType" name="memberType">
-<option value="선택하세요">선택하세요</option>
-<option value="일반유저">일반유저</option>
-<option value="사업자회원">사업자회원</option>
-<option value="병원회원">병원회원</option>
-</select>
-</div>
-</div>
- -->
+
 <div class='form-group row'>
-<label for='email' class='col-sm-2 col-form-label'>이메일</label>
-<div class='col-sm-7'>
+<label for='email' class='col-sm-3 col-form-label'>이메일</label>
+<div class='col-sm-7' style="padding-right: 5%;">
 <input class='form-control' id='email' type='text' name='email'>
 </div>
 </div>
 
 <div class='form-group row my-modify'>
-<label for='password' class='col-sm-2 col-form-label'>암호</label>
-<div class='col-sm-7' >
+<label for='password' class='col-sm-3 col-form-label'>암호</label>
+<div class='col-sm-7' style="padding-right: 5%;">
 <input class='form-control' id='password' type='password' name='password' placeholder="변경할 암호를 입력하세요.">
 </div>
 </div>
 
 <div class='form-group row'>
-<label for='tel' class='col-sm-2 col-form-label'>전화번호</label>
-<div class='col-sm-7'>
+<label for='tel' class='col-sm-3 col-form-label'>전화번호</label>
+<div class='col-sm-7' style="padding-right: 5%;">
 <input class='form-control' id='tel' type='text' name='tel'>
 </div>
 </div>
 
 <div class='form-group row'>
-<label for='push' class='col-sm-2 col-form-label'>알람수신여부</label>
-<div class='col-sm-7'>
+<label id="pushLabel" for='push' class='col-sm-3 col-form-label'>알람수신여부</label>
+<div id="pushView" class='col-sm-7' style="padding-right: 5%;">
 <input class='form-control' id='push' type='text' name='push'>
 </div>
 </div>
-<!-- 
-<div class='form-group row my-modify'>
-<label for='push' class='col-sm-3 col-form-label'>알람수신여부</label>
-<div class='col-sm-4' style="display: inline-block; margin-bottom: 15px;">
-<input id='push' type='radio' name='push' value="yes" checked="checked" />예
-<input id='push' type='radio' name='push'/>아니오
-</div>
-</div> 
- -->
 
 <div class='form-group row'>
-<label for='postalNo' class='col-sm-2 col-form-label'>우편번호</label>
-<div class='col-sm-7'>
-<input class='form-control' id='postalNo' type='text' onclick="addrsearch()" name='postalNo'>
+<label for='postalNo' class='col-sm-3 col-form-label'>우편번호</label>
+<div class='col-sm-7' style="padding-right: 5%;">
+<input class='form-control' id='postalNo' type='text' onclick="postalSearch()" name='postalNo'>
 </div>
 </div>
 
 <div class='form-group row'>
-<label for='primaryAddress' class='col-sm-2 col-form-label'>기본주소</label>
-<div class='col-sm-7'>
+<label for='primaryAddress' class='col-sm-3 col-form-label'>기본주소</label>
+<div class='col-sm-7' style="padding-right: 5%;">
 <input class='form-control' id='primaryAddress' type='text' name='primaryAddress'>
 </div>
 </div>
 
 <div class='form-group row'>
-<label for='detailAddress' class='col-sm-2 col-form-label'>상세주소</label>
-<div class='col-sm-7'>
+<label for='detailAddress' class='col-sm-3 col-form-label'>상세주소</label>
+<div class='col-sm-7' style="padding-right: 5%;">
 <input class='form-control' id='detailAddress' type='text' name='detailAddress'>
 </div>
 </div>
 
 <div class='form-group row my-view'>
-<label for='createDate' class='col-sm-2 col-form-label'>가입일</label>
-<div class='col-sm-7'>
+<label for='createDate' class='col-sm-3 col-form-label'>가입일</label>
+<div class='col-sm-7' style="padding-right: 5%;">
 <input class='form-control' id='createDate' type="date" name="createDate">
 </div>
 </div>
 
 <div class='form-group row my-modify'>
-<label for='file1' class='col-sm-2 col-form-label'>사진</label>
+<label for='file1' class='col-sm-3 col-form-label'>사진</label>
 <div class='col-sm-7' style="display: inline-block; margin-bottom: 15px; margin-left: 5px;">
 <input type="file" class="form-control-file" id="file" name="file">
 </div>
 </div>
   
 <div class='form-group row my-modify my-new'>
-<label class='col-sm-2 col-form-label'>첨부파일</label>
+<label class='col-sm-3 col-form-label'>첨부파일</label>
 <div id="attFile" class='col-sm-7' style="display: inline-block;">
 <br>
 </div>
@@ -144,6 +122,7 @@
 <script src='/node_modules/jquery/dist/jquery.js'></script>
 <script src='/node_modules/popper.js/dist/umd/popper.min.js'></script>
 <script src='/node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <script type="text/javascript">
 var memberNoItem = $('#memberNo'),
@@ -201,16 +180,40 @@ function load() {
                 };
             },
             error: () => {
-                window.alert('memberView 실행 오류!');
+                swal("실행 오류!", "로그인 정보를 확인해보세요!", "error");
             }
         });
     });
     
 }
-    
+
 updateBtn.click(() => {
 	$('.my-view').css('display', 'none');
 	$('.my-modify').css('display', '');
+	$('#memberTypeView').remove();
+	$('#pushView').remove();
+	$('#memberViewModal .modal-content').css('height', '90vh');
+	
+	$(document).ready(() => {
+	     $('#memberTypeLabel').after(
+	    		 "<div class='selectbox' style='display: inline-block; margin-bottom: 1%;'>" + 
+                 "<select style='margin-left: 5%; width: 18.4rem;' class='grouped_select optional form-control' id='memberType' name='memberType'>" + 
+                 "<option value='선택하세요'>선택하세요</option>" + 
+                 "<option value='일반유저'>일반유저</option>" + 
+                 "<option value='사업자회원'>사업자회원</option>" + 
+                 "<option value='병원회원'>병원회원</option>" + 
+                 "</select>" + 
+                 "</div>"
+	     );
+	     
+	     $('#pushLabel').after(
+	    		 "<div id='pushView' class='col-sm-7' style='display: inline-block; margin-left: 3%;'>" + 
+                 "<input id='pushModify1' type='radio' name='push' value='true' checked='checked'/>예" + 
+                 "<input id='pushModify2' type='radio' name='push' value='false'/>아니오" + 
+                 "</div>"
+	     );
+	});
+	     
 	$(document).ready(() => {
 	nameItem.removeAttr('readonly');
 	nicnameItem.removeAttr('readonly');
@@ -227,6 +230,16 @@ updateBtn.click(() => {
 
 modifyBtn.click(() => {
     var formData = new FormData($("#fileForm")[0]);
+    var pushData = $("input:radio[name=push]:checked").val();
+    
+    if (pushData) {
+        var pushKey = 'pushModify1';
+    } else {
+        var pushKey = 'pushModify2';
+    }
+    
+    formData.append(pushKey, pushData); 
+    
     $.ajax('../../json/member/update', {
         data: formData,
         dataType: 'json',
@@ -248,7 +261,7 @@ modifyBtn.click(() => {
 	         }, 0);
         },
         error: (jqXHR, textStatus, errorThrown) => {
-            window.alert('modifyBtn!');
+        	swal("변경 실패!", "변경할 정보를 확인해보세요!", "error");
         }
     });
 });
@@ -259,8 +272,8 @@ myPetBtn.click(() => {
     });
 });
 
-
-function addrsearch() {
+function postalSearch() {
+	console.log(no);
     new daum.Postcode({
         oncomplete: function(data) {
             var fullAddr = ''; // 최종 주소 변수

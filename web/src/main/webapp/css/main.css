@@ -22,9 +22,6 @@
     position: absolute;
     background-color: rgb(244, 236, 225);
 }
-.bal-my-table {
-	margin-top: 20px;
-}
 .bal-my-table-img{
 	text-align:center; 
 }
@@ -40,9 +37,11 @@
 }
 .bal-mb-0-img {
 	text-align:center; 
-	margin-top: 10px;
-    width:100x; 
-    height:100px;
+	margin-top: 5px;
+    width:300px; 
+    height:300px;
+    margin-bottom:-130px;
+    position: relative;
 }
 .bal-mb-1-img {
 	float: right;

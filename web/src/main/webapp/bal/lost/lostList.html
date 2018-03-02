@@ -62,13 +62,9 @@ var list = $('#listData'),
 load();
 
 function load() {
-       console.log('로스트 리스트 로드는 되나?');
     $.ajax('../../json/lost/list', {
         dataType: 'json',
         success: (result) => {
-        	console.log('result : ');
-        	console.log(result);
-        	
            list.html(templateEngine(result));
             $(document).smoothGallery({
                 animSpeed:300, 

@@ -63,23 +63,26 @@
 
 <body id="page-top">
 
-	<div id="nav_menu" style="width: 100%; height: 8vh; background-color: white; position: fixed; float: none; z-index: 1;">
-            <ul style="cursor: pointer; list-style-type: none; text-align: left; padding-top: 2vh;">
-	               <li class="header-nav-item2 header-nav-there-item" style="top: 12px;margin: 0; display: inline;">
-	                        <a href="/">
-	                          <img id="_logo7" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Snoopy_Peanuts.png/200px-Snoopy_Peanuts.png" height="40">
-	                        </a>
-	              </li>
-                  <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="#first">Home</a></li>
-                  <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="#care">Pet Care</a></li>
-                  <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="#together">Pet Together</a></li>
-                  <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="#story">Pet Story</a></li>
-                  <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="#cast">Pet Cast</a></li>
-                  <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="#lost">Lost</a></li>
-              </ul>
+	<div id="nav_menu" style="top: 0; width: 100%; height: 8vh; background-color: white; position: fixed; float: none; z-index: 1;">
+        <ul style="cursor: pointer; list-style-type: none; text-align: left; padding-top: 2vh;">
+            <li class="menuItem" style="top: 12px; margin: 0; display: inline;">
+                     <a href="/">
+                       <img id="_logo7" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Snoopy_Peanuts.png/200px-Snoopy_Peanuts.png" height="40">
+                     </a>
+           </li>
+              <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="#first">Home</a></li>
+              <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="#care">Pet Care</a></li>
+              <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="#together">Pet Together</a></li>
+              <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="#story">Pet Story</a></li>
+              <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="#cast">Pet Cast</a></li>
+              <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="#lost">Lost</a></li>
+          </ul>
 	</div>
 	
-	<div class="home">
+    <aside id="loginSection" style="width: 20rem; height: 1000px; position: fixed; 
+           background-color: white; top: 0; right: 0; clear: left; z-index: 1; transform: translateX(200%);"></aside>
+
+<div class="home">
 	
 
 <div id="menubarEntrance" style="background-color: #BD5D38; height: 10%; width: 1%; position: fixed; padding: 10px; top: 30%; left: 0; border-radius: 0px 20px 20px 0px;"></div>
@@ -122,21 +125,17 @@
 		
 		<div class="container-fluid" id="p-0">
 			<section class="resume-section p-3 p-lg-5 d-flex d-column" id="first"></section>
-			<section class="resume-section p-3 p-lg-5 d-flex flex-column"
-				id="care"></section>
-			<section class="resume-section p-3 p-lg-5 d-flex flex-column"
-				id="together"></section>
-			<section class="resume-section p-3 p-lg-5 d-flex flex-column"
-				id="story"></section>
-			<section class="resume-section p-3 p-lg-5 d-flex flex-column"
-				id="cast"></section>
-			<section class="resume-section p-3 p-lg-5 d-flex flex-column"
-				id="lost"></section>
+			<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="care"></section>
+			<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="together"></section>
+			<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="story"></section>
+			<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="cast"></section>
+			<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="lost"></section>
 		</div>
-	</div>
+	</div> 
+	
 	<!-- Modal -->
-
-	<div class="modal fade" role="dialog" id="loginModal">
+ 
+	<div class="fade" role="dialog" id="loginModal">
 		<div class="modal-dialog">
 			<div class="modal-content"></div>
 		</div>
@@ -149,27 +148,27 @@
 		</div>
 	</div>
 
-	<!-- Bootstrap core JavaScript -->
-	<script src="../../vendor/jquery/jquery.min.js"></script>
-	<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="../../vendor/jquery/jquery.min.js"></script>
+<script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-	<!-- Plugin JavaScript -->
-	<script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Plugin JavaScript -->
+<script src="../../vendor/jquery-easing/jquery.easing.min.js"></script>
 
-	<!-- Custom scripts for this template -->
-	<script src="../../js/resume.js"></script>
+<!-- Custom scripts for this template -->
+<script src="../../js/resume.js"></script>
 
-	<!-- Custom scripts for this template -->
-	<script src='../../node_modules/handlebars/dist/handlebars.min.js'></script>
-	<script src='../../node_modules/jquery/dist/jquery.js'></script>
-	<script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
-	<script src='../../node_modules/sweetalert/dist/sweetalert.min.js'></script>
-	<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
+<!-- Custom scripts for this template -->
+<script src='../../node_modules/handlebars/dist/handlebars.min.js'></script>
+<script src='../../node_modules/jquery/dist/jquery.js'></script>
+<script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+<script src='../../node_modules/sweetalert/dist/sweetalert.min.js'></script>
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
 
-	<script type="text/javascript">
+<script type="text/javascript">
 
 $('#first').load('section_first.html');
-$('#care').load('section_pet_care.html');
+/* $('#care').load('section_pet_care.html'); */
 $('#together').load('section_pet_together.html');
 $('#story').load('section_pet_story.html');
 $('#cast').load('section_pet_cast.html');
@@ -243,12 +242,13 @@ if (index != -1) {
 
 } else {}
 
-var loginModal = $('#loginModal');
-var loginModalContent = $('#loginModal .modal-content');
+/* var loginModal = $('#loginModal');
+var loginModalContent = $('#loginModal .modal-content'); */
 loginBtn.click(() => {
-	loginModalContent.load('../auth/login.html', () => {
-		loginModal.modal();
-	});
+	document.getElementById("loginSection").style.transform = "translateX(0%)";
+    document.getElementById("loginSection").style.transition = "1s";
+    
+	$('#loginSection').load('../auth/login.html');
 });
     
 logoutBtn.click(() => {

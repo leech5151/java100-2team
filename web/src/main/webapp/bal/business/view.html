@@ -104,12 +104,18 @@
  
 <div class='form-group row my-view'>
 <label for='filename' class='col-sm-2 col-form-label'>사진</label>
-<div id=filediv1 class='col-sm-10'>
+<div id=filediv class='col-sm-10'>
 </div>
 </div>
 
 <div class='col-sm-10 my-mo'>
-<input type='file' class='form-control-file' id='filename' name='file'>
+<input type='file' class='form-control-file' id='filename1' name='file'>
+</div>
+<div class='col-sm-10 my-mo'>
+<input type='file' class='form-control-file' id='filename2' name='file'>
+</div>
+<div class='col-sm-10 my-mo'>
+<input type='file' class='form-control-file' id='filename3' name='file'>
 </div>
 
 <div id="inserthere" class='form-group row my-view'></div>
@@ -151,10 +157,10 @@ var addBtn = $('#addBtn'),
     prmItem = $('#primary_address'),
     detItem = $('#detail_address'),
     nodItem = $('#nodiv'),
-    filedItem1 = $('#filediv1'),
-    filedItem2 = $('#filediv2'),
-    filedItem3 = $('#filediv3'),
-    fileItem = $('#filename'),
+    filedItem = $('#filediv'),
+    fileItem1 = $('#filename1'),
+    fileItem2 = $('#filename2'),
+    fileItem3 = $('#filename3'),
     reviewdItem = $('#reviewdiv'),
     reviewItem = $('#title');
 var b_number;
@@ -186,7 +192,7 @@ if (index != -1) { // 기존 데이터를 조회할 경우,
                 prmItem.val(result.data.primary_address);
                 detItem.val(result.data.detail_address);
                 for (var file of result.data.files){
-                filedItem1.html( "<img src='../../download/" + file.filename + "' alt=" + file.filename + ">")
+                filedItem.html( "<img src='../../download/" + file.filename + "' alt=" + file.filename + ">")
                 console.log(file.filename)
                 }
                 $.get('../../json/review/form',{

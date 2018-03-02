@@ -32,8 +32,6 @@
 <link href="../../vendor/devicons/css/devicons.min.css" rel="stylesheet">
 <link href="../../vendor/simple-line-icons/css/simple-line-icons.css"
 	rel="stylesheet">
-
-
 <!-- Custom styles for this template -->
 <link href="../../css/resume.css" rel="stylesheet">
 
@@ -65,7 +63,7 @@
 
 	<div class="home">
 
-<div id="menubarEntrance" style="background-color: #BD5D38; height: 10%; width: 1%; position: fixed; padding: 10px; top: 30%; left: 0; border-radius: 0px 20px 20px 0px;"></div>
+<!-- <div id="menubarEntrance" style="background-color: #BD5D38; height: 10%; width: 1%; position: fixed; padding: 10px; top: 30%; left: 0; border-radius: 0px 20px 20px 0px;"></div> -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" 
 		 id="sideNav" style="float:left;">
 			<a class="navbar-brand js-scroll-trigger" href="#page-top"> <span
@@ -152,11 +150,11 @@
 	<script type="text/javascript">
  
 $('#first').load('section_first.html');
-$('#care').load('section_pet_care.html');
+/* $('#care').load('section_pet_care.html');
 $('#together').load('section_pet_together.html');
 $('#story').load('section_pet_story.html');
 $('#cast').load('section_pet_cast.html');
-$('#lost').load('section_lost.html');
+$('#lost').load('section_lost.html'); */
 </script>
 
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -252,7 +250,7 @@ singUpBtn.click(() => {
         location.href = '../member/form_add.html';
     });
 })
-
+ 
 $('#menubarEntrance').mouseenter(() => {
     document.getElementById("sideNav").style.transform = "translateX(0%)";
     document.getElementById("sideNav").style.transition = "1s";
@@ -266,6 +264,7 @@ $('#sideNav').mouseleave(() => {
     document.getElementById("p-0").style.marginLeft = "0";
     document.getElementById("p-0").style.transition = "1s";
 });
+
 </script>
 
 </body>

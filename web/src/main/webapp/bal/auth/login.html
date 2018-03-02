@@ -1,6 +1,6 @@
 
 <div class="modal-header" style="padding: 10% 5%;">
-            <button id="cancelBtn1" type="button" class="close">&times;</button>
+            <button id="cancelBtn" type="button" class="close">&times;</button>
             <h4>
                 <span class="glyphicon glyphicon-lock"></span> Login
             </h4>
@@ -39,16 +39,14 @@
         </div>
         
         <footer>
-            <button id="cancelBtn2" type="button" class="btn btn-danger btn-default pull-left">
-                Cancel
-            </button>
-            <p>
-                Not a member? <a href="#">Sign Up</a>
-            </p>
-            <p>
-                Forgot <a href="#">Password?</a>
-            </p>
+            <div style="margin-left: 6%;">
+                아직 회원이 아니신가요? <a href="#">Sign Up</a>
+                <br>
+                비밀번호를 잊어버리셨나요? <a href="#">Password?</a>
+            </div>
         </footer>
+        
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <script type="text/javascript">
 var loginForm = $('#loginForm'),
@@ -138,7 +136,7 @@ window.fbAsyncInit = function() {
                 {"access_token":authObj.access_token},
                 function(result) {
                   if (result.status == 'success') {
-                      location.href = 'home.html';
+                      location.href = '../main/home.html';
                   } else {
                       swal("로그인실패!", "로그인에 실패하였습니다.", "error");
                   }
@@ -153,12 +151,9 @@ window.fbAsyncInit = function() {
 
 <script type="text/javascript">
 $(document).ready(function(){ 
-    $('#cancelBtn1').click(() => {
+    $('#cancelBtn').click(() => {
 	   document.getElementById("loginSection").style.transform = "translateX(200%)";
     });
     
-    $('#cancelBtn2').click(() => {
-	   document.getElementById("loginSection").style.transform = "translateX(200%)";
-    });
 });
 </script>

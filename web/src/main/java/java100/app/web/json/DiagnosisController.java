@@ -181,28 +181,21 @@ public class DiagnosisController {
     
     
     @RequestMapping("mypagesizelist")
-    public Object myPageSizeList(@RequestParam(value = "pn", defaultValue = "1") int pageNo,
+    public Object myPageSizeList(int pageNo,
             int pageSize,@ModelAttribute(value = "loginUser") Member loginUser,Diagnosis diagnosis) throws Exception {
       
+        String nowDate = diagnosis.getNowDateRecording();
+        String selectDate = diagnosis.getDateRecording();
         if (pageNo < 1) {
             pageNo = 1;
         }
 
-        int totalCount = diagnosisService.getTotalCount();
-        System.out.println("totalCount="+totalCount);
+        int totalCount = diagnosisService.getDateTotalCount(loginUser.getName(),selectDate,nowDate);
         int lastPageNo = totalCount / pageSize;
-        System.out.println("lastPageNo="+lastPageNo);
         if ((totalCount % pageSize) > 0) {
             lastPageNo++;
         }
-        System.out.println("lastPageNo2="+lastPageNo);
         
-        String nowDate = diagnosis.getNowDateRecording();
-        String selectDate = diagnosis.getDateRecording();
-        System.out.println("nowDate=" + nowDate);
-        System.out.println("date = " + selectDate);
-        System.out.println("pageSize=" + pageSize);
-        System.out.println("pageNo="+pageNo);
         HashMap<String, Object> result = new HashMap<>();
 
         result.put("pageNo", pageNo);

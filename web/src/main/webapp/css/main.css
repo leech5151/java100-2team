@@ -20,7 +20,7 @@ h2 {
 	font-family: titlefont;
     font-size: 70px;
 }
-p {
+p ui li {
 	font-family: contsfont-kor;
 	color: black;
 }
@@ -53,6 +53,21 @@ p {
     overflow: hidden;
     
 }
+.bal-mb-3 {
+	border: 0.1em solid blue;
+	height:100vh;
+}
+.bal-mb-3-data {
+	border: 0.3em solid yellow;
+	width:303px;
+	height:303px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	position: relative;
+	float:left;
+}
 .bal-mb-0-img {
 	text-align:center; 
 	margin-top: 5px;
@@ -68,7 +83,7 @@ p {
     margin-top:5%;
     margin-right:30%;
 }
-.bal-mb-5 {
+.bal-mb-0-b {
 	clear: both;
     text-align:center; 
     font-family: contsfont-eg;

@@ -1,2 +1,118 @@
-<h2>ABOUT PET</h2>
-<p>가나다라마</p>
+<meta charset="UTF-8">
+<div class="bal-mb-3">
+	<h2>PET TOGETHER</h2>
+	<div class="bal-mb-3-list">
+		<div class="bal-mb-3-data">
+		</div>
+		<div class="bal-mb-3-data">
+		</div>
+		<div class="bal-mb-3-data">
+		</div>
+		<div class="bal-mb-3-data">
+		</div>
+		<div class="bal-mb-3-data">
+		</div>
+		<div class="bal-mb-3-data">
+		</div>
+		
+	</div>
+</div>
+<script id="template" type="text/x-handlebars-template">
+{{#each list}}
+<div class="item col-md-3" data-item-id="1" data-item-tags="{{category}}">
+        <div class="wrapper">
+            <div id="blist-img">
+            <a href="../business/form.html?no={{businessNo}}"">
+            {{#each files}}
+                {{#if @first}}
+                     <img src="../../download/{{filename}}" alt="facebook" style="height:100%">
+                {{/if}}
+            {{/each}}
+            </a>
+            </div>
+            <div id="blist-conts" style="text-align:center;">
+            <h5>{{businessName}}</h5>
+            <p>{{post_address}}</p>
+            <p>{{primary_address}}</p>
+            <p>{{detail_address}}</p>
+            <p class="item-tags"></p>
+            </div>
+        </div>
+</div>
+{{/each}}
+</script>
+<script type="text/javascript">
+/* words = $('#words'),
+searchBtn = $('#searchBtn'), */
+var prevBtn = $('#prevBtn'),
+currBtn = $('#currBtn'),
+nextBtn = $('#nextBtn'),
+ulP = $('#blist-A'),
+currPageNo = 1;
+templateSrc = $('#template').html(),
+templateEngine = Handlebars.compile(templateSrc);
+load(1);
+
+
+/* searchBtn.click(() => {
+//event.preventDefault();
+load(1, {
+    "words": words.value
+})
+}); */
+
+prevBtn.click(() => {
+load(currPageNo - 1)
+});
+
+nextBtn.click(() => {
+load(currPageNo + 1)
+});
+
+
+function load(pageNo, options) {
+
+if (options == undefined) options = {};
+options.pn = pageNo;
+
+var count;
+$.ajax('../../json/business/list', {
+    /*method: 'GET',*/
+    data: options,
+    dataType: 'json',  
+    success: (result) => {
+        for (var item of result.list) {
+            for (var files of item.files) {
+                files.businessName = item.businessName;
+            }
+        }
+        console.log(result);
+        ulP.html(templateEngine(result));
+        
+        currPageNo = result.pageNo;
+        currBtn.html(currPageNo);
+        
+        if (result.pageNo == 1) {
+            $(prevBtn.parent()).addClass("disabled");
+        } else {
+            $(prevBtn.parent()).removeClass("disabled");
+        }
+        
+        if (result.lastPageNo == result.pageNo) {
+            $(nextBtn.parent()).addClass("disabled");
+        } else {
+            $(nextBtn.parent()).removeClass("disabled");
+        }
+    },
+    error: () => {
+        window.alert('error blist');
+    }
+});
+}
+</script>
+<script src="../../tagsort/demo/scripts/tagsort.min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+$(function(){
+    $('div.tags-container').tagSort({selector:'.item',displaySelector: '.item-tags', displaySeperator: ' / ', inclusive: false, fadeTime:200});
+});
+</script>

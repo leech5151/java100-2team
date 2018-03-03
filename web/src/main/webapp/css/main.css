@@ -53,6 +53,11 @@ p {
     overflow: hidden;
     
 }
+.bal-mb-1{
+	
+}
+
+
 .bal-mb-0-img {
 	text-align:center; 
 	margin-top: 5px;
@@ -61,12 +66,13 @@ p {
     margin-bottom:-130px;
     position: relative;
 }
-.bal-mb-1-img {
+.bal-mb-1-img-1 {
 	float: right;
     width:50px; 
     height:50px;
-    margin-top:5%;
-    margin-right:30%;
+    margin-top:25%;
+    margin-right:0%;
+    padding-right: 45%
 }
 .bal-mb-5 {
 	clear: both;

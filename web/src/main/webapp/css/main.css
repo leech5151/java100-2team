@@ -24,6 +24,8 @@ p ui li {
 	font-family: contsfont-kor;
 	color: black;
 }
+
+/* home section */
 .bal-my-home {
     width: 111%;
     height: 65%;
@@ -38,7 +40,7 @@ p ui li {
     height: 400vh;
     position: absolute;
     z-index:1;
-    border: 1em solid;
+    border: 0.1em solid;
 }
 .bal-my-table-img{
 	text-align:center; 
@@ -53,26 +55,6 @@ p ui li {
     overflow: hidden;
     
 }
-.bal-mb-3 {
-	border: 0.1em solid blue;
-	height:100vh;
-}
-.bal-mb-3-data {
-	border: 0.3em solid yellow;
-	width:303px;
-	height:303px;
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-bottom: 5px;
-	margin-top: 5px;
-	position: relative;
-	float:left;
-}
-.bal-mb-1{
-	
-}
-
-
 .bal-mb-0-img {
 	text-align:center; 
 	margin-top: 5px;
@@ -81,17 +63,36 @@ p ui li {
     margin-bottom:-130px;
     position: relative;
 }
-.bal-mb-1-img-1 {
-	float: right;
-    width:50px; 
-    height:50px;
-    margin-top:25%;
-    margin-right:0%;
-    padding-right: 45%
-}
 .bal-mb-0-b {
 	clear: both;
     text-align:center; 
     font-family: contsfont-eg;
     font-size: 40px;
+}
+/* care section */
+.bal-mb-1{
+	
+}
+.bal-mb-1-img-1 {
+	float: right;
+    width:50px; 
+    height:50px;
+    margin-right:0%;
+    padding-right: 45%
+}
+/* care together */
+.bal-mb-3 {
+	border: 0.1em solid blue;
+	height:100vh;
+}
+.bal-mb-3-data {
+	border: 0.3em solid yellow;
+	width:314px;
+	height:314px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	position: relative;
+	float:left;
 }

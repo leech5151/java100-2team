@@ -92,12 +92,10 @@
  
 
 
-       var businessViewModal = $('#businessViewModal');
       var businessViewModalContent = $('#businessViewModal .modal-content');
       $(document).ready(function(){ 
-          $('#businessInfo').click(function(e){
-          businessViewModalContent.load('../business/view.html', () => {
-              businessViewModalViewModal.modal();
+          $('#businessInfo').click(function(){
+          	  businessViewModalContent.load('../business/view.html', () => {
               });
           });
       }); 

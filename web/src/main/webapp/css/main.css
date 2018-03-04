@@ -20,7 +20,9 @@ p ui li {
 	font-family: contsfont-kor;
 	color: black;
 }
-
+.menuItem {
+	font-family: titlefont;
+}
 /* home section */
 .bal-my-home {
     width: 111%;

@@ -32,23 +32,22 @@
                 
                 <br>
             
-<div id="fb-root">
-</div>
+<div id="fb-root"></div>    
 <div class="fb-login-button" data-width="280" data-max-rows="1" data-size="large" 
     data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" 
-    data-use-continue-as="false" style="margin-top: -3%;"></div>
+    data-use-continue-as="false">Facebook으로 로그인</div>
                
-               <div style="margin-top: 5%;">
-                <a id="custom-login-btn" href="javascript:loginWithKakao()" >
+                <br>
+                <br>
+                <a id="custom-login-btn" href="javascript:loginWithKakao()">
                 <img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="280"/>
                 </a>
-               </div>
             </form>
         </div>
         
         <footer>
             <div style="margin-left: 6%;">
-                아직 회원이 아니신가요? <button id="signUpBtn" class="btn btn-sm btn-link">Sign Up</button>
+                아직 회원이 아니신가요? <a href="#">Sign Up</a>
                 <br>
                 비밀번호를 잊어버리셨나요? <a href="#">Password?</a>
             </div>
@@ -83,7 +82,7 @@ loginBtn2.click(() => {
 
 <script type="text/javascript">
 function autoServerLogin(accessToken) {
-    console.log(accessToken)
+	console.log(accessToken)
     $.getJSON(
         '../../json/auth/facebookLogin', 
         {'accessToken': accessToken}, 
@@ -98,7 +97,7 @@ function autoServerLogin(accessToken) {
 }
  
 function statusChangeCallback(response) {
-    console.log('가?')
+	console.log('가?')
   if (response.status === 'connected') { // 로그인이 정상적으로 되었을 때,
       autoServerLogin(response.authResponse.accessToken);
   
@@ -129,7 +128,7 @@ window.fbAsyncInit = function() {
   js.src = 'https://connect.facebook.net/ko_KR/sdk.js';
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
-    
+	
 /*   js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.12&appId=1608875912532374&autoLogAppEvents=1'; */
  </script>
 
@@ -162,17 +161,6 @@ Kakao.Auth.login({
 $(document).ready(function(){ 
     $('#cancelBtn').click(() => {
        document.getElementById("loginSection").style.transform = "translateX(200%)";
-    });
-    
-});
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-    $('#signUpBtn').click(() => {
-	   $.getJSON('login.html', (result) => {
-		    		   
-	   })
     });
     
 });

@@ -87,7 +87,9 @@ public class MemberController {
             
             uploadFiles.add(new MemberUploadFile(filename));
         }
-        
+        System.out.println(member.getEmail());
+        System.out.println(member.getPassword());
+        System.out.println(member.getName());
         member.setFiles(uploadFiles);
 
         memberService.add(member);

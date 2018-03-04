@@ -1,0 +1,62 @@
+
+<div class="modal-header" style="padding: 10% 5%;">
+            <button id="cancelBtn" type="button" class="close">&times;</button>
+            <h4>
+                <span class="glyphicon glyphicon-lock"></span> SignUp
+            </h4>
+        </div>
+        <div class="modal-body" style="padding: 40px 20px;">
+            <form id="loginForm" method="POST" role="form">
+        
+                <div class="form-group">
+                    <label for="name"><span
+                        class="glyphicon glyphicon-eye-open"></span> 이름</label> <input
+                        type="text" class="form-control" id="name"
+                        placeholder="Enter name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email"><span class="glyphicon glyphicon-user"></span>
+                        이메일</label> <input type="text" class="form-control" id="email"
+                        placeholder="Enter email">
+                </div>
+        
+                <div class="form-group">
+                    <label for="password"><span
+                        class="glyphicon glyphicon-eye-open"></span> 암호</label> <input
+                        type="password" class="form-control" id="password"
+                        placeholder="Enter password">
+                </div>
+        
+                <button id="loginBtn2" type="button"
+                    class="btn btn-success btn-block">
+                    <span class="glyphicon glyphicon-off"></span> 회원가입
+                </button>
+                
+</form>
+</div>            
+
+<script type="text/javascript">
+var loginForm = $('#loginForm'),
+    loginBtn2 = $('#loginBtn2'),
+    email = $('#email'),
+    password = $('#password'),
+    saveEmail = $('#saveEmail');
+
+loginBtn2.click(() => {
+    
+    $.post('../../json/auth/login', {
+        email: email.val(),
+        password: password.val(),
+        saveEmail: saveEmail.is(':checked') 
+    }, function(result) {
+        if (result.status == "success") {
+            location.href = "home.html"
+        } else {
+            swal("로그인실패!", "이메일이나 암호를 확인 해주세요!", "error");
+        }
+    }, 'json');
+    
+});
+
+</script>

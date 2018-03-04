@@ -123,7 +123,7 @@ public class LoginController {
             Member member = memberService.get(
                     (String)userInfo.get("kaccount_email"));
             if (member == null) { // 등록된 회원이 아니면,
-                // 페이스북에서 받은 정보로 회원을 자동 등록한다.
+
                 member = new Member();
                 member.setName((String)userInfo.get("kaccount_email"));
                 member.setEmail((String)userInfo.get("kaccount_email"));

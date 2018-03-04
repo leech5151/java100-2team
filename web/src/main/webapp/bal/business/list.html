@@ -1,30 +1,67 @@
 <meta charset="UTF-8">
-<h2>Welcome home!</h2>
- <div id="blist-container">
-    <div id="portfolio">
-	    <ul id="portfolio-item">
-	    
-	    </ul>
-	</div>    
-	<nav id="navigation">
-		<a id="prevBtn" class="page-link" tabindex="-1">이전</a></li>
-	    <a id="currBtn" href="#" class="nav selected" data-page="#">1</a>
-	    <a id="nextBtn" class="page-link" tabindex="0">다음</a></li>
-    </nav>
-  </div> 
+<link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../../css/main.css" rel="stylesheet">
+<link href="../../css/together.css" rel="stylesheet">
+<link href="../../css/together2.css" rel="stylesheet">
+<header style="text-align: center;">
+<h2>PET TOGETHER</h2>
+</header>
+<div class="form-group row" style="text-align: right;">
+<div class="col-sm-10">
+    <select id='category' class="btn btn-secondary data-reset" name="category">
+    <option value=카테고리>카테고리</option>
+    <option value=숙박업소>숙박업소</option>
+    <option value=식당>식당</option>
+    <option value=기타>기타</option>
+    </select>
+</div>
+</div>
+<div class="bal-mb-3" style="margin-top:-60px;">
+	<div style="margin-top: 8%;">
+	<div class="bal-mb-3-list">
+	</div>
+	</div> 
+</div> 
+<footer>
+	<nav aria-label="Page navigation">
+		<ul class="pagination justify-content-center">
+			<li class="page-item"><a id="prevBtn" class="page-link"
+				tabindex="-1">이전</a></li>
+
+			<li class="page-item"><a id="currBtn" class="page-link" href="#">1</a></li>
+
+			<li class="page-item "><a id="nextBtn" class="page-link"
+				tabindex="0">다음</a></li>
+		</ul>
+	</nav>
+</footer>
   <!-- <a href="../business/form.html?no={{businessNo}}"></a> -->
 <script src='../../node_modules/handlebars/dist/handlebars.min.js'></script>
 <script src='../../node_modules/jquery/dist/jquery.js'></script>
 <script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
-<script src='../../node_modules/sweetalert/dist/sweetalert.min.js'></script>
-<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
+<script src="../../js/together.js"></script>
+<script src="../../js/together2.js"></script>
 <script id="template" type="text/x-handlebars-template">
+
 {{#each list}}
-<li>
-{{#each files}}
-<img src="../../download/{{filename}}" onClick="location.href='../business/form.html?no={{businessNo}}'" alt="{{businessName}} " />
-{{/each}}  
-</li>
+    <div class="bal-mb-3-data" style="width:300px; height:250px;">
+		<figure class="snip1132">
+        {{#each files}}
+            {{#if @first}}
+                 <img src="../../download/{{filename}}" alt="{{filename}}" style="width:100%; height:100%;">
+            {{/if}}
+        {{/each}}
+	<figcaption>
+    	<div class="heading">
+     		<h3>{{primary_address}}<span>{{businessName}}</span></h3>
+    	</div>
+    	<div class="caption">
+      		<p>{{category}}</p>
+    	</div>
+  	</figcaption>
+  	<a href="../business/form.html?no={{businessNo}}"></a>
+	</figure>
+    </div>
 {{/each}}
 </script>
 <script type="text/javascript">
@@ -33,7 +70,7 @@ searchBtn = $('#searchBtn'), */
 var prevBtn = $('#prevBtn'),
 currBtn = $('#currBtn'),
 nextBtn = $('#nextBtn'),
-ulP = $('#portfolio-item'),
+blistItem = $('.bal-mb-3-list'),
 currPageNo = 1;
 templateSrc = $('#template').html(),
 templateEngine = Handlebars.compile(templateSrc);
@@ -73,7 +110,7 @@ $.ajax('../../json/business/list', {
             }
         }
         console.log(result);
-    	ulP.html(templateEngine(result));
+        blistItem.html(templateEngine(result));
         
         currPageNo = result.pageNo;
         currBtn.html(currPageNo);
@@ -91,7 +128,7 @@ $.ajax('../../json/business/list', {
         }
     },
     error: () => {
-        window.alert('���� ���� ����! blist');
+        window.alert('error! blist');
     }
 });
 }

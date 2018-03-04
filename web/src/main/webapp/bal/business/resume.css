@@ -82,7 +82,6 @@ h2 {
     flex-direction: column;
     width: 17rem;
     height: 100vh;
-    float: left;
   }
 
    #sideNav .navbar-brand {
@@ -149,6 +148,7 @@ section.resume-section .resume-item .resume-date {
 }
 
 a {
+	font-family: 'Open Sans', serif;
   color: #BD5D38;
 }
 

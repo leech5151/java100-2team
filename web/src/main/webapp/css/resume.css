@@ -1,7 +1,5 @@
 body {
-  font-family: 'Open Sans', serif;
   padding-top: 54px;
-  color: #868e96;
 }
 
 @media (min-width: 992px) {
@@ -17,20 +15,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Saira Extra Condensed', serif;
-  font-weight: 700;
   text-transform: uppercase;
-  color: #343a40;
 }
 
-h1 {
-  font-size: 6rem;
-  line-height: 5.5rem;
-}
-
-h2 {
-  font-size: 3.5rem;
-}
 
 .subheading {
   text-transform: uppercase;
@@ -116,8 +103,10 @@ h2 {
 
 section.resume-section {
   border-bottom: 1px solid #dee2e6;
-  padding-top: 5rem !important;
-  padding-bottom: 5rem !important;
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+  padding-left: 0rem !important;
+  padding-right: 0rem !important;
 }
 
 section.resume-section .resume-item .resume-date {
@@ -133,12 +122,12 @@ section.resume-section .resume-item .resume-date {
   }
 }
 
-@media (min-width: 992px) {
+/* @media (min-width: 992px) {
   section.resume-section {
     padding-top: 3.8rem !important;
     padding-bottom: 0rem !important;
   }
-}
+} */
 
 .bg-primary {
   background-color: #BD5D38 !important;

@@ -35,6 +35,10 @@
 <!-- Custom styles for this template -->
 <link href="../../css/resume.css" rel="stylesheet">
 
+
+<!-- 자체 작업 CSS -->
+<link href="../../css/main.css" rel="stylesheet">
+
 <style>
 .modal-header, h4, .close {
 	background-color: #5cb85c;
@@ -118,11 +122,13 @@
 		
 		<div class="container-fluid" id="p-0">
 			<section class="resume-section p-3 p-lg-5 d-flex d-column" id="first"></section>
+			<div class="bal-my-section">
 			<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="care"></section>
 			<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="together"></section>
 			<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="story"></section>
 			<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="cast"></section>
 			<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="lost"></section>
+			</div>
 		</div>
 	</div> 
 	
@@ -156,8 +162,8 @@
 
 $('#first').load('section_first.html');
 $('#care').load('section_pet_care.html');
-$('#together').load('section_pet_together.html');
-$('#story').load('section_pet_story.html');
+$('#together').load('section_diagnosis.html');
+$('#story').load('section_pet_together.html');
 $('#cast').load('section_pet_cast.html');
 $('#lost').load('section_lost.html');
 </script>

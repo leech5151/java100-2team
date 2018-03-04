@@ -32,16 +32,16 @@
 			</h1>
 			<nav class="codrops-demos">
 
-				<a href="../diagnosis/list.html">Menu</a> <a data-toggle="modal"
-					id="diagnosisInfo" class="open-modal" href="#diagnosisModalView">information</a>
-
+				<a href="../diagnosis/list.html">Menu</a>
+				<a data-toggle="modal" id="diagnosisInfo" class="open-modal" href="#diagnosisModalView">information</a>
 				<a class="current-demo" href="form.html">Image Gallery</a>
-				<div class="modal fade" role="dialog" id="doagnosisModalView">
+				<div class="modal fade" role="dialog" id="diagnosisModalView">
 					<div class="modal-dialog">
 						<div class="modal-content" id=modal_view_content>
 						</div>
 					</div>
 				</div>
+				
 			</nav>
 		</header>
 		<div style="width: 27%; text-align: left; margin-bottom: 1%; margin-left:18%; display: inline-block;border: solid 1px green">
@@ -160,7 +160,8 @@ $.datepicker.regional['kr'] = {
 	$("#navigation-list").toggle();
 	
 	});
-	
+	   var diagnosisModalView = $('#diagnosisModalView');
+	   var diagnosisModalViewContent = $('#diagnosisModalView .modal-content');	
 	
 	// 페이지 시작 ajax로딩
 	
@@ -190,6 +191,16 @@ $.datepicker.regional['kr'] = {
 	             	$(prevBtn.parent()).css("display","none");
 	            	$(currBtn.parent()).css("display","none");
 	                $(nextBtn.parent()).css("display","none");
+	                $(document).ready(function(){
+		            	   $(".modalList").click( function(e){
+		                	   	var no = $(this).children().first().text();
+		                	    location.href = location.href + "?" +no;	
+		                	    var formaddr = index + "?" + no;
+		            	   	  diagnosisModalViewContent.load('../diagnosis/diagnosismodalview.html', (no) => {
+		            	          return fromaddr,diagnosisModalView.modal();
+		            	         });
+		            	   });
+		            	   })
 	            },
 	            error: () => {
 	            }
@@ -244,6 +255,22 @@ $.datepicker.regional['kr'] = {
 			               } else {
 			                   $(nextBtn.parent()).removeClass("disabled");
 			               }
+			               
+			               $(document).ready(function(){
+			            	   $(".modalList").click( function(){
+			            			var index = location.href;
+			                	   	var no = $(this).children().first().text();
+			                	   	var formaddr = index + "?" + no;
+			                	   	console.log(formaddr)
+			                	   	console.log(index);
+			                	   	console.log(1111111111111111111)
+			            	   	  diagnosisModalViewContent.load('../diagnosis/diagnosismodalview.html', () => {
+			            	   		console.log(123123123123);
+			            	   		  console.log(2222222222222222222)
+			            	          diagnosisModalView.modal();
+			            	         });
+			            	   });
+			            	   })
 			           },
 			           error: () => {
 			           }
@@ -300,6 +327,23 @@ $.datepicker.regional['kr'] = {
 			               } else {
 			                   $(nextBtn.parent()).removeClass("disabled");
 			               }
+			               
+			               $(document).ready(function(){
+			            	   var index = location.href;
+			            	   console.log(index);
+			            	   $(".modalList").click( function(){
+			            			var index = location.href;
+			                	   	var no = $(this).children().first().text();
+			                	   	var formaddr = index + "?" + no;
+			                	   	console.log(formaddr)
+			                	   	console.log(index);
+			                	   	console.log(1111111111111111111)
+			            	   	  diagnosisModalViewContent.load('../diagnosis/diagnosismodalview.html', () => {
+			            	   		console.log(123123123123);
+			            	          diagnosisModalView.modal();
+			            	         });
+			            	   });
+			            	   })
 			           },
 			           error: () => {
 			           }
@@ -383,6 +427,25 @@ $.ajax('../../json/diagnosis/myAlllist', {
         	$(prevBtn.parent()).css("display","none");
         	$(currBtn.parent()).css("display","none");
             $(nextBtn.parent()).css("display","none");
+            
+            $(document).ready(function(){
+            	var index = location.href;
+         	   console.log(index);
+         	   $(".modalList").click( function(){
+         			var index = location.href;
+            	   	var no = $(this).children().first().text();
+            	   	var formaddr = index + "?" + no;
+            	   	console.log(formaddr)
+            	   	console.log(index);
+            	   	console.log(k)
+            	   	console.log(1111111111111111111)
+         	   	 diagnosisModalViewContent.load('../diagnosis/diagnosismodalview.html', () => {
+         	   		console.log(123123123123);
+         	   		  console.log(2222222222222222222)
+         	          diagnosisModalView.modal();
+         	         });
+         	   });
+         	   })
     },
     error: () => {
     }
@@ -435,6 +498,24 @@ function load(pageNo, options){
                } else {
                    $(nextBtn.parent()).removeClass("disabled");
                }
+               
+               
+               $(document).ready(function(){
+            	 
+            	   $(".modalList").click( function(){
+            		var index = location.href;
+            	   	var no = $(this).children().first().text();
+            	   	var formaddr = index + "?" + no;
+            	   	console.log(formaddr)
+            	   	console.log(index);
+            	   	console.log(1111111111111111111)
+            	   	  diagnosisModalViewContent.load('../diagnosis/diagnosismodalview.html', () => {
+            	   		  console.log(123123123123);
+            	          diagnosisModalView.modal();
+            	         });
+            	   });
+            	   })
+
            },
            error: () => {
            }
@@ -455,20 +536,6 @@ nextBtn.click(() => {
     console.log(currPageNo)
 });
 
-   var diagnosisModalView = $('#diagnosisModalView');
-   var diagnosisModalViewContent = $('#diagnosisModalView .modal-content');
-
-$(document).ready(function(){
-$(".modalList").click( function(){
-	var k = $(this).children().first().text();
-	console.log(k)
-	console.log(1111111111111111111)
-	  diagnosisModalViewContent.load('../diagnosis/view.html', () => {
-		  console.log(2222222222222222222)
-       diagnosisModalView.modal();
-      });
-});
-})
 
 
  

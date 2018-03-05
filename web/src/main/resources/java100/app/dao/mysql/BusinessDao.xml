@@ -99,6 +99,66 @@
         limit #{startIndex}, #{size}
     </select> 
     
+    
+     <select id="findCategory" resultMap="businessMap" parameterType="map">
+         select 
+            b.bus_no,
+            d.file,
+            b.b_name,
+            b.ctgr,
+            b.pst_no,
+            b.prm_addr,
+            b.det_addr,
+            b.ctgr
+        from bus as b
+            left join bus_mda as d 
+             on b.bus_no=d.bus_no 
+		where b.ctgr=#{category}
+  <if test="words != null">
+           <where>
+               <foreach collection="words" item="word">
+                  or title like '%${word}%'
+               </foreach>
+           </where>
+        </if> 
+        
+        <!-- 정렬 조건에 따라 SQL문을 변경한다.-->
+        order by 
+        <choose>
+            <when test="orderColumn == 'name' and align == 'desc'">
+                name desc
+            </when>
+            <when test="orderColumn == 'name' and align == 'asc'">
+                name asc
+            </when>
+            <when test="orderColumn == 'nic_name' and align == 'desc'">
+                nic_name desc
+            </when>
+            <when test="orderColumn == 'nic_name' and align == 'asc'">
+                nic_name asc
+            </when>
+            <when test="orderColumn == 'email' and align == 'desc'">
+                email desc
+            </when>
+            <when test="orderColumn == 'email' and align == 'asc'">
+                email asc
+            </when>
+            <when test="orderColumn == 'cre_date' and align == 'desc'">
+                cre_date desc
+            </when>
+            <when test="orderColumn == 'cre_date' and align == 'asc'">
+                cre_date asc
+            </when>
+            <otherwise>
+                m_no desc
+            </otherwise>
+        </choose>
+       
+        limit #{startIndex}, #{size}
+    </select> 
+    
+    
+    
     <select id="countAll" resultType="int">
         select count(*) from bus
     </select>

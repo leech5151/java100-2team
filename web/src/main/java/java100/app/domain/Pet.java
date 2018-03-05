@@ -1,5 +1,7 @@
 package java100.app.domain;
 
+import java.util.List;
+
 public class Pet {
     protected int petNo; 
     protected String petName; 
@@ -8,6 +10,7 @@ public class Pet {
     protected double weight; 
     protected double goalWeight; 
     protected int memberNo;
+    protected List<PetUploadFile> files;
     
     public int getPetNo() {
         return petNo;
@@ -63,6 +66,14 @@ public class Pet {
     
     public void setMemberNo(int memberNo) {
         this.memberNo = memberNo;
+    }
+
+    public List<PetUploadFile> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<PetUploadFile> files) {
+        this.files = files;
     }
     
 }

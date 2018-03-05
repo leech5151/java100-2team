@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java100.app.dao.LostDao;
 import java100.app.dao.LostFileDao;
-import java100.app.dao.MemberDao;
 import java100.app.domain.Lost;
 import java100.app.domain.LostUploadFile;
 import java100.app.service.LostService;
@@ -48,6 +47,14 @@ public class LostServiceImpl implements LostService {
     }
     
     @Override
+    public void addFiles(List<LostUploadFile> files, int no) {
+        for (LostUploadFile file : files) {
+            file.setLostNo(no);
+            lostFileDao.insert(file);
+        }
+    }
+    
+    @Override
     public Lost get(int no) {
         lostDao.updateViewCount(no);
         
@@ -73,13 +80,7 @@ public class LostServiceImpl implements LostService {
         
         return lostDao.delete(no);
     }
-    @Override
-    public void addFiles(List<LostUploadFile> files, int no) {
-        for (LostUploadFile file : files) {
-            file.setLostNo(no);
-            lostFileDao.insert(file);
-        }
-    }
+    
     
 }
 

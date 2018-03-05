@@ -35,8 +35,8 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     
 
     @Override
-    public int getDateTotalCount(String name,String selectDate,String nowDate) {
-        return diagnosisDao.dateCountAll(name,selectDate,nowDate);
+    public int getDateTotalCount(String tel,String selectDate,String nowDate) {
+        return diagnosisDao.dateCountAll(tel,selectDate,nowDate);
     }
 
     @Override
@@ -116,18 +116,23 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     }
 
     @Override
-    public List<Diagnosis> myList(String name,String selectDate,String nowDate) {
-        return diagnosisDao.findMyAll(name,selectDate,nowDate);
+    public List<Diagnosis> myList(String tel,String selectDate,String nowDate) {
+        return diagnosisDao.findMyAll(tel,selectDate,nowDate);
+    }
+    
+    @Override
+    public List<Diagnosis> myList5(String tel) {
+        return diagnosisDao.findMy5(tel);
     }
     
     
     @Override
-    public List<Diagnosis> myPageSizeList(String name, String selectDate, String nowDate,int pageNo, int pageSize) {
+    public List<Diagnosis> myPageSizeList(String tel, String selectDate, String nowDate,int pageNo, int pageSize) {
         
         HashMap<String,Object> params = new HashMap<>();
         params.put("startIndex", (pageNo - 1) * pageSize);
         params.put("size", pageSize);
-        params.put("name", name);
+        params.put("tel", tel);
         params.put("selectDate", selectDate);
         params.put("nowDate", nowDate);
         
@@ -141,8 +146,8 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     
 
     @Override
-    public List<Diagnosis> myAllList(String name) {
-        return diagnosisDao.findMyAllList(name);
+    public List<Diagnosis> myAllList(String tel) {
+        return diagnosisDao.findMyAllList(tel);
     }
 
 }

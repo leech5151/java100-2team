@@ -4,9 +4,21 @@
 <!-- snip1200 hover 클래스는 컨탠츠 고정 -->
 <div class="bal-mb-2">
 <div style="margin-top: 200px">
-<h2 style="margin-left: 700px">DIANOGSIS</h2>
-<div class="bal-mb-2-b">
-<figure class="snip1200">
+<h2 style="margin-left: 700px"><a href="../diagnosis/form.html" style="z-index: 10;position: relative">DIANOGSIS</a></h2>
+<div class="bal-mb-2-b" id="diagnosisList">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <figure class="snip1200">
   <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample27.jpg" alt="sq-sample27" />
   <figcaption>
     <p>I say, if your knees aren't green by the end of the day, you ought to seriously re-examine your life.</p>
@@ -47,16 +59,60 @@
   <a href="#"></a>
 </figure>
 <figure class="snip1200">
-  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample32.jpg" alt="sq-sample32" />
+<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample32.jpg" alt="sq-sample32" />
   <figcaption>
-    <p>That's the difference between me and the rest of the world! Happiness isn't good enough for me! I demand euphoria! </p>
+    <p>That's the difference between me and the rest of the world!</p>
     <div class="heading">
       <h3>My <span> Dream</span></h3>
     </div>
   </figcaption>
   <a href="#"></a>
-</figure>
+</figure> -->
+
+
+
+
+
+
 </div>
 </div>
 </div>
 <script src="../../js/diagnosis.js"></script>
+<script>
+load();
+function load(pageNo, options){
+	 $(document).ready(function(){
+    if (options == undefined) options = {};
+       options.pn = pageNo;
+       
+       $.ajax('../../json/diagnosis/mylist5', {
+           /*method: 'GET',*/
+           data: options,
+           dataType: 'json',
+           success: (result) => {
+               
+            	$('#diagnosisList').html("");
+                for (var data of result.list) {
+             		$('<figure class="snip1200">')
+                     .html(  	
+                    		 	'<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample32.jpg" alt="sq-sample32" />'+
+                     	       "<figcaption>"+
+                    		 	"<p  style='text-align: center'><strong><u>Hospital</u></strong><br>" + data.hospital.hospitalName + "<br><strong><u>CUSTOMERNAME</u></strong><br>" + data.memberName +"<br><strong><u>CATEGORY</u></strong><br>" + data.diagnosisCategory  + "</p>" + 
+ 	                   			 "<div class='heading'>"+
+ 	                            " <h3><span>" + data.dateRecording +"</span></h3>"+
+ 	                            "</div>")
+ 	                            .appendTo('#diagnosisList'); 
+             		
+           
+             		
+             		
+                }
+               
+           },
+           error: () => {
+           }
+       });
+	 })
+   }
+
+</script>

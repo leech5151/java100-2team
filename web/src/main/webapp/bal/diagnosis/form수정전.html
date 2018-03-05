@@ -59,6 +59,9 @@
    		 </ul>
   		 </nav>
 		
+	<!-- -------------------------------- -->
+	
+	<!-- -------------------------------- -->		
 		<div style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">
 			<div style='width:10%; display:inline-block; ; font-size:20px;'>No</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Hospital</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Customer</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Date</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Category</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Medical name</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Contents</div>
 		</div>
@@ -82,104 +85,128 @@
 	</div>
 	<!-- /container -->
 </div>
+<!-- Modal -->
+<div class="modal-header"  style="padding: 40px 50px;">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+</div>
 
 <div class="modal-body" style="padding: 40px 50px;">
 <div class='container'>
 
-        <h1>진료 상세정보</h1>
-
-        <form action='update' method='post'>
-
-            <div class='form-group row my-view'>
-                <label for='diagnosisNo' class='col-sm-2 col-form-label'>진료번호</label>
-                <div class='col-sm-10'>
-                    <input class='form-control' readonly id='diagnosisNo' type='number'
-                        name='diagnosisNo'>
-                </div>
-            </div>
-
-            <div class='form-group row my-view'>
-                <label for='hospitalName' class='col-sm-2 col-form-label'>병원명</label>
-                <div class='col-sm-10'>
-                    <input class='form-control' readonly id='hospitalName' type='text'
-                        name='diagnosis.hospital.hospitalName'>
-                </div>
-            </div>
-
-            <div class='form-group row'>
-                <label for='memberName' class='col-sm-2 col-form-label'>진료회원명</label>
-                <div class='col-sm-10'>
-                    <input class='form-control' id='memberName' type='text' name='memberName'>
-                </div>
-            </div>
-
-            <div class='form-group row'>
-                <label for='memberTel' class='col-sm-2 col-form-label'>진료회원연락처</label>
-                <div class='col-sm-10'>
-                    <input class='form-control' id='memberTel' type='text' name='memberTel'>
-                </div>
-            </div>
+    <h1 class='my-new'>업체등록</h1>
+    <h1 class='my-view'>업체 상세정보</h1>
 
 
-            <div class='form-group row'>
-                <label for='dogweight' class='col-sm-2 col-form-label'>강아지무게</label>
-                <div class='col-sm-10'>
-                    <input class='form-control' id='dogweight' type='number'
-                        name='dogweight'>
-                </div>
-            </div>
+<form id='frm' method="post" enctype="multipart/form-data">
+
+<div class="form-group row ">
+<div class="col-sm-10">
+    <select id='category' class="btn btn-secondary data-reset" name="category">
+    <option value=카테고리>카테고리</option>
+    <option value=숙박업소>숙박업소</option>
+    <option value=식당>식당</option>
+    <option value=기타>기타</option>
+    </select>
+</div>
+</div>
+
+<div class='form-group row my-view'>
+<label for='businessNo' class='col-sm-2 col-form-label'>번호</label>
+<div id="nodiv" class='col-sm-10'></div>
+</div> 
+
+<div class='form-group row my-mo'>
+<label for='businessName' class='col-sm-2 col-form-label'>업체명</label>
+<div class='col-sm-10'>
+<input class='form-control' id='businessName' type='text' name='businessName' >
+</div>
+</div>
+
+<div class='form-group row my-mo'>
+<label for='open_time' class='col-sm-2 col-form-label'>오픈시간</label>
+<div class='col-sm-10'>
+<input class='form-control' id='open_time' type='time' name='open_time' >
+</div>
+</div>
+
+<div class='form-group row my-mo'>
+<label for='close_time' class='col-sm-2 col-form-label'>마감시간</label>
+<div class='col-sm-10'>
+<input class='form-control' id='close_time' type='time' name='close_time' >
+</div>
+</div> 
+
+<div class='form-group row my-mo'>
+<label for='tel' class='col-sm-2 col-form-label'>전화번호</label>
+<div class='col-sm-10'>
+<input class='form-control' id='tel' type='text' name='tel' >
+</div>
+</div>
+
+<div class='form-group row my-mo'>
+<label for='menu' class='col-sm-2 col-form-label'>메뉴</label>
+<div class='col-sm-10'>
+<input class='form-control' id='menu' type='text' name='menu' >
+</div>
+</div>
+
+<div class='form-group row my-mo'>
+<label for='content' class='col-sm-2 col-form-label'>내용</label>
+<div class='col-sm-10'>
+<input class='form-control' id='content' type='text' name='content'>
+</div>
+</div>
+
+<div class='form-group row my-mo'>
+<label for='url' class='col-sm-2 col-form-label'>홈페이지</label>
+<div class='col-sm-10'>
+<input class='form-control' id='url' type='text' name='url' >
+</div>
+</div>
+
+<div class='form-group row my-mo'>
+<label for='post_no' class='col-sm-2 col-form-label'>우편번호</label>
+<div class='col-sm-10'>
+<input class='form-control' id='post_no' type="number" name='post_no' >
+</div>
+</div>
+
+<div class='form-group row my-mo'>
+<label for='primary_address' class='col-sm-2 col-form-label'>기본주소</label>
+<div class='col-sm-10'>
+<input class='form-control' id='primary_address' type='text' name='primary_address' >
+</div>
+</div>
+
+<div class='form-group row my-mo'>
+<label for='detail_address' class='col-sm-2 col-form-label'>상세주소</label>
+<div class='col-sm-10'>
+<input class='form-control' id='detail_address' type='text' name='detail_address' >
+</div>
+</div>
+ 
+<div class='form-group row my-view'>
+<label for='filename' class='col-sm-2 col-form-label'>사진</label>
+<div id=filediv class='col-sm-10'>
+</div>
+</div>
+
+<div class='col-sm-10 my-mo'>
+<input type='file' class='form-control-file' id='filename1' name='file'>
+</div>
+<div class='col-sm-10 my-mo'>
+<input type='file' class='form-control-file' id='filename2' name='file'>
+</div>
+<div class='col-sm-10 my-mo'>
+<input type='file' class='form-control-file' id='filename3' name='file'>
+</div>
+
+<div id="inserthere" class='form-group row my-view'></div>
 
 
-            <div class='form-group row'>
-                <label class='col-sm-2 col-form-label'>분류</label>
-                <div class='col-sm-10'>
-                    <input class='form-control' id='diagnosisCategory' type='text'
-                        name='diagnosisCategory'>
-                </div>
-            </div>
+<div class='form-group row'>
+<div class='col-sm-10'>
 
-            <div class='form-group row'>
-                <label for='diagnosisName' class='col-sm-2 col-form-label'>진료명</label>
-                <div class='col-sm-10'>
-                    <input class='form-control' id='diagnosisName' type='text'
-                        name='diagnosisName'>
-                </div>
-            </div>
-
-            <div class='form-group row'>
-                <label for='diagnosisContents' class='col-sm-2 col-form-label'>진료내용</label>
-                <div class='col-sm-10'>
-                    <input class='form-control' id='diagnosisContents' type='text'
-                        name='diagnosisContents'>
-                </div>
-            </div>
-
-
-            <div class='form-group row my-view'>
-                <label for='dateRecording' class='col-sm-2 col-form-label'>기록일자</label>
-                <div class='col-sm-10'>
-                    <input class='form-control my-recordData' id='dateRecording'
-                        type='date' name='dateRecording'>
-                </div>
-            </div>
-
-            <div class='form-group row'>
-                <label for='recorder' class='col-sm-2 col-form-label'>기록자</label>
-                <div class='col-sm-10'>
-                    <input class='form-control my-recordData' id='recorder' type='text'
-                        name='recorder'>
-                </div>
-            </div>
-
-            <div class='form-group row'>
-                <label for='remarks' class='col-sm-2 col-form-label'>비고</label>
-                <div class='col-sm-10'>
-                    <input class='form-control' id='remarks' type='text' name='remarks'>
-                </div>
-            </div>
-
-            <div class='form-group row'>
-                <div class='col-sm-10'>
 </div>
 </div>
 </form>
@@ -187,10 +214,8 @@
 </div>
 
 <div class="modal-footer">
-    <button id="addBtn" type="button" class='btn btn-primary btn-sm my-new'>추가</button>
-    <button id="updateBtn" type="button" class='btn btn-primary btn-sm my-view'>변경</button>
-    <button id="deleteBtn" type="button" class='btn btn-primary btn-sm my-view'>삭제</button>
 </div>
+
 
 <script src='../../node_modules/jquery/dist/jquery.min.js'></script>
 <script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
@@ -203,23 +228,6 @@ currBtn = $('#currBtn'),
 nextBtn = $('#nextBtn'),
 currPageNo =1,
 pageSize = 1000;
-
-var addBtn=$('#addBtn'),
-updateBtn = $('#updateBtn'),
-deleteBtn = $('#deleteBtn'),
-noItem=$('#diagnosisNo'),
-memberNameItem=$('#memberName'),
-memberTelItem=$('#memberTel'),
-hospitalNameItem=$('#hospitalName'),
-hospitalNoItem=$('#hospitalNo'),
-dogweightItem=$('#dogweight'),
-categoryItem=$('#diagnosisCategory'),
-nameItem=$('#diagnosisName'),
-contentsItem=$('#diagnosisContents'),
-recordingItem=$('#dateRecording'),
-recorderItem=$('#recorder'),
-remarksItem=$('#remarks');
-
 
 var nowDate = new Date();
 var date = new Date();
@@ -241,7 +249,6 @@ var selectMonth = nowDate.getMonth() +1;
 var selectDay = nowDate.getDate();
 if(selectMonth < 10){ selectMonth = "0" + selectMonth}
 if(selectDay < 10) {selectDay = "0"+selectDay}
-var text = 'null';
 
 var resultSelectDate = selectYear+"-"+selectMonth+"-" + selectDay;
 
@@ -285,8 +292,8 @@ $.datepicker.regional['kr'] = {
 	$("#navigation-list").toggle();
 	
 	});
-/* 	   var diagnosisModalView = $('#diagnosisModalView');
-	   var diagnosisModalViewContent = $('#diagnosisModalView .modal-content');	 */
+	   var diagnosisModalView = $('#diagnosisModalView');
+	   var diagnosisModalViewContent = $('#diagnosisModalView .modal-content');	
 	
 	// 페이지 시작 ajax로딩
 	
@@ -304,66 +311,34 @@ $.datepicker.regional['kr'] = {
 	                for (var data of result.list) {
 	                	$('<div class="modalList" style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
 	                        .html(  
-	                        	       "<div style='width:10%; display:inline-block; '>" + data.diagnosisNo + "</div>" + 
-			                            
-	                        	        "<a data-toggle='modal' id='diagnosisInfo' class='open-modal' href='../diagnosis/view.html?no=" + data.diagnosisNo + "'>" +data.hospital.hospitalName + "</a>" + 
-			                            "<div class='modal fade' role='dialog' id='diagnosisViewModal'>" +
-			                            "<div class='modal-dialog'>" +
-			                            "<div class='modal-content' id=modal_view_content>" +
-			                            "</div></div></div>" + 
-			                            /* data-toggle='modal' id='diagnosisInfo' class='open-modal' */
-			                            "<div style='width:10%; display:inline-block; '>" + data.memberName + "</div>" +
-			                            "<div style='width:20%; display:inline-block; '>" + data.dateRecording + "</div>" +
-			                            "<div style='width:10%; display:inline-block; '>" + data.diagnosisCategory + "</div>" +
-			                            "<div style='width:10%; display:inline-block; '>" + data.diagnosisName + "</div>" +
-			                            "<div style='width:20%; display:inline-block; '>" + data.diagnosisContents + "</div>")
+	                        	       "<div style='width:10%; display:inline-block; ; '>" + data.diagnosisNo + "</div>" + 
+			                            "<div style='width:20%; display:inline-block; ; '>"+ data.hospital.hospitalName + "</div>" + 
+			                            "<div style='width:10%; display:inline-block;; '>" + data.memberName + "</div>" +
+			                            "<div style='width:20%; display:inline-block;; '>" + data.dateRecording + "</div>" +
+			                            "<div style='width:10%; display:inline-block;; '>" + data.diagnosisCategory + "</div>" +
+			                            "<div style='width:10%; display:inline-block;; '>" + data.diagnosisName + "</div>" +
+			                            "<div style='width:20%; display:inline-block;; '>" + data.diagnosisContents + "</div>")
 			                            .appendTo('#diagnosisbody'); 
-	                	
-	                	/*  $(document).ready(function (){
-	                	    $('a').click(function(event){
-	                	    event.preventDefault();
-	                	    alert("hi");
-	                	    });
-	                	});  */
 	                }
-	                
 	             	$(prevBtn.parent()).css("display","none");
 	            	$(currBtn.parent()).css("display","none");
 	                $(nextBtn.parent()).css("display","none");
+	                $(document).ready(function(){
+		            	   $(".modalList").click( function(e){
+		                	   	var no = $(this).children().first().text();
+		                	    location.href = location.href + "?" +no;	
+		                	    var formaddr = index + "?" + no;
+		            	   	  diagnosisModalViewContent.load('../diagnosis/diagnosismodalview.html', (no) => {
+		            	          return fromaddr,diagnosisModalView.modal();
+		            	         });
+		            	   });
+		            	   })
 	            },
 	            error: () => {
 	            }
 	        });
 	    }
-	$(document).on('click', '.modalList', function(){
-	    text = $(this).children().first().text();
-	    var diagnosisViewModalContent = $('#diagnosisViewModal .modal-content');
-	    console.log(text);
-	    console.log(diagnosisViewModalContent);
-	    modalPopup(text);
-	}); 
 	
-	function modalPopup(text){
-	    $.ajax('../../json/diagnosis/' + text, {
-            dataType: 'json',
-            success: (result) => {
-                noItem.val(result.data.diagnosisNo);
-                memberNameItem.val(result.data.memberName);
-                memberTelItem.val(result.data.memberTel);
-                hospitalNameItem.val(result.data.hospital.hospitalName);
-                dogweightItem.val(result.data.dogweight);
-                categoryItem.val(result.data.diagnosisCategory);
-                nameItem.val(result.data.diagnosisName);
-                contentsItem.val(result.data.diagnosisContents);
-                recordingItem.val(result.data.dateRecording);
-                recorderItem.val(result.data.recorder);
-                remarksItem.val(result.data.remarks);
-            },
-            error: () => {
-                window.alert('서버 실행 오류!');
-            }
-        });
-	}
 	// 데이트피커 선택날짜 리스트
 	$(".selectDate").datepicker({
 		onSelect:  function selectdatepicker(dateText, inst) {
@@ -413,6 +388,21 @@ $.datepicker.regional['kr'] = {
 			                   $(nextBtn.parent()).removeClass("disabled");
 			               }
 			               
+			               $(document).ready(function(){
+			            	   $(".modalList").click( function(){
+			            			var index = location.href;
+			                	   	var no = $(this).children().first().text();
+			                	   	var formaddr = index + "?" + no;
+			                	   	console.log(formaddr)
+			                	   	console.log(index);
+			                	   	console.log(1111111111111111111)
+			            	   	  diagnosisModalViewContent.load('../diagnosis/diagnosismodalview.html', () => {
+			            	   		console.log(123123123123);
+			            	   		  console.log(2222222222222222222)
+			            	          diagnosisModalView.modal();
+			            	         });
+			            	   });
+			            	   })
 			           },
 			           error: () => {
 			           }
@@ -470,6 +460,22 @@ $.datepicker.regional['kr'] = {
 			                   $(nextBtn.parent()).removeClass("disabled");
 			               }
 			               
+			               $(document).ready(function(){
+			            	   var index = location.href;
+			            	   console.log(index);
+			            	   $(".modalList").click( function(){
+			            			var index = location.href;
+			                	   	var no = $(this).children().first().text();
+			                	   	var formaddr = index + "?" + no;
+			                	   	console.log(formaddr)
+			                	   	console.log(index);
+			                	   	console.log(1111111111111111111)
+			            	   	  diagnosisModalViewContent.load('../diagnosis/diagnosismodalview.html', () => {
+			            	   		console.log(123123123123);
+			            	          diagnosisModalView.modal();
+			            	         });
+			            	   });
+			            	   })
 			           },
 			           error: () => {
 			           }
@@ -477,6 +483,38 @@ $.datepicker.regional['kr'] = {
 			   }
 			}
 	});
+
+
+// 모든 리스트 출력
+/* allDateBtn.click(() =>{
+	 $.ajax('../../json/diagnosis/myAlllist', {
+         dataType: 'json',
+         success: (result) => {
+        	 $('#diagnosisbody').html("");
+             for (var data of result.list) {
+            	 $('<div class="modalList" style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
+                     .html(  
+                    	      "<div style='width:10%; display:inline-block'>" + data.diagnosisNo + "</div>" + 
+	                            "<div id='modalList' style='width:20%; display:inline-block'>"+ data.hospital.hospitalName + "</div>" + 
+	                            "<div id='modalList' style='width:10%; display:inline-block'>" + data.memberName + "</div>" +
+	                            "<div id='modalList' style='width:20%; display:inline-block'>" + data.dateRecording + "</div>" +
+	                            "<div id='modalList' style='width:10%; display:inline-block'>" + data.diagnosisCategory + "</div>" +
+	                            "<div id='modalList' style='width:10%; display:inline-block'>" + data.diagnosisName + "</div>" +
+	                            "<div id='modalList' style='width:20%; display:inline-block'>" + data.diagnosisContents + "</div>")
+	                            .appendTo('#diagnosisbody');
+             }
+             $(prevBtn.parent()).css("display","block");
+         	   $(currBtn.parent()).css("display","block");
+             $(nextBtn.parent()).css("display","block");
+         },
+         error: () => {
+         }
+     });
+	
+})
+ */
+
+
 
 
 $(".dropdownlist").click( function(){
@@ -522,6 +560,24 @@ $.ajax('../../json/diagnosis/myAlllist', {
         	$(currBtn.parent()).css("display","none");
             $(nextBtn.parent()).css("display","none");
             
+            $(document).ready(function(){
+            	var index = location.href;
+         	   console.log(index);
+         	   $(".modalList").click( function(){
+         			var index = location.href;
+            	   	var no = $(this).children().first().text();
+            	   	var formaddr = index + "?" + no;
+            	   	console.log(formaddr)
+            	   	console.log(index);
+            	   	console.log(k)
+            	   	console.log(1111111111111111111)
+         	   	 diagnosisModalViewContent.load('../diagnosis/diagnosismodalview.html', () => {
+         	   		console.log(123123123123);
+         	   		  console.log(2222222222222222222)
+         	          diagnosisModalView.modal();
+         	         });
+         	   });
+         	   })
     },
     error: () => {
     }
@@ -574,6 +630,24 @@ function load(pageNo, options){
                } else {
                    $(nextBtn.parent()).removeClass("disabled");
                }
+               
+               
+               $(document).ready(function(){
+            	 
+            	   $(".modalList").click( function(){
+            		var index = location.href;
+            	   	var no = $(this).children().first().text();
+            	   	var formaddr = index + "?" + no;
+            	   	console.log(formaddr)
+            	   	console.log(index);
+            	   	console.log(1111111111111111111)
+            	   	  diagnosisModalViewContent.load('../diagnosis/diagnosismodalview.html', () => {
+            	   		  console.log(123123123123);
+            	          diagnosisModalView.modal();
+            	         });
+            	   });
+            	   })
+
            },
            error: () => {
            }
@@ -595,5 +669,20 @@ nextBtn.click(() => {
 });
 
 
+
+ 
+  /*  $(document).ready(function(){ 
+       $('#businessInfo').click(function(e){
+       		   businessViewModalContent.load('../business/view.html', () => {
+               businessViewModal.modal();
+           });
+       });
+   
+   });
+   */
+   
+z
+   
+   
    
 </script>

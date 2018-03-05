@@ -83,6 +83,10 @@
 	<!-- /container -->
 </div>
 
+<div class="modal" id="testModal" tabindex="-1" role="dialog">
+<div class="modal-dialog modal-sm">
+<div class="modal-content">
+
 <div class="modal-body" style="padding: 40px 50px;">
 <div class='container'>
 
@@ -192,6 +196,9 @@
     <button id="deleteBtn" type="button" class='btn btn-primary btn-sm my-view'>삭제</button>
 </div>
 
+</div>
+</div>
+</div>
 <script src='../../node_modules/jquery/dist/jquery.min.js'></script>
 <script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
 <script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
@@ -341,6 +348,7 @@ $.datepicker.regional['kr'] = {
 	    console.log(text);
 	    console.log(diagnosisViewModalContent);
 	    modalPopup(text);
+	    $("#testModal").modal();
 	}); 
 	
 	function modalPopup(text){

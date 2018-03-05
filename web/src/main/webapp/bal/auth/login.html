@@ -53,7 +53,7 @@
     data-use-continue-as="false" style="margin-top: -3%;"></div>
                
                <div style="margin-top: 5%;">
-                <a id="custom-login-btn" href="javascript:loginWithKakao()" >
+                <a id="custom-login-btn" href="javascript:loginWithKakao();" >
                 <img src="//mud-kage.kakao.com/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="280" height="38"/>
                 </a>
                </div>
@@ -107,6 +107,10 @@ loginBtn2.click(() => {
     
 });
 
+$('.fb-login-button').on('login', function() {
+	alert('ooooooo')
+});
+
 function autoServerLogin(accessToken) {
     console.log(accessToken)
     $.getJSON(
@@ -121,16 +125,7 @@ function autoServerLogin(accessToken) {
           }
     });
 }
- 
-function statusChangeCallback(response) {
-  if (response.status === 'connected') { // 로그인이 정상적으로 되었을 때,
-      autoServerLogin(response.authResponse.accessToken);
-  
-  } else { // 로그인이 되지 않았을 때,
-      console.log("로그인 되지 않았음");
-  }
-}
-  
+
 function checkLoginState() {
     FB.getLoginStatus(function(response) { 
       statusChangeCallback(response);
@@ -144,6 +139,15 @@ window.fbAsyncInit = function() {
         xfbml   : true,
         version : 'v2.12'
     });
+    
+    FB.Event.subscribe('auth.statusChange', function(response) {
+        if (response.status === 'connected') { // 로그인이 정상적으로 되었을 때,
+              autoServerLogin(response.authResponse.accessToken);
+          
+          } else { // 로그인이 되지 않았을 때,
+              console.log("로그인 되지 않았음");
+          }
+    });
 };
 
 (function(d, s, id) {
@@ -153,10 +157,10 @@ window.fbAsyncInit = function() {
   js.src = 'https://connect.facebook.net/ko_KR/sdk.js';
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
-    
-/*   js.src = 'https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.12&appId=1608875912532374&autoLogAppEvents=1'; */
 
-Kakao.init('ff1cbf9468f0d7759d24a8472491276e');
+}  
+
+Kakao.init('ff1cbf9468f0d7759d24a8472491276e')
 function loginWithKakao() {
 Kakao.Auth.login({
   success: function(authObj) {
@@ -176,8 +180,6 @@ Kakao.Auth.login({
   }
 });
 };
-
-}  
 </script>
 
 <script type="text/javascript">

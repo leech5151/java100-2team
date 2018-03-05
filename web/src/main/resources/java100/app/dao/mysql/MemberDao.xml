@@ -37,7 +37,7 @@
             nic_name,
             email,
             cre_date,
-            tel
+            tel            
     </sql>
 
     <select id="findAll" resultMap="memberMap" parameterType="map">

@@ -132,6 +132,7 @@
 
 <div class="modal-footer">
 <button id="addBtn" type="button" class='btn btn-primary btn-sm my-new'>추가</button>
+<button id="backBtn" type="button" class='btn btn-primary btn-sm my-new'  onclick="history.back();">돌아가기</button>
 <button id="updateBtn" type="button" class='btn btn-primary btn-sm my-view'>변경</button>
 <button id="deleteBtn" type="button" class='btn btn-primary btn-sm my-view'>삭제</button>
 </div>
@@ -234,21 +235,6 @@ addReviewBtn.click(()=> {
              window.alert('서버 실행 오류2!');
          }
      });
- });
-     
- modifyBtn.click(() => {
-     $('.my-view').css('display', 'true');
-     nameItem.attr('disabled', false);
-     openItem.attr('disabled', false);
-     closeItem.attr('disabled', false);
-     telItem.attr('disabled', false);
-     menuItem.attr('disabled', false);
-     contsItem.attr('disabled', false);
-     urlItem.attr('disabled', false);
-     pstItem.attr('disabled', false);
-     prmItem.attr('disabled', false);
-     detItem.attr('disabled', false);
-     fileItem.attr('disabled', false);
  });
  updateBtn.click(() => {
      

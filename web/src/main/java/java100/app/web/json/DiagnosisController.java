@@ -163,22 +163,17 @@ public class DiagnosisController {
     public Object myList(Diagnosis diagnosis,@ModelAttribute(value = "loginUser") Member loginUser) throws Exception{
         String nowDate = diagnosis.getNowDateRecording();
         String selectDate = diagnosis.getDateRecording();
-        Member member = memberService.get(loginUser.getMemberNo());
-        System.out.println(member.getTel());
         
         HashMap<String, Object> result = new HashMap<>();
-        result.put("list", diagnosisService.myList(member.getTel(),selectDate,nowDate));
+        result.put("list", diagnosisService.myList(loginUser.getTel(),selectDate,nowDate));
         return result;
         
     }
     
     @RequestMapping("mylist5")
     public Object myList5(@ModelAttribute(value = "loginUser") Member loginUser) throws Exception{
-        Member member = memberService.get(loginUser.getMemberNo());
-        System.out.println(member.getTel());
-        
         HashMap<String, Object> result = new HashMap<>();
-        result.put("list", diagnosisService.myList5(member.getTel()));
+        result.put("list", diagnosisService.myList5(loginUser.getTel()));
         return result;
         
     }
@@ -186,10 +181,8 @@ public class DiagnosisController {
     
     @RequestMapping("myAlllist")
     public Object myAllList(@ModelAttribute(value = "loginUser") Member loginUser) throws Exception{
-        Member member = memberService.get(loginUser.getMemberNo());
-        System.out.println(member.getTel());
         HashMap<String, Object> result = new HashMap<>();
-        result.put("list", diagnosisService.myAllList(member.getTel()));
+        result.put("list", diagnosisService.myAllList(loginUser.getTel()));
         return result;
         
     }
@@ -198,15 +191,14 @@ public class DiagnosisController {
     @RequestMapping("mypagesizelist")
     public Object myPageSizeList(int pageNo,
             int pageSize,@ModelAttribute(value = "loginUser") Member loginUser,Diagnosis diagnosis) throws Exception {
-        Member member = memberService.get(loginUser.getMemberNo());
-        System.out.println(member.getTel());
+        
         String nowDate = diagnosis.getNowDateRecording();
         String selectDate = diagnosis.getDateRecording();
         if (pageNo < 1) {
             pageNo = 1;
         }
 
-        int totalCount = diagnosisService.getDateTotalCount(member.getTel(),selectDate,nowDate);
+        int totalCount = diagnosisService.getDateTotalCount(loginUser.getTel(),selectDate,nowDate);
         int lastPageNo = totalCount / pageSize;
         if ((totalCount % pageSize) > 0) {
             lastPageNo++;
@@ -216,7 +208,7 @@ public class DiagnosisController {
 
         result.put("pageNo", pageNo);
         result.put("lastPageNo", lastPageNo);
-        result.put("list", diagnosisService.myPageSizeList(member.getTel(),selectDate,nowDate,pageNo, pageSize));
+        result.put("list", diagnosisService.myPageSizeList(loginUser.getTel(),selectDate,nowDate,pageNo, pageSize));
 
         return result;
     }

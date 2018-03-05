@@ -162,7 +162,6 @@ public class LoginController {
     public Object loginUser(HttpSession session) {
         
         Member member = (Member)session.getAttribute("loginUser");
-        
         HashMap<String,Object> result = new HashMap<>();
         
         if (member != null) {

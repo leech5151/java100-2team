@@ -8,9 +8,10 @@ import java100.app.domain.Diagnosis;
 public interface DiagnosisDao {
     List<Diagnosis> findAll(Map<String,Object> params);
     List<Diagnosis> findMyPageSizeAll(Map<String,Object> params);
-    List<Diagnosis> findMyAll(String name,String selectDate,String nowDate);
-    List<Diagnosis> findMyAllList(String name);
-    int dateCountAll(String name,String selectDate,String nowDate);
+    List<Diagnosis> findMyAll(String tel,String selectDate,String nowDate);
+    List<Diagnosis> findMy5(String tel);
+    List<Diagnosis> findMyAllList(String tel);
+    int dateCountAll(String tel,String selectDate,String nowDate);
     int countAll();
     int CountMember(String tel);
     int insert(Diagnosis diagnosis);

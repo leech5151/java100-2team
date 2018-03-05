@@ -19,15 +19,16 @@ public interface DiagnosisService {
     int getTotalCount();
     int add(Diagnosis diagnosis);
     int get(String tel);
-    int getDateTotalCount(String name,String selectDate,String nowDate);
+    int getDateTotalCount(String te,String selectDate,String nowDate);
     Diagnosis get(int no);
     int update(Diagnosis diagnosis,int no);
     int deleteAll(int no);
     int delete(int no,int no2);
     Object getHospitalNo(int no);
-    List<Diagnosis> myList(String string,String selectDate,String nowDate);
-    List<Diagnosis> myPageSizeList(String name, String selectDate,String nowDate,int pageNo, int pageSize);
-    List<Diagnosis> myAllList(String name);
+    List<Diagnosis> myList(String tel,String selectDate,String nowDate);
+    List<Diagnosis> myList5(String string);
+    List<Diagnosis> myPageSizeList(String tel, String selectDate,String nowDate,int pageNo, int pageSize);
+    List<Diagnosis> myAllList(String tel);
     
 }
 

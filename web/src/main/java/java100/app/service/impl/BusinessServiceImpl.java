@@ -31,6 +31,22 @@ public class BusinessServiceImpl implements BusinessService {
         return businessDao.findAll(params);
     }
     
+    
+    @Override
+    public List<Business> listCategory(int pageNo, int pageSize, Map<String, Object> options, String category) {
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("startIndex", (pageNo - 1) * pageSize);
+        params.put("size", pageSize);
+        params.put("category",category);
+        
+        if (options != null) {  
+        }
+        
+        return businessDao.findCategory(params);
+    }
+    
+    
+    
     @Override
     public int getTotalCount() {
         return businessDao.countAll();
@@ -97,7 +113,7 @@ public class BusinessServiceImpl implements BusinessService {
             businessFileDao.insert(file);
         }
     }
-    
+
 }
 
 

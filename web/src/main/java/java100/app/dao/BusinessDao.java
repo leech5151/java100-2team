@@ -8,6 +8,7 @@ import java100.app.domain.Business;
 
 public interface BusinessDao {
     List<Business> findAll(Map<String,Object> params);
+    List<Business> findCategory(Map<String,Object> params);
     int countAll();
     int insert(Business business);
     Business findByNo(int bus_no);

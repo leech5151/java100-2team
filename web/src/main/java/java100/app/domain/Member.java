@@ -17,6 +17,15 @@ public class Member {
     protected String createDate; // list
     protected List<MemberUploadFile> files;
    
+    
+    @Override
+    public String toString() {
+        return "Member [memberNo=" + memberNo + ", name=" + name + ", nicname=" + nicname + ", email=" + email
+                + ", password=" + password + ", tel=" + tel + ", push=" + push + ", postalNo=" + postalNo
+                + ", primaryAddress=" + primaryAddress + ", detailAddress=" + detailAddress + ", memberType="
+                + memberType + ", createDate=" + createDate + ", files=" + files + "]";
+    }
+
     public int getMemberNo() {
         return memberNo;
     }

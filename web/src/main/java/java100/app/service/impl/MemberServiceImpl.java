@@ -43,8 +43,6 @@ public class MemberServiceImpl implements MemberService {
         
         int count = memberDao.insert(member);
         
-        this.addFiles(member.getFiles(), member.getMemberNo());
-        
         return count;
     }
     

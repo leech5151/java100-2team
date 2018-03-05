@@ -37,7 +37,7 @@
             nic_name,
             email,
             cre_date,
-            tel
+            tel            
     </sql>
 
     <select id="findAll" resultMap="memberMap" parameterType="map">
@@ -108,7 +108,7 @@
     <insert id="insert" parameterType="member"
         useGeneratedKeys="true" keyColumn="m_no" keyProperty="memberNo">
         insert into memb(email,pwd,nic_name,name,tel,push,pst_no,prm_addr,det_addr,m_type,cre_date)
-        values(#{email},password(#{password}),#{email},#{name},#{email},#{push},#{postalNo},#{primaryAddress},#{detailAddress},#{memberType},now())
+        values(#{email},password(#{password}),#{nicname},#{name},#{tel},#{push},#{postalNo},#{primaryAddress},#{detailAddress},#{memberType},now())
     </insert>
 
     <select id="findByNo" resultMap="memberMap" parameterType="int">

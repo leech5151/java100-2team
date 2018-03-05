@@ -9,6 +9,7 @@ public interface PetDao {
     List<Pet> findAll(int searchNo);
     int countAll();
     int insert(Pet pet);
+    Pet findByNo(int no);
     int delete(int no);
 }
 

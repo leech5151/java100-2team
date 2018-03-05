@@ -73,28 +73,29 @@ public class MemberController {
     public Object add(
             String email,
             String password,
+            Member member,
             Model model) throws Exception {
-
-        HashMap<String, Object> result = new HashMap<>();
-
+        
         if (memberService.get(email) != null) {
+            HashMap<String, Object> result = new HashMap<>();
             result.put("status", "addFail");
             return result;
+            
+        } else {
+            HashMap<String, Object> result = new HashMap<>();
+            member.setEmail(email);
+            member.setPassword(password);
+            member.setNicname(email);
+            member.setTel(email);
+            
+            memberService.add(member);
+            memberService.get(member.getMemberNo());
+
+            result.put("email", member.getEmail());
+            result.put("password", member.getPassword());
+            return result;
         }
-        
-        Member member = new Member();
-        member.setEmail(email);
-        member.setPassword(password);
-        member.setNicname(email);
-        member.setTel(email);
 
-        memberService.add(member);
-
-        memberService.get(member.getMemberNo());
-        result.put("email", member.getEmail());
-        result.put("password", member.getPassword());
-        
-        return result;
     }
     
     @RequestMapping("{no}")
@@ -139,19 +140,10 @@ public class MemberController {
         result.put("member", member);
         return result;
     }
-/*
-    @RequestMapping("delete")
-    public String delete(int no) throws Exception {
 
-        memberService.delete(no);
-        return "redirect:list";
-    }
-*/ 
     long prevMillis = 0;
     int count = 0;
     
-    // 다른 클라이언트가 보낸 파일명과 중복되지 않도록 
-    // 서버에 파일을 저장할 때는 새 파일명을 만든다.
     synchronized private String getNewFilename(String filename) {
         long currMillis = System.currentTimeMillis();
         if (prevMillis != currMillis) {

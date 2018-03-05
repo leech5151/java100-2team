@@ -54,65 +54,30 @@
 
 <body id="page-top">
 
- 	<header id="topMenu" style="top: 0; left:0; width: 100%; height: 8vh; background-color: white; position: fixed; z-index: 10;">
+ 	<header id="topMenu" style="top: 0; left:0; width: 100%; height: 8vh; background-color: white; position: fixed; z-index: 10; transform: translateX(0);">
         <ul style="cursor: pointer; list-style-type: none; text-align: center; padding-top: 2vh; font-size:40px;">
-            <li class="menuItem" style="top: 12px; margin: 0; display: inline;">
-                     <a href="/">
-                       <img id="_logo7" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Snoopy_Peanuts.png/200px-Snoopy_Peanuts.png" height="40">
-                     </a>
+           <li class="menuItem" style="top: 12px; margin: 0; display: inline;">
+	           <a href="/">
+	             <img id="_logo7" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Snoopy_Peanuts.png/200px-Snoopy_Peanuts.png" height="40"> Balance Pet
+	           </a>
            </li>
-              <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="#first">Home</a></li>
+              <li class="menuItem" style="display: inline; padding: 0px 2% 0px 100px;"><a class="js-scroll-trigger" href="#first">Home</a></li>
               <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="#care">Pet Care</a></li>
               <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="#diagnosis">Pet Diagnosis</a></li>
               <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="#together">Pet Together</a></li>
               <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="#cast">Cast</a></li>
+              <li id="memberView" class="menuItem" style="display: inline; padding: 0px 2% 0px 2px; font-size: 25px;"><a class="js-scroll-trigger after-login" href="#">MyInfo</a></li>
+              <li id="loginBtn" class="menuItem" style="display: inline; padding: 0px 2% 0px 2px; font-size: 25px; font: italic bold; color: black;"><a class="js-scroll-trigger before-login" href="#">Login</a></li>
+              <li id="logoutBtn" class="menuItem" style="display: inline; padding: 0px 2% 0px 2px; font-size: 25px; font: italic bold; color: black;"><a class="js-scroll-trigger after-login" href="#">Logout</a></li>
           </ul>
 	</header>
+	
 <div class="home">
 	
     <aside id="loginSection" style="width: 20rem; height: 1000px; position: fixed; 
            background-color: white; top: 0; right: 0; clear: left; z-index: 20; transform: translateX(200%);"></aside>
 	
-
-<div id="menubarEntrance" style="background-color: #BD5D38; height: 10%; width: 1%; position: fixed; padding: 10px; top: 30%; left: 0; border-radius: 0px 20px 20px 0px;"></div>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" 
-		 id="sideNav" style="float:left;">
-			<a class="navbar-brand js-scroll-trigger" href="#page-top"> <span
-				class="d-block d-lg-none">Balance Pet</span> 
-				<img id="memberPhoto"></img>
-
-			</a>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-				<ul class="navbar-nav" id="menubar">
-					<li></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger"
-						href="#first">Home</a></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger"
-						href="#care">Pet Care</a></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger"
-						href="#together">Pet Together</a></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger"
-						href="#story">Pet Story</a></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger"
-						href="#cast">Pet Cast</a></li>
-					<li class="nav-item"><a class="nav-link js-scroll-trigger"
-						href="#lost">Lost</a></li>
-				</ul>
-			</div>
-
-			<div class='form-group row' align="right">
-				<button id="loginBtn" type="button" style="margin: 5px"
-					class='btn btn-outline-dark btn-sm before-login'>login</button>
-				<button id="singUpBtn" type="button" style="margin: 5px"
-					class='btn btn-outline-dark btn-sm before-login'>signUp</button>
-				<button id="logoutBtn" type="button" style="margin: 5px"
-					class='btn btn-outline-dark btn-sm after-login'>logout</button>
-			</div>
-
-		</nav>
-		
-		<div class="container-fluid" id="p-0">
+		<div class="container-fluid" id="p-0" style="margin-left: -17rem">
 			<section class="resume-section p-3 p-lg-5 d-flex d-column" id="first"></section>
 			<div class="bal-my-section">
 			<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="care"></section>
@@ -124,15 +89,6 @@
 		</div>
 	</div> 
 	
-	<!-- Modal -->
- 
-	<div class="modal fade" role="dialog" id="memberViewModal">
-		<div class="modal-dialog">
-			<div class="modal-content"
-				style="width: 38rem; height: 80vh; overflow: auto;"></div>
-		</div>
-	</div>
-
 <!-- Bootstrap core JavaScript -->
 <script src="../../vendor/jquery/jquery.min.js"></script>
 <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -157,17 +113,15 @@ $('#care').load('section_pet_care.html');
 $('#diagnosis').load('section_diagnosis.html');
 $('#together').load('section_pet_together.html');
 $('#cast').load('section_pet_cast.html');
-/* $('#lost').load('section_lost.html'); */
+/*$('#lost').load('section_lost.html'); */
 </script>
 
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
     
 var loginBtn = $('#loginBtn'),
-    singUpBtn = $('#singUpBtn'),
     logoutBtn = $('#logoutBtn'),
-    memberThumnail = $('#memberThumnail'),
-    memberPhoto = $('#memberPhoto'),
+    memberView = $('#memberView'),
     memberNo = '';
 
 $.getJSON('../../json/auth/loginUser', (result) => {
@@ -194,10 +148,8 @@ $.getJSON('../../json/auth/loginUser', (result) => {
         }
     }
     
-    var memberViewModal = $('#memberViewModal');
-    var memberViewModalContent = $('#memberViewModal .modal-content');
     $(document).ready(function(){ 
-        $('#memberInfo').click(() => {
+        $('#memberView').click(() => {
     		event.preventDefault();
     		event.stopPropagation();
    			memberViewModalContent.load('../member/memberForm.html', () => {
@@ -230,37 +182,13 @@ loginBtn.click(() => {
 	document.getElementById("loginSection").style.transform = "translateX(0%)";
     document.getElementById("loginSection").style.transition = "1s";
     
-	$('#loginSection').load('../auth/login_signUp.html');
+	$('#loginSection').load('../auth/login.html');
 });
     
 logoutBtn.click(() => {
    $.getJSON('../../json/auth/logout', (result) => {
        location.href = '../main/home.html';
    });
-});
-
-singUpBtn.click(() => {
-    $.getJSON('../../json/main/home', (result) => {
-        location.href = '../member/form_add.html';
-    });
-})
-
-$('#menubarEntrance').mouseenter(() => {
-    document.getElementById("sideNav").style.transform = "translateX(0%)";
-    document.getElementById("sideNav").style.transition = "1s";
-    document.getElementById("p-0").style.marginLeft = "0";
-    document.getElementById("p-0").style.transition = "1s";
-    document.getElementById("topMenu").style.transform = "translateX(17rem)";
-    document.getElementById("topMenu").style.transition = "1s";
-});
- 
-$('#sideNav').mouseleave(() => {
-    document.getElementById("sideNav").style.transform = "translateX(-100%)";
-    document.getElementById("sideNav").style.transform = "translateX(-100%)";
-    document.getElementById("p-0").style.marginLeft = "-17rem";
-    document.getElementById("p-0").style.transition = "1s";
-    document.getElementById("topMenu").style.transform = "translateX(0)";
-    document.getElementById("topMenu").style.transition = "1s";
 });
 
 </script>

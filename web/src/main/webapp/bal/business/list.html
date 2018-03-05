@@ -40,6 +40,7 @@ padding-left: 0;
 <div class="bal-mb-3" style="margin-top:-60px;">
 	<div style="margin-top: 8%;">
 	<div class="bal-mb-3-list">
+	
 	</div>
 	</div> 
 </div> 
@@ -92,10 +93,27 @@ var prevBtn = $('#prevBtn'),
 currBtn = $('#currBtn'),
 nextBtn = $('#nextBtn'),
 blistItem = $('.bal-mb-3-list'),
+category = '카테고리',
 currPageNo = 1;
 templateSrc = $('#template').html(),
 templateEngine = Handlebars.compile(templateSrc);
-load(1);
+
+load2();
+
+$('#category').on('change', function() {
+	  category = $("#category option:selected").val();
+	
+	  if(category == '카테고리'){
+		 load2(1);
+	  }else if(category =='숙박업소'){
+		  load(1);
+	  }else if(category == '식당'){
+		  load(1);
+	  }else if(category == '기타'){
+		  load(1);
+	  }
+	})
+
 
 
 /* searchBtn.click(() => {
@@ -118,11 +136,12 @@ function load(pageNo, options) {
 
 if (options == undefined) options = {};
 options.pn = pageNo;
-
+options.category = category;
 var count;
-$.ajax('../../json/business/manyList', {
+
+$.ajax('../../json/business/categorylist', {
     /*method: 'GET',*/
-    data: options,
+    data: 	options,
     dataType: 'json',  
     success: (result) => {
         for (var item of result.list) {
@@ -154,7 +173,48 @@ $.ajax('../../json/business/manyList', {
 });
 }
 
+function load2(pageNo, options) {
+
+	if (options == undefined) options = {};
+	options.pn = pageNo;
+	var count;
+	$.ajax('../../json/business/manyList', {
+	    /*method: 'GET',*/
+	    data: 	options,
+	    dataType: 'json',  
+	    success: (result) => {
+	        for (var item of result.list) {
+	            for (var files of item.files) {
+	                files.businessName = item.businessName;
+	            }
+	        }
+	        console.log(result);
+	        blistItem.html(templateEngine(result));
+	        
+	        currPageNo = result.pageNo;
+	        currBtn.html(currPageNo);
+	        
+	        if (result.pageNo == 1) {
+	            $(prevBtn.parent()).addClass("disabled");
+	        } else {
+	            $(prevBtn.parent()).removeClass("disabled");
+	        }
+	        
+	        if (result.lastPageNo == result.pageNo) {
+	            $(nextBtn.parent()).addClass("disabled");
+	        } else {
+	            $(nextBtn.parent()).removeClass("disabled");
+	        }
+	    },
+	    error: () => {
+	        window.alert('error! blist');
+	    }
+	});
+	}
+
+
+
+
 
 </script>
-<script src="../../together-list/javascript/demo.js"></script>
 					  

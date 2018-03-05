@@ -17,6 +17,7 @@ import java100.app.domain.BusinessUploadFile;
 //
 public interface BusinessService {
     List<Business> list(int pageNo, int pageSize, Map<String,Object> options);
+    List<Business> listCategory(int pageNo, int pageSize, Map<String,Object> options,String category);
     int getTotalCount();
     int add(Business business);
     void addFiles(List<BusinessUploadFile> files, int businessNo);

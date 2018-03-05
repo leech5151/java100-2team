@@ -1,0 +1,56 @@
+<a href="/">
+<img id="memberPhoto" style="background-color: black; width: 30%; height: 10%; border-radius: 100% 100% 100% 100%; border-color: black; margin: 25% 0% 3% 35%;"></img>
+</a>
+
+<div style="width: 80%; height: 10%; border-color: black; margin: 5% 10% 20% 10%; text-align: center;">
+angelpjn@naver.com
+<br>
+<br>
+이름님
+<br>
+<br>
+HP : 010-0000-2222
+</div>
+
+<br>
+<hr>
+
+<footer>
+<br>
+<div style="width: 80%; margin-left: 10%; text-align: center; color: #824027;" class="btn btn-lg btn-light">My Page</div>
+
+<br>
+<div style="width: 80%; margin-left: 10%; text-align: center; color: #824027;" class="btn btn-lg btn-light">My Pet</div>
+
+<br>
+<div style="width: 80%; margin-left: 10%; text-align: center; color: #824027;" class="btn btn-lg btn-light">F A Q</div>
+
+<br>
+<div style="width: 80%; margin-left: 10%; text-align: center; color: #824027;" class="btn btn-lg btn-light">Balance Pet 알아보기</div>
+
+<br>
+</footer>
+
+<script type="text/javascript">
+
+$.getJSON('../../json/auth/loginUser', (result) => {
+    var member = result.member;
+    var memberNo = member.memberNo;
+    for (var file of member.files) {
+        if (file.filename == null) {
+            var srcpath = "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Snoopy_Peanuts.png/200px-Snoopy_Peanuts.png";
+        } else {
+            var srcpath = "../../download/" + file.filename;
+        }
+        $('#memberPhoto').attr({
+            src: srcpath,
+            /* class: 'img-fluid img-profile rounded-circle mx-auto mb-2', */
+            alt: "'" + file.filename + "'",
+            id: 'memberInfo'
+        });
+    }
+});
+
+</script>
+
+

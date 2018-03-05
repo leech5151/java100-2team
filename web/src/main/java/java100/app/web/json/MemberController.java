@@ -71,30 +71,25 @@ public class MemberController {
     
     @RequestMapping("add")
     public Object add(
-            Member member,
-            MultipartFile[] file,
+            String email,
+            String password,
             Model model) throws Exception {
-        
-        String uploadDir = servletContext.getRealPath("/download");
 
-        ArrayList<MemberUploadFile> uploadFiles = new ArrayList<>();
-        
-        for (MultipartFile part : file) {
-            if (part.isEmpty())
-                continue;
-            
-            String filename = this.writeUploadFile(part, uploadDir);
-            
-            uploadFiles.add(new MemberUploadFile(filename));
+        HashMap<String, Object> result = new HashMap<>();
+
+        if (memberService.get(email) != null) {
+            result.put("status", "addFail");
+            return result;
         }
-        System.out.println(member.getEmail());
-        System.out.println(member.getPassword());
-        System.out.println(member.getName());
-        member.setFiles(uploadFiles);
+        
+        Member member = new Member();
+        member.setEmail(email);
+        member.setPassword(password);
+        member.setNicname(email);
+        member.setTel(email);
 
         memberService.add(member);
-        System.out.println(member.getPassword());
-        HashMap<String, Object> result = new HashMap<>();
+
         memberService.get(member.getMemberNo());
         result.put("email", member.getEmail());
         result.put("password", member.getPassword());

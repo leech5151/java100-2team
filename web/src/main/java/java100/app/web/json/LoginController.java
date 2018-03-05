@@ -46,7 +46,6 @@ public class LoginController {
             HttpServletResponse response,
             HttpSession httpSession,
             Model model) {
-        
         Member member = memberService.get(email, password);
         
         if (saveEmail != null) {

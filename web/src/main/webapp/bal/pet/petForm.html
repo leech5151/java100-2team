@@ -1,0 +1,101 @@
+<div class="modal-header"  style="padding: 5% 5% 5% 5%;">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4>
+        <span class="glyphicon glyphicon-lock"></span> My Pet 등록
+    </h4>
+</div>
+
+<div class="modal-body" style="padding: 1%; 10%; 5%;">
+<div class='container'>
+
+<form id="fileForm" enctype="multipart/form-data">
+
+<div class='form-group row'>
+<label for='petName' class='col-sm-2 col-form-label'>이름</label>
+<div class='col-sm-10'>
+<input class='form-control' id='petName' type='text' name='petName'>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='breed' class='col-sm-2 col-form-label'>품종</label>
+<div class='col-sm-10'>
+<input class='form-control' id='breed' type='text' name='breed'>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='age' class='col-sm-2 col-form-label'>나이</label>
+<div class='col-sm-10'>
+<input class='form-control' id='age' type='number' name='age'>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='weight' class='col-sm-2 col-form-label'>체중</label>
+<div class='col-sm-10'>
+<input class='form-control' id='weight' type='number' name='weight'>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='goalWeight' class='col-sm-2 col-form-label'>목표체중</label>
+<div class='col-sm-10'>
+<input class='form-control' id='goalWeight' type='number' name='goalWeight'>
+</div>
+</div>
+
+<div class='form-group row'>
+<label for='file' class='col-sm-2 col-form-label'>사진</label>
+<div class='col-sm-10'>
+<input type="file" class="form-control-file" id="file" name="file">
+</div>
+</div>
+
+<div class='form-group row'>
+<div class='col-sm-10'>
+<button id="addBtn2" type="button" class='btn btn-primary btn-sm'>등록</button>
+</div>
+</div>
+
+</form>
+</div>
+</div>
+
+<script src='../../node_modules/jquery/dist/jquery.js'></script>
+<script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
+<script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+<script src='../../node_modules/sweetalert/dist/sweetalert.min.js'></script>
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
+<script type="text/javascript">
+var petName = $('#petName'),
+    breed = $('#breed'),
+    age = $('#age'),
+    weight = $('#weight'),
+    goalWeight = $('#goalWeight'),
+    addBtn2 = $('#addBtn2');
+    
+addBtn2.click(() => {
+	var formData = new FormData($("#fileForm")[0]);
+	console.log(formData.get('petName'))
+	console.log(formData.get('breed'))
+	console.log(formData.get('age'))
+	console.log(formData.get('weight'))
+	console.log(formData.get('goalWeight'))
+    $.ajax('../../json/pet/add', {
+        data: formData,
+        dataType: 'json',
+        method: 'POST',
+        processData : false,
+        contentType : false,
+        success: (result) => {
+        	petViewModalContent.load('../pet/petList.html');
+        },
+        error: (jqXHR, textStatus, errorThrown) => {
+        	swal("등록 실패!", "정보를 확인해보세요!", "error");
+        }
+    });
+});
+</script>
+
+    

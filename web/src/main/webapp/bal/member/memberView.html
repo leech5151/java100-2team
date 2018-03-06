@@ -1,26 +1,19 @@
-<a href="/">
-<img id="memberPhoto" style="background-color: black; width: 30%; height: 10%; border-radius: 100% 100% 100% 100%; border-color: black; margin: 25% 0% 3% 35%;"></img>
+
+<a href="#">
+<img id="memberPhoto" style="width: 30%; height: 10%; border-radius: 100% 100% 100% 100%; margin: 25% 0% 3% 35%;"></img>
 </a>
 
-<div style="width: 80%; height: 10%; border-color: black; margin: 5% 10% 20% 10%; text-align: center;">
-angelpjn@naver.com
-<br>
-<br>
-이름님
-<br>
-<br>
-HP : 010-0000-2222
+<div id="memberInfo" style="width: 80%; height: 10%; border-color: black; margin: 5% 10% 20% 10%; text-align: center;" >
 </div>
-
 <br>
 <hr>
 
 <footer>
 <br>
-<div style="width: 80%; margin-left: 10%; text-align: center; color: #824027;" class="btn btn-lg btn-light">My Page</div>
+<div id="memberInfoModify" style="width: 80%; margin-left: 10%; text-align: center; color: #824027;" class="btn btn-lg btn-light">My Page</div>
 
 <br>
-<div style="width: 80%; margin-left: 10%; text-align: center; color: #824027;" class="btn btn-lg btn-light">My Pet</div>
+<div id="myPetBtn" style="width: 80%; margin-left: 10%; text-align: center; color: #824027;" class="btn btn-lg btn-light">My Pet</div>
 
 <br>
 <div style="width: 80%; margin-left: 10%; text-align: center; color: #824027;" class="btn btn-lg btn-light">F A Q</div>
@@ -29,8 +22,13 @@ HP : 010-0000-2222
 <div style="width: 80%; margin-left: 10%; text-align: center; color: #824027;" class="btn btn-lg btn-light">Balance Pet 알아보기</div>
 
 <br>
+<div id="cancelBtn" style="width: 80%; margin-left: 10%; text-align: center; color: #824027;" class="btn btn-lg btn-light">close</div>
+
+<br>
+
 </footer>
 
+<script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
 <script type="text/javascript">
 
 $.getJSON('../../json/auth/loginUser', (result) => {
@@ -44,11 +42,44 @@ $.getJSON('../../json/auth/loginUser', (result) => {
         }
         $('#memberPhoto').attr({
             src: srcpath,
-            /* class: 'img-fluid img-profile rounded-circle mx-auto mb-2', */
-            alt: "'" + file.filename + "'",
-            id: 'memberInfo'
+            alt: "'" + file.filename + "'"
         });
+        $('#memberInfo').html(
+         		"<br>" +
+        		"<h6>" + member.email + "</h6>" +
+         		"<br>" + 
+         		"<h6>" + member.name + "</h6>" +
+         		"<br>" + 
+        		"<h6>" + member.tel + "</h6>")
     }
+});
+
+var memberViewModal = $('#memberViewModal');
+var memberViewModalContent = $('#memberViewModal .modal-content');
+$(document).ready(function(){ 
+    $('#memberInfoModify').click(() => {
+        memberViewModalContent.load('../member/memberForm.html', () => {
+        memberViewModal.modal();
+        });
+    });
+});
+
+var petViewModal = $('#myPetListModal');
+var petViewModalContent = $('#myPetListModal .modal-content');
+$(document).ready(function(){ 
+    $('#myPetBtn').click(() => {
+	event.preventDefault();
+    event.stopPropagation();
+        petViewModalContent.load('../pet/petList.html', () => {
+		petViewModal.modal();
+        });
+    });
+});
+
+$(document).ready(function(){ 
+    $('#cancelBtn').click(() => {
+       document.getElementById("memberViewSection").style.transform = "translateX(200%)";
+    });
 });
 
 </script>

@@ -1,50 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>내 강아지</title>
-<link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
-<link rel='stylesheet' href='../../css/common.css'>
-</head>
-<body>
-<div class='container'>
-
-<header>
-<nav class='navbar navbar-expand-lg navbar-light bg-light'>
-
-<a class='navbar-brand' href='../main/home.html'>
-  <img src='../../images/bootstrap-solid.svg' width='30' height='30' class='d-inline-block align-top' alt=''>
-  Balance Pet
-</a>
-
-
-<button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
-  <span class='navbar-toggler-icon'></span>
-</button>
-
-<div class='collapse navbar-collapse' id='navbarNav'>
-<ul class='navbar-nav mr-auto'>
-  <li class='nav-item'>
-    <a class='nav-link' href='../member/list.html'>회원목록</a>
-  </li>
-</ul>
-
-<ul class='navbar-nav mr-auto'>
-  <li class='nav-item'>
-    <a class='nav-link' href='../lost/list.html'>미아찾기</a>
-  </li>
-</ul>
-
-<a id="logout" href="/app/auth/logout" 
-           class='btn btn-light btn-sm'>로그아웃</a>
-    </div>
-</nav>
-</header>
-
-    <h1>내 강아지</h1>
+<div class="modal-header"  style="padding: 5% 5% 5% 5%;">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4>
+        <span class="glyphicon glyphicon-lock"></span> My Pet
+    </h4>
+</div>
 
 <nav class="navbar navbar-light justify-content-between">
-  <button id="goBackBtn" type="button" class="btn btn-primary btn-sm">돌아가기</button>
   <button id="addBtn" type="button" class="btn btn-primary btn-sm">추가</button>
   <form class="form-inline" action="list">
     <input id="words" name="words"
@@ -55,10 +16,10 @@
   </form>
 </nav>
 
-<table id="list" class='table table-hover'>
+<table id="petListUp" class='table table-hover'>
 <thead>
 <tr>
-<th>번호</th><th>이름</th><th>품종</th><th>나이</th><th>체중</th><th>목표체중</th><th>삭제</th>
+<th>사진</th><th>이름</th><th>품종</th><th>나이</th><th>체중</th><th>목표체중</th><th>삭제</th>
 </tr>
 </thead>
 <tbody>
@@ -76,19 +37,13 @@
     <li class="page-item ">
         <a id="nextBtn" class="page-link" tabindex="0">다음</a></li>
   </ul>
-  <button onclick=""></button>
 </nav>
 
-<footer>
-    비트캠프 자바100기 Balance@2018
-</footer>
-</div>
-
-<script id="template1" type="text/x-handlebars-template">
+<script id="petTemplate" type="text/x-handlebars-template">
 {{#each list}}
 <tr>
-  <td>{{petNo}}</td>
-  <td>{{petName}}</td>
+  <td><img src='../../download/{{#each files}}{{filename}}{{/each}}' alt='{{#each files}}{{filename}}{{/each}}' width='50' height='50'></td>
+  <td>{{petName}}
   <td>{{breed}}</td>
   <td>{{age}}</td>
   <td>{{weight}}</td>
@@ -102,17 +57,18 @@
 <script src='../../node_modules/jquery/dist/jquery.js'></script>
 <script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
 <script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+<script src='../../node_modules/sweetalert/dist/sweetalert.min.js'></script>
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
 <script type="text/javascript">
-var tbody = $('#list > tbody'),
+var petTbody = $('#petListUp > tbody'),
     words = $('#words'),
     searchBtn = $('#searchBtn'),
     prevBtn = $('#prevBtn'),
     currBtn = $('#currBtn'),
     nextBtn = $('#nextBtn'),
     addBtn = $('#addBtn'),
-    logout = $('#logout'),
     currPageNo = 1,
-    template1Src = $('#template1').html(),
+    template1Src = $('#petTemplate').html(),
     template1Engine = Handlebars.compile(template1Src);
    
 load(1);
@@ -136,12 +92,11 @@ function load(pageNo, options) {
        
     if (options == undefined) options = {};
     options.pn = pageNo;
-    
     $.ajax('../../json/pet/list', {
         data: options,
         dataType: 'json',
         success: (result) => {
-           	tbody.html(template1Engine(result));
+        	petTbody.html(template1Engine(result));
             currPageNo = result.pageNo;
             currBtn.html(currPageNo);
             
@@ -162,25 +117,15 @@ function load(pageNo, options) {
             } else {
                 $(nextBtn.parent()).removeClass("disabled");
             }
-
+           		
             $(document).ready(function(){ 
            	    $('button').click(function(e){
            	        var id = e.target.getAttribute('id');
           	        if ((id != '') && (id != null))  
                       var newId = '#' + id;
-          	
-    	        if ((newId == '#addBtn')) {
-          		    $.getJSON('../../json/pet/list', (result) => {
-          		        location.href = '/bal/pet/form.html';
-          		    });
-          		    
-          	    } else if ((newId == '#goBackBtn')) {
-           		    $.ajax('../../json/pet/list', {
-           		        success: (result) => {
-           		            console.log(result.member.memberNo)
-           		        location.href = '../member/view.html?no=' + result.member.memberNo
-           		        }
-           		     });
+
+          	        if ((newId == '#addBtn')) {
+          		        petViewModalContent.load('../pet/petForm.html');
            		
 	           	} else {
 	                var petNo = newId.substring(10);
@@ -190,7 +135,7 @@ function load(pageNo, options) {
 	                    },
 	                    dataType: 'json',
 	                    success: (result) => {
-	                    location.href = "list.html";
+          		        petViewModalContent.load('../pet/petList.html');
 	                    }
 	                });
            		
@@ -199,13 +144,12 @@ function load(pageNo, options) {
            	});
         },
         error: () => {
-            window.alert("서버 실행 오류!");
+            swal("조회 데이터가 없습니다.");
         }
     });
 }
+
 </script>
-</body>
-</html>
     
     
     

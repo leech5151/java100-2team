@@ -9,9 +9,7 @@
 
     <resultMap type="trainning" id="trainningMap">
         <id column="t_no" property="trainningNo"/>
-        <result column="ctg" property="category"/>
         <result column="conts" property="contents"/>
-        <result column="m_conts" property="maintextContents"/>
         <result column="vwcnt" property="viewCount"/>
         <result column="rdt" property="registrationDate"/>
         <result column="m_no" property="memberNo"/>
@@ -38,10 +36,8 @@
     <select id="findAll" resultMap="trainningMap" parameterType="map">
           select 
             t.t_no,
-            t.ctg,
             t.title,
             t.conts,
-            t.m_conts,
             t.vwcnt,
             t.rdt,
             tm.file,
@@ -101,17 +97,15 @@
     
     <insert id="insert" parameterType="trainning"
         useGeneratedKeys="true" keyColumn="t_no" keyProperty="trainningNo">
-        insert into trainning(m_no, ctg, title, conts, m_conts, rdt)
-        values(#{member.memberNo},#{category}, #{title}, #{contents}, #{maintextContents}, now())
+        insert into trainning(m_no, title, conts, rdt)
+        values(#{member.memberNo}, #{title}, #{contents}, now())
     </insert>
 
     <select id="findByNo" resultMap="trainningMap" parameterType="int">
         select 
             t.t_no,
-            t.ctg,
             t.title,
             t.conts,
-            t.m_conts,
             t.vwcnt,
             t.rdt,
             tm.mda_no,
@@ -190,7 +184,6 @@
         update trainning set
             title=#{title}, 
             conts=#{contents},
-            m_conts=#{maintextContents},
             vwcnt=#{viewCount}
         where t_no=#{trainningNo}
     </update>

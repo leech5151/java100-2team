@@ -105,3 +105,23 @@ p ui li {
 	position: relative;
 	float:left;
 }
+.btn-primary {
+	background-color: #ff8040;
+	border-color: #ff8040;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #824027;
+    border-color: #824027;
+}
+.btn-outline-success:hover {
+    color: #fff;
+    background-color: #ff8040;
+    border-color: #ff8040;
+}
+.btn-outline-success {
+    color: #ff8040;
+    background-color: transparent;
+    background-image: none;
+    border-color: #ff8040;
+}

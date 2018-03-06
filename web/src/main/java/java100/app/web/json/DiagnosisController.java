@@ -74,9 +74,9 @@ public class DiagnosisController {
         diagnosis.setHospital(hospital);
         
         int membercheck = diagnosisService.get(diagnosis.getMemberTel());
-        System.out.println("============================");
-        System.out.println(membercheck);
-        System.out.println("============================");
+//        System.out.println("============================");
+//        System.out.println(membercheck);
+//        System.out.println("============================");
         HashMap<String, Object> result = new HashMap<>();
 
         if(membercheck != 0) {

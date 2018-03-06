@@ -50,6 +50,17 @@ public class PetServiceImpl implements PetService {
     }
     
     @Override
+    public int update(Pet pet) {
+        int count = petDao.update(pet);
+        
+        petFileDao.deleteAllByPetNo(pet.getPetNo());
+        
+        addFiles(pet.getFiles(), pet.getPetNo());
+        
+        return count;
+    }
+    
+    @Override
     public int delete(int no) {
         
         petFileDao.deleteAllByPetNo(no);

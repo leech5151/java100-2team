@@ -10,6 +10,7 @@ public interface PetDao {
     int countAll();
     int insert(Pet pet);
     Pet findByNo(int no);
+    int update(Pet pet);
     int delete(int no);
 }
 

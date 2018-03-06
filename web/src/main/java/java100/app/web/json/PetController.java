@@ -9,6 +9,7 @@ import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -17,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java100.app.domain.Member;
 import java100.app.domain.Pet;
 import java100.app.domain.PetUploadFile;
-import java100.app.service.LostService;
 import java100.app.service.PetService;
 
 @RestController
@@ -27,7 +27,6 @@ public class PetController {
     
     @Autowired ServletContext servletContext;
     @Autowired PetService petService;
-    @Autowired LostService lostService;
     
     @RequestMapping("list")
     public Object list(
@@ -37,8 +36,14 @@ public class PetController {
         HashMap<String, Object> result = new HashMap<>();
         result.put("list", petService.list(searchNo));
         result.put("member", loginUser);
-        System.out.println(loginUser.getMemberNo());
         result.put("status", "success");
+        return result;
+    }
+
+    @RequestMapping("{no}")
+    public Object view(@PathVariable int no) throws Exception {
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("data", petService.get(no));
         return result;
     }
     
@@ -47,7 +52,6 @@ public class PetController {
             Pet pet,
             MultipartFile[] file,
             @ModelAttribute(value="loginUser") Member loginUser) throws Exception {
-        
         String uploadDir = servletContext.getRealPath("/download");
         
         ArrayList<PetUploadFile> uploadFiles = new ArrayList<>();
@@ -74,6 +78,36 @@ public class PetController {
         return result;
     }
 
+    @RequestMapping("update")
+    public Object update(
+            Pet pet, 
+            MultipartFile[] file,
+            @ModelAttribute(value="loginUser") Member loginUser) throws Exception {
+        
+        String uploadDir = servletContext.getRealPath("/download");
+
+        ArrayList<PetUploadFile> uploadFiles = new ArrayList<>();
+        
+        for (MultipartFile part : file) {
+            if (part.isEmpty())
+                continue;
+            
+            String filename = this.writeUploadFile(part, uploadDir);
+            
+            uploadFiles.add(new PetUploadFile(filename));
+        }
+        
+        pet.setFiles(uploadFiles);
+
+        petService.update(pet);
+        
+        HashMap<String,Object> result = new HashMap<>();
+        
+        result.put("status", "success");
+        
+        return result;
+    }
+    
     @RequestMapping("delete")
     public Object delete(int petNo) throws Exception {
 

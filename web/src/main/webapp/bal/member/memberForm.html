@@ -1,8 +1,8 @@
 <div class="modal-header"  style="padding: 5% 5% 5% 5%;">
-    <button type="button" class="close" data-dismiss="modal">&times;</button>
     <h4>
         <span class="glyphicon glyphicon-lock"></span> 회원 상세정보
     </h4>
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 
 <div class="modal-body" style="padding: 1%; 10%; 5%;">
@@ -138,7 +138,6 @@ var memberNoItem = $('#memberNo'),
     createDateItem = $('#createDate'),
     memberNo = "",    
     attFile = $('#attFile'),
-    myPetBtn = $('#myPetBtn'),
     updateBtn = $('#updateBtn'),
     modifyBtn = $('#modifyBtn'),
     goBackBtn = $('#goBackBtn');
@@ -262,12 +261,6 @@ modifyBtn.click(() => {
         error: (jqXHR, textStatus, errorThrown) => {
         	swal("변경 실패!", "변경할 정보를 확인해보세요!", "error");
         }
-    });
-});
-   
-myPetBtn.click(() => {
-    $.getJSON('../../json/pet/list', (result) => {
-        location.href = '../pet/list.html'
     });
 });
 

@@ -12,6 +12,7 @@ public interface PetService {
     int add(Pet pet);
     void addFiles(List<PetUploadFile> files, int petNo);
     Pet get(int no);
+    int update(Pet pet);
     int delete(int no);
     
     

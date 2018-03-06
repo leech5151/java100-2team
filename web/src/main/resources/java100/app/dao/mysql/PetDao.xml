@@ -64,13 +64,22 @@
             p.wgt,
             p.g_wgt,
             p.m_no,
-            pm.file
+            pm.file 
         from 
             pet as p 
             left join pet_mda as pm on p.p_no=pm.p_no
-            join memb as m on l.m_no=m.m_no
         where p.p_no=#{value}
     </select>
+     
+    <update id="update" parameterType="pet">
+        update pet set
+            p_name=#{petName},
+            brd=#{breed},
+            age=#{age},
+            wgt=#{weight},
+            g_wgt=#{goalWeight}
+        where p_no=#{petNo}
+    </update>
     
     <delete id="delete" parameterType="int">
         delete from pet

@@ -127,7 +127,7 @@ public class BusinessController {
         // UI 제어와 관련된 코드는 이렇게 페이지 컨트롤러에 두어야 한다.
         //
         
-        System.out.println(category);
+//        System.out.println(category);
         
         if (pageNo < 1) {
             pageNo = 1;

@@ -32,8 +32,8 @@
 			</h1>
 			<nav class="codrops-demos">
 
-				<a href="../diagnosis/list.html">Menu</a>
-				<a data-toggle="modal" id="diagnosisInfo" class="open-modal" href="#diagnosisModalView">information</a>
+				<a href="../main/home.html">home</a>
+				<a href="../diagnosis/list.html">menu</a>
 				<a class="current-demo" href="form.html">Image Gallery</a>
 				<div class="modal fade" role="dialog" id="diagnosisModalView">
 					<div class="modal-dialog">
@@ -84,7 +84,7 @@
 </div>
 
 <div class="modal" id="testModal" tabindex="-1" role="dialog">
-<div class="modal-dialog modal-sm">
+<div class="modal-dialog modal-sm" style="max-width: 1000px;">
 <div class="modal-content">
 
 <div class="modal-body" style="padding: 40px 50px;">
@@ -311,19 +311,13 @@ $.datepicker.regional['kr'] = {
 	                for (var data of result.list) {
 	                	$('<div class="modalList" style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
 	                        .html(  
-	                        	       "<div style='width:10%; display:inline-block; '>" + data.diagnosisNo + "</div>" + 
-			                            
-	                        	        "<a data-toggle='modal' id='diagnosisInfo' class='open-modal' href='../diagnosis/view.html?no=" + data.diagnosisNo + "'>" +data.hospital.hospitalName + "</a>" + 
-			                            "<div class='modal fade' role='dialog' id='diagnosisViewModal'>" +
-			                            "<div class='modal-dialog'>" +
-			                            "<div class='modal-content' id=modal_view_content>" +
-			                            "</div></div></div>" + 
-			                            /* data-toggle='modal' id='diagnosisInfo' class='open-modal' */
-			                            "<div style='width:10%; display:inline-block; '>" + data.memberName + "</div>" +
-			                            "<div style='width:20%; display:inline-block; '>" + data.dateRecording + "</div>" +
-			                            "<div style='width:10%; display:inline-block; '>" + data.diagnosisCategory + "</div>" +
-			                            "<div style='width:10%; display:inline-block; '>" + data.diagnosisName + "</div>" +
-			                            "<div style='width:20%; display:inline-block; '>" + data.diagnosisContents + "</div>")
+	                                "<div style='width:10%; display:inline-block; ; '>" + data.diagnosisNo + "</div>" + 
+                                    "<div style='width:20%; display:inline-block; ; '>"+ data.hospital.hospitalName + "</div>" + 
+                                    "<div style='width:10%; display:inline-block;; '>" + data.memberName + "</div>" +
+                                    "<div style='width:20%; display:inline-block;; '>" + data.dateRecording + "</div>" +
+                                    "<div style='width:10%; display:inline-block;; '>" + data.diagnosisCategory + "</div>" +
+                                    "<div style='width:10%; display:inline-block;; '>" + data.diagnosisName + "</div>" +
+                                    "<div style='width:20%; display:inline-block;; '>" + data.diagnosisContents + "</div>")
 			                            .appendTo('#diagnosisbody'); 
 	                	
 	                	/*  $(document).ready(function (){

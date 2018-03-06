@@ -1,4 +1,4 @@
-$(document).ready(function() {
+
     var 
         $gallery = $(".gallery"),
     	$galleryPictures = $(".gallery-pictures"),
@@ -53,7 +53,7 @@ $(document).ready(function() {
     	if(typeof anim=="undefined") anim=true;
     	stopMomentum();
     	TweenMax.to(galleryPos,anim?0.8:0,{
-    		x:-v*imageTotalWidth,
+    		x:+v*imageTotalWidth,
     		ease:Quint.easeOut,
     		onUpdate:updateGalleryPos,
     		onComplete:updateGalleryPos
@@ -62,7 +62,7 @@ $(document).ready(function() {
 
     function updateGalleryPos(){
     	TweenMax.set($galleryPictures,{
-    		x:galleryPos.x+(($(window).width()-imageWidth)/2),
+    		x:galleryPos.x-(($(window).width()+imageWidth)/2),
     		force3D:true,
     		lazy:true
     	});
@@ -155,4 +155,3 @@ $(document).ready(function() {
     }
 
     setGalleryPos(0,false);
-})

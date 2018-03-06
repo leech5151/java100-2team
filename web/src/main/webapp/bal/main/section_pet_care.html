@@ -6,6 +6,76 @@
    font-size: 18px;
 }
 </style>
+
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfvbzMOUokktQRtlp9nwpUrVGEin3QF7o&libraries=places&callback=initMap" async defer></script>
+ <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfvbzMOUokktQRtlp9nwpUrVGEin3QF7o&libraries=places"></script>
+ <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfvbzMOUokktQRtlp9nwpUrVGEin3QF7o&callback=initMap"></script>
+<script>
+var map;
+function initMap() {
+  var pyrmont = {lat: 37.494541, lng: 127.027583};
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: pyrmont,
+    zoom: 18
+  });
+
+  var service = new google.maps.places.PlacesService(map);
+  service.nearbySearch({
+    location: pyrmont,
+    radius: 1000,
+    type: ['animalhospital']
+  }, processResults);
+}
+
+function processResults(results, status, pagination) {
+  if (status !== google.maps.places.PlacesServiceStatus.OK) {
+    return;
+  } else {
+    createMarkers(results);
+
+    if (pagination.hasNextPage) {
+      var moreButton = document.getElementById('more');
+
+      moreButton.disabled = false;
+
+      moreButton.addEventListener('click', function() {
+        moreButton.disabled = true;
+        pagination.nextPage();
+      });
+    }
+  }
+}
+
+function createMarkers(places) {
+  var bounds = new google.maps.LatLngBounds();
+  var placesList = document.getElementById('places');
+
+  for (var i = 0, place; place = places[i]; i++) {
+    var image = {
+      url: place.icon,
+      size: new google.maps.Size(71, 71),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(17, 34),
+      scaledSize: new google.maps.Size(25, 25)
+    };
+
+    var marker = new google.maps.Marker({
+      map: map,
+      icon: image,
+      title: place.name,
+      position: place.geometry.location
+    });
+
+    placesList.innerHTML += '<li>' + place.name + '</li>';
+
+    bounds.extend(place.geometry.location);
+  }
+  map.fitBounds(bounds);
+}
+</script>
+
+
 <div data-exact-height="630" data-content-padding-horizontal="0"
 	data-content-padding-vertical="0" title="" class="ca1"
 	id="comp-j7fyzhoq"
@@ -275,11 +345,21 @@
       with default Bootstrap components and utilities with little
       customization.</p>
 </div>
-<div align="right"
-	style="left: 549px; position: absolute; top: 290px; width: 428px; height: 306px;">
-	<img style="width: 400px;" alt="hp" src="../../download/hospital.jpg">
+<div id="map" align="right"
+   style="left: 549px; position: absolute; top: 290px; width: 428px; height: 306px;">
+   <img style="width: 400px;" src="../../download/hospital.jpg">
 </div>
+<div id="right-panel">
+      <h2>Results</h2>
+      <ul id="places"></ul>
+      <button id="more">More results</button>
+    </div>
+
+
+
 <script type="text/javascript">
+
+
 
 
 load();

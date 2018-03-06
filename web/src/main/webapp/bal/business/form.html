@@ -45,18 +45,14 @@
 				<a class="current-demo" href="form.html">Image Gallery</a>
 			</nav>
 		 </header>
-		<div class="content">
+		 <div class="content">
 			<div class="gallery">
 				<ul class="gallery-pictures">
 				</ul>
-				<div class="gallery-pagination">
-					<button class="gallery-pagination-dot"></button>
-					<button class="gallery-pagination-dot"></button>
-					<button class="gallery-pagination-dot"></button>
-				</div>
 			</div>
 			<p>Click on a more distant dot to see the effect better.</p>
-		</div>
+		</div> 
+	
 		<!-- Related demos -->
 	</div><!-- /container -->
 </div>
@@ -75,14 +71,11 @@
                 console.log(result)                
                    var i = 1;
                    for (var file of result.data.files){
-                   $('.gallery-pictures').append('<li class="gallery-picture">' +
-                           '<img src="../../download/' + file.filename + '" alt="img0'+ i +'"  width="700px" height="300px">' +
-                           '</li>')
-                   i++;
-                   }
-                
-                   
-            console.log(result.data.member.valueOf().nicname)
+                   $('.gallery-pictures').html(
+                           '<li class="gallery-picture">' +
+                           '<img src="../../download/' + file.filename + '" alt="'+ file.filename +'" >' +
+                           '</li>'
+                           )}
                },
                error: () => {
                    window.alert('서버 실행 오류!');

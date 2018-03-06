@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>회원가입</title>
+<meta charset="UTF-8" />
 <link rel='stylesheet'
     href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <link rel='stylesheet' href='../../css/common.css'>
-</head>
-<body>
-    <div class='container'>
+
+<div class="modal-body" style="padding: 40px 50px;">
+<div class='container'>
 
         <h1>회원 상세정보</h1>
 
@@ -104,30 +100,19 @@
 
             <div class='form-group row'>
                 <div class='col-sm-10'>
-                    <button id="addBtn" type="button"
-                        class='btn btn-primary btn-sm my-new'>추가</button>
-                    <button id="updateBtn" type="button"
-                        class='btn btn-primary btn-sm my-view'>변경</button>
-                    <button id="deleteBtn" type="button"
-                        class='btn btn-primary btn-sm my-view'>삭제</button>
-                </div>
-            </div>
+</div>
+</div>
+</form>
+</div>
+</div>
 
-            <div class='form-group row' style="display: none">
-                <input class='form-control' readonly id='hospitalNo' type='number'
-                    name='diagnosis.hospital.hospitalNo'>
-            </div>
+<div class="modal-footer">
+	<button id="addBtn" type="button" class='btn btn-primary btn-sm my-new'>추가</button>
+	<button id="updateBtn" type="button" class='btn btn-primary btn-sm my-view'>변경</button>
+	<button id="deleteBtn" type="button" class='btn btn-primary btn-sm my-view'>삭제</button>
+</div>
 
-
-        </form>
-
-
-        <footer></footer>
-
-
-    </div>
-
-    <script src='../../node_modules/jquery/dist/jquery.js'></script>
+   <script src='../../node_modules/jquery/dist/jquery.js'></script>
     <script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
     <script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
     <script type="text/javascript">
@@ -182,11 +167,11 @@ if (index != -1) { // 기존 데이터를 조회할 경우,
             $.ajax('../../json/diagnosis/form' ,{
                 dataType: 'json',
                 success: (result) => {
-                	if(result.data==null){
-                		hospitalNoItem.val(''); 
-                	}else{
-                		hospitalNoItem.val(result.data.hospital.hospitalNo);	
-                	}
+                    if(result.data==null){
+                        hospitalNoItem.val(''); 
+                    }else{
+                        hospitalNoItem.val(result.data.hospital.hospitalNo);    
+                    }
                    
                 },
                 error: () => {
@@ -214,10 +199,10 @@ if (index != -1) { // 기존 데이터를 조회할 경우,
  */
  
 addBtn.click(() => {
-	 if (hospitalNoItem.val()=='') {
-	        alert("병원관련 회원만 입력 가능 합니다");
-	        return;
-	    }
+     if (hospitalNoItem.val()=='') {
+            alert("병원관련 회원만 입력 가능 합니다");
+            return;
+        }
     $.ajax('../../json/diagnosis/add', {
         data: {
             dogweight: dogweightItem.val(),
@@ -234,17 +219,17 @@ addBtn.click(() => {
         dataType: 'json',
         method: 'POST',
         success: (result) => {
-        	if(result.status=='success'){
-				location.href = "list.html";	
-			}else if(result.status=='fail'){
-				window.alert('병원회원만 입력 가능합니다');
-			}else{
-				window.alert('해당 회원이 없습니다.');
-			}
-		},
-		error: () => {
-			window.alert('서버 실행 오류!');
-		}
+            if(result.status=='success'){
+                location.href = "list.html";    
+            }else if(result.status=='fail'){
+                window.alert('병원회원만 입력 가능합니다');
+            }else{
+                window.alert('해당 회원이 없습니다.');
+            }
+        },
+        error: () => {
+            window.alert('서버 실행 오류!');
+        }
     });
 });
 updateBtn.click(() => {
@@ -263,17 +248,17 @@ updateBtn.click(() => {
         dataType: 'json',
         method: 'POST',
         success: (result) => {
-        	if(result.status=='success'){
-				location.href = "list.html";	
-			}else if(result.status=='fail'){
-				window.alert('왜 지것도 아닌 진료기록을 변경하려 하시나');
-			}else{
-				window.alert('병원운영 회원의 자기 병원의 진료만 변경가능 합니다');
-			}
-		},
-		error: () => {
-			window.alert('서버 실행 오류!');
-		}
+            if(result.status=='success'){
+                location.href = "list.html";    
+            }else if(result.status=='fail'){
+                window.alert('왜 지것도 아닌 진료기록을 변경하려 하시나');
+            }else{
+                window.alert('병원운영 회원의 자기 병원의 진료만 변경가능 합니다');
+            }
+        },
+        error: () => {
+            window.alert('서버 실행 오류!');
+        }
     });
 });
 
@@ -284,18 +269,18 @@ deleteBtn.click(() => {
         },
         dataType: 'json',
         success: (result) => {
-        	if(result.status=='success'){
-				location.href = "list.html";	
-			}else if(result.status=='fail'){
-				window.alert('삭제권한이 없습니다');
-			}else{
-				window.alert('병원등록 후 자신이 등록한 진료기록만 삭제가능 합니다');
-			}
-		},
-		error: () => {
-			window.alert('서버 실행 오류!');
-		}
+            if(result.status=='success'){
+                location.href = "list.html";    
+            }else if(result.status=='fail'){
+                window.alert('삭제권한이 없습니다');
+            }else{
+                window.alert('병원등록 후 자신이 등록한 진료기록만 삭제가능 합니다');
+            }
+        },
+        error: () => {
+            window.alert('서버 실행 오류!');
+        }
     });
 });
 </script>
-</html>
+    

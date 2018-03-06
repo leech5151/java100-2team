@@ -1,0 +1,28 @@
+
+<link rel="stylesheet" type="text/css" href="../../css/trainning.css" />
+
+<div class="small-12 large-4 columns">
+    <div class="containers">
+      <div class="imageWrapper">
+        <img class="image" src="https://img05.deviantart.net/d3d4/i/2013/109/d/6/cavalry_knights_by_artnothearts-d62b1vs.jpg">
+      </div>
+    </div>
+    <button class="file-upload">            
+      <input type="file" class="file-input">Choose File
+    </button>
+  </div>
+<script type="text/javascript">
+$('.file-input').change(function(){
+    var curElement = $(this).parent().parent().find('.image');
+    console.log(curElement);
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        curElement.attr('src', e.target.result);
+    };
+
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+});
+</script>

@@ -68,10 +68,11 @@ var petViewModal = $('#myPetListModal');
 var petViewModalContent = $('#myPetListModal .modal-content');
 $(document).ready(function(){ 
     $('#myPetBtn').click(() => {
-	event.preventDefault();
-    event.stopPropagation();
+		event.preventDefault();
+	    event.stopPropagation();
         petViewModalContent.load('../pet/petList.html', () => {
 		petViewModal.modal();
+        $.css("petListCss", "");
         });
     });
 });

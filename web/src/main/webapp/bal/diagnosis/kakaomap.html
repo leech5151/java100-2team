@@ -360,24 +360,26 @@ html, body {
 				src="http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png"
 				alt="축소"></span>
 		</div>
-	</div>
-	
 	<div id="menu_wrap" class="bg_white">
 			<ul id="placesList"></ul>
 			<div id="pagination"></div>
 		</div>
+	</div>
+	
 	
 
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94bb2cfc7cdc1dacca4463266c794af3&libraries=services,clusterer,drawing"></script>
-
+	<script src='../../node_modules/jquery/dist/jquery.js'></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94bb2cfc7cdc1dacca4463266c794af3&libraries=services,clusterer,drawing"></script>
 	<script type="text/javascript">
-        ///지도생성
-        var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-        var options = { //지도를 생성할 때 필요한 기본 옵션
+    var pst_no=null,
+    	prm_addr=null,
+    	det_addr=null;
+	
+     var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+     var options = { //지도를 생성할 때 필요한 기본 옵션
         		
             center : new daum.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-            level : 5
+            level : 3
             
         //지도의 레벨(확대, 축소 정도)
         };
@@ -385,9 +387,19 @@ html, body {
         
     ////////////////주소로 장소표시/////////////////////////////
     var geocoder = new daum.maps.services.Geocoder();
-
+        
+ 	$.ajax('../../json/auth/loginUser', {
+		async: false,
+	   dataType: 'json',
+	   success: (result) => {
+		   prm_addr = result.member.primaryAddress;
+	   },
+	     error: () => {
+	   	  window.alert('서버 실행 오류!');
+	     }
+	     });  
 	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch('오산시 궐동로 75', function(result, status) {
+	geocoder.addressSearch(prm_addr, function(result, status) {
 	   // 정상적으로 검색이 완료됐으면 
       if (status === daum.maps.services.Status.OK) {
          var coords = new daum.maps.LatLng(result[0].y, result[0].x);
@@ -399,7 +411,7 @@ html, body {
 
          // 인포윈도우로 장소에 대한 설명을 표시합니다
          var infowindow = new daum.maps.InfoWindow({
-             content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+             content: '<div style="width:150px;text-align:center;padding:6px 0;">주소위치</div>'
          });
          infowindow.open(map, marker);
          // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
@@ -425,9 +437,9 @@ html, body {
              	
              	 var options = { 
              			 location: coords,
-             			 radius: 500
+             			 radius: 1000
              	        };
-     	        var keyword = '맛집';
+     	        var keyword = '동물병원';
 
      	        if (!keyword.replace(/^\s+|\s+$/g, '')) {
      		        alert('키워드를 입력해주세요!');

@@ -24,6 +24,8 @@ padding-left: 0;
 </ul>
 <h2>PET' TOGETHER</h2>
 </header>
+<button id="addBtn" type="button" class='btn btn-primary btn-sm my-new'style="margin-left: 100px;" >추가</button>
+
 <div class="form-group row" style="text-align: right;">
 <div class="col-sm-10">
     <select id='category' class="btn btn-secondary data-reset" name="category">
@@ -43,7 +45,7 @@ padding-left: 0;
 </div> 
 <footer>
 	<nav aria-label="Page navigation">
-		<ul class="pagination justify-content-center">
+		<ul class="pagination justify-content-center" style="margin-top: -100px;">
 			<li class="page-item"><a id="prevBtn" class="page-link"
 				tabindex="-1">이전</a></li>
 
@@ -72,7 +74,7 @@ padding-left: 0;
         {{/each}}
 	<figcaption>
     	<div class="heading">
-     		<h3>{{primary_address}}<span>{{businessName}}</span></h3>
+     		<h3><span>{{adress primary_address}}</span></h3>
     	</div>
     	<div class="caption">
       		<p>{{category}}</p>
@@ -89,12 +91,15 @@ searchBtn = $('#searchBtn'), */
 var prevBtn = $('#prevBtn'),
 currBtn = $('#currBtn'),
 nextBtn = $('#nextBtn'),
+addBtn = $('#addBtn'),
 blistItem = $('.bal-mb-3-list'),
 category = '카테고리',
 currPageNo = 1;
 businessTemplateSrc = $('#businessTemplate').html(),
 businessTemplateEngine = Handlebars.compile(businessTemplateSrc);
-
+Handlebars.registerHelper('adress', function (primary_adress) {
+    return primary_adress.substring(0,2);
+  });
 load2();
 
 $('#category').on('change', function() {
@@ -127,7 +132,9 @@ load(currPageNo - 1)
 nextBtn.click(() => {
 load(currPageNo + 1)
 });
-
+addBtn.click(() => {
+location.href = "../business/view.html";
+});
 
 function load(pageNo, options) {
 

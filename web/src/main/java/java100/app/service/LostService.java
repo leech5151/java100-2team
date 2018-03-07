@@ -7,7 +7,7 @@ import java100.app.domain.Lost;
 import java100.app.domain.LostUploadFile;
 
 public interface LostService {
-    List<Lost> list(Map<String,Object> options);
+    List<Lost> list(int pageNo, int pageSize, Map<String,Object> options);
     int getTotalCount();
     int add(Lost lost);
     void addFiles(List<LostUploadFile> files, int lostNo);

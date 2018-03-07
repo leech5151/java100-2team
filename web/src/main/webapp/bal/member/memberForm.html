@@ -68,7 +68,7 @@
 <div class='form-group row'>
 <label for='postalNo' class='col-sm-3 col-form-label'>우편번호</label>
 <div class='col-sm-7' style="padding-right: 5%;">
-<input class='form-control' id='postalNo' type='text' onclick="postalSearch()" name='postalNo'>
+<input class='form-control' id='postalNo' onclick="addreSearch()" type='text' name='postalNo'>
 </div>
 </div>
 
@@ -117,13 +117,11 @@
 <button id="modifyBtn" type="button" class="btn btn-primary btn-sm my-modify">변경</button>
 <button id="goBackBtn" type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
 </div>
-
 <script src='/node_modules/jquery/dist/jquery.js'></script>
 <script src='/node_modules/popper.js/dist/umd/popper.min.js'></script>
 <script src='/node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
-<script type="text/javascript">
+<script>
 var memberNoItem = $('#memberNo'),
     nameItem = $('#name'),
     nicnameItem = $('#nicname'),
@@ -264,8 +262,7 @@ modifyBtn.click(() => {
     });
 });
 
-function postalSearch() {
-	console.log(no);
+function addreSearch() {
     new daum.Postcode({
         oncomplete: function(data) {
             var fullAddr = ''; // 최종 주소 변수
@@ -301,5 +298,5 @@ function postalSearch() {
         }
     }).open();
 }
-</script>
 
+</script>

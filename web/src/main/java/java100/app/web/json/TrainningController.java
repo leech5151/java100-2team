@@ -164,7 +164,7 @@ public class TrainningController {
 
         HashMap<String, Object> result = new HashMap<>();
         System.out.println("ttttttttttttttt: " +trainningService.checkLike(trainning));
-        if (trainningService.checkLike(trainning) == 0)
+        if (trainning.getLiked() == 0)
             return result.put("status", "unchecked");
         else
             return result.put("status", "checked");

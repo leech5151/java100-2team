@@ -42,6 +42,7 @@
 	width: 220%;
 	font-size: 1em;
 	box-shadow: 20px 20px 0px rgba(0, 0, 0, 0.16);
+	color: black;
 }
 .hidden {
 	position: absolute;
@@ -68,7 +69,6 @@
 	font-size: 4em;
 	color: black;
 	line-height: 1;
-	font-family: 'Lustria', 'Goudy Old Style', Garamond, 'Big Caslon', 'Times New Roman', serif;
 }
 
 .codrops-header h1 span {

@@ -1,10 +1,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link id="petListCss" rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link id="petListCss" rel="stylesheet" href="../../myDesign/pet/pet.css">
 
 <div class="modal-header"  style="padding: 5% 5% 5% 5%;">
-    <h1>
+    <h4>
         <span class="glyphicon glyphicon-lock"></span> My Pet
-    </h1>
+    </h4>
     <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 
@@ -21,7 +21,7 @@
 
 <script id="petTemplate" type="text/x-handlebars-template">
 {{#each list}}
-  <h2 class="mySlides1" style="margin-left: 10%; margin-top: 5%; font-style: italic;">{{petName}}</h2>
+  <P class="mySlides1" style="font-size: 30px; margin-left: 10%; margin-top: 5%; font-style: italic;">{{petName}}</p>
   <img class="mySlides2" style="width: 33rem; height: 40vh;" src='../../download/{{#each files}}{{filename}}{{/each}}' alt='{{#each files}}{{filename}}{{/each}}'>
   <div class="mySlides3" style="width: 33rem%; height: 10vh; background-color: black;">
   <div style="width: 40%; float: left; margin-top: 3%; margin-left: 10%;">
@@ -95,7 +95,6 @@ $.ajax('../../json/pet/list', {
            z[slideIndex-1].style.display = "block";  
          }
 
-         
          var petList = result.list.length;
          var count = 0;
          

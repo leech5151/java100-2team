@@ -20,10 +20,12 @@ public class LostServiceImpl implements LostService {
     @Autowired LostFileDao lostFileDao;
     
     @Override
-    public List<Lost> list(Map<String, Object> options) {
+    public List<Lost> list(int pageNo, int pageSize, Map<String, Object> options) {
         
         HashMap<String,Object> params = new HashMap<>();
         
+        params.put("startIndex", (pageNo - 1) * pageSize);
+        params.put("size", pageSize);
         if (options != null) {
             params.putAll(options);
         }

@@ -58,6 +58,8 @@ var memberViewModal = $('#memberViewModal');
 var memberViewModalContent = $('#memberViewModal .modal-content');
 $(document).ready(function(){ 
     $('#memberInfoModify').click(() => {
+		event.preventDefault();
+	    event.stopPropagation();
         memberViewModalContent.load('../member/memberForm.html', () => {
         memberViewModal.modal();
         });

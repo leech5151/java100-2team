@@ -30,6 +30,12 @@
 	text-decoration: none;
 }
 
+#view_form b {
+	color: #999;
+	text-decoration: none;
+	font-size: 45px;
+}
+
 #view_form a:hover, #view_form a:focus {
 	color: #7D87AE;
 	outline: none;
@@ -66,7 +72,7 @@
 .codrops-header h1 {
 	margin: 0.5em 0 0 0;
 	font-weight: 400;
-	font-size: 4em;
+	font-size: 6em;
 	color: black;
 	line-height: 1;
 }

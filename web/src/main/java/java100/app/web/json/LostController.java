@@ -39,11 +39,10 @@ public class LostController {
         if (pageNo < 1) {
             pageNo = 1;
         }
-        
+        System.out.println(pageNo);
         if (pageSize < 6 || pageSize > 18) {
             pageSize = 6;
         }
-        System.out.println(pageNo);
         HashMap<String,Object> options = new HashMap<>();
         
         int totalCount = lostService.getTotalCount();
@@ -51,9 +50,9 @@ public class LostController {
         if ((totalCount % pageSize) > 0) {
             lastPageNo++;
         }
-        System.out.println(totalCount);
         HashMap<String,Object> result = new HashMap<>();
         result.put("pageNo", pageNo);
+        System.out.println(pageNo);
         result.put("lastPageNo", lastPageNo);
         result.put("list", lostService.list(pageNo, pageSize, options));
         return result;

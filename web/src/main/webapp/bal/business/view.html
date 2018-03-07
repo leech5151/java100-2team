@@ -4,15 +4,15 @@
 <link rel='stylesheet' href='../../css/business.css'>
 <link rel='stylesheet' href='../../css/main.css'>
 
-<!-- <div class="modal-header"  style="padding: 40px 50px;">
+<div class="modal-header"  style="padding: 40px 50px;">
     <button type="button" class="close my-view'" data-dismiss="modal">&times;</button>
-</div> -->
+</div> 
 
 <div class="modal-body" style="padding: 40px 50px;">
 <div class='container' style="font-family:contsfont-kor">
 
-    <h2 class='my-new'>업체등록</h2>
-    <h2 class='my-view'>업체 상세정보</h2>
+    <h1 class='my-new'>업체등록</h1>
+    <h1 class='my-view'>업체 상세정보</h1>
 
 
 <form id='frm' method="post" enctype="multipart/form-data">
@@ -86,6 +86,7 @@
 <label for='post_no' class='col-sm-2 col-form-label'>우편번호</label>
 <div class='col-sm-10'>
 <input class='form-control' id='post_no' type="number" name='post_no' >
+<input type="button" onclick="addresearch()" value="우편번호 찾기" style="float: left;"><br>
 </div>
 </div>
 
@@ -118,7 +119,6 @@
 <div class='col-sm-10 my-mo'>
 <input type='file' class='form-control-file' id='filename3' name='file'>
 </div>
-
 <div id="inserthere" class='form-group row my-view'></div>
 
 
@@ -143,6 +143,7 @@
 <script src='../../node_modules/jquery/dist/jquery.min.js'></script>
 <script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
 <script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+
 <script type="text/javascript">
 var addBtn = $('#addBtn'),
     updateBtn = $('#updateBtn'),
@@ -276,7 +277,42 @@ deleteBtn.click(function() {
     });
 });
 
+function addresearch() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            var fullAddr = ''; // 최종 주소 변수
+            var extraAddr = ''; // 조합형 주소 변수
 
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                fullAddr = data.roadAddress;
+
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                fullAddr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+            if(data.userSelectedType === 'R'){
+                //법정동명이 있을 경우 추가한다.
+                if(data.bname !== ''){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있을 경우 추가한다.
+                if(data.buildingName !== ''){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('post_no').value = data.zonecode; //5자리 새우편번호 사용
+            document.getElementById('primary_address').value = fullAddr;
+
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById('detail_address').focus();
+        }
+    }).open();
+}
 </script>
 
 </body>

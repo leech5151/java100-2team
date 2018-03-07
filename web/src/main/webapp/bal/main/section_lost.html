@@ -23,7 +23,7 @@
 
 {{#each list}}
 
-<div id="lostData" class="bal-mb-3-data lostData">
+<div class="bal-mb-3-data lostData">
 <figure class="snip1283">
 {{#each files}}
 <img src="../../download/{{filename}}" alt="{{filename}}" style="width:100%; height:100%;">
@@ -49,8 +49,7 @@
 <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
 
 <script type="text/javascript">
-var addBtn = $('#addBtn'),
-    pageNo = 1,
+var pageNo = 1,
     list = $('#lostList'),      
     lostTemplateSrc = $('#lostTemplate').html(),
     lostTemplateEngine = Handlebars.compile(lostTemplateSrc);
@@ -60,7 +59,7 @@ $.getJSON('../../json/auth/loginUser', (result) => {
         $('.after-login').css('display', 'none');
     }
     
-    if (options == undefined) options = {};
+    var options = {};
     options.pn = pageNo;
     $.ajax('../../json/lost/list', {
         data: options,
@@ -75,20 +74,16 @@ $.getJSON('../../json/auth/loginUser', (result) => {
 	            if ((id != '') && (id != null))  
 	            var newId = '#' + id;
 	    
-			    if ((newId == '#addBtn')) {
-		            $.ajax('../lost/lostForm.html', {
-		                success: (result) => {
-		                    location.href = '../lost/lostForm.html';
-		            }
-		            });
-		            console.log(pn)
-			    } else if (newId = '#prevBtn') {
-			    	pageChange(pageCalculator(-1, result.lastPageNo), options)
-			    } else if (newId = '#nextBtn') {
-			    	pageChange(pageCalculator(1, result.lastPageNo), options)
-			    }
+			    if (newId == '#addBtn') {
+			    	modalStart();
+			    } else if ((newId == '#prevBtn')) {
+	    			pageNo = pageCalculator(-1, result.lastPageNo)
+			    	pageChange(pageNo, options)
+			    } else if (newId == '#nextBtn') {
+	    			pageNo = pageCalculator(1, result.lastPageNo)
+			    	pageChange(pageNo, options)
+			    } else {}
 		    });
-           
        }
     });
 });
@@ -106,6 +101,7 @@ function pageCalculator(n, lastPageNo) {
 function pageChange(pageNo, options) {
 
 	$('.lostData').remove();
+	options.pn = pageNo;
     $.ajax('../../json/lost/list', {
         data: options,
         dataType: 'json',
@@ -113,6 +109,16 @@ function pageChange(pageNo, options) {
            list.append(lostTemplateEngine(result));
            location.href = "../main/home.html#lost";
        }
+    });
+}
+
+function modalStart() {
+	var lostFormAddModal = $('#lostFormAddModal');
+	var lostFormAddModalContent = $('#lostFormAddModal .modal-content');
+    event.preventDefault();
+    event.stopPropagation();
+    lostFormAddModalContent.load('../lost/lostForm.html', () => {
+    	lostFormAddModal.modal();
     });
 }
 

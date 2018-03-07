@@ -16,6 +16,11 @@ h2 {
 	font-family: titlefont;
     font-size: 70px;
 }
+
+h1 {
+	font-family: titlefont;
+    font-size: 6em;
+}
 p ui li {
 	font-family: contsfont-kor;
 	color: black;

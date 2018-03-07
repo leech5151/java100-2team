@@ -24,7 +24,6 @@
 <!-- Custom styles for this template -->
 <link href="../../css/resume.css" rel="stylesheet">
 
-
 <!-- 자체 작업 CSS -->
 <link href="../../css/main.css" rel="stylesheet">
 
@@ -117,10 +116,11 @@
 <!-- Custom scripts for this template -->
 <script src='../../node_modules/handlebars/dist/handlebars.min.js'></script>
 <script src='../../node_modules/jquery/dist/jquery.js'></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94bb2cfc7cdc1dacca4463266c794af3&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=46dfff729a8998eb0cfa0e6f84b735ba&libraries=services,clusterer,drawing"></script>
 <script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
 <script src='../../node_modules/sweetalert/dist/sweetalert.min.js'></script>
 <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 <script type="text/javascript">
 $('#first').load('section_first.html');
@@ -128,7 +128,7 @@ $('#care').load('section_pet_care.html');
 $('#diagnosis').load('section_diagnosis.html');
 $('#together').load('section_pet_together.html');
 $('#cast').load('section_pet_cast.html');
-/* $('#lost').load('section_lost.html'); */
+$('#lost').load('section_lost.html');
 </script>
 
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -194,10 +194,11 @@ logoutBtn.click(() => {
 });
 
 $('#memberView').click(() => {
-document.getElementById("memberViewSection").style.transform = "translateX(0%)";
-document.getElementById("memberViewSection").style.transition = "1s";
-
-$('#memberViewSection').load('../member/memberView.html');
+	event.preventDefault();
+    event.stopPropagation();
+	document.getElementById("memberViewSection").style.transform = "translateX(0%)";
+	document.getElementById("memberViewSection").style.transition = "1s";
+	$('#memberViewSection').load('../member/memberView.html');
 });
 
 </script>

@@ -59,7 +59,7 @@
              <if test="words != null">
             <where>
                 <foreach collection="words" item="word">
-                    or title like '%${word}%'
+                    or p_name like '%${word}%'
                 </foreach>
             </where>
             </if>
@@ -106,7 +106,8 @@
                 l_no asc
             </otherwise>
         </choose>
-
+        
+        limit #{startIndex}, #{size}
     </select>
 
     

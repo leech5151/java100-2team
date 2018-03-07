@@ -1,33 +1,219 @@
+<meta charset="UTF-8">
+<link href="../../myDesign/lost/lost.css" rel="stylesheet">
+<link href="../../myDesign/lost/lost2.css" rel="stylesheet">
 
-<div class="my-auto">
-  <h2 class="mb-5">
-    <ul class='navbar-nav mr-auto'>
-      <li class='nav-item' style="color: #bd5d38;">LOST</li>
-    </ul>
-  </h2>
-<button style="float: left; margin-bottom: 10px;" type="button" id="addBtn" class="btn btn-danger btn-sm after-login">미아 등록</button>
-<br>
-<div id="lostList"></div>
+<div class="bal-mb-3">
+    <div style="margin-top: 15%;text-align: left;">
+    <h2>Lost</h2>
+    <div>
+<button id="addBtn" type="button" class="btn btn-danger btn-sm after-login">미아 등록</button>
+<button style="margin-left: 81%;" id="lostViewBtn" type="button" class="btn btn-light btn-sm before-login"> &oplus; 더보기</button>
+</div>
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+        <a id="prevBtn" class="page-link" tabindex="-1">이전</a></li>
+        
+    <li class="page-item">
+        <a id="currBtn" class="page-link" href="#lost">1</a></li>
+    
+    <li class="page-item ">
+        <a id="nextBtn" class="page-link" tabindex="0">다음</a></li>
+  </ul>
+        <button id="prevBtn2" class="page-link" tabindex="0">이전</button>
+        <button id="nextBtn2" class="page-link" tabindex="0">다음</button>
+</nav>
+    <div id="lostList" class="bal-mb-3-list">
+    </div>
+    </div>
+</div>
+<!-- 
+ <nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+        <a id="prevBtn" type="button" class="page-link" tabindex="-1">이전</a></li>
+        
+    <li class="page-item">
+        <a id="currBtn" class="page-link" href="#">1</a></li>
+    
+    <li class="page-item ">
+        <a id="nextBtn" type="button" class="page-link" tabindex="0">다음</a></li>
+  </ul>
+</nav>
+
+ -->
+<script id="lostTemplate" type="text/x-handlebars-template">
+
+{{#each list}}
+
+<div class="bal-mb-3-data">
+<figure class="snip1283">
+{{#each files}}
+<img src="../../download/{{filename}}" alt="{{filename}}" style="width:100%; height:100%;">
+{{/each}}
+<figcaption>
+<h3 style="text-align: center;"> < {{petName}} > </h3>
+    <p style="font-size: 20px;">품종 : {{breed}}</p>
+    <p style="font-size: 20px;">연락처 : {{registrant.tel}}</p>
+<div><a href="../lost/lostList.html" class="read-more">Read More</a></div>
+</figcaption>
+</figure>
+</a>
 </div>
 
-<script type="text/javascript">
-$('#lostList').load('../lost/lostList.html');
+{{/each}}
 </script>
 
+<!-- {{#if @last}}
+<div class="bal-mb-3-data">
+<figure class="snip1283">
+<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample70.jpg" alt="sample70"/>
+<figcaption>
+<h3 style="text-align: center;"> < {{petName}} > </h3>
+    <p style="font-size: 20px;">품종 : {{breed}}</p>
+    <p style="font-size: 20px;">연락처 : {{registrant.tel}}</p>
+<div><a href="../lost/lostList.html" class="read-more">Read More</a></div>
+</figcaption>
+</figure>
+</div>
+{{/if}} -->
+<script src='../../node_modules/handlebars/dist/handlebars.min.js'></script>
+<script src='../../node_modules/jquery/dist/jquery.js'></script>
+<script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
+<script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+<script src='../../node_modules/sweetalert/dist/sweetalert.min.js'></script>
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
+
 <script type="text/javascript">
-var addBtn = $('#addBtn');
+var addBtn = $('#addBtn'),
+    prevBtn = $('#prevBtn'),
+    currBtn = $('#currBtn'),
+    nextBtn = $('#nextBtn'),
+    currPageNo = 1,
+    list = $('#lostList'),      
+    lostTemplateSrc = $('#lostTemplate').html(),
+    lostTemplateEngine = Handlebars.compile(lostTemplateSrc);
 
 $.getJSON('../../json/auth/loginUser', (result) => {
-	if (result.status == 'fail') {
-		$('.after-login').css('display', 'none');
-	}
+    if (result.status == 'fail') {
+        $('.after-login').css('display', 'none');
+    }
 });
 
-addBtn.click(() => {
-	$.ajax('../lost/lostForm.html', {
-		success: (result) => {
-			location.href = '../lost/lostForm.html';
-		}
-	});
+load(1);
+/* 
+prevBtn.click(() => {
 });
+
+nextBtn.click(() => {
+    load(currPageNo + 1)
+});
+ */
+var count = 0;
+ 
+function calculator(n) {
+	currPageNo += n;
+   return currPageNo;
+}
+
+function load(pageNo, options) {
+	if (options == undefined) options = {};
+    options.pn = pageNo;
+    console.log('막 로드 : ' + options.pn)
+    $(document).ready(function(){ 
+        $('button').click(function(e){
+            var id = e.target.getAttribute('id');
+            if ((id != '') && (id != null))  
+            var newId = '#' + id;
+            
+            if ((newId == '#addBtn')) {
+                $.ajax('../lost/lostForm.html', {
+                    success: (result) => {
+                        location.href = '../lost/lostForm.html';
+		        }
+		        });
+		    } else if (newId.substring(0, 9) == '#viewBtn') {
+	           var lostNo = newId.substring(8);
+	           $.ajax('../../json/lost/' + lostNo, {
+	               dataType: 'json',
+	               success: (result) => {
+	            	    location.href = "../lost/lostForm.html?no=" + lostNo;
+	               }
+	           });
+		    } else if (newId == '#nextBtn2') {
+		    	options.pn = calculator(1)
+	            console.log('nextBtn2 : ' + options.pn)
+	            $.ajax('../../json/lost/list', {
+	                data: options,
+	                dataType: 'json',
+	                success: (result) => {
+            		window.location.reload();
+	                   list.append(lostTemplateEngine(result));
+	                   currPageNo = result.pageNo;
+	                   currBtn.html(currPageNo);
+	                   if (result.pageNo == 1) {
+	                       $(prevBtn.parent()).addClass("disabled");
+	                   } else {
+	                       $(prevBtn.parent()).removeClass("disabled");
+	                   }
+	                   
+	                   if (result.lastPageNo == result.pageNo) {
+	                       $(nextBtn.parent()).addClass("disabled");
+	                   } else {
+	                       $(nextBtn.parent()).removeClass("disabled");
+	                   }
+	                   location.href = "../main/home.html#lost";
+	               }
+	            });
+		    } else if (newId == '#prevBtn2') {
+		    	options.pn = calculator(-1)
+	            console.log('prevBtn2 : ' + options.pn)
+	            $.ajax('../../json/lost/list', {
+	                data: options,
+	                dataType: 'json',
+	                success: (result) => {
+	                   list.append(lostTemplateEngine(result));
+	                   currPageNo = result.pageNo;
+	                   currBtn.html(currPageNo);
+	                   if (result.pageNo == 1) {
+	                       $(prevBtn.parent()).addClass("disabled");
+	                   } else {
+	                       $(prevBtn.parent()).removeClass("disabled");
+	                   }
+	                   
+	                   if (result.lastPageNo == result.pageNo) {
+	                       $(nextBtn.parent()).addClass("disabled");
+	                   } else {
+	                       $(nextBtn.parent()).removeClass("disabled");
+	                   }
+	                   location.href = "../main/home.html#lost";
+	               }
+	            });
+	         } else {
+                	console.log('그냥 가야하는 놈 : ' + options.pn)
+                $.ajax('../../json/lost/list', {
+                    data: options.pn,
+                    dataType: 'json',
+                    success: (result) => {
+                       list.append(lostTemplateEngine(result));
+                       currPageNo = result.pageNo;
+                       currBtn.html(currPageNo);
+                       if (result.pageNo == 1) {
+                           $(prevBtn.parent()).addClass("disabled");
+                       } else {
+                           $(prevBtn.parent()).removeClass("disabled");
+                       }
+                       
+                       if (result.lastPageNo == result.pageNo) {
+                           $(nextBtn.parent()).addClass("disabled");
+                       } else {
+                           $(nextBtn.parent()).removeClass("disabled");
+                       }
+                       location.href = "../main/home.html#lost";
+                   }
+                });
+	        }
+        });
+    });
+}
 </script>

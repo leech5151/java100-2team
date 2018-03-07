@@ -103,21 +103,22 @@
 
 .map_wrap {
 	position: relative;
-	width: 100%;
+	width: 690px;
 	height: 500px;
-	float: right;
+	float: left;
 }
-/* #menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+#menu_wrap {top:0;left:0;bottom:0;height: 500px;width:250px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
 .bg_white {background:#fff;}
 #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
 #menu_wrap .option{text-align: center;}
 #menu_wrap .option p {margin:10px 0;}  
 #menu_wrap .option button {margin-left:5px;}
-#placesList li {list-style: none;}
-#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+#placesList li {border-radius:10px;list-style: none;}
+#placesList li:hover {background-color: #ff8040; color:#ffffff}
+#placesList .item {position:relative;border:1px solid #824027;overflow: hidden;cursor: pointer;min-height: 65px; text-align: center;}
 #placesList .item span {display: block;margin-top:4px;}
 #placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-#placesList .item .info{padding:10px 0 10px 55px;}
+#placesList .item .info{padding:10px 0 10px 0px;}
 #placesList .info .gray {color:#8a8a8a;}
 #placesList .info .jibun {padding-left:26px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
 #placesList .info .tel {color:#009900;}
@@ -139,8 +140,8 @@
 #placesList .item .marker_15 {background-position: 0 -654px;}
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
-#pagination .on {font-weight: bold; cursor: default;color:#777;}
- */
+#pagination .on {font-weight: bold; cursor: default;color:#ffffff;}
+ 
 </style>
 
 
@@ -406,17 +407,18 @@
 </div>
 <div style="width: 50%; margin-top: 100px; display: inline-block"
 	class="pricing-header px-3 py-3 pt-md-5 pb-md-4  text-center">
-	<h2 class="display-4">VIP 24</h2>
+	<h2 class="display-4">My Hospital</h2>
 	<p class="lead">주변 병원을 검색합니다</p>
 </div>
 
-
-<div class="map_wrap">
-	<div id="map" style="width: 100%; height: 100%; overflow: hidden;"></div>
-</div>
-<div id="menu_wrap" class="bg_white">
-	<ul id="placesList"></ul>
-	<div id="pagination"></div>
+<div style="width: 980px; height: 500px; position:relative; margin-left: 40px">
+	<div class="map_wrap">
+		<div id="map" style="width: 100%; height: 100%; overflow: auto;"></div>
+	</div>
+	<div id="menu_wrap" class="bg_white">
+		<ul id="placesList"></ul>
+		<div id="pagination"></div>
+	</div>
 </div>
 
 
@@ -504,7 +506,7 @@ var options = { //지도를 생성할 때 필요한 기본 옵션
 		
     center : new daum.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
     scrollwheel : false,
-    level : 4   
+    level : 5   
 };
 
 
@@ -567,7 +569,7 @@ if (status === daum.maps.services.Status.OK) {
      	
      	 var options = { 
      			 location: coords,
-     			 radius: 500
+     			 radius: 1000
      	        };
 	        var keyword = '동물병원';
 

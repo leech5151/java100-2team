@@ -20,7 +20,7 @@
         {{/each}}
 	<figcaption>
     	<div class="heading">
-     		<h3>{{primary_address}}<span>{{businessName}}</span></h3>
+     		<h3><span>{{adress primary_address}}</span></h3>
     	</div>
     	<div class="caption">
       		<p>{{category}}</p>
@@ -31,18 +31,18 @@
         </a>
     </div>
 	{{#if @last}}
-		<div class="bal-mb-3-data">
-	       <figure class="snip1283">
- 				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample70.jpg" alt="sample70"/>
-  				<figcaption>
-   					<h3>Sue Shei</h3>
-    				<p>The strength to change what I can, the inability to accept what I can't and the incapacity to tell the difference.</p>
-					<div><a href="../business/list.html" class="read-more">Read More</a></div>
-					<div style="margin-top: 30px;"><a href="../business/view.html" class="read-more">Enroll</a></div>
-  				</figcaption>
-			</figure>
-    	</div>
-	{{/if}}
+        <div class="bal-mb-3-data">
+           <figure class="snip1283">
+                <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample70.jpg" alt="sample70"/>
+                <figcaption>
+                    <h3>Sue Shei</h3>
+                    <p>The strength to change what I can, the inability to accept what I can't and the incapacity to tell the difference.</p>
+                    <div><a href="../business/list.html" class="read-more">Read More</a></div>
+                    <div style="margin-top: 30px;"><a href="../business/view.html" class="read-more">Enroll</a></div>
+                </figcaption>
+            </figure>
+        </div>
+    {{/if}}
 
 {{/each}}
 </script>
@@ -73,6 +73,9 @@ Handlebars.registerHelper('ifCond', function(v1, options) {
 	  }
 	  return options.inverse(this);
 });
+Handlebars.registerHelper('adress', function (primary_adress) {
+    return primary_adress.substring(0,2);
+  });
 
 function load(pageNo, options) {
 

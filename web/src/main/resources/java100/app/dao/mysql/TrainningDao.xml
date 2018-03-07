@@ -148,8 +148,9 @@
     <select id="checkLike" parameterType="trainning" resultType="int">
     	select liked from likes where m_no=#{memberNo} and t_no=#{trainningNo}
     	<if test="liked == null">
-    	liked=0
+    	liked=0 
     	</if>
+    	
     </select>
         
     <!-- <select id="findByLikes" resultMap="trainningMap" parameterType="trainning">

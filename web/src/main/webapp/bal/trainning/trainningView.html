@@ -5,11 +5,17 @@
 <link rel='stylesheet' href='../../css/business.css'>
 <link rel='stylesheet' href='../../css/trainning.css'>
 <link rel='stylesheet' href='../../css/main.css'>
-
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
+<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
 <style>
 .b {
 	border-bottom: 1px solid gray;
 	padding-bottom: 30px;
+	margin-left: -22px;
 }
 
 .c {
@@ -36,8 +42,8 @@
 	<div class='container' style="font-family:contsfont-kor">
 
 
-		<h1 class='my-new' style="margin-bottom: 50px; font-family:contsfont-kor">영상등록</h1>
-		<h1 class='my-view' style="margin-bottom: 50px; font-family:contsfont-kor"> 영상 상세정보</h1>
+		<h2 class='my-new' style="margin-bottom: 50px; font-family:contsfont-kor">영상등록</h2>
+		<h2 class='my-view' style="margin-bottom: 50px; font-family:contsfont-kor"> 영상 상세정보</h2>
 
 
 		<form id='form' method="post" enctype="multipart/form-data">
@@ -87,7 +93,7 @@
 						class='col-sm-2 col-form-label c' id='reg'>게시일</span>
 					<button style="border: 0; background: transparent" class='d'
 						id='like-btn' type='button'>
-						<img id='likeb' src="../../download/nolike.png" alt='좋아요' />
+						<img id='likeb' src="../../download/nolike.png" alt='좋아요' /> 좋아요 
 						<div id='count' style="display: inline-block"></div>
 					</button>
 				</div>
@@ -110,11 +116,9 @@
 						name='contents'>
 				</div>
 			</div>
-			<!-- 	<div class='form-group row'>
-			</div>
 			
-			 -->
-			<div class='my-new'>
+			
+			<div  class="my-new">
 				<div id="filediv" class="small-12 large-4 columns">
 					<div class="containers">
 						<div class="imageWrapper">
@@ -122,11 +126,30 @@
 								controls="controls" autoplay loop id="video" width="100%"></video>
 						</div>
 					</div>
-					<button class="file-upload">
-						<input type="file" class="file-input" id="file1" name="file" >Choose File
-					</button>
+				
+			<!-- 	<button class="file-upload">
+						<input type="file" class="file-input" id="file1" name="file">Choose File
+					</button> -->
+			<div class="" style="width:407px; position: absolute; top: 91%; left: 48%; transform: translate(-50%, -50%);">
+						<input type="file"  id="file1" name="file" class="input-file">
+						<div class="input-group form-group-lg col-xs-12">
+						<!-- 	<span class="input-group-addon"><i
+								class="fa fa-video-camera"></i></span>  -->
+								<input type="text" class="form-control" disabled placeholder="Upload Video">
+							<span class="input-group-btn">
+								<button class="upload-field btn btn-lg btn-success"
+									type="button">
+									<i class="fa fa-search"></i> Browse
+								</button>
+							</span>
+						</div>
+					</div>
 				</div>
 			</div>
+			
+			
+			
+			
 			<!-- 
 				<div id="filediv" class='filebox'>
 					<input type="file" class="form-control-file" id="file1" name="file">
@@ -135,14 +158,6 @@
 			<div id=nodiv1 class='col-sm-10'></div>
 
 
-
-			<!-- <div class='form-group row'>
-				<label for='maintextContents' class='col-sm-2 col-form-label my-new'>본문설명</label>
-				<div class='col-sm-10'>
-					<input class='form-control' id='maintextContents' type='text'
-						name='maintextContents'>
-				</div>
-			</div> -->
 
 
 			<!-- <div class='form-group row my-view'>
@@ -176,6 +191,7 @@
 <script src='../../node_modules/jquery/dist/jquery.min.js'></script>
 <script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
 <script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 var addBtn = $('#addBtn'),
 updateBtn = $('#updateBtn'),
@@ -391,7 +407,7 @@ function dislike() {
         }); 
 
     	
-    	$('.file-input').change(function(){
+    	$('.input-file').change(function(){
     	    var curElement = $(this).parent().parent().find('#video');
     	    console.log(curElement);
     	    var reader = new FileReader();
@@ -404,6 +420,19 @@ function dislike() {
     	    // read the image file as a data URL.
     	    reader.readAsDataURL(this.files[0]);
     	}); 
+    	
+    	
+    	$(document).on('click', '.upload-field', function() {
+              var file = $(this).parent().parent().parent().find('.input-file');
+              file.trigger('click');
+          });
+          $(document).on(
+                  'change',
+                  '.input-file',
+                  function() {
+                      $(this).parent().find('.form-control').val(
+                              $(this).val().replace(/C:\\fakepath\\/i, ''));
+                  });
     	
     	
 </script>

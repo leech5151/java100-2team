@@ -30,6 +30,12 @@
 	text-decoration: none;
 }
 
+#view_form b {
+	color: #999;
+	text-decoration: none;
+	font-size: 45px;
+}
+
 #view_form a:hover, #view_form a:focus {
 	color: #7D87AE;
 	outline: none;
@@ -42,6 +48,7 @@
 	width: 220%;
 	font-size: 1em;
 	box-shadow: 20px 20px 0px rgba(0, 0, 0, 0.16);
+	color: black;
 }
 .hidden {
 	position: absolute;
@@ -65,10 +72,9 @@
 .codrops-header h1 {
 	margin: 0.5em 0 0 0;
 	font-weight: 400;
-	font-size: 4em;
+	font-size: 6em;
 	color: black;
 	line-height: 1;
-	font-family: 'Lustria', 'Goudy Old Style', Garamond, 'Big Caslon', 'Times New Roman', serif;
 }
 
 .codrops-header h1 span {

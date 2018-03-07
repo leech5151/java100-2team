@@ -31,14 +31,13 @@
 	<div class="container_b">
 		<header class="codrops-header" style="margin-bottom: -4%">
 			<h1>
-				Motion Blur Effect with SVG<span>by <a
-					href="../main/home.html#together">pet together</a></span>
+				Diagnosis<span> <a href="../main/home.html#diagnosis">hospital staff</a></span>
 			</h1>
 			<nav class="codrops-demos">
 
-				<a href="../main/home.html">home</a>
-				<a href="../diagnosis/list.html">menu</a>
-				<a class="current-demo" href="form.html">Image Gallery</a>
+				<a href="../main/home.html#diagnosis">home</a>
+				
+				
 				<div class="modal fade" role="dialog" id="diagnosisModalView">
 					<div class="modal-dialog">
 						<div class="modal-content" id=modal_view_content>
@@ -48,14 +47,12 @@
 				
 			</nav>
 		</header>
-		<div style="width: 27%; text-align: left; margin-bottom: 1%; margin-left:18%; display: inline-block;">
+		<div style="width: 21%; text-align: left; margin-bottom: 1%; margin-left:15%; display: inline-block;">
 			<input type="text" readonly="readonly" id="selectDate" class="selectDate calendar" style="font-size:15px; height: 40px; background-image:url(../../images/button/calendar48_2.png); background-repeat: no-repeat; background-position: right; background-size: 40px">
 			<a>~</a>
 			<input type="text" readonly="readonly" id="nowDate" class="nowDate calendar" style="font-size:15px; height: 40px; background-image:url(../../images/button/calendar48_2.png); background-repeat: no-repeat; background-position: right; background-size: 40px">
-		<!-- <img id="123" src="../../images/button/menu.png" height="32" width="32" style="margin-bottom: " ></img> -->
 		</div>
-		
-		
+		<img id="addform" src="../../images/button/add.png" height="32" width="32" style="right: 100px" ></img>
 		<div id="sidebox">
 		 <nav id="navigation-list">
    		 <ul style="list-style: none; position: relative; float: left;">
@@ -68,7 +65,7 @@
 		</div>
 		
 		<div style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">
-			<div style='width:10%; display:inline-block; ; font-size:20px;'>No</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Hospital</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Customer</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Date</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Category</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Medical name</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Contents</div>
+			<div style='width:10%; display:inline-block; ; font-size:20px;'>No</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Customer Name</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Tel</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Date</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Category</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Medical name</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Contents</div>
 		</div>
 
 		<div id="diagnosisbody">
@@ -94,7 +91,6 @@
 <div class="modal-dialog modal-sm" style="max-width: 1000px;">
 <div class="modal-content">
 <div class="modal-header">
-<button id="closeBtn" type="button" class='btn btn-primary btn-sm my-new' >닫기</button>
 </div>
 <div class="modal-body" style="padding: 40px 50px;">
 <div class='container'>
@@ -103,7 +99,7 @@
 
         <form action='update' method='post'>
 
-            <div class='form-group row my-view'>
+            <div  class='form-group row my-view addForm'>
                 <label for='diagnosisNo' class='col-sm-2 col-form-label'>진료번호</label>
                 <div class='col-sm-10'>
                     <input class='form-control' readonly id='diagnosisNo' type='number'
@@ -111,7 +107,7 @@
                 </div>
             </div>
 
-            <div class='form-group row my-view'>
+            <div class='form-group row my-view addForm'>
                 <label for='hospitalName' class='col-sm-2 col-form-label'>병원명</label>
                 <div class='col-sm-10'>
                     <input class='form-control' readonly id='hospitalName' type='text'
@@ -190,14 +186,26 @@
                     <input class='form-control' id='remarks' type='text' name='remarks'>
                 </div>
             </div>
-
+            
             <div class='form-group row'>
                 <div class='col-sm-10'>
 </div>
+
+ <div class='form-group row' style="display: none">
+                <input class='form-control' readonly id='hospitalNo' type='number'
+                    name='diagnosis.hospital.hospitalNo'>
+ </div>
 </div>
 </form>
 </div>
 </div>
+
+<div class="modal-footer">
+<button id="addBtn" type="button" class='btn btn-primary btn-sm my-new' data-dismiss="modal" >추가</button>
+<button id="updateBtn" class="addForm" type="button" class='btn btn-primary btn-sm my-view'>변경</button>
+<button id="deleteBtn" class="addForm" type="button" class='btn btn-primary btn-sm my-view'>삭제</button>
+</div>
+
 
 </div>
 </div>
@@ -206,7 +214,8 @@
 <script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
 <script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
 <script src='../../node_modules/jquery-ui-dist/jquery-ui.js'></script>
-
+<script src='../../node_modules/sweetalert/dist/sweetalert.min.js'></script>
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
 <script>
 var prevBtn = $('#prevBtn'),
 currBtn = $('#currBtn'),
@@ -226,7 +235,10 @@ nameItem=$('#diagnosisName'),
 contentsItem=$('#diagnosisContents'),
 recordingItem=$('#dateRecording'),
 recorderItem=$('#recorder'),
-remarksItem=$('#remarks');
+remarksItem=$('#remarks'),
+addBtn = $('#addBtn'),
+updateBtn = $('#updateBtn'),
+deleteBtn = $('#deleteBtn');
 
 
 var nowDate = new Date();
@@ -304,7 +316,7 @@ $.datepicker.regional['kr'] = {
 	
 	startpage();
 	function startpage(){
-	        $.ajax('../../json/diagnosis/mylist', {
+	        $.ajax('../../json/diagnosis/hospitallist', {
 	        	data: { 
 				       dateRecording: dateItem.val(),
 				       nowDateRecording: nowDateItem.val()
@@ -316,21 +328,14 @@ $.datepicker.regional['kr'] = {
 	                for (var data of result.list) {
 	                	$('<div class="modalList" style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
 	                        .html(  
-	                                "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;; '>" + data.diagnosisNo + "</div>" + 
-                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;; '>"+ data.hospital.hospitalName + "</div>" + 
-                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;; '>" + data.memberName + "</div>" +
-                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;; '>" + data.dateRecording + "</div>" +
-                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;; '>" + data.diagnosisCategory + "</div>" +
-                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;; '>" + data.diagnosisName + "</div>" +
-                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;; '>" + data.diagnosisContents + "</div>")
+	                                "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
+                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.memberName + "</div>" +
+                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>"+ data.memberTel + "</div>" + 
+                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
+                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
+                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
+                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
 			                            .appendTo('#diagnosisbody'); 
-	                	
-	                	/*  $(document).ready(function (){
-	                	    $('a').click(function(event){
-	                	    event.preventDefault();
-	                	    alert("hi");
-	                	    });
-	                	});  */
 	                }
 	                
 	             	$(prevBtn.parent()).css("display","none");
@@ -341,7 +346,42 @@ $.datepicker.regional['kr'] = {
 	            }
 	        });
 	    }
+	$(document).on('click', '#addform', function(){
+		 dogweightItem.val(null);
+         categoryItem.val(null);
+         nameItem.val(null);
+         contentsItem.val(null);
+         recordingItem.val(null); 
+         hospitalNoItem.val(null);
+         hospitalNameItem.val(null);
+         recorderItem.val(null);
+         remarksItem.val(null);
+         memberNameItem.val(null);
+         memberTelItem.val(null);
+		
+		 $.ajax('../../json/diagnosis/form' ,{
+             dataType: 'json',
+             success: (result) => {
+             	if(result.data==null){
+             		hospitalNoItem.val(''); 
+             	}else{
+             		hospitalNoItem.val(result.data.hospital.hospitalNo);	
+             	}
+                
+             },
+             error: () => {
+                 swal("ERROR 관리자에게 문의 하세요");
+             }
+         });
+		$(".addForm").css("display","none");
+		$("#addBtn").css("display","");
+	    $("#testModal").modal();
+	}); 
+	
+	
 	$(document).on('click', '.modalList', function(){
+		$("#addBtn").css("display","none");
+		$(".addForm").css("display","");
 	    text = $(this).children().first().text();
 	    var diagnosisViewModalContent = $('#diagnosisViewModal .modal-content');
 	    console.log(text);
@@ -371,6 +411,92 @@ $.datepicker.regional['kr'] = {
             }
         });
 	}
+	
+	addBtn.click(() => {
+		 if (hospitalNoItem.val()=='') {
+		        alert("병원관련 회원만 입력 가능 합니다");
+		        return;
+		    }
+	    $.ajax('../../json/diagnosis/add', {
+	        data: {
+	            dogweight: dogweightItem.val(),
+	            diagnosisCategory: categoryItem.val(),
+	            diagnosisName: nameItem.val(),
+	            diagnosisContents: contentsItem.val(),
+	            dateRecording: recordingItem.val(),
+	            hospitalNo: hospitalNoItem.val(),
+	            recorder: recorderItem.val(),
+	            remarks: remarksItem.val(),
+	            memberName: memberNameItem.val(),
+	            memberTel: memberTelItem.val()
+	        },
+	        dataType: 'json',
+	        method: 'POST',
+	        success: (result) => {
+	        	if(result.status=='success'){
+					window.alert("성공!!")	
+				}else if(result.status=='fail'){
+					swal("병원 회원만 입력 가능합니다","병원 등록 후 사용하세요");
+				}else{
+					swal("해당 회원이 없습니다!","회원 전화번호를 확인하세요!");
+				}
+			},
+			error: () => {
+				swal("변경 실패!", "입력할 정보를 확인해보세요!");
+			}
+	    });
+	});
+	updateBtn.click(() => {
+	    $.ajax('../../json/diagnosis/update', {
+	        data: {
+	             diagnosisNo: noItem.val(),
+	             dogweight: dogweightItem.val(),
+	             diagnosisCategory: categoryItem.val(),
+	             diagnosisName: nameItem.val(),
+	             diagnosisContents: contentsItem.val(),
+	             hospitalName: hospitalNameItem.val(),
+	             remarks: remarksItem.val(),
+	             memberName: memberNameItem.val(),
+	             memberTel: memberTelItem.val()
+	        },
+	        dataType: 'json',
+	        method: 'POST',
+	        success: (result) => {
+	        	if(result.status=='success'){
+					location.href = "list.html";	
+				}else if(result.status=='fail'){
+					swal("다른 병원의 자료는 수정할 수 없습니다");
+				}else{
+					swal("병원 관계자 회원만 가능합니다");
+				}
+			},
+			error: () => {
+				window.alert('서버 실행 오류!');
+			}
+	    });
+	});
+
+	deleteBtn.click(() => {
+	    $.ajax('../../json/diagnosis/delete', {
+	        data: {
+	            no: noItem.val()
+	        },
+	        dataType: 'json',
+	        success: (result) => {
+	        	if(result.status=='success'){
+					location.href = "list.html";	
+				}else if(result.status=='fail'){
+					swal("삭제권한이 없습니다!");
+				}else{
+					swal("삭제권한이 없습니다");
+				}
+			},
+			error: () => {
+				swal("해당 자료가 없습니다");
+			}
+	    });
+	});
+	
 	// 데이트피커 선택날짜 리스트
 	$(".selectDate").datepicker({
 		onSelect:  function selectdatepicker(dateText, inst) {
@@ -379,7 +505,7 @@ $.datepicker.regional['kr'] = {
 				
 			    if (options == undefined) options = {};
 			       options.pn = pageNo;
-			       $.ajax('../../json/diagnosis/mypagesizelist', {
+			       $.ajax('../../json/diagnosis/hospitalpagesizelist', {
 			           data: { 
 			        	   options,
 			        	   pageNo: pageNo,
@@ -395,13 +521,13 @@ $.datepicker.regional['kr'] = {
 			               for (var data of result.list) {
 			            		$('<div class="modalList" style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
 		                        .html(  
-		                        	       "<div style='width:10%; display:inline-block; ; '>" + data.diagnosisNo + "</div>" + 
-				                            "<div style='width:20%; display:inline-block; ; '>"+ data.hospital.hospitalName + "</div>" + 
-				                            "<div style='width:10%; display:inline-block;; '>" + data.memberName + "</div>" +
-				                            "<div style='width:20%; display:inline-block;; '>" + data.dateRecording + "</div>" +
-				                            "<div style='width:10%; display:inline-block;; '>" + data.diagnosisCategory + "</div>" +
-				                            "<div style='width:10%; display:inline-block;; '>" + data.diagnosisName + "</div>" +
-				                            "<div style='width:20%; display:inline-block;; '>" + data.diagnosisContents + "</div>")
+		                        		   "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
+		                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
+		                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.memberName + "</div>" +
+		                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
+		                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
+		                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
+		                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
 				                            .appendTo('#diagnosisbody'); 
 			               }
 			               
@@ -436,7 +562,7 @@ $.datepicker.regional['kr'] = {
 				
 			    if (options == undefined) options = {};
 			       options.pn = pageNo;
-			       $.ajax('../../json/diagnosis/mypagesizelist', {
+			       $.ajax('../../json/diagnosis/hospitalpagesizelist', {
 			           data: { 
 			        	   options,
 			        	   pageNo: pageNo,
@@ -452,13 +578,13 @@ $.datepicker.regional['kr'] = {
 			               for (var data of result.list) {
 			            		$('<div class="modalList" style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
 		                        .html(  
-		                        	       "<div style='width:10%; display:inline-block; ; '>" + data.diagnosisNo + "</div>" + 
-				                            "<div style='width:20%; display:inline-block; ; '>"+ data.hospital.hospitalName + "</div>" + 
-				                            "<div style='width:10%; display:inline-block;; '>" + data.memberName + "</div>" +
-				                            "<div style='width:20%; display:inline-block;; '>" + data.dateRecording + "</div>" +
-				                            "<div style='width:10%; display:inline-block;; '>" + data.diagnosisCategory + "</div>" +
-				                            "<div style='width:10%; display:inline-block;; '>" + data.diagnosisName + "</div>" +
-				                            "<div style='width:20%; display:inline-block;; '>" + data.diagnosisContents + "</div>")
+		                        		   "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
+		                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
+		                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.memberName + "</div>" +
+		                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
+		                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
+		                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
+		                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
 				                            .appendTo('#diagnosisbody'); 
 			               }
 			               
@@ -509,20 +635,20 @@ $(".dropdownlist").click( function(){
 
 
 function loadAll(pageNo, option){
-$.ajax('../../json/diagnosis/myAlllist', {
+$.ajax('../../json/diagnosis/hospitalalllist', {
     dataType: 'json',
     success: (result) => {
    	 $('#diagnosisbody').html("");
         for (var data of result.list) {
         	$('<div class="modalList" style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
             .html(  
-            	       "<div style='width:10%; display:inline-block; ; '>" + data.diagnosisNo + "</div>" + 
-                        "<div style='width:20%; display:inline-block; ; '>"+ data.hospital.hospitalName + "</div>" + 
-                        "<div style='width:10%; display:inline-block;; '>" + data.memberName + "</div>" +
-                        "<div style='width:20%; display:inline-block;; '>" + data.dateRecording + "</div>" +
-                        "<div style='width:10%; display:inline-block;; '>" + data.diagnosisCategory + "</div>" +
-                        "<div style='width:10%; display:inline-block;; '>" + data.diagnosisName + "</div>" +
-                        "<div style='width:20%; display:inline-block;; '>" + data.diagnosisContents + "</div>")
+            		   "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
+                       "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
+                       "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.memberName + "</div>" +
+                       "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
+                       "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
+                       "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
+                       "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
                         .appendTo('#diagnosisbody'); 
         }
         	$(prevBtn.parent()).css("display","none");
@@ -537,7 +663,7 @@ $.ajax('../../json/diagnosis/myAlllist', {
 
 function load(pageNo, options){
     if (options == undefined) options = {};
-       $.ajax('../../json/diagnosis/mypagesizelist', {
+       $.ajax('../../json/diagnosis/hospitalpagesizelist', {
            data: { 
         	   options,
         	   pageNo: pageNo,
@@ -553,13 +679,13 @@ function load(pageNo, options){
                for (var data of result.list) {
             		$('<div class="modalList" style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
                     .html(  
-                    	       "<div style='width:10%; display:inline-block; ; '>" + data.diagnosisNo + "</div>" + 
-	                            "<div style='width:20%; display:inline-block; ; '>"+ data.hospital.hospitalName + "</div>" + 
-	                            "<div style='width:10%; display:inline-block;; '>" + data.memberName + "</div>" +
-	                            "<div style='width:20%; display:inline-block;; '>" + data.dateRecording + "</div>" +
-	                            "<div style='width:10%; display:inline-block;; '>" + data.diagnosisCategory + "</div>" +
-	                            "<div style='width:10%; display:inline-block;; '>" + data.diagnosisName + "</div>" +
-	                            "<div style='width:20%; display:inline-block;; '>" + data.diagnosisContents + "</div>")
+                    		   "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
+                               "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
+                               "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.memberName + "</div>" +
+                               "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
+                               "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
+                               "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
+                               "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
 	                            .appendTo('#diagnosisbody'); 
                }
                

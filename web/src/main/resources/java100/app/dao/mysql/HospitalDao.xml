@@ -98,9 +98,10 @@
         select count(*) from hp
     </select>
     
-    <select id="hospitalNoByMemberNo" resultType="int">
+    <select id="hospitalSelectByMemberNo" resultType="int">
     	select count(*) from hp where m_no=#{value}
     </select>
+    
     
     <insert id="insert" parameterType="hospital"
         useGeneratedKeys="true" keyColumn="hp_no" keyProperty="hospitalNo">

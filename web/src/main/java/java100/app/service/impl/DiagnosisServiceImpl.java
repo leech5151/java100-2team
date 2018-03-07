@@ -38,6 +38,11 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     public int getDateTotalCount(String tel,String selectDate,String nowDate) {
         return diagnosisDao.dateCountAll(tel,selectDate,nowDate);
     }
+    
+    @Override
+    public int getHospitalDateTotalCount(int hpno,String selectDate,String nowDate) {
+        return diagnosisDao.hospitalDateCountAll(hpno,selectDate,nowDate);
+    }
 
     @Override
     public int getTotalCount() {
@@ -105,10 +110,9 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     }
 
     @Override
-    public Object getHospitalNo(int no) {
+    public Diagnosis getHospitalNo(int no) {
         return diagnosisDao.findByHospitalNo(no);
     }
-    
 
     @Override
     public int deleteAll(int no) {
@@ -136,18 +140,49 @@ public class DiagnosisServiceImpl implements DiagnosisService {
         params.put("selectDate", selectDate);
         params.put("nowDate", nowDate);
         
-        ///////////////
-        
-        //////////////////
         
         return diagnosisDao.findMyPageSizeAll(params);
     
     }
     
+    @Override
+    public List<Diagnosis> hospitalPageSizeList(int hpno, String selectDate, String nowDate,int pageNo, int pageSize) {
+        
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("startIndex", (pageNo - 1) * pageSize);
+        params.put("size", pageSize);
+        params.put("hpno", hpno);
+        params.put("selectDate", selectDate);
+        params.put("nowDate", nowDate);
+        
+        return diagnosisDao.findHospitalPageSizeAll(params);
+    
+    }
+    
+    
+    
 
     @Override
     public List<Diagnosis> myAllList(String tel) {
         return diagnosisDao.findMyAllList(tel);
+    }
+
+
+    @Override
+    public List<Diagnosis> gethopspitalProducerList5(int no) {
+       
+        return diagnosisDao.findHospitalList5(no);
+    }
+
+    @Override
+    public List<Diagnosis> gethospitalListAll(int no) {
+        return diagnosisDao.findHospitalListAll(no);
+    }
+
+
+    @Override
+    public List<Diagnosis> getHospitalList(int hpno, String selectDate, String nowDate) {
+        return diagnosisDao.findHospitalList(hpno,selectDate,nowDate);
     }
 
 }

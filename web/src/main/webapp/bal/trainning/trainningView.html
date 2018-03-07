@@ -1,11 +1,12 @@
 <meta charset="UTF-8" />
-<link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel='stylesheet'
+	href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <link rel='stylesheet' href='../../css/common.css'>
 <link rel='stylesheet' href='../../css/business.css'>
 <link rel='stylesheet' href='../../css/trainning.css'>
+<link rel='stylesheet' href='../../css/main.css'>
 
 <style>
-
 .b {
 	border-bottom: 1px solid gray;
 	padding-bottom: 30px;
@@ -21,23 +22,25 @@
 	position: absolute;
 	right: 650px;
 }
-
 </style>
 
 
-<div class="modal-header"  style="padding: 40px 50px;">
-    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+<div class="modal-header" style="padding: 40px 50px;">
+	<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
 </div>
 
 <div class="modal-body" style="padding: 40px 50px;">
-<div class='container'>
+
+  
+
+	<div class='container' style="font-family:contsfont-kor">
 
 
-    <h1 class='my-new'>영상등록</h1>
-    <h1 class='my-view'>영상 상세정보</h1> 
+		<h1 class='my-new' style="margin-bottom: 50px; font-family:contsfont-kor">영상등록</h1>
+		<h1 class='my-view' style="margin-bottom: 50px; font-family:contsfont-kor"> 영상 상세정보</h1>
 
 
-<form id='form' method="post" enctype="multipart/form-data">
+		<form id='form' method="post" enctype="multipart/form-data">
 
 			<!-- <div class="form-group row ">
 				<div class="col-sm-10">
@@ -52,7 +55,7 @@
 			</div> -->
 
 
-	<!-- 	<div align="center" id="vi"></div>
+			<!-- 	<div align="center" id="vi"></div>
 
 			<div class='form-group row'>
 				<label for='file1' class='col-sm-2 col-form-label'>영상</label>
@@ -63,12 +66,12 @@
 				<div class='col-sm-10'>
 					<input class='form-control' id='title' type='text' name='title'>
 				</div>
-			</div> 
+			</div>
 
 
 
 
-		<!--  <div class='form-group row'>
+			<!--  <div class='form-group row'>
 				<label for='registrationDate' class='col-sm-2 col-form-label'>게시일</label>
 				<div class='col-sm-10'>
 					<input class='form-control' id='registrationDate' readonly type='text' name='registrationDate'>
@@ -79,13 +82,14 @@
 
 
 			<div id='viewno' class='form-group row b'>
-			<div>
-				<span id='view' class='col-sm-2 col-form-label c'>조회수</span>
-				<span class='col-sm-2 col-form-label c' id='reg'>게시일</span>
-         				<button style="border: 0; background: transparent" class='d' id='like-btn' type='button'>
-					<img id='likeb' src="../../download/nolike.png" alt='좋아요' />
-					<div id='count' style="display: inline-block"></div>
-				</button>
+				<div>
+					<span id='view' class='col-sm-2 col-form-label c'>조회수</span> <span
+						class='col-sm-2 col-form-label c' id='reg'>게시일</span>
+					<button style="border: 0; background: transparent" class='d'
+						id='like-btn' type='button'>
+						<img id='likeb' src="../../download/nolike.png" alt='좋아요' />
+						<div id='count' style="display: inline-block"></div>
+					</button>
 				</div>
 			</div>
 
@@ -95,7 +99,8 @@
 			<div class='form-group row my-view'>
 				<label for='nicname' class='col-sm-2 col-form-label'>닉네임</label>
 				<div class='col-sm-10'>
-					<input class='form-control' id='nicname' readonly type='text' name='nicname'>
+					<input class='form-control' id='nicname' readonly type='text'
+						name='nicname' style='width: 25%; text-align: center;'>
 				</div>
 			</div>
 			<div class='form-group row'>
@@ -109,13 +114,25 @@
 			</div>
 			
 			 -->
-	 
-			 
+			<div class='my-new'>
+				<div id="filediv" class="small-12 large-4 columns">
+					<div class="containers">
+						<div class="imageWrapper">
+							<video src="../../download/' + file.filename + '"
+								controls="controls" autoplay loop id="video" width="100%"></video>
+						</div>
+					</div>
+					<button class="file-upload">
+						<input type="file" class="file-input" id="file1" name="file" >Choose File
+					</button>
+				</div>
+			</div>
+			<!-- 
 				<div id="filediv" class='filebox'>
 					<input type="file" class="form-control-file" id="file1" name="file">
-				</div>
-				
-			    <div id=nodiv1 class='col-sm-10'></div>
+				</div> -->
+
+			<div id=nodiv1 class='col-sm-10'></div>
 
 
 
@@ -137,21 +154,23 @@
 
 
 
-</form>
-</div>
+		</form>
+	</div>
 </div>
 
 
 
 <div class="modal-footer">
-<div style="margin: auto;">
-<button id="addBtn" type="button" class='btn btn-primary btn-sm my-new'>추가</button>
-<button id="backBtn" type="button" class='btn btn-primary btn-sm my-new'  onclick="history.back();">돌아가기</button>
-</div>
-<div style="padding-right: 50%;">
-<button id="updateBtn" type="button" class='btn btn-primary btn-sm my-view'>변경</button>
-<button id="deleteBtn" type="button" class='btn btn-primary btn-sm my-view'>삭제</button>
-</div>
+	<div style="margin: auto;">
+		<button id="addBtn" type="button"
+			class='btn btn-primary btn-sm my-new'>추가</button>
+		<button id="backBtn" type="button"
+			class='btn btn-primary btn-sm my-new' onclick="history.back();">돌아가기</button>
+		<button id="updateBtn" type="button"
+			class='btn btn-primary btn-sm my-view'>변경</button>
+		<button id="deleteBtn" type="button"
+			class='btn btn-primary btn-sm my-view'>삭제</button>
+	</div>
 </div>
 
 <script src='../../node_modules/jquery/dist/jquery.min.js'></script>
@@ -371,9 +390,23 @@ function dislike() {
             }
         }); 
 
+    	
+    	$('.file-input').change(function(){
+    	    var curElement = $(this).parent().parent().find('#video');
+    	    console.log(curElement);
+    	    var reader = new FileReader();
 
+    	    reader.onload = function (e) {
+    	        // get loaded data and render thumbnail.
+    	        curElement.attr('src', e.target.result);
+    	    };
+
+    	    // read the image file as a data URL.
+    	    reader.readAsDataURL(this.files[0]);
+    	}); 
+    	
+    	
 </script>
 
 </body>
 </html>
-    

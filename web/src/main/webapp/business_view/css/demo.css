@@ -40,7 +40,7 @@
 }
 #modal_view_content {
 	width: 220%;
-	font-size: 0.75em;
+	font-size: 1em;
 	box-shadow: 20px 20px 0px rgba(0, 0, 0, 0.16);
 }
 .hidden {
@@ -65,7 +65,8 @@
 .codrops-header h1 {
 	margin: 0.5em 0 0 0;
 	font-weight: 400;
-	font-size: 2em;
+	font-size: 4em;
+	color: black;
 	line-height: 1;
 	font-family: 'Lustria', 'Goudy Old Style', Garamond, 'Big Caslon', 'Times New Roman', serif;
 }

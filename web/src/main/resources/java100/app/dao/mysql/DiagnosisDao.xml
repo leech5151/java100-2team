@@ -125,7 +125,7 @@
         m_name=#{memberName},
         m_tel=#{memberTel},
         rems=#{remarks}
-        where hp_no=#{hospital.hospitalNo}
+        where hp_no=#{hospital.hospitalNo} and dgn_no=#{diagnosisNo} 
     </update>
 
     <delete id="delete" parameterType="int">
@@ -133,9 +133,27 @@
     </delete> 
     
     <delete id="deleteAll" parameterType="int">
-        delete from dgn	
-        where hp_no=#{value}
+        delete from dgn	where hp_no=#{value}
     </delete> 
+    
+      <select id="getHospitalList" resultMap="diagnosisMap" parameterType="int">
+         select 
+            d.dgn_no,
+            d.dgn_cg,
+            d.dgn_name,
+            d.dgn_conts,
+            d.m_tel,
+            d.m_name,
+            m.m_no as m_no,
+            h.hp_name as hp_name
+       	 	from dgn as d 
+       	 	left join hp as h on d.hp_no=h.hp_no 
+        	left join memb as m on d.m_no=m.m_no
+			where h.hp_no = #{no}
+			order by d.dgn_no DESC, d.date_rec DESC
+    </select>
+    
+    
     
     <select id="findByHospitalNo" resultMap="diagnosisMap" parameterType="int">
     	select hp_no from hp where m_no=#{member.memberNo}
@@ -145,8 +163,15 @@
         select count(*) from dgn
     </select>
     
-    <select id="dateCountAll" parameterType="string" resultType="int">
+    <select id="dateCountAll" parameterType="map" resultType="int">
     	select count(*) from dgn where m_tel=#{arg0} and date_rec between #{arg1} and #{arg2} 
+    </select>
+    
+     <select id="hospitalDateCountAll" resultType="int">
+    	select count(*) 
+    	from dgn as d 
+    	left join hp as h on d.hp_no=h.hp_no 
+    	where d.hp_no=#{arg0} and date_rec between #{arg1} and #{arg2} 
     </select>
     
     <select id="CountMember" parameterType="string" resultType="int">
@@ -167,8 +192,27 @@
        	 	from dgn as d 
        	 	left join hp as h on d.hp_no=h.hp_no 
         	left join memb as m on d.m_no=m.m_no
-        	where m_tel=#{arg0} and d.date_rec between #{arg1} and #{arg2} order by d.date_rec DESC]]>
+        	where m_tel=#{arg0} and d.date_rec between #{arg1} and #{arg2} order by d.dgn_no DESC, d.date_rec DESC]]>
     </select>
+    
+    
+     <select id="findHospitalList" resultMap="diagnosisMap" parameterType="map">
+         <![CDATA[select 
+          d.dgn_no,
+            d.dgn_cg,
+            d.dgn_name,
+            d.dgn_conts,
+            d.date_rec,
+            d.m_name,
+            d.m_tel,
+            m.m_no as m_no,
+            h.hp_name as hp_name
+       	 	from dgn as d 
+       	 	left join hp as h on d.hp_no=h.hp_no 
+        	left join memb as m on d.m_no=m.m_no
+        	where d.hp_no=#{arg0} and d.date_rec between #{arg1} and #{arg2} order by d.dgn_no DESC, d.date_rec DESC]]>
+    </select>
+    
     
     
      <select id="findMy5" resultMap="diagnosisMap" parameterType="map">
@@ -184,8 +228,43 @@
        	 	from dgn as d 
        	 	left join hp as h on d.hp_no=h.hp_no 
         	left join memb as m on d.m_no=m.m_no
-        	where m_tel=#{arg0} order by d.date_rec DESC 
+        	where m_tel=#{arg0} order by d.dgn_no DESC, d.date_rec DESC
         	limit 5]]>
+    </select>
+    
+    
+    <select id="findHospitalList5" resultMap="diagnosisMap" parameterType="map">
+         <![CDATA[select 
+          d.dgn_no,
+            d.dgn_cg,
+            d.dgn_name,
+            d.dgn_conts,
+            d.date_rec,
+            d.m_name,
+            m.m_no as m_no,
+            h.hp_name as hp_name
+       	 	from dgn as d 
+       	 	left join hp as h on d.hp_no=h.hp_no 
+        	left join memb as m on d.m_no=m.m_no
+        	where d.hp_no=#{value} order by d.dgn_no DESC, d.date_rec DESC
+        	limit 5]]>
+    </select>
+    
+     <select id="findHospitalListAll" resultMap="diagnosisMap" parameterType="map">
+         <![CDATA[select 
+          d.dgn_no,
+            d.dgn_cg,
+            d.dgn_name,
+            d.dgn_conts,
+            d.date_rec,
+            d.m_name,
+            d.m_tel,
+            m.m_no as m_no,
+            h.hp_name as hp_name
+       	 	from dgn as d 
+       	 	left join hp as h on d.hp_no=h.hp_no 
+        	left join memb as m on d.m_no=m.m_no
+        	where d.hp_no=#{value} order by d.dgn_no DESC, d.date_rec DESC]]>
     </select>
     
     
@@ -202,7 +281,7 @@
        	 	from dgn as d 
        	 	left join hp as h on d.hp_no=h.hp_no 
         	left join memb as m on d.m_no=m.m_no
-        	where m_tel=#{value} 
+        	where m_tel=#{value} order by d.dgn_no DESC, d.date_rec DESC
     </select>
     
        <select id="findMyPageSizeAll" resultMap="diagnosisMap" parameterType="map">
@@ -219,7 +298,26 @@
        	 	from dgn as d 
        	 	left join hp as h on d.hp_no=h.hp_no 
         	left join memb as m on d.m_no=m.m_no
-			where m_tel=#{tel} and d.date_rec between #{selectDate} and #{nowDate} order by d.date_rec DESC
+			where m_tel=#{tel} and d.date_rec between #{selectDate} and #{nowDate} order by d.dgn_no DESC, d.date_rec DESC
+       		limit #{startIndex}, #{size}
+	    </select>
+	    
+	    
+	   <select id="findHospitalPageSizeAll" resultMap="diagnosisMap" parameterType="map">
+         select 
+            d.dgn_no,
+            d.dgn_cg,
+            d.dgn_name,
+            d.dgn_conts,
+            d.m_tel,
+            d.date_rec,
+            d.m_name,
+            m.m_no as m_no,
+            h.hp_name as hp_name
+       	 	from dgn as d 
+       	 	left join hp as h on d.hp_no=h.hp_no 
+        	left join memb as m on d.m_no=m.m_no
+			where d.hp_no=#{hpno} and d.date_rec between #{selectDate} and #{nowDate} order by d.dgn_no DESC, d.date_rec DESC
        		limit #{startIndex}, #{size}
 	    </select>
     

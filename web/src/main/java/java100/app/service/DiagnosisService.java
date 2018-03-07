@@ -20,11 +20,21 @@ public interface DiagnosisService {
     int add(Diagnosis diagnosis);
     int get(String tel);
     int getDateTotalCount(String te,String selectDate,String nowDate);
+    
+    int getHospitalDateTotalCount(int hpno,String selectDate,String nowDate);
     Diagnosis get(int no);
     int update(Diagnosis diagnosis,int no);
     int deleteAll(int no);
     int delete(int no,int no2);
-    Object getHospitalNo(int no);
+    Diagnosis getHospitalNo(int no);
+    
+    //병원 관계자 List출력 서비스
+    List<Diagnosis> getHospitalList(int hpno, String selectDate,String nowDate);
+    List<Diagnosis> gethopspitalProducerList5(int no);
+    List<Diagnosis> gethospitalListAll(int no);
+    List<Diagnosis> hospitalPageSizeList(int hpno, String selectDate,String nowDate,int pageNo, int pageSize);
+    
+    //회원의 list출력 서비스
     List<Diagnosis> myList(String tel,String selectDate,String nowDate);
     List<Diagnosis> myList5(String string);
     List<Diagnosis> myPageSizeList(String tel, String selectDate,String nowDate,int pageNo, int pageSize);

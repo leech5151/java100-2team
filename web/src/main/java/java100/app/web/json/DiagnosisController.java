@@ -16,6 +16,7 @@ import java100.app.domain.Diagnosis;
 import java100.app.domain.Hospital;
 import java100.app.domain.Member;
 import java100.app.service.DiagnosisService;
+import java100.app.service.HospitalService;
 import java100.app.service.MemberService;
 
 
@@ -24,11 +25,9 @@ import java100.app.service.MemberService;
 @SessionAttributes("loginUser")
 public class DiagnosisController {
 
-    @Autowired
-    ServletContext servletContext;
-    @Autowired
-    DiagnosisService diagnosisService;
-    
+    @Autowired ServletContext servletContext;
+    @Autowired DiagnosisService diagnosisService;
+    @Autowired HospitalService hospitalService;
     @Autowired MemberService memberService;
 
     @RequestMapping("list")
@@ -74,9 +73,6 @@ public class DiagnosisController {
         diagnosis.setHospital(hospital);
         
         int membercheck = diagnosisService.get(diagnosis.getMemberTel());
-//        System.out.println("============================");
-//        System.out.println(membercheck);
-//        System.out.println("============================");
         HashMap<String, Object> result = new HashMap<>();
 
         if(membercheck != 0) {
@@ -166,9 +162,12 @@ public class DiagnosisController {
         
         HashMap<String, Object> result = new HashMap<>();
         result.put("list", diagnosisService.myList(loginUser.getTel(),selectDate,nowDate));
-        return result;
+        return result; 
         
     }
+    
+ 
+ 
     
     @RequestMapping("mylist5")
     public Object myList5(@ModelAttribute(value = "loginUser") Member loginUser) throws Exception{
@@ -186,6 +185,45 @@ public class DiagnosisController {
         return result;
         
     }
+    
+    @RequestMapping("hospitallist")
+    public Object hospitalList(Diagnosis diagnosis,@ModelAttribute(value = "loginUser") Member loginUser) throws Exception{
+      
+        String nowDate = diagnosis.getNowDateRecording();
+        String selectDate = diagnosis.getDateRecording();
+        
+        Diagnosis diagnosishpno =  diagnosisService.getHospitalNo(loginUser.getMemberNo());
+        int hpno = diagnosishpno.getHospital().getHospitalNo();
+        
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("list", diagnosisService.getHospitalList(hpno,selectDate,nowDate));
+        return result; 
+        
+    }
+    
+    @RequestMapping("hospitalalllist")
+    public Object hospitalListAll(@ModelAttribute(value = "loginUser") Member loginUser) throws Exception{
+        
+        Diagnosis diagnosishpno =  diagnosisService.getHospitalNo(loginUser.getMemberNo());
+        int hpno = diagnosishpno.getHospital().getHospitalNo();
+        
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("list", diagnosisService.gethospitalListAll(hpno));
+        return result;
+    }
+    
+    @RequestMapping("hospitalproducerlist5")
+    public Object hospitalProducerList5(@ModelAttribute(value = "loginUser") Member loginUser) throws Exception{
+        
+        Diagnosis diagnosishpno =  diagnosisService.getHospitalNo(loginUser.getMemberNo());
+        int hpno = diagnosishpno.getHospital().getHospitalNo();
+        
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("list", diagnosisService.gethopspitalProducerList5(hpno));
+        return result;
+    }
+    
+    
     
     
     @RequestMapping("mypagesizelist")
@@ -212,6 +250,36 @@ public class DiagnosisController {
 
         return result;
     }
+    
+    
+    @RequestMapping("hospitalpagesizelist")
+    public Object hospitalPageSizeList(int pageNo, int pageSize,@ModelAttribute(value = "loginUser") Member loginUser,Diagnosis diagnosis) throws Exception {
+      
+        Diagnosis diagnosishpno =  diagnosisService.getHospitalNo(loginUser.getMemberNo());
+        int hpno = diagnosishpno.getHospital().getHospitalNo();
+        System.out.println(hpno);
+        String nowDate = diagnosis.getNowDateRecording();
+        String selectDate = diagnosis.getDateRecording();
+        if (pageNo < 1) {
+            pageNo = 1;
+        }
+
+        int totalCount = diagnosisService.getHospitalDateTotalCount(hpno,selectDate,nowDate);
+        System.out.println(totalCount);
+        int lastPageNo = totalCount / pageSize;
+        if ((totalCount % pageSize) > 0) {
+            lastPageNo++;
+        }
+        
+        HashMap<String, Object> result = new HashMap<>();
+
+        result.put("pageNo", pageNo);
+        result.put("lastPageNo", lastPageNo);
+        result.put("list", diagnosisService.hospitalPageSizeList(hpno,selectDate,nowDate,pageNo, pageSize));
+
+        return result;
+    }
+    
     
     
 }

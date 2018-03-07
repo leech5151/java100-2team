@@ -122,7 +122,7 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Override
     public int getHospitalBymemberNo(Hospital hospital) {
-        int countmemberNo = hospitalDao.hospitalNoByMemberNo(hospital.getMember().getMemberNo());
+        int countmemberNo = hospitalDao.hospitalSelectByMemberNo(hospital.getMember().getMemberNo());
         System.out.println(countmemberNo);
         return countmemberNo;
     }

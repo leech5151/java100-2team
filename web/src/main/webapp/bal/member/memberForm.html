@@ -68,8 +68,7 @@
 <div class='form-group row'>
 <label for='postalNo' class='col-sm-3 col-form-label'>우편번호</label>
 <div class='col-sm-7' style="padding-right: 5%;">
-<input class='form-control' id='postalNo' type='text' name='postalNo'>
-<input type='button' onclick="addrSearch()" value="우편번호 찾기">
+<input class='form-control' id='postalNo' onclick="addreSearch()" type='text' name='postalNo'>
 </div>
 </div>
 
@@ -122,9 +121,7 @@
 <script src='/node_modules/popper.js/dist/umd/popper.min.js'></script>
 <script src='/node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
 
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-
-<script type="text/javascript">
+<script>
 var memberNoItem = $('#memberNo'),
     nameItem = $('#name'),
     nicnameItem = $('#nicname'),
@@ -265,11 +262,10 @@ modifyBtn.click(() => {
     });
 });
 
-function addrSearch() {
-    console.log('1')
+function addreSearch() {
     new daum.Postcode({
         oncomplete: function(data) {
-            /* var fullAddr = ''; // 최종 주소 변수
+            var fullAddr = ''; // 최종 주소 변수
             var extraAddr = ''; // 조합형 주소 변수
 
             if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
@@ -298,7 +294,7 @@ function addrSearch() {
             document.getElementById('primaryAddress').value = fullAddr;
 
             // 커서를 상세주소 필드로 이동한다.
-            document.getElementById('detailAddress').focus(); */
+            document.getElementById('detailAddress').focus();
         }
     }).open();
 }

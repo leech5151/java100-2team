@@ -18,57 +18,76 @@ function load() {
 	$.ajax('../../json/auth/loginUser', {
         dataType: 'json',
         success: (result) => {
-        	$(document).ready(function(){
-        		if(result.member.memberType=='병원회원'){
-        			
-        			 $(document).ready(function(){
-					       $.ajax('../../json/diagnosis/hospitalproducerlist5', {
-					           success: (result) => {
-									$('.header').children().attr('href','../diagnosis/hospitalStaffForm.html')        	   
-					            	$('#diagnosisList').html("");
-					                for (var data of result.list) {
-					             		$('<figure class="snip1200">')
-					                     .html(  	
-					                    		 	'<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample32.jpg" alt="sq-sample32" />'+
-					                     	       "<figcaption>"+
-					                    		 	"<p  style='text-align: center'><strong><u>Hospital</u></strong><br>" + data.hospital.hospitalName + "<br><strong><u>CUSTOMERNAME</u></strong><br>" + data.memberName +"<br><strong><u>CATEGORY</u></strong><br>" + data.diagnosisCategory  + "</p>" + 
-					 	                   			 "<div class='heading'>"+
-					 	                            " <h3><span>" + data.dateRecording +"</span></h3>"+
-					 	                            "</div>")
-					 	                            .appendTo('#diagnosisList'); 
-					                }
-					               
-					           },
-					           error: () => {
-					           }
-					       });
-						 })
-				}else{
-				 $(document).ready(function(){
-					       $.ajax('../../json/diagnosis/mylist5', {
-					           success: (result) => {
-					               
-					            	$('#diagnosisList').html("");
-					                for (var data of result.list) {
-					             		$('<figure class="snip1200">')
-					                     .html(  	
-					                    		 	'<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample32.jpg" alt="sq-sample32" />'+
-					                     	       "<figcaption>"+
-					                    		 	"<p  style='text-align: center'><strong><u>Hospital</u></strong><br>" + data.hospital.hospitalName + "<br><strong><u>CUSTOMERNAME</u></strong><br>" + data.memberName +"<br><strong><u>CATEGORY</u></strong><br>" + data.diagnosisCategory  + "</p>" + 
-					 	                   			 "<div class='heading'>"+
-					 	                            " <h3><span>" + data.dateRecording +"</span></h3>"+
-					 	                            "</div>")
-					 	                            .appendTo('#diagnosisList'); 
-					             		
-					                }
-					               
-					           },
-					           error: () => {
-					           }
-					       });
-						 })
-			}
-		})
+        	if(result.status == "success"){
+        		$(document).ready(function(){
+        		
+            		if(result.member.memberType=='병원회원'){
+            			console.log('병원회원')
+    					       $.ajax('../../json/diagnosis/hospitalproducerlist5', {
+    					           success: (result) => {
+    					        	  if(result.status=="success"){
+    					        			$('.header').children().attr('href','../diagnosis/hospitalStaffForm.html')        	   
+        					            	$('#diagnosisList').html("");
+        					                for (var data of result.list) {
+        					             		$('<figure class="snip1200">')
+        					                     .html(  	
+        					                    		 	'<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample32.jpg" alt="sq-sample32" />'+
+        					                     	       "<figcaption>"+
+        					                    		 	"<p  style='text-align: center'><strong><u>Hospital</u></strong><br>" + data.hospital.hospitalName + "<br><strong><u>CUSTOMERNAME</u></strong><br>" + data.memberName +"<br><strong><u>CATEGORY</u></strong><br>" + data.diagnosisCategory  + "</p>" + 
+        					 	                   			 "<div class='heading'>"+
+        					 	                            " <h3><span>" + data.dateRecording +"</span></h3>"+
+        					 	                            "</div>")
+        					 	                            .appendTo('#diagnosisList'); 
+        					                }
+    					        	  }else{
+    					        			$('.header').children().attr('href','../diagnosis/hospitalStaffForm.html')
+    					        			$('.header').children().text('병원 등록하기')   
+    					        			$('#diagnosisList').html("");
+    				                 		$('<div>')
+    				                         .html(     "<div>"+
+    				                        		 "<p>병원회원이시면 병원을 등록 후 사용하시기 바랍니다</p>"+
+    				        		                 "</div>")
+    				     	                            .appendTo('#diagnosisList'); 
+    					        	  } 
+    					           },
+    					           error: () => {
+    					           }
+    					       });
+    				}else {
+    					console.log('다른회원들')
+    					       $.ajax('../../json/diagnosis/mylist5', {
+    					           success: (result) => {
+    					               
+    					            	$('#diagnosisList').html("");
+    					                for (var data of result.list) {
+    					             		$('<figure class="snip1200">')
+    					                     .html(  	
+    					                    		 	'<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample32.jpg" alt="sq-sample32" />'+
+    					                     	       "<figcaption>"+
+    					                    		 	"<p  style='text-align: center'><strong><u>Hospital</u></strong><br>" + data.hospital.hospitalName + "<br><strong><u>CUSTOMERNAME</u></strong><br>" + data.memberName +"<br><strong><u>CATEGORY</u></strong><br>" + data.diagnosisCategory  + "</p>" + 
+    					 	                   			 "<div class='heading'>"+
+    					 	                            " <h3><span>" + data.dateRecording +"</span></h3>"+
+    					 	                            "</div>")
+    					 	                            .appendTo('#diagnosisList'); 
+    					             		
+    					                }
+    					               
+    					           },
+    					           error: () => {
+    					           }
+    					       });
+    			}
+    		});
+        	}
+        	if(result.status=="fail"){
+            		$('#diagnosisList').html("");
+                 		$('<div>')
+                         .html(     "<div>"+
+                        		 "<p>로그인이 필요한 서비스입니다</p>"+
+        		                 "</div>")
+     	                            .appendTo('#diagnosisList'); 
+                 		
+        	}
         },
 		error: () => {
 			window.alert('서버 실행 오류!');

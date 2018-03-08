@@ -167,7 +167,7 @@ public class LoginController {
         if (member != null) {
 //            result.put("loginInfo", member);
             result.put("member", memberService.get(member.getMemberNo()));
-//            result.put("status", "success");
+            result.put("status", "success"); // 막지마시오 
         } else {
             result.put("status", "fail");
         }

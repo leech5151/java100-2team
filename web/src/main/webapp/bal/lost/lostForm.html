@@ -1,170 +1,56 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>미아찾기</title>
-<link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
-<link rel='stylesheet' href='../../css/common.css'>
-</head>
-<body>
-<div class='container'>
+<link rel="stylesheet" href="../../myDesign/pet/pet.css">
 
-<header>
-<nav class='navbar navbar-expand-lg navbar-light bg-light'>
+<div class="modal-header"  style="padding: 5% 5% 5% 5%;">
+    <h4>
+        <span class="glyphicon glyphicon-lock"></span> 미아 등록
+    </h4>
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+</div>
 
-<a class='navbar-brand' href='../main/home.html'>
-  <img src='../../images/bootstrap-solid.svg' width='30' height='30' class='d-inline-block align-top' alt=''>
-  Balance Pet
-</a>
-
-<button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
-  <span class='navbar-toggler-icon'></span>
-</button>
-
-<div class='collapse navbar-collapse' id='navbarNav'>
-
-<ul class='navbar-nav mr-auto'>
-  <li class='nav-item'>
-    <a class='nav-link' href='../hospital/list'>병원목록</a>
-  </li>
-</ul>
-
-<ul class='navbar-nav mr-auto'>
-  <li class='nav-item'>
-    <a class='nav-link' href='../diagnosis/list'>진료목록</a>
-  </li>
-</ul>
-
-<ul class='navbar-nav mr-auto'>
-  <li class='nav-item'>
-    <a class='nav-link' href='../business/list'>서비스</a>
-  </li>
-</ul>
-
-<ul class='navbar-nav mr-auto'>
-  <li class='nav-item'>
-    <a class='nav-link' href='../lost/list.html'>미아찾기</a>
-  </li>
-</ul>
-
-<a id="logout" href="../../json/auth/logout" 
-           class='btn btn-light btn-sm'>로그아웃</a>
-    </div>
-</nav>
-</header>
-
-    <h1>미아 상세정보</h1>
-    
+<div class="w3-content w3-display-container" style="max-width: 90%; height: 70vh; margin-top: 1%;">
 <form id="fileForm" enctype="multipart/form-data">
 
-   <div class='form-group row my-view'>
-   <label for='lostNumber' class='col-sm-2 col-form-label'>미아번호</label>
-   <div id="lostNum" class='col-sm-10'>
-   </div>
-   </div>
+  <img id="lostPetPhoto" class="mySlides2" style="width: 35rem; height: 35vh; margin-top: 3rem;" src= "https://static.wixstatic.com/media/5bfb6f_1534be33e38b46dba2fcf0d135b70972~mv2.png/v1/fill/w_750,h_788,al_c,usm_0.66_1.00_0.01/5bfb6f_1534be33e38b46dba2fcf0d135b70972~mv2.png" alt=''>
+  <div class="mySlides3" style="width: 35rem; height: 23vh; background-color: black;">
+  <div style="width: 40%; float: left; margin-top: 3%; margin-left: 10%;">
+  <p style="color: gray;">
+      <input id="petName" type="text" name="petName" style="width: 14rem;" placeholder="이름을 입력하세요."> 
+      <br><br>
+      <input id="breed" type="text" name="breed" style="width: 14rem;" placeholder="품종을 입력하세요."> 
+      <br><br>
+      <input id="lostLocation" type="text" name="lostLocation" style="width: 14rem;" placeholder="분실 장소를 입력하세요.">
+      <br><br>
+      분실일 : <input id='lostDate' type='date' name='lostDate' style="width: 10.2rem;">
+  </p>
+  </div>
+  <div style="width: 37%; float: left; margin-top: 3%; margin-left: 10%;">
+  <p style="color: white; margin-left: -1rem;">
+      <input id='character' type='text' name='character' style="width: 14rem;" placeholder="특징을 입력하세요.">
+      <br><br>
+      <input id='reward' type='text' name='reward' style="width: 14rem;" placeholder="사례금을 기입하세요.">
+      <br><br>
+      <input id='contents' type='text' name='contents' style="width: 14rem;" placeholder="기타 알릴 사항을 입력하세요.">
+      <br><br>
+      <input id="file" type="file" name="file" style="width: 10rem; color: black;" >
+  </p>
+  </div>
+  </div>
 
-   <div class='form-group row my-view'>
-   <label for='viewCount' class='col-sm-2 col-form-label'>조회수</label>
-   <div id="viewC" class='col-sm-10'>
-   </div>
-   </div>
-           
-   <div class='form-group row my-view'>
-   <label class='col-sm-2 col-form-label'>첨부파일</label>
-   <div id="attFile" class='col-sm-10'>
-   </div>
-   </div>
+</form>
+</div>
 
-
-   <div class='form-group row'>
-   <label for='petName' class='col-sm-2 col-form-label'>강아지이름</label>
-   <div class='col-sm-10'>
-   <input class='form-control' id='petName' type='text' 
-           name='petName'>
-   </div>
-   </div>
-   
-   <div class='form-group row'>
-   <label for='breed' class='col-sm-2 col-form-label'>품종</label>
-   <div class='col-sm-10'>
-   <input class='form-control' id='breed' type='text' 
-           name='breed'>
-   </div>
-   </div>
-   
-   <div class='form-group row'>
-   <label for='lostLocation' class='col-sm-2 col-form-label'>분실장소</label>
-   <div class='col-sm-10'>
-   <input class='form-control' id='lostLocation' type='text' 
-           name='lostLocation'>
-   </div>
-   </div>
-
-   <div class='form-group row'>
-   <label for='lostDate' class='col-sm-2 col-form-label'>분실일</label>
-   <div class='col-sm-10'>
-   <input class='form-control' id='lostDate' type='date' 
-           name='lostDate'>
-   </div>
-   </div>
-
-   <div class='form-group row'>
-   <label for='character' class='col-sm-2 col-form-label'>특징</label>
-   <div class='col-sm-10'>
-   <input class='form-control' id='character' type='text' name='character'>
-   </div>
-   </div>
-
-   <div class='form-group row'>
-   <label for='reward' class='col-sm-2 col-form-label'>사례금</label>
-   <div class='col-sm-10'>
-   <input class='form-control' id='reward' type='text' name='reward'>
-   </div>
-   </div>
-
-   <div class='form-group row'>
-   <label for='contents' class='col-sm-2 col-form-label'>기타사항</label>
-   <div class='col-sm-10'>
-   <input class='form-control' id='contents' type='text' name='contents'>
-   </div>
-   </div>
-
-   <div class='form-group row'>
-   <label for='tel' class='col-sm-2 col-form-label'>연락처</label>
-   <div class='col-sm-10'>
-   <input class='form-control' id='tel' type='text' name='tel' required>
-   </div>
-   </div>
-   
-   <div class='form-group row'>
-   <label for='file' class='col-sm-2 col-form-label'>사진</label>
-   <div class='col-sm-10'>
-   <input type="file" class="form-control-file" id="file" name="file">
-   </div>
-   </div>
-   
-   <div class='form-group row'>
-   <div class='col-sm-10'>
-   <button id="addBtn" type="button" class='btn btn-primary btn-sm my-new'>추가</button>
-   <button id="updateBtn" type="button" class='btn btn-primary btn-sm my-view'>변경</button>
-   <button id="deleteBtn" type="button" class='btn btn-primary btn-sm my-view'>삭제</button> 
-   </div>
-   </div>
-   </form>
-   
-<footer>
-    비트캠프 자바100기 Balance@2018
-</footer>
+<div style="width: 100%; height: 8vh;">
+<button style="margin: 0 0 0 34.5rem;" id="addBtn2" type="button" class='btn btn-primary btn-sm'>등록</button>
 </div>
 
 <script src='../../node_modules/jquery/dist/jquery.js'></script>
-<script src='../../node_modules/popper.js/dist/umd/popper.js'></script>
-<script src='../../node_modules/bootstrap/dist/js/bootstrap.js'></script>
+<script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
+<script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
 <script src='../../node_modules/sweetalert/dist/sweetalert.min.js'></script>
 <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
 
 <script type="text/javascript">
-var addBtn = $('#addBtn'),
+var addBtn2 = $('#addBtn2'),
     updateBtn = $('#updateBtn'),
     deleteBtn = $('#deleteBtn'),
     lostNoItem = $('#lostNo'),
@@ -176,15 +62,30 @@ var addBtn = $('#addBtn'),
     rewardItem = $('#reward'),
     viewCountItem = $('#viewCount'),
     contentsItem = $('#contents'),
-    telItem = $('#tel'),
     attFile = $('#attFile'),
     fileItem = $('#file'),
     lostNum = $('#lostNum');
     viewC = $('#viewC'),
     logout = $('#logout');
 
-var index = location.href.indexOf('?');
+$(function() {
+  $("#file").on('change', function(){
+      readURL(this);
+  });
+});
 
+function readURL(input) {
+    if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+            $('#lostPetPhoto').attr('src', e.target.result);
+    }
+
+      reader.readAsDataURL(input.files[0]);
+    } 
+}
+
+var index = location.href.indexOf('?');
 if (index != -1) {
     var qs = location.href.substr(index + 1);
     var arr = qs.split('=');
@@ -194,30 +95,22 @@ if (index != -1) {
         $.ajax('../../json/lost/' + arr[1], {
             dataType: 'json',
             success: (result) => {
-      	       $('#lostNum').html("<input class='form-control' readonly id='lostNo' type='number' name='lostNo' value='" + result.data.lostNo + "'>");
-               lostNoItem.val(result.data.lostNo);
-               $('#viewC').html("<input class='form-control' readonly id='viewCount' type='number' name='viewCount' value='" + result.data.viewCount + "'>");
-               viewCountItem.val(result.data.viewCount);
-               petNameItem.attr('readonly', 'readonly');
-               petNameItem.val(result.data.petName);
-               breedItem.attr('readonly', 'readonly');
-               breedItem.val(result.data.breed);
-               lostLocationItem.attr('readonly', 'readonly');
-               lostLocationItem.val(result.data.lostLocation);
-               lostDateItem.attr('readonly', 'readonly');
-               lostDateItem.val(result.data.lostDate);
-               characterItem.attr('readonly', 'readonly');
-               characterItem.val(result.data.character);
-               rewardItem.attr('readonly', 'readonly');
-               rewardItem.val(result.data.reward);
-               contentsItem.attr('readonly', 'readonly');
-               contentsItem.val(result.data.contents);
-               telItem.attr('readonly', 'readonly');
-               telItem.val(result.data.registrant.tel);
-               for (var file of result.data.files) {
-                   $('#attFile').html("<a href='../../download/" + file.filename + "'>" + file.filename + "</a>")
-               }
-            		
+            	console.log(result);
+            	$('#lostNum').html("<input class='form-control' readonly id='lostNo' type='number' name='lostNo' value='" + result.data.lostNo + "'>");
+            	lostNoItem.val(result.data.lostNo);
+            	$('#viewC').html("<input class='form-control' readonly id='viewCount' type='number' name='viewCount' value='" + result.data.viewCount + "'>");
+            	viewCountItem.val(result.data.viewCount);
+            	petNameItem.val(result.data.petName);
+            	breedItem.val(result.data.breed);
+            	lostLocationItem.val(result.data.lostLocation);
+            	lostDateItem.val(result.data.lostDate);
+            	characterItem.val(result.data.character);
+            	rewardItem.val(result.data.reward);
+            	contentsItem.val(result.data.contents);
+            	for (var file of result.data.files) {
+            		$('#attFile').html("<a href='../../download/" + file.filename + "'>" + file.filename + "</a>")
+            	}
+            	
             },
             error: () => {
                 window.alert('서버 실행 오류!');
@@ -227,39 +120,24 @@ if (index != -1) {
     
 } else {
     $('.my-view').css('display', 'none');
-    $.getJSON('../../json/auth/loginUser', (result) => {
-        if (result.status != 'fail') {
-            var member = result.member;
-           if (member.tel == null || member.tel == '') {
-               swal("연락처를 등록 해주세요.");
-           } else {
-               telItem.val(member.tel);
-           }
-            
-        } else {
-            swal("조회 실패!", "정보 조회에 실패하였습니다.", 'error');
-        }
-    });
 }
 
-addBtn.click(() => {
-var formData = new FormData($("#fileForm")[0]);
-
-	$.ajax('../../json/lost/add', {
-	    data: formData,
-	    dataType: 'json',
-	    method: 'POST',
-	    processData : false,
-	    contentType : false,
-	    success: (result) => {
-     	    location.href = "../main/home.html#lost";
+addBtn2.click(() => {
+    var formData = new FormData($("#fileForm")[0]);
+//      console.log(formData.get('petName'))
+    $.ajax('../../json/lost/add', {
+        data: formData,
+        dataType: 'json',
+        method: 'POST',
+        processData : false,
+        contentType : false,
+        success: (result) => {
+        	location.href = '../main/home.html';
         },
-	    error: (jqXHR, textStatus, errorThrown) => {
-	        swal("등록 실패!", "정보를 확인해보세요!", "error");
-	    }
-	});
-
-  
+        error: (jqXHR, textStatus, errorThrown) => {
+            swal("등록 실패!", "정보를 확인해보세요!", "error");
+        }
+    });
 });
 
 updateBtn.click(() => {
@@ -271,7 +149,7 @@ updateBtn.click(() => {
         processData : false,
         contentType : false,
         success: (result) => {
-        location.href = "../main/home.html#lost";
+        location.href = "../main/home.html#awards";
         },
         error: (jqXHR, textStatus, errorThrown) => {
             swal("수정 실패!", "정보를 확인 해보세요!", "error");
@@ -288,19 +166,10 @@ deleteBtn.click(() => {
         },
         dataType: 'json',
         success: (result) => {
-        location.href = "../main/home.html#lost";
+        location.href = "../main/home.html#awards";
         },
         error: () => {
             swal("삭제 실패!", "다시 시도해보세요!", "error");
-        }
-    });
-});
-
-logout.click(() => {
-    $.ajax('../../json/auth/logout', {
-        dataType: 'json',
-        success: (result) => {
-            location.href = "../main/home.html";
         }
     });
 });

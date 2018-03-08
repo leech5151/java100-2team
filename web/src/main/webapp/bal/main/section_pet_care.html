@@ -103,41 +103,180 @@
 	height: 500px;
 	float: left;
 }
-#menu_wrap {top:0;left:0;bottom:0;height: 500px;width:250px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
-.bg_white {background:#fff;}
-#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
-#menu_wrap .option{text-align: center;}
-#menu_wrap .option p {margin:10px 0;}  
-#menu_wrap .option button {margin-left:5px;}
-#placesList li {border-radius:10px;list-style: none;}
-#placesList li:hover {background-color: #ff8040; color:#ffffff}
-#placesList .item {position:relative;border:1px solid #824027;overflow: hidden;cursor: pointer;min-height: 65px; text-align: center;}
-#placesList .item span {display: block;margin-top:4px;}
-#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-#placesList .item .info{padding:10px 0 10px 0px;}
-#placesList .info .gray {color:#8a8a8a;}
-#placesList .info .jibun {padding-left:26px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
-#placesList .info .tel {color:#009900;}
-#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
-#placesList .item .marker_1 {background-position: 0 -10px;}
-#placesList .item .marker_2 {background-position: 0 -56px;}
-#placesList .item .marker_3 {background-position: 0 -102px}
-#placesList .item .marker_4 {background-position: 0 -148px;}
-#placesList .item .marker_5 {background-position: 0 -194px;}
-#placesList .item .marker_6 {background-position: 0 -240px;}
-#placesList .item .marker_7 {background-position: 0 -286px;}
-#placesList .item .marker_8 {background-position: 0 -332px;}
-#placesList .item .marker_9 {background-position: 0 -378px;}
-#placesList .item .marker_10 {background-position: 0 -423px;}
-#placesList .item .marker_11 {background-position: 0 -470px;}
-#placesList .item .marker_12 {background-position: 0 -516px;}
-#placesList .item .marker_13 {background-position: 0 -562px;}
-#placesList .item .marker_14 {background-position: 0 -608px;}
-#placesList .item .marker_15 {background-position: 0 -654px;}
-#pagination {margin:10px auto;text-align: center;}
-#pagination a {display:inline-block;margin-right:10px;}
-#pagination .on {font-weight: bold; cursor: default;color:#ffffff;}
- 
+
+#menu_wrap {
+	top: 0;
+	left: 0;
+	bottom: 0;
+	height: 500px;
+	width: 250px;
+	padding: 5px;
+	overflow-y: auto;
+	background: rgba(255, 255, 255, 0.7);
+	z-index: 1;
+	font-size: 12px;
+	border-radius: 10px;
+}
+
+.bg_white {
+	background: #fff;
+}
+
+#menu_wrap hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 2px solid #5F5F5F;
+	margin: 3px 0;
+}
+
+#menu_wrap .option {
+	text-align: center;
+}
+
+#menu_wrap .option p {
+	margin: 10px 0;
+}
+
+#menu_wrap .option button {
+	margin-left: 5px;
+}
+
+#placesList li {
+	border-radius: 10px;
+	list-style: none;
+}
+
+#placesList li:hover {
+	background-color: #ff8040;
+	color: #ffffff
+}
+
+#placesList .item {
+	position: relative;
+	border: 1px solid #824027;
+	overflow: hidden;
+	cursor: pointer;
+	min-height: 65px;
+	text-align: center;
+}
+
+#placesList .item span {
+	display: block;
+	margin-top: 4px;
+}
+
+#placesList .item h5, #placesList .item .info {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#placesList .item .info {
+	padding: 10px 0 10px 0px;
+}
+
+#placesList .info .gray {
+	color: #8a8a8a;
+}
+
+#placesList .info .jibun {
+	padding-left: 26px;
+	background:
+		url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png)
+		no-repeat;
+}
+
+#placesList .info .tel {
+	color: #009900;
+}
+
+#placesList .item .markerbg {
+	float: left;
+	position: absolute;
+	width: 36px;
+	height: 37px;
+	margin: 10px 0 0 10px;
+	background:
+		url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
+		no-repeat;
+}
+
+#placesList .item .marker_1 {
+	background-position: 0 -10px;
+}
+
+#placesList .item .marker_2 {
+	background-position: 0 -56px;
+}
+
+#placesList .item .marker_3 {
+	background-position: 0 -102px
+}
+
+#placesList .item .marker_4 {
+	background-position: 0 -148px;
+}
+
+#placesList .item .marker_5 {
+	background-position: 0 -194px;
+}
+
+#placesList .item .marker_6 {
+	background-position: 0 -240px;
+}
+
+#placesList .item .marker_7 {
+	background-position: 0 -286px;
+}
+
+#placesList .item .marker_8 {
+	background-position: 0 -332px;
+}
+
+#placesList .item .marker_9 {
+	background-position: 0 -378px;
+}
+
+#placesList .item .marker_10 {
+	background-position: 0 -423px;
+}
+
+#placesList .item .marker_11 {
+	background-position: 0 -470px;
+}
+
+#placesList .item .marker_12 {
+	background-position: 0 -516px;
+}
+
+#placesList .item .marker_13 {
+	background-position: 0 -562px;
+}
+
+#placesList .item .marker_14 {
+	background-position: 0 -608px;
+}
+
+#placesList .item .marker_15 {
+	background-position: 0 -654px;
+}
+
+#pagination {
+	margin: 10px auto;
+	text-align: center;
+}
+
+#pagination a {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+#pagination .on {
+	font-weight: bold;
+	cursor: default;
+	color: #ffffff;
+}
 </style>
 
 
@@ -190,7 +329,7 @@
 <div data-exact-height="630" data-content-padding-horizontal="0"
 	data-content-padding-vertical="0" title="" class="ca1"
 	id="comp-j7g8f80y"
-	style="left: 370px; position: absolute; visibility: inherit; top: 2384px; width: 600px; height: 630px;">
+	style="left: 473px; position: absolute; visibility: inherit; top: 2455px; width: 600px; height: 630px;">
 	<div id="comp-j7g8f80ylink" class="ca1link"
 		style="width: 600px; height: 630px;">
 		<div data-style="" class="ca1img" id="comp-j7g8f80yimg"
@@ -218,25 +357,12 @@
 </div>
 
 
-<div data-exact-height="244" data-content-padding-horizontal="0"
-	data-content-padding-vertical="0" title="" class="ca1"
-	id="comp-j7ggynwq"
-	style="left: 233px; position: absolute; visibility: inherit; top: 3844px; width: 600px; height: 244px;">
-	<div id="comp-j7ggynwqlink" class="ca1link"
-		style="width: 600px; height: 244px;">
-		<div data-style="" class="ca1img" id="comp-j7ggynwqimg"
-			style="position: relative; width: 600px; height: 244px;">
-			<img id="comp-j7ggynwqimgimage" alt="" data-type="image"
-				src="https://static.wixstatic.com/media/5bfb6f_1534be33e38b46dba2fcf0d135b70972~mv2.png/v1/crop/x_0,y_0,w_895,h_364/fill/w_750,h_305,al_c,usm_0.66_1.00_0.01/5bfb6f_1534be33e38b46dba2fcf0d135b70972~mv2.png"
-				style="width: 600px; height: 244px; object-fit: cover;">
-		</div>
-	</div>
-</div>
+
 
 <div data-exact-height="127" data-content-padding-horizontal="0"
 	data-content-padding-vertical="0" title="" class="ca1"
 	id="comp-j7ga48r0"
-	style="left: 640px; position: absolute; top: 4050px; width: 284px; height: 127px;">
+	style="left: 640px; position: absolute; top: 4663px; width: 284px; height: 127px;">
 	<div id="comp-j7ga48r0link" class="ca1link"
 		style="width: 284px; height: 127px;">
 		<div data-style="" class="ca1img" id="comp-j7ga48r0img"
@@ -269,7 +395,7 @@
 <div data-exact-height="279" data-content-padding-horizontal="0"
 	data-content-padding-vertical="0" title="" class="ca1"
 	id="comp-j7ga48qz"
-	style="left: 920px; position: absolute; top: 3900px; width: 44px; height: 279px;">
+	style="left: 920px; position: absolute; top: 4511px; width: 44px; height: 279px;">
 	<div id="comp-j7ga48qzlink" class="ca1link"
 		style="width: 44px; height: 279px;">
 		<div data-style="" class="ca1img" id="comp-j7ga48qzimg"
@@ -345,7 +471,7 @@
 <div data-exact-height="599" data-content-padding-horizontal="0"
 	data-content-padding-vertical="0" title="" class="ca1"
 	id="comp-j7g8a9jv"
-	style="left: 275px; position: absolute; visibility: inherit; top: 2990px; width: 338px; height: 599px;">
+	style="left: -55px; position: absolute; visibility: inherit; top: 3251px; width: 338px; height: 599px;">
 	<div id="comp-j7g8a9jvlink" class="ca1link"
 		style="width: 338px; height: 599px;">
 		<div data-style="" class="ca1img" id="comp-j7g8a9jvimg"
@@ -401,13 +527,31 @@
 		</div>
 	</div>
 </div>
+
+
+<div data-exact-height="244" data-content-padding-horizontal="0"
+	data-content-padding-vertical="0" title="" class="ca1"
+	id="comp-j7ggynwq"
+	style="left: 207px; position: absolute; visibility: inherit; top: 4480px; width: 600px; height: 244px;">
+	<div id="comp-j7ggynwqlink" class="ca1link"
+		style="width: 600px; height: 244px;">
+		<div data-style="" class="ca1img" id="comp-j7ggynwqimg"
+			style="position: relative; width: 600px; height: 244px;">
+			<img id="comp-j7ggynwqimgimage" alt="" data-type="image"
+				src="https://static.wixstatic.com/media/5bfb6f_1534be33e38b46dba2fcf0d135b70972~mv2.png/v1/crop/x_0,y_0,w_895,h_364/fill/w_750,h_305,al_c,usm_0.66_1.00_0.01/5bfb6f_1534be33e38b46dba2fcf0d135b70972~mv2.png"
+				style="width: 600px; height: 244px; object-fit: cover;">
+		</div>
+	</div>
+</div>
+
 <div style="width: 50%; margin-top: 100px; display: inline-block"
 	class="pricing-header px-3 py-3 pt-md-5 pb-md-4  text-center">
 	<h2 class="display-4">My Hospital</h2>
 	<p class="lead">주변 병원을 검색합니다</p>
 </div>
 
-<div style="width: 980px; height: 500px; position:relative; margin-left: 40px">
+<div
+	style="width: 980px; height: 500px; position: relative; margin-left: 40px">
 	<div class="map_wrap">
 		<div id="map" style="width: 100%; height: 100%; overflow: auto;"></div>
 	</div>

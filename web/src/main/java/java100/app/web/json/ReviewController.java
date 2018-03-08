@@ -68,6 +68,7 @@ public class ReviewController {
         result.put("pageNo", pageNo);
         result.put("lastPageNo", lastPageNo);
         result.put("totalCount", totalCount);
+        result.put("b_number", b_number);
         result.put("list", reviewService.list(pageNo, pageSize, options));
         return result;
     }

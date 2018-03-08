@@ -172,7 +172,9 @@ public class DiagnosisController {
     @RequestMapping("mylist5")
     public Object myList5(@ModelAttribute(value = "loginUser") Member loginUser) throws Exception{
         HashMap<String, Object> result = new HashMap<>();
+        System.out.println(loginUser.getTel());
         result.put("list", diagnosisService.myList5(loginUser.getTel()));
+        
         return result;
         
     }
@@ -216,9 +218,15 @@ public class DiagnosisController {
     public Object hospitalProducerList5(@ModelAttribute(value = "loginUser") Member loginUser) throws Exception{
         
         Diagnosis diagnosishpno =  diagnosisService.getHospitalNo(loginUser.getMemberNo());
-        int hpno = diagnosishpno.getHospital().getHospitalNo();
-        
         HashMap<String, Object> result = new HashMap<>();
+        int hpno = 0;
+        try {
+           hpno = diagnosishpno.getHospital().getHospitalNo();
+        }catch (Exception e) {
+            result.put("status","fail");
+            return result;
+        }
+        result.put("status","success");
         result.put("list", diagnosisService.gethopspitalProducerList5(hpno));
         return result;
     }

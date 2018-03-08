@@ -74,6 +74,7 @@ $(document).ready(function(){
 	    event.stopPropagation();
         petViewModalContent.load('../pet/petList.html', () => {
 		petViewModal.modal();
+        $.css("petListCss", "");
         });
     });
 });

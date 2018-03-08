@@ -8,11 +8,13 @@
 <link rel="shortcut icon" href="../favicon.ico">
 
 <link rel="stylesheet" type="text/css" href="../../css/diagnosis/font-awesome-4.3.0/css/font-awesome.min.css" />
-<link rel="stylesheet" type="text/css" href="../../css/diagnosis/diagnosisdemo.css" />
+<!-- <link rel="stylesheet" type="text/css" href="../../css/diagnosis/diagnosisdemo.css" /> -->
 <link rel="stylesheet" href='../../node_modules/jquery-ui-dist/jquery-ui.css' />
 <link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel="stylesheet" type="text/css" href="../../business_view/css/demo.css" />
+<link rel="stylesheet" type="text/css" href="../../business_view/css/gallery.css" />
 <link rel="stylesheet" type="text/css" href="../../css/main.css" />
-<style>
+<!-- <style>
  nav li a {
   text-decoration: inherit;
   padding: 20px 0px;
@@ -27,23 +29,23 @@
 #sidebox { position:absolute; width:200px; top:433px; left:50px; padding: 3px 10px }
 
 
-</style>
+</style> -->
 <div id=diagnosis_form>
 	<div class="container_b">
-		<header class="codrops-header" style="margin-bottom: -4%">
-			<h1>
-				Diagnosis<span> <a href="../main/home.html#diagnosis">Custommer</a></span>
-			</h1>
+		<header class="codrops-header">
+			<h1>Balance Pet<span style="padding-bottom: 0px; padding-top: 10px; font-size: 35px">by <a href="../main/home.html#cast">pet cast</a></span></h1>
 			<nav class="codrops-demos">
 
-				<a href="../main/home.html#diagnosis">home</a>
+				<a href="../main/home.html#cast">Menu</a><br>
+				
+				<a data-toggle="modal" id="trainningInfo" class="open-modal" href="#trainningViewModal">information</a><br>
 				<div class="modal fade" role="dialog" id="diagnosisModalView">
 					<div class="modal-dialog">
 						<div class="modal-content" id=modal_view_content>
 						</div>
 					</div>
 				</div>
-				
+				<a class="current-demo" href="form.html">Image Gallery</a>
 			</nav>
 		</header>
 		<div style="width: 27%; text-align: left; margin-bottom: 1%; margin-left:18%; display: inline-block;">

@@ -7,6 +7,7 @@ import java100.app.domain.Lost;
 
 public interface LostDao {
     List<Lost> findAll(Map<String,Object> params);
+    List<Lost> findAllList();
     int countAll();
     int insert(Lost lost);
     int updateViewCount(int no);

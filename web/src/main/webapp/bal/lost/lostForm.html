@@ -27,7 +27,8 @@
   <p style="color: white; margin-left: -1rem;">
       <input id='character' type='text' name='character' style="width: 14rem;" placeholder="특징을 입력하세요.">
       <br><br>
-      <input id='reward' type='text' name='reward' style="width: 14rem;" placeholder="사례금을 기입하세요.">
+      알람 전송 : <input id='pushAlert' type="checkbox" name='pushAlert' style="width: 1rem;">
+      <input id='reward' type='text' name='reward' style="width: 6.5rem;" placeholder="사례금 입력">
       <br><br>
       <input id='contents' type='text' name='contents' style="width: 14rem;" placeholder="기타 알릴 사항을 입력하세요.">
       <br><br>
@@ -132,7 +133,7 @@ addBtn2.click(() => {
         processData : false,
         contentType : false,
         success: (result) => {
-        	location.href = '../main/home.html';
+         	location.href = '../main/home.html';
         },
         error: (jqXHR, textStatus, errorThrown) => {
             swal("등록 실패!", "정보를 확인해보세요!", "error");

@@ -52,6 +52,7 @@ public class PetController {
             Pet pet,
             MultipartFile[] file,
             @ModelAttribute(value="loginUser") Member loginUser) throws Exception {
+        
         String uploadDir = servletContext.getRealPath("/download");
         
         ArrayList<PetUploadFile> uploadFiles = new ArrayList<>();

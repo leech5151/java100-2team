@@ -153,8 +153,28 @@ $.getJSON('../../json/auth/loginUser', (result) => {
         $('.after-login').css('display', 'none');
         return;
     } else {
-        var member = result.member;
-        memberNo = member.memberNo;
+        var member = result.member,
+            memberNo = member.memberNo;
+        
+        if (result.member.push) {
+        	$.getJSON('../../json/lost/listAll', (result) => {
+	        	var count = 0;
+        		for (var data of result.list) {
+	        	    if (data.pushAlert  && data.registrant.tel != member.tel) {	count++; }
+        		}
+        		
+        		if (count > 0) {
+       	    	    var lostPushAlertModal = $('#lostPushAlertModal');
+       	    	    var lostPushAlertModalContent = $('#lostPushAlertModal .modal-content');
+       	    	    event.preventDefault();
+       	    	    event.stopPropagation();
+       	    	    lostPushAlertModalContent.load('../lost/lostPushAlert.html', () => {
+       	    	    	lostPushAlertModal.modal();
+       	    	    });
+        		}
+            })
+        }
+
         $('.before-login').css('display', 'none');
         for (var file of member.files) {
             if (file.filename == null) {
@@ -183,7 +203,7 @@ if (index != -1) {
                 location.href = "../main/home.html";
             },
             error: () => {
-                window.alert('서버 실행 오류!');
+            	swal('실행 오류', "잠시 후 다시 시도해주세요.", 'error');
             }
         });
     });

@@ -1,0 +1,179 @@
+<div class="modal-header"  style="padding: 5% 5% 5% 5%;">
+    <h4>
+        도와주세요.
+    </h4>
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+</div>
+
+<div class=" " style="max-width: 30rem; height: 70vh; margin-top: 1%;">
+<div id="lostPushAlertListUp" >
+
+</div>
+  <button id="leftBtn" class="  " style="margin-left: -3rem;">&#10094;</button>
+  <button id="rightBtn" class="  " style="margin-right: -2.3rem;">&#10095;</button>
+</div>
+
+<script src='../../node_modules/jquery/dist/jquery.js'></script>
+<script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
+<script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+<script src='../../node_modules/sweetalert/dist/sweetalert.min.js'></script>
+<script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
+
+<script type="text/javascript">
+ var lostPushAlertListUp = $('#lostPushAlertListUp');
+
+$.getJSON('../../json/auth/loginUser', (result) => {
+    var member = result.member,
+        memberNo = member.memberNo;
+    
+    $.getJSON('../../json/lost/listAll', (result) => {
+        for (var data of result.list) {
+            if (data.pushAlert  && data.registrant.tel != member.tel) {
+                for (var file of data.files) {}
+                $('#lostPushAlertListUp')
+                    .html(
+                         "<div class='bal-mb-3-data lostData'>" + 
+                         "<figure class='snip1283'>" + 
+                         "<img src='../../download/" + file.filename + "' alt='" + file.filename + "' style='width:100%; height:100%;'>" + 
+                         "<figcaption>" + 
+                         "<h3 style='text-align: center;'> < " + data.petName + " > </h3>" + 
+                             "<p style='font-size: 20px;'>품종 : " + data.breed + "</p>" + 
+                             "<p style='font-size: 20px;'>연락처 : " + data.registrant.tel + "</p>" + 
+                         "<div><a href='../lost/lostList.html' class='read-more'>Read More</a></div>" + 
+                         "</figcaption>" + 
+                         "</figure>" + 
+                         "</a>" + 
+                         "</div>").prependTo('#moveBtn');
+            }            
+        }
+        
+        var count = 0;
+        
+        function calculator(n) {
+           count += n;
+           if (count < 0) {
+               count = petList - 1;
+           } else if (count == petList) {
+               count = 0;
+           }
+           return count;
+        }
+       
+        $(document).ready(function(){ 
+           $('button').click(function(e){
+
+               var id = e.target.getAttribute('id');
+               if ((id != '') && (id != null))  
+               var newId = '#' + id;
+
+               var lostNo = [];
+               for (var i = 0; i < result.list.length; i++) {
+                   if (data.pushAlert  && data.registrant.tel != member.tel) {
+                   lostNo[i] = result.list[i].lostNo;
+                   }
+               }
+               console.log(lostNo)
+               if (newId == '#leftBtn') {
+                   plusDivs(-1)
+                   calculator(-1)
+                   
+               } else if (newId == '#rightBtn') {
+                   plusDivs(1)
+                   calculator(1)
+               }
+           });
+       });
+    })
+});
+/* 
+$.ajax('../../json/lost/listAll', {
+     dataType: 'json',
+     success: (result) => {
+    	 lostPushAlertListUp.append(lostPushAlertTemplateEngine(result));
+
+         var slideIndex = 1;
+         showDivs(slideIndex);
+
+         function plusDivs(n) {
+           showDivs(slideIndex += n);
+         }
+
+         function showDivs(n) {
+           var i;
+           
+           var x = document.getElementsByClassName("mySlides");
+           if (n > x.length) {slideIndex = 1}    
+           if (n < 1) {slideIndex = x.length}
+           for (i = 0; i < x.length; i++) {
+              x[i].style.display = "none";  
+           }
+            x[slideIndex-1].style.display = "block";  
+ 
+         }
+
+         var lostList = 0;
+         for (var i = 0; i < result.list.length; i++) {
+        	 if (result.list.pushAlert  && result.list.registrant.tel != member.tel) {
+        		 lostList++;
+        	 }
+         console.log(lostList)
+         }
+
+         var count = 0;
+         
+         function calculator(n) {
+            count += n;
+            if (count < 0) {
+                count = petList - 1;
+            } else if (count == petList) {
+                count = 0;
+            }
+            return count;
+         }
+        
+         $(document).ready(function(){ 
+            $('button').click(function(e){
+
+                var id = e.target.getAttribute('id');
+                if ((id != '') && (id != null))  
+                var newId = '#' + id;
+
+                var petNo = [];
+                for (var i = 0; i < result.list.length; i++) {
+                    petNo[i] = result.list[i].petNo;
+                }
+                
+                if (newId == '#leftBtn') {
+                    plusDivs(-1)
+                    calculator(-1)
+                    
+                } else if (newId == '#rightBtn') {
+                    plusDivs(1)
+                    calculator(1)
+                }
+            });
+        });
+     },
+     error: () => {
+         swal("조회 데이터가 없습니다.");
+     }
+ });
+ */
+</script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

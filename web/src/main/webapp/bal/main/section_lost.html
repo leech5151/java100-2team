@@ -61,7 +61,7 @@ $.getJSON('../../json/auth/loginUser', (result) => {
     if (result.status == 'fail') {
         $('.after-login').css('display', 'none');
     }
-    
+    var member = result.member;
     var options = {};
     options.pn = pageNo;
     $.ajax('../../json/lost/list', {
@@ -76,7 +76,16 @@ $.getJSON('../../json/auth/loginUser', (result) => {
 	            var newId = '#' + id;
 	    
 			    if (newId == '#addBtn') {
-			    	modalStart();
+			    	if (member.tel == null) {
+			    		swal({
+		                      type: 'info',
+		                      title: '연락처를 추가해주세요.',
+		                      showConfirmButton: true,
+		                      closeModal: true,
+		                }, memberInfo());
+			    	} else {
+				    	modalStart();
+			    	}
 			    } else if ((newId == '#prevBtn')) {
 	    			pageNo = pageCalculator(-1, result.lastPageNo)
 			    	pageChange(pageNo, options)
@@ -121,6 +130,14 @@ function modalStart() {
     lostFormAddModalContent.load('../lost/lostForm.html', () => {
     	lostFormAddModal.modal();
     });
+}
+
+function memberInfo() {
+	event.preventDefault();
+    event.stopPropagation();
+    document.getElementById("memberViewSection").style.transform = "translateX(0%)";
+    document.getElementById("memberViewSection").style.transition = "1s";
+    $('#memberViewSection').load('../member/memberView.html');
 }
 
 </script>

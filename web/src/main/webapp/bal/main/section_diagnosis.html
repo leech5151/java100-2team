@@ -82,8 +82,9 @@ function load() {
         	if(result.status=="fail"){
             		$('#diagnosisList').html("");
                  		$('<div>')
-                         .html(     "<div>"+
-                        		 "<p>로그인이 필요한 서비스입니다</p>"+
+                         .html(     "<div style='padding-top: 4em;text-align: center;height: 205px;background-color: #000000;opacity: 0.6;'>"+
+                        		 "<h3 style='float: left;font-size: 50px;margin-left: 166px;color:red;width:50px;'>!</h3>" +
+                        		 "<div style='float: left;width: 600px;color:white;font-size:40px;font-family:contsfont-kor;'>로그인이 필요한 서비스입니다</div>"+
         		                 "</div>")
      	                            .appendTo('#diagnosisList'); 
                  		

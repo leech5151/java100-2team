@@ -27,7 +27,7 @@
       <br><br>
       목표체중 : <input id='goalWeight' type='number' name='goalWeight' style="width: 5rem;">
       <br><br>
-      <input id="petFile" type="file" name="petFile" style="width: 10rem; color: black;" >
+      <input id="file" type="file" name="file" style="width: 10rem; color: black;" >
   </p>
   </div>
   </div>
@@ -71,9 +71,6 @@ function readURL(input) {
 
 addBtn2.click(() => {
 	var formData = new FormData($("#fileForm")[0]);
-    console.log(formData.get('petName'))
-    console.log(formData.get('age'))
-    console.log(formData.get('petFile'))
     $.ajax('../../json/pet/add', {
         data: formData,
         dataType: 'json',

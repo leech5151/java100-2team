@@ -8,9 +8,9 @@
     <div>
     
 <nav aria-label="Page navigation" style="position: relative; float: left; width: 100%;">
-<button id="addBtn" type="button" class="btn btn-danger btn-sm after-login">미아 등록</button>
-<button id="prevBtn" class="btn btn-sm btn-light" style="margin-left: 44%; color: blue;">이전</button>
-<button id="nextBtn" class="btn btn-sm btn-light" style="color: blue;">다음</button>
+<button id="lostAddBtn" type="button" class="btn btn-danger btn-sm after-login">미아 등록</button>
+<button id="lostPrevBtn" class="btn btn-sm btn-light" style="margin-left: 44%; color: blue;">이전</button>
+<button id="lostNextBtn" class="btn btn-sm btn-light" style="color: blue;">다음</button>
 </nav>
 <br>
 <br>
@@ -73,12 +73,12 @@ $.getJSON('../../json/auth/loginUser', (result) => {
 	            if ((id != '') && (id != null))  
 	            var newId = '#' + id;
 	    
-			    if (newId == '#addBtn') {
+			    if (newId == '#lostAddBtn') {
 			    	modalStart();
-			    } else if ((newId == '#prevBtn')) {
+			    } else if ((newId == '#lostPrevBtn')) {
 	    			pageNo = pageCalculator(-1, result.lastPageNo)
 			    	pageChange(pageNo, options)
-			    } else if (newId == '#nextBtn') {
+			    } else if (newId == '#lostNextBtn') {
 	    			pageNo = pageCalculator(1, result.lastPageNo)
 			    	pageChange(pageNo, options)
 			    } else {}

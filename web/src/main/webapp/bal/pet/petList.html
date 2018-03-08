@@ -57,7 +57,7 @@ var petListUp = $('#petListUp'),
 $.ajax('../../json/pet/list', {
      dataType: 'json',
      success: (result) => {
-         petListUp.append(template1Engine(result));
+    	 petListUp.append(template1Engine(result));
 
          var slideIndex = 1;
          showDivs(slideIndex);
@@ -98,57 +98,57 @@ $.ajax('../../json/pet/list', {
          var count = 0;
          
          function calculator(n) {
-            count += n;
-            if (count < 0) {
-                count = petList - 1;
-            } else if (count == petList) {
-                count = 0;
-            }
-            return count;
+         	count += n;
+         	if (count < 0) {
+         		count = petList - 1;
+         	} else if (count == petList) {
+         		count = 0;
+         	}
+         	return count;
          }
-        
+     	
          $(document).ready(function(){ 
-            $('button').click(function(e){
+       	    $('button').click(function(e){
 
                 var id = e.target.getAttribute('id');
-                if ((id != '') && (id != null))  
+      	        if ((id != '') && (id != null))  
                 var newId = '#' + id;
 
-                var petNo = [];
-                for (var i = 0; i < result.list.length; i++) {
-                    petNo[i] = result.list[i].petNo;
-                 }
-                if ((newId == '#addBtn')) {
-                    petViewModalContent.load('../pet/petForm.html');
-            
-                } else if (newId == '#leftBtn') {
-                    plusDivs(-1)
-                    calculator(-1)
-                    
-                } else if (newId == '#rightBtn') {
-                    plusDivs(1)
-                    calculator(1)
+		        var petNo = [];
+		      	for (var i = 0; i < result.list.length; i++) {
+		            petNo[i] = result.list[i].petNo;
+		         }
+      	        if ((newId == '#addBtn')) {
+      		        petViewModalContent.load('../pet/petForm.html');
+       		
+	         	} else if (newId == '#leftBtn') {
+	         		plusDivs(-1)
+	         		calculator(-1)
+	         		
+	         	} else if (newId == '#rightBtn') {
+	         		plusDivs(1)
+	         		calculator(1)
 
-                } else if (newId == '#deleteBtn') {
-                  $.ajax('../../json/pet/delete', {
-                      data: {
-                          petNo: petNo[count]
-                      },
-                      dataType: 'json',
-                      success: (result) => {
-                        petViewModalContent.load('../pet/petList.html');
-                      }
-                  });
-                } else if (newId == '#updateBtn') {
-                    $.ajax('../../json/pet/' + petNo[count], {
-                           dataType: 'json',
-                           success: (result) => {
-//                     이전거        location.href = "../pet/petForm.html?no=" + petNo;    
-//                          이게 로드   petViewModalContent.load('../pet/petForm.html?no=' + petNo[count]);
-                           }
-                   });
-                }
-            });
+	         	} else if (newId == '#deleteBtn') {
+	              $.ajax('../../json/pet/delete', {
+	                  data: {
+	                      petNo: petNo[count]
+	                  },
+	                  dataType: 'json',
+	                  success: (result) => {
+	       		        petViewModalContent.load('../pet/petList.html');
+	                  }
+	              });
+	            } else if (newId == '#updateBtn') {
+	            	$.ajax('../../json/pet/' + petNo[count], {
+	                       dataType: 'json',
+	                       success: (result) => {
+//   	               이전거        location.href = "../pet/petForm.html?no=" + petNo;    
+//    	                    이게 로드   petViewModalContent.load('../pet/petForm.html?no=' + petNo[count]);
+	                       }
+	               });
+	            }
+     	    });
         });
      },
      error: () => {

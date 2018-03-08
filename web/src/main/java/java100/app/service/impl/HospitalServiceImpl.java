@@ -127,5 +127,12 @@ public class HospitalServiceImpl implements HospitalService {
         return countmemberNo;
     }
 
+    @Override
+    public int getHospitalLoginUserNo(int memberNo) {
+        int countHospitalNO = hospitalDao.hospitalSelectByMemberNo(memberNo);
+        System.out.println(countHospitalNO);
+        return countHospitalNO;
+    }
+
     
 }

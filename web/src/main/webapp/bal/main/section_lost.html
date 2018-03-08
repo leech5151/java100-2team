@@ -9,7 +9,7 @@
     
 <nav aria-label="Page navigation" style="position: relative; float: left; width: 100%;">
 <button id="addBtn" type="button" class="btn btn-danger btn-sm after-login">미아 등록</button>
-<button id="prevBtn" class="btn btn-sm btn-light" style="margin-left: 35%; color: blue;">이전</button>
+<button id="prevBtn" class="btn btn-sm btn-light" style="margin-left: 44%; color: blue;">이전</button>
 <button id="nextBtn" class="btn btn-sm btn-light" style="color: blue;">다음</button>
 </nav>
 <br>
@@ -53,6 +53,7 @@ var pageNo = 1,
     list = $('#lostList'),      
     lostTemplateSrc = $('#lostTemplate').html(),
     lostTemplateEngine = Handlebars.compile(lostTemplateSrc);
+    
 
 $.getJSON('../../json/auth/loginUser', (result) => {
     if (result.status == 'fail') {
@@ -67,8 +68,6 @@ $.getJSON('../../json/auth/loginUser', (result) => {
         success: (result) => {
            list.append(lostTemplateEngine(result));
 
-           location.href = "../main/home.html#lost";
-           
 		    $('button').click(function(e){
 	            var id = e.target.getAttribute('id');
 	            if ((id != '') && (id != null))  

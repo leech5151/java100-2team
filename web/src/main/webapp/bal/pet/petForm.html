@@ -27,7 +27,7 @@
       <br><br>
       목표체중 : <input id='goalWeight' type='number' name='goalWeight' style="width: 5rem;">
       <br><br>
-      <input id="file" type="file" name="file" style="width: 10rem; color: black;" >
+      <input id="petFile" type="file" name="petFile" style="width: 10rem; color: black;" >
   </p>
   </div>
   </div>
@@ -53,7 +53,7 @@ var petName = $('#petName'),
     addBtn2 = $('#addBtn2');
 
 $(function() {
-  $("#file").on('change', function(){
+  $("#petFile").on('change', function(){
       readURL(this);
   });
 });

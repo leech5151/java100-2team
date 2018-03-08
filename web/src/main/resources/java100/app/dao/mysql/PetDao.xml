@@ -43,6 +43,7 @@
             pm.file
         from pet as p
         left join pet_mda as pm on p.p_no=pm.p_no
+        where p.m_no=${value}
     </select>
 
     <select id="countAll" resultType="int">

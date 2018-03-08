@@ -3,12 +3,6 @@
 .m_pointer {
 	cursor: pointer;
 }
-
-.pull{
-width: 100%;
-height: 95%;
-}
-
 </style>
 	<p>애견 훈련 정보 영상</p>
 
@@ -52,14 +46,14 @@ height: 95%;
 <script id="template1" type="text/x-handlebars-template">
 {{#each list}}
 <div class="col-md-4 col-sm-6 col-xs-12"> 
-<div class="card mb-4 box-shadow pull">
+<div class="card mb-4 box-shadow">
 				{{#each files}}
                 <video 
 				 class="m_pointer" onmouseover="this.play()" onmouseout="this.pause()" autobuffer="true"  onclick="location.href='../trainning/trainningForm.html?no={{trainningNo}}'"  src="../../download/{{filename}}" 
 				 id="video" width="100%" height="200px"></video>
 				{{/each}}
                 <div class="card-body">
-                  <h5 class="md-0">{{title}}</h5>
+                  <h3 class="md-0">{{title}}</h3>
                     <div class="d-flex justify-content-between align-items-center">
                     <p class="card-text">{{member.nicname}}</p><br>
                   	</div>

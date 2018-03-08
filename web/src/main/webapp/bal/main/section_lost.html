@@ -8,11 +8,9 @@
     <div>
     
 <nav aria-label="Page navigation" style="position: relative; float: left; width: 100%;">
-<button id="prevBtn" class="btn btn-sm btn-light before-login" style="margin-left: 44%; color: blue;">이전</button>
-<button id="nextBtn" class="btn btn-sm btn-light before-login" style="color: blue;">다음</button>
 <button id="addBtn" type="button" class="btn btn-danger btn-sm after-login">미아 등록</button>
-<button id="prevBtn" class="btn btn-sm btn-light after-login" style="margin-left: 35%; color: blue;">이전</button>
-<button id="nextBtn" class="btn btn-sm btn-light after-login" style="color: blue;">다음</button>
+<button id="prevBtn" class="btn btn-sm btn-light" style="margin-left: 44%; color: blue;">이전</button>
+<button id="nextBtn" class="btn btn-sm btn-light" style="color: blue;">다음</button>
 </nav>
 <br>
 <br>
@@ -61,7 +59,7 @@ $.getJSON('../../json/auth/loginUser', (result) => {
     if (result.status == 'fail') {
         $('.after-login').css('display', 'none');
     }
-    var member = result.member;
+    
     var options = {};
     options.pn = pageNo;
     $.ajax('../../json/lost/list', {
@@ -76,16 +74,7 @@ $.getJSON('../../json/auth/loginUser', (result) => {
 	            var newId = '#' + id;
 	    
 			    if (newId == '#addBtn') {
-			    	if (member.tel == null) {
-			    		swal({
-		                      type: 'info',
-		                      title: '연락처를 추가해주세요.',
-		                      showConfirmButton: true,
-		                      closeModal: true,
-		                }, memberInfo());
-			    	} else {
-				    	modalStart();
-			    	}
+			    	modalStart();
 			    } else if ((newId == '#prevBtn')) {
 	    			pageNo = pageCalculator(-1, result.lastPageNo)
 			    	pageChange(pageNo, options)
@@ -130,14 +119,6 @@ function modalStart() {
     lostFormAddModalContent.load('../lost/lostForm.html', () => {
     	lostFormAddModal.modal();
     });
-}
-
-function memberInfo() {
-	event.preventDefault();
-    event.stopPropagation();
-    document.getElementById("memberViewSection").style.transform = "translateX(0%)";
-    document.getElementById("memberViewSection").style.transition = "1s";
-    $('#memberViewSection').load('../member/memberView.html');
 }
 
 </script>

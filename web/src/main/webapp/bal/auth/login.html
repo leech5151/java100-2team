@@ -107,8 +107,12 @@ loginBtn2.click(() => {
     
 });
 
+$('.fb-login-button').on('login', function() {
+	alert('ooooooo')
+});
+
 function autoServerLogin(accessToken) {
-//     console.log(accessToken)
+    console.log(accessToken)
     $.getJSON(
         '../../json/auth/facebookLogin', 
         {'accessToken': accessToken}, 
@@ -141,7 +145,7 @@ window.fbAsyncInit = function() {
               autoServerLogin(response.authResponse.accessToken);
           
           } else { // 로그인이 되지 않았을 때,
-                swal("로그인실패!", "로그인에 실패하였습니다.", "error");
+              console.log("로그인 되지 않았음");
           }
     });
 };
@@ -172,7 +176,7 @@ Kakao.Auth.login({
           });
   },
   fail: function(err) {
-    swal(JSON.stringify(err));
+    alert(JSON.stringify(err));
   }
 });
 };

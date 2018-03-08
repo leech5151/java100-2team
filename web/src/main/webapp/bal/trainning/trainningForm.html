@@ -26,7 +26,7 @@
    </svg>
 	<div class="container">
 		<header class="codrops-header">
-			<h1>Balance Pet<span style="padding-bottom: 0px">by <a href="../main/home.html#cast">pet cast</a></span></h1>
+			<h1>Balance Pet<br><b href="../main/home.html#cast">by pet cast</b></h1>
 			<nav class="codrops-demos">
 
 				<a href="../main/home.html#cast">Menu</a><br>
@@ -71,7 +71,7 @@
                success: (result) => {
    				console.log(result)                
                    for (var file of result.data.files){
-                   $('#vi').html('<video src="../../download/' + file.filename + '" controls="controls"  autoplay loop id="video" width="50%" height="47%"></video>');
+                   $('#vi').html('<video src="../../download/' + file.filename + '" controls="controls"  autoplay loop id="video" width="700px" height="300px"></video>');
                    }
                    
                },

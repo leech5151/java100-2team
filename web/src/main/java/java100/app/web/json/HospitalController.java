@@ -205,6 +205,21 @@ public class HospitalController {
         }
         
     }
+    
+    @RequestMapping("hospitalNo")
+    public Object hospitalNo(@ModelAttribute(value="loginUser") Member loginUser) throws Exception {
+        HashMap<String,Object> result = new HashMap<>();
+            int counthospital = hospitalService.getHospitalLoginUserNo(loginUser.getMemberNo());
+            if(counthospital == 1) {
+                result.put("status", "success");
+                return result;   
+            }else {
+                result.put("status", "fail");
+                return result;   
+            }
+    }
+    
+    
 
     long prevMillis = 0;
     int count = 0;

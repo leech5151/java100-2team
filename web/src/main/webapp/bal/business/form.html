@@ -8,14 +8,11 @@
 		<meta name="keywords" content="motion blur, html, css, svg, filter, javascript, web design, image gallery" />
 		<meta name="author" content="Lucas Bebber for Codrops" />
 		
-		<link rel="shortcut icon" href="../favicon.ico">
-		<link rel="stylesheet" type="text/css" href="../../css/normalize.css" />
-		<link rel="stylesheet" type="text/css" href="../../business_view/fonts/font-awesome-4.3.0/css/font-awesome.min.css" />
+		<link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
 		<link rel="stylesheet" type="text/css" href="../../business_view/css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="../../business_view/css/gallery.css" />
-
-        <script src="../../business_view/js/TweenMax.min.js"></script>
-        <script src="../../business_view/js/jquery.min.js"></script>
+        <link rel='stylesheet' type="text/css" href='../../css/main.css'>
+        
         </head>
     <body>
     <div id=view_form>
@@ -31,8 +28,8 @@
 			<h1>Motion Blur Effect with SVG<span>by <a href="../main/home.html#together">pet together</a></span></h1>
 			<nav class="codrops-demos">
 
-				<a href="../main/home.html#together">Menu</a><br>
-				
+				<a href="../main/home.html#together">home</a><br>
+				<a class="current-demo" href="list.html">list</a><br>
 				<a data-toggle="modal" id="businessInfo" class="open-modal" href="#businessViewModal">information</a><br>
 				<div class="modal fade" role="dialog" id="businessViewModal">
 				<div class="modal-dialog">
@@ -42,7 +39,7 @@
 				</div>
 				</div>
 				
-				<a class="current-demo" href="form.html">Image Gallery</a>
+				
 			</nav>
 		 </header>
 		<div class="content">
@@ -55,7 +52,10 @@
 		<!-- Related demos -->
 	</div><!-- /container -->
 </div>
-
+<script src="../../business_view/js/TweenMax.min.js"></script>
+<script src="../../business_view/js/jquery.min.js"></script>
+<script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
+<script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script> 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
    var index = location.href.indexOf('?');
@@ -243,10 +243,12 @@
  
 
 
+      var businessViewModal = $('#businessViewModal');
       var businessViewModalContent = $('#businessViewModal .modal-content');
       $(document).ready(function(){ 
-          $('#businessInfo').click(function(){
+          $('#businessInfo').click(function(e){
           	  businessViewModalContent.load('../business/view.html', () => {
+          	     businessViewModal.modal();
               });
           });
       }); 

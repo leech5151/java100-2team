@@ -587,6 +587,13 @@ $.ajax('../../json/auth/loginUser', {
 	success: (result) => {
 		if(result.status == "fail"){
 			prm_addr = "서울특별시 중구 세종대로 110 서울특별시청";
+			$('#idPlease').html("");
+            $('<div>')
+             .html(     "<div style='    margin-top: 3em;position: absolute;z-index: 5;padding-top: 10em;text-align: center;height: 400px;background-color: #000000;opacity: 0.8;'>"+
+                     "<h3 style='float: left;font-size: 50px; margin-left: 3em;color:red;width:50px;'>!</h3>" +
+                     "<div style='float: left;width: 600px;color:white;font-size:40px;font-family:contsfont-kor;margin-right: 2em;'>로그인이 필요한 서비스입니다.</div>"+
+                     "</div>")
+                        .appendTo('#idPlease'); 
 			markerText = '<div style="width:400px;text-align:center;padding:6px 0;">로그인이 필요한 서비스입니다 로그인해서 확인해 주세요!</div>'; 
 		}else{
 			if(result.member.memberType == "병원회원"){
@@ -596,6 +603,13 @@ $.ajax('../../json/auth/loginUser', {
 					success: (result) => {
 						if(result.status == "fail"){
 							prm_addr = "서울특별시 중구 세종대로 110 서울특별시청";
+							$('#idPlease').html("");
+				            $('<div>')
+				             .html(     "<div style='    margin-top: 3em;position: absolute;z-index: 5;padding-top: 10em;text-align: center;height: 400px;background-color: #000000;opacity: 0.8;'>"+
+				                     "<h3 style='float: left;font-size: 50px; margin-left: 3em;color:red;width:50px;'>!</h3>" +
+				                     "<div style='float: left;width: 600px;color:white;font-size:35px;font-family:contsfont-kor;margin-right: 2em;'>병원이 등록이 필요한 서비스입니다.</div>"+
+				                     "</div>")
+				                        .appendTo('#idPlease'); 
 							markerText = '<div style="width:400px;text-align:center;padding:6px 0;">병원이 없쓰요!! 등록하세요오오옷</div>'; 
 						}else{
 							prm_addr = "서울특별시 중구 세종대로 110 서울특별시청";

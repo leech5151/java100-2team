@@ -43,11 +43,12 @@ function load() {
     					        			$('.header').children().attr('href','../diagnosis/hospitalStaffForm.html')
     					        			$('.header').children().text('병원 등록하기')   
     					        			$('#diagnosisList').html("");
-    				                 		$('<div>')
-    				                         .html(     "<div>"+
-    				                        		 "<p>병원회원이시면 병원을 등록 후 사용하시기 바랍니다</p>"+
-    				        		                 "</div>")
-    				     	                            .appendTo('#diagnosisList'); 
+    				                        $('<div>')
+    				                         .html(     "<div style='padding-top: 6em;text-align: center;height: 283px;background-color: #000000;opacity: 0.8;'>"+
+    				                                 "<h3 style='float: left;font-size: 50px;margin-left: 166px;color:red;width:50px;'>!</h3>" +
+    				                                 "<div style='float: left;width: 600px;color:white;font-size:35px;font-family:contsfont-kor;'>병원등록이 필요한 서비스입니다.</div>"+
+    				                                 "</div>")
+    				                                    .appendTo('#diagnosisList'); 
     					        	  } 
     					           },
     					           error: () => {
@@ -82,7 +83,7 @@ function load() {
         	if(result.status=="fail"){
             		$('#diagnosisList').html("");
                  		$('<div>')
-                         .html(     "<div style='padding-top: 4em;text-align: center;height: 205px;background-color: #000000;opacity: 0.6;'>"+
+                         .html(     "<div style='padding-top: 6em;text-align: center;height: 283px;background-color: #000000;opacity: 0.8;'>"+
                         		 "<h3 style='float: left;font-size: 50px;margin-left: 166px;color:red;width:50px;'>!</h3>" +
                         		 "<div style='float: left;width: 600px;color:white;font-size:40px;font-family:contsfont-kor;'>로그인이 필요한 서비스입니다</div>"+
         		                 "</div>")

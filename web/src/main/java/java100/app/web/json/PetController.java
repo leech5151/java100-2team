@@ -55,7 +55,7 @@ public class PetController {
         String uploadDir = servletContext.getRealPath("/download");
         
         ArrayList<PetUploadFile> uploadFiles = new ArrayList<>();
-        
+
         for (MultipartFile part : file) {
             if (part.isEmpty())
                 continue;
@@ -63,10 +63,10 @@ public class PetController {
             String filename = this.writeUploadFile(part, uploadDir);
             
             uploadFiles.add(new PetUploadFile(filename));
+            System.out.println(filename);
         }
         
         pet.setFiles(uploadFiles);
-        
         pet.setMemberNo(loginUser.getMemberNo());
         
         petService.add(pet);
@@ -87,7 +87,7 @@ public class PetController {
         String uploadDir = servletContext.getRealPath("/download");
 
         ArrayList<PetUploadFile> uploadFiles = new ArrayList<>();
-        
+
         for (MultipartFile part : file) {
             if (part.isEmpty())
                 continue;

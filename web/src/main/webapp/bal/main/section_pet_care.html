@@ -478,7 +478,7 @@ $.ajax('../../json/auth/loginUser', {
 							$('<div>')
 		                     .html(  	
 		                    		 	'<button type="button" onclick="location.href="../hospital/form.html">AddBtn</button>'+
-		                    		 	 "<td><a href='form.html?no=" + data.diagnosisNo + "'>"+ data.hospital.hospitalName + "</a></td>" + 
+		                    		 	// "<td><a href='form.html?no=" + data.diagnosisNo + "'>"+ data.hospital.hospitalName + "</a></td>" + 
 		 	                            "</div>")
 		 	                            .appendTo('.pricing-header');
 							prm_addr = "서울특별시 중구 세종대로 110 서울특별시청";
@@ -495,8 +495,6 @@ $.ajax('../../json/auth/loginUser', {
 						}else{
 							$('.hospitalh2').text('Hospital');
 							$('.hospitalp').text('Manage Hospital');
-							//prm_addr = "서울특별시 중구 세종대로 110 서울특별시청";
-							//markerText = '<div style="width:400px;text-align:center;padding:6px 0;">병원이 있쓰요!!</div>'; 
 						}
 					},
 					 error: () => {
@@ -531,8 +529,6 @@ $.ajax('../../json/auth/loginUser', {
 
 
 
-/* var map = new daum.maps.Map(container, options);
-var zoomControl = new daum.maps.ZoomControl(); */
 
 if(map != null){
 	map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);	

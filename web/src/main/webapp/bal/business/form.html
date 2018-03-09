@@ -8,11 +8,11 @@
 		<meta name="keywords" content="motion blur, html, css, svg, filter, javascript, web design, image gallery" />
 		<meta name="author" content="Lucas Bebber for Codrops" />
 		
-		<link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+		<link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'> 
 		<link rel="stylesheet" type="text/css" href="../../business_view/css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="../../business_view/css/gallery.css" />
         <link rel='stylesheet' type="text/css" href='../../css/main.css'>
-        
+         
         </head>
     <body>
     <div id=view_form>
@@ -47,12 +47,13 @@
 				<ul class="gallery-pictures">
 				</ul>
 			</div>
+			<p>Click on a more distant dot to see the effect better.</p>
 		</div>
 		<!-- Related demos -->
 	</div><!-- /container -->
 </div>
 <script src="../../business_view/js/TweenMax.min.js"></script>
-<script src="../../business_view/js/jquery.min.js"></script>
+<script src="../../business_view/js/jquery.min.js"></script> 
 <script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
 <script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script> 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -242,12 +243,12 @@
  
 
 
-      var businessViewModal = $('#businessViewModal');
+      var businessViewModal = $('#businessViewModal'); 
       var businessViewModalContent = $('#businessViewModal .modal-content');
       $(document).ready(function(){ 
-          $('#businessInfo').click(function(e){
+          $('#businessInfo').click(function(e){ 
           	  businessViewModalContent.load('../business/view.html', () => {
-          	     businessViewModal.modal();
+          	     businessViewModal.modal(); 
               });
           });
       }); 

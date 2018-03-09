@@ -8,32 +8,23 @@
 <link rel="shortcut icon" href="../favicon.ico">
 
 <link rel="stylesheet" type="text/css" href="../../css/diagnosis/font-awesome-4.3.0/css/font-awesome.min.css" />
-<!-- <link rel="stylesheet" type="text/css" href="../../css/diagnosis/diagnosisdemo.css" /> -->
 <link rel="stylesheet" href='../../node_modules/jquery-ui-dist/jquery-ui.css' />
 <link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <link rel="stylesheet" type="text/css" href="../../business_view/css/demo.css" />
 <link rel="stylesheet" type="text/css" href="../../business_view/css/gallery.css" />
 <link rel="stylesheet" type="text/css" href="../../css/main.css" />
-<!-- <style>
- nav li a {
-  text-decoration: inherit;
-  padding: 20px 0px;
-  color: white;
-  display: block;
-  text-transform: uppercase;
-  transition: all 0.4s;
-  -webkit-transition: all 0.4s;
+<style>
+ nav a {
+color:#7D87AE;
 }
-
-
-#sidebox { position:absolute; width:200px; top:433px; left:50px; padding: 3px 10px }
-
-
-</style> -->
+ nav a:hover{
+color:#212529;
+}
+</style>
 <div id=diagnosis_form>
 	<div class="container_b">
 		<header class="codrops-header" style="margin-bottom: -4%">
-			<h1>Diagnosis<span> <a href="../main/home.html#diagnosis">Custommer</a></span></h1>
+			<h1>Diagnosis<span> <a href="../main/home.html#diagnosis"> of Custommer</a></span></h1>
 			<nav class="codrops-demos">
 				<a href="../main/home.html#diagnosis">home</a>			
 				<div class="modal fade" role="dialog" id="diagnosisModalView">
@@ -67,7 +58,7 @@
 			<div style='width:10%; display:inline-block; ; font-size:20px;'>No</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Hospital</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Customer</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Date</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Category</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Medical name</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Contents</div>
 		</div>
 
-		<div id="diagnosisbody">
+		<div id="diagnosisbody" style="font-size:18px;margin-top: 15px;">
 		
 		
 		</div>
@@ -310,15 +301,15 @@ $.datepicker.regional['kr'] = {
 	            success: (result) => {
 	            	 $('#diagnosisbody').html("");
 	                for (var data of result.list) {
-	                	$('<div class="modalList" style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
+	                	$('<div class="modalList" style="font-family: contsfont-kor;width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
 	                        .html(  
-	                                "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
-                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
-                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.memberName + "</div>" +
-                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
-                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
-                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
-                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
+	                                "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
+                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
+                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.memberName + "</div>" +
+                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
+                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
+                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
+                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
 			                            .appendTo('#diagnosisbody'); 
 	                	
 	                	/*  $(document).ready(function (){
@@ -391,13 +382,13 @@ $.datepicker.regional['kr'] = {
 			               for (var data of result.list) {
 			            		$('<div class="modalList" style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
 		                        .html(  
-		                        		   "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
-		                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
-		                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.memberName + "</div>" +
-		                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
-		                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
-		                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
-		                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
+		                        		   "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
+		                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
+		                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.memberName + "</div>" +
+		                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
+		                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
+		                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
+		                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
 				                            .appendTo('#diagnosisbody'); 
 			               }
 			               
@@ -448,13 +439,13 @@ $.datepicker.regional['kr'] = {
 			               for (var data of result.list) {
 			            		$('<div class="modalList" style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
 		                        .html(  
-		                        		   "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
-		                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
-		                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.memberName + "</div>" +
-		                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
-		                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
-		                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
-		                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
+		                        		   "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
+		                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
+		                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.memberName + "</div>" +
+		                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
+		                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
+		                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
+		                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
 				                            .appendTo('#diagnosisbody'); 
 			               }
 			               
@@ -508,13 +499,13 @@ $.ajax('../../json/diagnosis/myAlllist', {
         for (var data of result.list) {
         	$('<div class="modalList" style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
             .html(  
-            		   "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
-                       "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
-                       "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.memberName + "</div>" +
-                       "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
-                       "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
-                       "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
-                       "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
+            		   "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
+                       "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
+                       "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.memberName + "</div>" +
+                       "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
+                       "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
+                       "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
+                       "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
                         .appendTo('#diagnosisbody'); 
         }
         	$(prevBtn.parent()).css("display","none");
@@ -545,13 +536,13 @@ function load(pageNo, options){
                for (var data of result.list) {
             		$('<div class="modalList" style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
                     .html(  
-                    		   "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
-                               "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
-                               "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.memberName + "</div>" +
-                               "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
-                               "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
-                               "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
-                               "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
+                    		   "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
+                               "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
+                               "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.memberName + "</div>" +
+                               "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
+                               "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
+                               "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
+                               "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
 	                            .appendTo('#diagnosisbody'); 
                }
                

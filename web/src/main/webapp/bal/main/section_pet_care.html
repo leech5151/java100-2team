@@ -535,7 +535,6 @@ if(map != null){
 ////////////////주소로 장소표시/////////////////////////////
 var geocoder = new daum.maps.services.Geocoder();
 
- ///////////////////
 //주소로 좌표를 검색합니다
 geocoder.addressSearch(prm_addr, function(result, status) {
 // 정상적으로 검색이 완료됐으면 
@@ -554,8 +553,6 @@ var marker = new daum.maps.Marker({
 	
     image:markerImage
 
-});
-}
  // 인포윈도우로 장소에 대한 설명을 표시합니다
  if(prm_addr ==="서울특별시 중구 세종대로 110 서울특별시청"){
  
@@ -568,8 +565,6 @@ var marker = new daum.maps.Marker({
  }else{
 	 map.setCenter(coords);
  }
-
- 
  ///////////////////////////////////////////////////////////////////////////////////////////
  var markers = [];
  // 장소 검색 객체를 생성합니다
@@ -601,10 +596,6 @@ var marker = new daum.maps.Marker({
 				// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
 			        ps.keywordSearch(keyword, placesSearchCB, options);
 			}
-			/////////////삭제해//////////////////////////
-
-     		//////////////삭제해//////////////////////////
-     
      }
 
      // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다

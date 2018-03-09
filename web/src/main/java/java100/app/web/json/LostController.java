@@ -56,9 +56,15 @@ public class LostController {
         return result;
     }
     
+    @RequestMapping("listAll")
+    public Object listAll() throws Exception {
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("list", lostService.listAll());
+        return result;
+    }
+    
     @RequestMapping("{no}")
     public Object view(@PathVariable int no) throws Exception {
-        
         HashMap<String,Object> result = new HashMap<>();
         result.put("data", lostService.get(no));
         return result;

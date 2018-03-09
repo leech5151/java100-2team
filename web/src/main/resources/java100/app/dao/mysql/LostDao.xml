@@ -14,6 +14,7 @@
         <result column="rwd" property="reward"/>
         <result column="vwcnt" property="viewCount"/>
         <result column="conts" property="contents"/>
+        <result column="pushAlert" property="pushAlert"/>
         
         <association property="registrant" javaType="member">
             <id column="m_no" property="memberNo"/>
@@ -110,6 +111,22 @@
         limit #{startIndex}, #{size}
     </select>
 
+    <select id="findAllList" resultMap="lostMap">
+	     select 
+	        l.l_no,
+	        l.m_no,
+	        l.p_name,
+	        l.brd,
+	        l.cha,
+	        l.rwd,
+	        l.vwcnt,
+	        l.pushAlert,
+	        m.tel,
+	        lm.file
+	    from lost as l 
+	    join memb as m on l.m_no=m.m_no
+	    left join lost_mda as lm on l.l_no=lm.l_no
+    </select>
     
     <select id="countAll" resultType="int">
         select count(*) from lost
@@ -117,8 +134,8 @@
     
     <insert id="insert" parameterType="lost"
         useGeneratedKeys="true" keyColumn="l_no" keyProperty="lostNo">
-        insert into lost(m_no,p_name,brd,l_loc,l_date,cha,rwd,conts)
-        values(#{registrant.memberNo},#{petName},#{breed},#{lostLocation},#{lostDate},#{character},#{reward},#{contents})
+        insert into lost(m_no,p_name,brd,l_loc,l_date,cha,rwd,conts,pushAlert)
+        values(#{registrant.memberNo},#{petName},#{breed},#{lostLocation},#{lostDate},#{character},#{reward},#{contents},#{pushAlert})
     </insert>
     
     <select id="findByNo" resultMap="lostMap" parameterType="int">
@@ -133,6 +150,7 @@
 		    l.vwcnt,
 		    l.conts,
 		    l.brd,
+		    l.pushAlert,
 		    lm.mda_no,
 		    lm.file,
  		    m.tel

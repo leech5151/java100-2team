@@ -8,7 +8,6 @@ import java.util.HashMap;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import java100.app.domain.Business;
-import java100.app.domain.BusinessReview;
 import java100.app.domain.BusinessUploadFile;
 import java100.app.domain.Member;
 import java100.app.service.BusinessService;
@@ -83,8 +81,6 @@ public class BusinessController {
 
         // UI 제어와 관련된 코드는 이렇게 페이지 컨트롤러에 두어야 한다.
         //
-        
-        System.out.println(category);
         
         if (pageNo < 1) {
             pageNo = 1;

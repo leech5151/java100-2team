@@ -85,13 +85,12 @@ function readURL(input) {
       reader.readAsDataURL(input.files[0]);
     } 
 }
-
 var index = location.href.indexOf('?');
 if (index != -1) {
     var qs = location.href.substr(index + 1);
     var arr = qs.split('=');
+
     $('.my-new').css('display', 'none');
-    
     $(function load() {
         $.ajax('../../json/lost/' + arr[1], {
             dataType: 'json',

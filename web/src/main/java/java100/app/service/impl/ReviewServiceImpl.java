@@ -80,7 +80,6 @@ public class ReviewServiceImpl implements ReviewService {
     public int delete(int rv_no) {
         
         businessReviewFileDao.deleteAllByReviewNo(rv_no);
-        System.out.println(rv_no);
         return businessReviewDao.delete(rv_no);
     }
 

@@ -1,6 +1,7 @@
 <meta charset="UTF-8">
 <link href="../../myDesign/lost/lost.css" rel="stylesheet">
 <link href="../../myDesign/lost/lost2.css" rel="stylesheet">
+<link href="../../myDesign/lost/lost3.css" rel="stylesheet">
 
 <div class="bal-mb-3">
     <div style="margin-top: 15%;text-align: left;">
@@ -8,9 +9,11 @@
     <div>
     
 <nav aria-label="Page navigation" style="position: relative; float: left; width: 100%;">
+<button id="lostPrevBtn" class="btn btn-sm btn-light before-login" style="margin-left: 44%; color: blue;">이전</button>
+<button id="lostNextBtn" class="btn btn-sm btn-light before-login" style="color: blue;">다음</button>
 <button id="lostAddBtn" type="button" class="btn btn-danger btn-sm after-login">미아 등록</button>
-<button id="lostPrevBtn" class="btn btn-sm btn-light" style="margin-left: 44%; color: blue;">이전</button>
-<button id="lostNextBtn" class="btn btn-sm btn-light" style="color: blue;">다음</button>
+<button id="lostPrevBtn" class="btn btn-sm btn-light after-login" style="margin-left: 35%; color: blue;">이전</button>
+<button id="lostNextBtn" class="btn btn-sm btn-light after-login" style="color: blue;">다음</button>
 </nav>
 <br>
 <br>
@@ -23,16 +26,21 @@
 
 {{#each list}}
 
-<div class="bal-mb-3-data lostData">
-<figure class="snip1283">
+<div class="bal-mb-3-data lostData" style="border: 1px; border-color: #808080;">
+<figure class="snip1436">
 {{#each files}}
 <img src="../../download/{{filename}}" alt="{{filename}}" style="width:100%; height:100%;">
 {{/each}}
 <figcaption>
-<h3 style="text-align: center;"> < {{petName}} > </h3>
-    <p style="font-size: 20px;">품종 : {{breed}}</p>
-    <p style="font-size: 20px;">연락처 : {{registrant.tel}}</p>
-<div><a href="../lost/lostList.html" class="read-more">Read More</a></div>
+<h3 style="text-align: center;"> < 이름 : {{petName}} > </h3>
+<ul style="margin-top: 1rem;">
+    <li style="font-size: 20px;">특이사항 : {{character}}</>
+    <li style="font-size: 20px;">분실장소 : {{lostLocation}}</>
+    <li style="font-size: 20px;">분실일 : {{lostDate}}</li>
+    <li style="font-size: 20px;">연락처 : {{registrant.tel}}</li>
+</ul>
+<button id="lostView{{lostNo}}" data-toggle="modal" data-target="#exampleModal" type="button" style="margin-left: 1rem; color: white;" class="btn btn-sm btn-dark after-login">&#x2795; 더 보기</button>
+<button id="delete{{lostNo}}" type="button" style="margin-left: 4rem;" class="btn btn-sm btn-dark after-login">&#x2796; 삭제</button>
 </figcaption>
 </figure>
 </a>
@@ -60,6 +68,11 @@ $.getJSON('../../json/auth/loginUser', (result) => {
         $('.after-login').css('display', 'none');
     }
     
+    if (result.status == 'success') {
+	    var member = result.member;
+	    var currTel = member.tel;
+    }
+    
     var options = {};
     options.pn = pageNo;
     $.ajax('../../json/lost/list', {
@@ -68,20 +81,77 @@ $.getJSON('../../json/auth/loginUser', (result) => {
         success: (result) => {
            list.append(lostTemplateEngine(result));
 
-		    $('button').click(function(e){
+               $('button').click(function(e){
 	            var id = e.target.getAttribute('id');
 	            if ((id != '') && (id != null))  
-	            var newId = '#' + id;
-	    
-			    if (newId == '#lostAddBtn') {
-			    	modalStart();
+	                var newId = '#' + id;
+
+	            if (newId == '#lostAddBtn') {
+			    	addModalStart();
 			    } else if ((newId == '#lostPrevBtn')) {
 	    			pageNo = pageCalculator(-1, result.lastPageNo)
 			    	pageChange(pageNo, options)
 			    } else if (newId == '#lostNextBtn') {
 	    			pageNo = pageCalculator(1, result.lastPageNo)
 			    	pageChange(pageNo, options)
-			    } else {}
+			    } else if (newId.substring(0, 7) == '#delete') {
+			    	
+			    	$.getJSON('../../json/lost/' + newId.substring(7), (result) => {
+			    		if(currTel==result.data.registrant.tel) {
+					    	$.getJSON('../../json/delete/' + newId.substring(7));
+			    		}
+			    	});
+			    } else if (newId.substring(0, 9) == '#lostView') {
+		    		$.ajax('../../json/lost/' + newId.substring(9), {
+		    	        dataType: 'json',
+		    	        success: (result) => {
+		    	           list.empty();
+		    	        		   for (var file of result.data.files) {}	   
+		    	           $('#lostList').html(
+		    	        		   "<div class='bal-mb-3-data lostData' style='border: 1px; border-color: #808080; margin-left: 10rem;'>" + 
+		    	        		   "<figure class='snip1283p'>" + 
+		    	        		   "<img src='../../download/" + file.filename + "' alt='" + file.filename + "' style='width:100%; height:100%;'>" + 
+		    	        		   "<figcaption>" + 
+		    	        		   "<h3 style='text-align: center;'> < " + result.data.petName + " > </h3>" + 
+		    	        		       
+		    	        		       "<form id='fileForm2' enctype='multipart/form-data'>" + 
+			    	        		       "이름 :           <input id='petName2' class='afterUpdate' type='text' name='petName' style='width: 20rem; margin-left: 6.5rem; background-color: black; color: white;' placeholder='" + result.data.petName + "'><br><br><br>" + 
+			    	        		       "품종 :           <input id='breed2' class='afterUpdate' type='text' name='breed' style='width: 20rem; margin-left: 6.5rem; background-color: black; color: white;' placeholder='" + result.data.breed + "'><br><br><br>" + 
+			    	        		       "분실장소 :       <input id='lostLocation2' class='afterUpdate' type='text' name='lostLocation' style='width: 20rem; margin-left: 4.5rem; background-color: black; color: white;' placeholder='" + result.data.lostLocation + "'><br><br><br>" + 
+			    	        		       "분실일(" + result.data.lostDate + ") : <input id='lostDate2' class='afterUpdate' type='date' name='lostDate' style='width: 18.5rem; margin-left: 1rem; background-color: black; color: white;'><br><br><br>" + 
+			    	        		       "특이사항 :       <input id='character2' class='afterUpdate' type='text' name='character' style='width: 20rem; margin-left: 4.5rem; background-color: black; color: white;' placeholder='" + result.data.character + "'><br><br><br>" + 
+			    	        		       "사례금 :         <input id='reward2' class='afterUpdate' type='text' name='reward' style='width: 20rem; margin-left: 5.5rem; background-color: black; color: white;' placeholder='" + result.data.reward + "'><br><br><br>" + 
+			    	        		       "알릴사항 : <input id='contents2' class='afterUpdate' type='text' name='contents' style='width: 20rem; margin-left: 4.5rem; background-color: black; color: white;' placeholder='" + result.data.contents + "'><br><br>" + 
+			    	        		       "사진 :           <input id='file2' class='afterUpdate' type='file' name='file' style='width: 20rem; color: black; color: white;'>" + 
+		    	        		       "</form>" + 
+		    	        		       
+		    	        		   "<button id='lostUpdateBtn' type='button' style='margin-left: 1rem; color: white;' class='btn btn-sm btn-dark after-login'>수정</button>" + 
+		    	        		   "<button id='return' type='button' style='margin-left: 1rem; color: white;' class='btn btn-sm btn-dark'>전체조회</button>" + 
+		    	        		   "</figcaption>" + 
+		    	        		   "</figure>" + 
+		    	        		   "</a>" + 
+		    	        		   "</div>");
+		    	           
+		    	           $('#lostUpdateBtn').click(() => {
+		    	        	    var formData = new FormData($("#fileForm2")[0]);
+		    	        	    $.ajax('../../json/lost/update', {
+		    	        	        data: formData,
+		    	        	        dataType: 'json',
+		    	        	        method: 'POST',
+		    	        	        processData : false,
+		    	        	        contentType : false,
+		    	        	        success: (result) => {
+		    	        	        location.href = "../main/home.html#lost";
+		    	        	        },
+		    	        	        error: (jqXHR, textStatus, errorThrown) => {
+		    	        	            swal("수정 실패!", "정보를 확인 해보세요!", "error");
+		    	        	            /* window.alert('서버 실행 오류!'); */
+		    	        	        }
+		    	        	    });
+		    	        	});
+	    	        		   }
+	    	        });
+			    }
 		    });
        }
     });
@@ -111,7 +181,7 @@ function pageChange(pageNo, options) {
     });
 }
 
-function modalStart() {
+function addModalStart() {
 	var lostFormAddModal = $('#lostFormAddModal');
 	var lostFormAddModalContent = $('#lostFormAddModal .modal-content');
     event.preventDefault();

@@ -109,8 +109,6 @@ public class DiagnosisController {
         int count = diagnosisService.update(diagnosis,loginUser.getMemberNo());
         HashMap<String, Object> result = new HashMap<>();
         
-        System.out.println(count);
-        
         if(count != 0) {
             result.put("status", "success");
             return result;
@@ -125,21 +123,17 @@ public class DiagnosisController {
 
         HashMap<String, Object> result = new HashMap<>();
         int count = diagnosisService.delete(no, loginUser.getMemberNo());
-        System.out.println(count);
         if (count == 1) {
             result.put("status", "success");
-            System.out.println(result);
 
             return result;
         } else if(count == 0){
             result.put("status", "fail");
-            System.out.println(result);
 
             return result;
             
         }else {
             result.put("status", "fail2");
-            System.out.println(result);
             return result;
         }
         
@@ -148,7 +142,6 @@ public class DiagnosisController {
     @RequestMapping("form")
     public Object findByMemberNo(@ModelAttribute(value = "loginUser") Member loginUser) throws Exception {
         int no = loginUser.getMemberNo();
-        System.out.println(no);
         HashMap<String, Object> result = new HashMap<>();
         result.put("data", diagnosisService.getHospitalNo(no));
         return result;
@@ -172,7 +165,6 @@ public class DiagnosisController {
     @RequestMapping("mylist5")
     public Object myList5(@ModelAttribute(value = "loginUser") Member loginUser) throws Exception{
         HashMap<String, Object> result = new HashMap<>();
-        System.out.println(loginUser.getTel());
         result.put("list", diagnosisService.myList5(loginUser.getTel()));
         
         return result;
@@ -265,7 +257,6 @@ public class DiagnosisController {
       
         Diagnosis diagnosishpno =  diagnosisService.getHospitalNo(loginUser.getMemberNo());
         int hpno = diagnosishpno.getHospital().getHospitalNo();
-        System.out.println(hpno);
         String nowDate = diagnosis.getNowDateRecording();
         String selectDate = diagnosis.getDateRecording();
         if (pageNo < 1) {
@@ -273,7 +264,6 @@ public class DiagnosisController {
         }
 
         int totalCount = diagnosisService.getHospitalDateTotalCount(hpno,selectDate,nowDate);
-        System.out.println(totalCount);
         int lastPageNo = totalCount / pageSize;
         if ((totalCount % pageSize) > 0) {
             lastPageNo++;

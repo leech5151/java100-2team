@@ -1,5 +1,43 @@
 
 <style>
+.scrollbar
+{
+    margin-left: -25px;
+    float: left;
+    height: 500px;
+    width: 250px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-bottom: 25px;
+}
+.force-overflow
+{
+    min-height: 450px;
+}
+#style-7::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+    border-radius: 10px;
+} 
+
+#style-7::-webkit-scrollbar
+{
+    width: 10px;
+    background-color: #F5F5F5;
+}
+
+#style-7::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    background-image: -webkit-gradient(linear,
+                     left bottom,
+                     left top,
+                     color-stop(0.44, rgb(122,153,217)),
+                     color-stop(0.72, rgb(73,125,189)),
+                     color-stop(0.86, rgb(28,58,148)));
+}
+/* 스크롤까지 */
 .radius_border {
 	border: 1px solid #919191;
 	border-radius: 5px;
@@ -108,8 +146,8 @@
 	top: 0;
 	left: 0;
 	bottom: 0;
-	height: 500px;
-	width: 250px;
+	height: 555px;
+    width: 290px; 
 	padding: 5px;
 	overflow-y: auto;
 	background: rgba(255, 255, 255, 0.7);
@@ -143,6 +181,7 @@
 }
 
 #placesList li {
+    margin-right: 10px; 
 	border-radius: 10px;
 	list-style: none;
 }
@@ -188,7 +227,7 @@
 }
 
 #placesList .info .tel {
-	color: #009900;
+	color: #8a8a8a; 
 }
 
 #placesList .item .markerbg {
@@ -556,8 +595,10 @@
 		<div id="map" style="width: 100%; height: 100%; overflow: auto;"></div>
 	</div>
 	<div id="menu_wrap" class="bg_white">
-		<ul id="placesList"></ul>
+	   <div class="scrollbar" id="style-7"> 
+		<ul id="placesList" class="force-overflow"></ul>
 		<div id="pagination"></div>
+	   </div> 
 	</div>
 </div>
 

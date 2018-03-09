@@ -1,9 +1,43 @@
 
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94bb2cfc7cdc1dacca4463266c794af3&libraries=services,clusterer,drawing"></script>
-
-
 <style>
+.scrollbar
+{
+    margin-left: -25px;
+    float: left;
+    height: 500px;
+    width: 250px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-bottom: 25px;
+}
+.force-overflow
+{
+    min-height: 450px;
+}
+#style-7::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+    border-radius: 10px;
+} 
+
+#style-7::-webkit-scrollbar
+{
+    width: 10px;
+    background-color: #F5F5F5;
+}
+
+#style-7::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    background-image: -webkit-gradient(linear,
+                     left bottom,
+                     left top,
+                     color-stop(0.44, rgb(122,153,217)),
+                     color-stop(0.72, rgb(73,125,189)),
+                     color-stop(0.86, rgb(28,58,148)));
+}
+/* 스크롤까지 */
 .radius_border {
 	border: 1px solid #919191;
 	border-radius: 5px;
@@ -107,41 +141,181 @@
 	height: 500px;
 	float: left;
 }
-#menu_wrap {top:0;left:0;bottom:0;height: 500px;width:250px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
-.bg_white {background:#fff;}
-#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
-#menu_wrap .option{text-align: center;}
-#menu_wrap .option p {margin:10px 0;}  
-#menu_wrap .option button {margin-left:5px;}
-#placesList li {border-radius:10px;list-style: none;}
-#placesList li:hover {background-color: #ff8040; color:#ffffff}
-#placesList .item {position:relative;border:1px solid #824027;overflow: hidden;cursor: pointer;min-height: 65px; text-align: center;}
-#placesList .item span {display: block;margin-top:4px;}
-#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-#placesList .item .info{padding:10px 0 10px 0px;}
-#placesList .info .gray {color:#8a8a8a;}
-#placesList .info .jibun {padding-left:26px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
-#placesList .info .tel {color:#009900;}
-#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
-#placesList .item .marker_1 {background-position: 0 -10px;}
-#placesList .item .marker_2 {background-position: 0 -56px;}
-#placesList .item .marker_3 {background-position: 0 -102px}
-#placesList .item .marker_4 {background-position: 0 -148px;}
-#placesList .item .marker_5 {background-position: 0 -194px;}
-#placesList .item .marker_6 {background-position: 0 -240px;}
-#placesList .item .marker_7 {background-position: 0 -286px;}
-#placesList .item .marker_8 {background-position: 0 -332px;}
-#placesList .item .marker_9 {background-position: 0 -378px;}
-#placesList .item .marker_10 {background-position: 0 -423px;}
-#placesList .item .marker_11 {background-position: 0 -470px;}
-#placesList .item .marker_12 {background-position: 0 -516px;}
-#placesList .item .marker_13 {background-position: 0 -562px;}
-#placesList .item .marker_14 {background-position: 0 -608px;}
-#placesList .item .marker_15 {background-position: 0 -654px;}
-#pagination {margin:10px auto;text-align: center;}
-#pagination a {display:inline-block;margin-right:10px;}
-#pagination .on {font-weight: bold; cursor: default;color:#ffffff;}
- 
+
+#menu_wrap {
+	top: 0;
+	left: 0;
+	bottom: 0;
+	height: 555px;
+    width: 290px; 
+	padding: 5px;
+	overflow-y: auto;
+	background: rgba(255, 255, 255, 0.7);
+	z-index: 1;
+	font-size: 12px;
+	border-radius: 10px;
+}
+
+.bg_white {
+	background: #fff;
+}
+
+#menu_wrap hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 2px solid #5F5F5F;
+	margin: 3px 0;
+}
+
+#menu_wrap .option {
+	text-align: center;
+}
+
+#menu_wrap .option p {
+	margin: 10px 0;
+}
+
+#menu_wrap .option button {
+	margin-left: 5px;
+}
+
+#placesList li {
+    margin-right: 10px; 
+	border-radius: 10px;
+	list-style: none;
+}
+
+#placesList li:hover {
+	background-color: #ff8040;
+	color: #ffffff
+}
+
+#placesList .item {
+	position: relative;
+	border: 1px solid #824027;
+	overflow: hidden;
+	cursor: pointer;
+	min-height: 65px;
+	text-align: center;
+}
+
+#placesList .item span {
+	display: block;
+	margin-top: 4px;
+}
+
+#placesList .item h5, #placesList .item .info {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#placesList .item .info {
+	padding: 10px 0 10px 0px;
+}
+
+#placesList .info .gray {
+	color: #8a8a8a;
+}
+
+#placesList .info .jibun {
+	padding-left: 26px;
+	background:
+		url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png)
+		no-repeat;
+}
+
+#placesList .info .tel {
+	color: #8a8a8a; 
+}
+
+#placesList .item .markerbg {
+	float: left;
+	position: absolute;
+	width: 36px;
+	height: 37px;
+	margin: 10px 0 0 10px;
+	background:
+		url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
+		no-repeat;
+}
+
+#placesList .item .marker_1 {
+	background-position: 0 -10px;
+}
+
+#placesList .item .marker_2 {
+	background-position: 0 -56px;
+}
+
+#placesList .item .marker_3 {
+	background-position: 0 -102px
+}
+
+#placesList .item .marker_4 {
+	background-position: 0 -148px;
+}
+
+#placesList .item .marker_5 {
+	background-position: 0 -194px;
+}
+
+#placesList .item .marker_6 {
+	background-position: 0 -240px;
+}
+
+#placesList .item .marker_7 {
+	background-position: 0 -286px;
+}
+
+#placesList .item .marker_8 {
+	background-position: 0 -332px;
+}
+
+#placesList .item .marker_9 {
+	background-position: 0 -378px;
+}
+
+#placesList .item .marker_10 {
+	background-position: 0 -423px;
+}
+
+#placesList .item .marker_11 {
+	background-position: 0 -470px;
+}
+
+#placesList .item .marker_12 {
+	background-position: 0 -516px;
+}
+
+#placesList .item .marker_13 {
+	background-position: 0 -562px;
+}
+
+#placesList .item .marker_14 {
+	background-position: 0 -608px;
+}
+
+#placesList .item .marker_15 {
+	background-position: 0 -654px;
+}
+
+#pagination {
+	margin: 10px auto;
+	text-align: center;
+}
+
+#pagination a {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+#pagination .on {
+	font-weight: bold;
+	cursor: default;
+	color: #ffffff;
+}
 </style>
 
 
@@ -407,17 +581,24 @@
 </div>
 <div style="width: 50%; margin-top: 100px; display: inline-block"
 	class="pricing-header px-3 py-3 pt-md-5 pb-md-4  text-center">
-	<h2 class="display-4">My Hospital</h2>
-	<p class="lead">주변 병원을 검색합니다</p>
+	<h2 class="display-4 hospitalh2">My Hospital</h2>
+	<p class="lead hospitalp">주변 병원을 검색합니다</p>
 </div>
-
-<div style="width: 980px; height: 500px; position:relative; margin-left: 40px">
+<div id="hospitalbody">
+		
+		
+		</div>
+<div
+	style="width: 980px; height: 500px; position: relative; margin-left: 40px">
+	<div id="idPlease"></div>
 	<div class="map_wrap">
 		<div id="map" style="width: 100%; height: 100%; overflow: auto;"></div>
 	</div>
 	<div id="menu_wrap" class="bg_white">
-		<ul id="placesList"></ul>
+	   <div class="scrollbar" id="style-7"> 
+		<ul id="placesList" class="force-overflow"></ul>
 		<div id="pagination"></div>
+	   </div> 
 	</div>
 </div>
 
@@ -427,128 +608,182 @@
 
 <script type="text/javascript">
 
-///////////////////////////지도추가////////////////////////////////////////////////
-/* load();
-$(".tab_content").hide(); 
-$(".tab_content:first").show(); 
-$("ul.tabs li:first").addClass("active").show();
-
-function load() {
-   
-
-   $.ajax('../../json/auth/loginUser', {
-        dataType: 'json',
-        success: (result) => {
-           $(document).ready(function(){
-              if(result.member.memberType=='병원회원'){
-                 $('#tab').html('<ul class="tabs">'+
-                             '<li><a href="#tab1">내병원</a></li>'+
-                             '<li><a href="#tab2">병원전체진료자료</a></li>'+
-                             '</ul>').appendTo('#tab');
-                 
-
-                 $("ul.tabs li:first").addClass("active").show();
-              
-                 $("ul.tabs li").click(function() {
-                   console.log("클릭됨");
-                   $("ul.tabs li").removeClass("active");
-                   $(this).addClass("active"); 
-                   $(".tab_content").hide();
-                   var activeTab = $(this).find("a").attr("href"); 
-                   $(activeTab).fadeIn();
-                   
-                   
-                    $('#hospital').load('../hospital/hospitalproducermainlisttest.html');
-                    $('#diagnosis').load('../diagnosis/hospitalproducermainlisttest.html');
-                   return false;
-                });
-              
-                 //클릭시
-         }else{
-            $('#tab').html('<ul class="tabs">'+
-                  '<li><a href="#tab1">내주변병원</a></li>'+
-                  '<li><a href="#tab2">내가받은진료자료</a></li>'+
-                  '</ul>').appendTo('#tab');
-            
-            $("ul.tabs li:first").addClass("active").show();
-            
-            $("ul.tabs li").click(function() {
-               $('#hospital').load('../hospital/customermainlisttest.html');
-               $('#diagnosis').load('../diagnosis/customermainlisttest.html');
-               console.log("클릭됨");
-               $("ul.tabs li").removeClass("active");
-               $(this).addClass("active"); 
-               $(".tab_content").hide();
-
-               var activeTab = $(this).find("a").attr("href"); 
-               $(activeTab).fadeIn(); 
-               return false;
-            });
-            $('#hospital').load('../hospital/customermainlisttest.html');
-            
-         }
-      })
-        },
-      error: () => {
-         window.alert('서버 실행 오류!');
-      }
-    });
-   
-};  */
-
-
 var pst_no=null,
 prm_addr=null,
 det_addr=null;
 
+var markerText = null;
+var searchText = null;
+
+
+var imageSrc = null, // 마커 이미지 url, 스프라이트 이미지를 씁니다
+imageSize = new daum.maps.Size(36, 37), // 마커 이미지의 크기
+imgOptions = {  offset : new daum.maps.Point(13, 37)};
+
+
 var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 var options = { //지도를 생성할 때 필요한 기본 옵션
-		
-    center : new daum.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+    center : new daum.maps.LatLng(37.566295037, 126.9779450126), //지도의 중심좌표.
     scrollwheel : false,
     level : 5   
 };
 
+var map = null;
+var zoomControl = null;
 
-var map = new daum.maps.Map(container, options);
+$.ajax('../../json/auth/loginUser', {
+	async: false,
+	dataType: 'json',
+	success: (result) => {
+		if(result.status == "fail"){
+			prm_addr = "서울특별시 중구 세종대로 110 서울특별시청";
+			$('#idPlease').html("");
+            $('<div>')
+             .html(     "<div style='    margin-top: 3em;position: absolute;z-index: 5;padding-top: 10em;text-align: center;height: 400px;background-color: #000000;opacity: 0.8;'>"+
+                     "<h3 style='float: left;font-size: 50px; margin-left: 3em;color:red;width:50px;'>!</h3>" +
+                     "<div style='float: left;width: 600px;color:white;font-size:40px;font-family:contsfont-kor;margin-right: 2em;'>로그인이 필요한 서비스입니다.</div>"+
+                     "</div>")
+                        .appendTo('#idPlease'); 
+			markerText = '<div style="width:400px;text-align:center;padding:6px 0;">로그인이 필요한 서비스입니다 로그인해서 확인해 주세요!</div>'; 
+			map = new daum.maps.Map(container, options);
+			zoomControl = new daum.maps.ZoomControl();
+		}else{
+			if(result.member.memberType == "병원회원"){
+				$.ajax('../../json/hospital/hospitalNo', {
+					async: false,
+					dataType: 'json',
+					success: (result) => {
+						if(result.status == "fail"){
+							$('.hospitalh2').text('Hospital');
+							$('.hospitalp').text('Register your Hospital');
+							$('<div>')
+		                     .html(  	
+		                    		 	'<button type="button" onclick="location.href=\'../hospital/form.html\'">AddBtn</button>'+
+		 	                            "</div>")
+		 	                            .appendTo('.pricing-header');
+							prm_addr = "서울특별시 중구 세종대로 110 서울특별시청";
+							$('#idPlease').html("");
+				            $('<div>')
+				             .html(     "<div style='    margin-top: 3em;position: absolute;z-index: 5;padding-top: 10em;text-align: center;height: 400px;background-color: #000000;opacity: 0.8;'>"+
+				                     "<h3 style='float: left;font-size: 50px; margin-left: 3em;color:red;width:50px;'>!</h3>" +
+				                     "<div style='float: left;width: 600px;color:white;font-size:35px;font-family:contsfont-kor;margin-right: 2em;'>병원이 등록이 필요한 서비스입니다.</div>"+
+				                     "</div>")
+				                        .appendTo('#idPlease'); 
+							markerText = '<div style="width:400px;text-align:center;padding:6px 0;">Register Your Hospital!</div>'; 
+							map = new daum.maps.Map(container, options);
+							zoomControl = new daum.maps.ZoomControl();
+						}else{
+							$('.hospitalh2').text('Hospital');
+							$('.hospitalp').text('Manage Hospital');
+							
+							
+						    $.ajax('../../json/hospital/hospitalview', {
+	      					 	dataType: 'json',
+	    					    method: 'POST',
+	        				    success: (result) => {
+	            				$('#hospitalbody').html("");
+	              				$('<div class="hoslptal" style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
+	                    		.html(  
+	                      	        "<div style='width:10%; display:none; border-top: 1px solid #aaa;'>" + result.data.hospitalNo + "</div>" + 
+                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>"+ result.data.hospitalName + "</div>" + 
+                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.openTime + "</div>" +
+                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.closeTime + "</div>" +
+                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.medicalSubject+ "</div>" +
+                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.medicalAnimal + "</div>" +
+                                    "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.hospitalTel + "</div>"+
+                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.contents + "</div>" +
+                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.postalNo + "</div>" +
+                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.primaryAddress + "</div>" +
+                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.detailAddress + "</div>" +
+                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.medicalStaff + "</div>"+
+                                    "<div id='fileView' class='col-sm-10'></div>")
+			                    .appendTo('#hospitalbody');
 
-var zoomControl = new daum.maps.ZoomControl();
+                                for (var file of result.data.files) {
+                                	$('#fileView').html("<img src='../../download/" + file.filename + "' alt=" + file.filename + " width='400px' height='400px'>").appendTo('#fileView');
+                                };
+                                $('<button id="updateBtn" type="button" onclick="location.href=\'../hospital/form.html?no='+result.data.hospitalNo +'\'">변경</button>').insertAfter('.hospitalp');
+	                
+	            },
+	            error: () => {
+	            }
+	        });
+						
+						/////////////////////////////	
+						}//innerelse end
+						
+					},//success:result
+					 error: () => {
+					 }
+				}); 
+			}else{
+				prm_addr = result.member.primaryAddress;
+				searchText = "동물병원",
+				imageSrc = '../../images/icon/placeholderhome.png';
+				map = new daum.maps.Map(container, options);
+				zoomControl = new daum.maps.ZoomControl();
+			}
+			
+		}
+	   
+	},
+	 error: () => {
+		  window.alert('서버 실행 오류!');
+	 }
+	 }); 
 
-map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+
+
+
+
+
+//37.566295037
+
+//126.9779450126
+
+
+
+if(map != null){
+	map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);	
+	
+
+
 
 
 ////////////////주소로 장소표시/////////////////////////////
 var geocoder = new daum.maps.services.Geocoder();
 
-$.ajax('../../json/auth/loginUser', {
-async: false,
-dataType: 'json',
-success: (result) => {
-   prm_addr = result.member.primaryAddress;
-},
- error: () => {
-	  window.alert('서버 실행 오류!');
- }
- });  
 //주소로 좌표를 검색합니다
 geocoder.addressSearch(prm_addr, function(result, status) {
 // 정상적으로 검색이 완료됐으면 
 if (status === daum.maps.services.Status.OK) {
  var coords = new daum.maps.LatLng(result[0].y, result[0].x);
- // 결과값으로 받은 위치를 마커로 표시합니다
+ var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize,imgOptions);
+ if(imageSrc === null){
  var marker = new daum.maps.Marker({
      map: map,
      position: coords
  });
-
- // 인포윈도우로 장소에 대한 설명을 표시합니다
- var infowindow = new daum.maps.InfoWindow({
-     content: '<div style="width:150px;text-align:center;padding:6px 0;">현재위치</div>'
- });
- infowindow.open(map, marker);
- // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
- map.setCenter(coords);
- 
+ }else{
+	 var marker = new daum.maps.Marker({
+			map: map,
+		 	position: coords,
+		    image:markerImage
+		  
+		});
+		 }
+		   // 인포윈도우로 장소에 대한 설명을 표시합니다
+		  if(prm_addr ==="서울특별시 중구 세종대로 110 서울특별시청"){
+		 	 var infowindow = new daum.maps.InfoWindow({
+		 	     content: markerText
+		 	 });
+		 	 infowindow.open(map, marker);
+		 	 // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+		 	 map.setCenter(coords);
+		  }else{
+		 	 map.setCenter(coords);
+		  }
+		 
  ///////////////////////////////////////////////////////////////////////////////////////////
  var markers = [];
  // 장소 검색 객체를 생성합니다
@@ -571,15 +806,15 @@ if (status === daum.maps.services.Status.OK) {
      			 location: coords,
      			 radius: 1000
      	        };
-	        var keyword = '동물병원';
-
-	        if (!keyword.replace(/^\s+|\s+$/g, '')) {
-		        alert('키워드를 입력해주세요!');
-		        return false;
-	        }
-
-	        // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-	        ps.keywordSearch(keyword, placesSearchCB, options);
+	        var keyword = searchText;
+			if(keyword!=null){
+				 if (!keyword.replace(/^\s+|\s+$/g, '')) {
+				       	swal('키워드를 입력해주세요!');
+				        return false;
+			        }
+				// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+			        ps.keywordSearch(keyword, placesSearchCB, options);
+			}
      }
 
      // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
@@ -595,12 +830,12 @@ if (status === daum.maps.services.Status.OK) {
 
 	        } else if (status === daum.maps.services.Status.ZERO_RESULT) {
 
-		        alert('검색 결과가 존재하지 않습니다.');
+		        swal('검색 결과가 존재하지 않습니다.  ');
 		        return;
 
 	        } else if (status === daum.maps.services.Status.ERROR) {
 
-		        alert('검색 결과 중 오류가 발생했습니다.');
+		        swal('검색 결과 중 오류가 발생했습니다.  ');
 		        return;
 
 	        }
@@ -685,11 +920,11 @@ if (status === daum.maps.services.Status.OK) {
 
      // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
      function addMarker(position, idx, title) {
-	        var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+	        var imageSrc = '../../images/icon/placeholder.png',  // 마커 이미지 url, 스프라이트 이미지를 씁니다
 	        imageSize = new daum.maps.Size(36, 37), // 마커 이미지의 크기
 	        imgOptions = {
-	            spriteSize : new daum.maps.Size(36, 691), // 스프라이트 이미지의 크기
-	            spriteOrigin : new daum.maps.Point(0, (idx * 46) + 10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+	            //spriteSize : new daum.maps.Size(36, 691), // 스프라이트 이미지의 크기
+	            // spriteOrigin : new daum.maps.Point(0, (idx * 46) + 10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
 	            offset : new daum.maps.Point(13, 37)
 	        // 마커 좌표에 일치시킬 이미지 내에서의 좌표
 	        }, markerImage = new daum.maps.MarkerImage(imageSrc, imageSize,
@@ -759,11 +994,22 @@ if (status === daum.maps.services.Status.OK) {
 	        }
      
 	   } 
+}else {
+	 var coords = new daum.maps.LatLng(37.566295037, 126.9779450126);
+	 var marker = new daum.maps.Marker({
+	     map: map,
+	     position: coords
+	 });
+	 var markerText2 = '<div style="width:400px;text-align:center;padding:6px 0;">주소가 정확하지 않습니다 MyInfo에서 주소를 설정해 주세요!</div>'; 
+	 var infowindow = new daum.maps.InfoWindow({
+	     content: markerText2 
+	 });
+	 infowindow.open(map, marker);
+	 map.setCenter(coords);
+	 
 }
-});   
-
-
-
+}); 
+}
 
 	</script>
 

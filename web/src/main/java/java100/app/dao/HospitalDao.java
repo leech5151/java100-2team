@@ -13,6 +13,7 @@ public interface HospitalDao {
     int update(Hospital hospital);
     int delete(int no);
     int hospitalSelectByMemberNo(int no);
+    Hospital hospitalNoLoginUserNo(int memberNo);
 }
 
 

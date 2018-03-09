@@ -546,8 +546,8 @@
 
 <div style="width: 50%; margin-top: 100px; display: inline-block"
 	class="pricing-header px-3 py-3 pt-md-5 pb-md-4  text-center">
-	<h2 class="display-4">My Hospital</h2>
-	<p class="lead">주변 병원을 검색합니다</p>
+	<h2 class="display-4 hospitalh2">My Hospital</h2>
+	<p class="lead hospitalp">주변 병원을 검색합니다</p>
 </div>
 
 <div style="width: 980px; height: 500px; position:relative; margin-left: 40px">
@@ -560,9 +560,6 @@
 		<div id="pagination"></div>
 	</div>
 </div>
-
-
-
 
 
 <script type="text/javascript">
@@ -580,6 +577,47 @@ imageSize = new daum.maps.Size(36, 37), // 마커 이미지의 크기
 imgOptions = {  offset : new daum.maps.Point(13, 37)};
 
 
+var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+var options = { //지도를 생성할 때 필요한 기본 옵션
+    center : new daum.maps.LatLng(37.566295037, 126.9779450126), //지도의 중심좌표.
+    scrollwheel : false,
+    level : 5   
+};
+
+var map = null;
+var zoomControl = null;
+
+
+$(document).on('click', '.modalList', function(){
+	$("#addBtn").css("display","none");
+	$(".addForm").css("display","");
+    text = $(this).children().first().text();
+    var diagnosisViewModalContent = $('#diagnosisViewModal .modal-content');
+    modalPopup(text);
+    $("#testModal").modal();
+}); 
+
+function modalPopup(text){
+    $.ajax('../../json/diagnosis/' + text, {
+        dataType: 'json',
+        success: (result) => {
+            noItem.val(result.data.diagnosisNo);
+            memberNameItem.val(result.data.memberName);
+            memberTelItem.val(result.data.memberTel);
+            hospitalNameItem.val(result.data.hospital.hospitalName);
+            dogweightItem.val(result.data.dogweight);
+            categoryItem.val(result.data.diagnosisCategory);
+            nameItem.val(result.data.diagnosisName);
+            contentsItem.val(result.data.diagnosisContents);
+            recordingItem.val(result.data.dateRecording);
+            recorderItem.val(result.data.recorder);
+            remarksItem.val(result.data.remarks);
+        },
+        error: () => {
+            window.alert('서버 실행 오류!');
+        }
+    });
+}
 
 $.ajax('../../json/auth/loginUser', {
 	async: false,
@@ -588,6 +626,8 @@ $.ajax('../../json/auth/loginUser', {
 		if(result.status == "fail"){
 			prm_addr = "서울특별시 중구 세종대로 110 서울특별시청";
 			markerText = '<div style="width:400px;text-align:center;padding:6px 0;">로그인이 필요한 서비스입니다 로그인해서 확인해 주세요!</div>'; 
+			map = new daum.maps.Map(container, options);
+			zoomControl = new daum.maps.ZoomControl();
 		}else{
 			if(result.member.memberType == "병원회원"){
 				$.ajax('../../json/hospital/hospitalNo', {
@@ -595,11 +635,23 @@ $.ajax('../../json/auth/loginUser', {
 					dataType: 'json',
 					success: (result) => {
 						if(result.status == "fail"){
+							$('.hospitalh2').text('Hospital');
+							$('.hospitalp').text('Register your Hospital');
+							$('<div>')
+		                     .html(  	
+		                    		 	'<button type="button" onclick="location.href="../hospital/form.html">AddBtn</button>'+
+		                    		 	 "<td><a href='form.html?no=" + data.diagnosisNo + "'>"+ data.hospital.hospitalName + "</a></td>" + 
+		 	                            "</div>")
+		 	                            .appendTo('.pricing-header');
 							prm_addr = "서울특별시 중구 세종대로 110 서울특별시청";
-							markerText = '<div style="width:400px;text-align:center;padding:6px 0;">병원이 없쓰요!! 등록하세요오오옷</div>'; 
+							markerText = '<div style="width:250px;text-align:center;padding:6px 0;">Register Your Hospital!</div>'; 
+							map = new daum.maps.Map(container, options);
+							zoomControl = new daum.maps.ZoomControl();
 						}else{
-							prm_addr = "서울특별시 중구 세종대로 110 서울특별시청";
-							markerText = '<div style="width:400px;text-align:center;padding:6px 0;">병원이 있쓰요!!</div>'; 
+							$('.hospitalh2').text('Hospital');
+							$('.hospitalp').text('Manage Hospital');
+							//prm_addr = "서울특별시 중구 세종대로 110 서울특별시청";
+							//markerText = '<div style="width:400px;text-align:center;padding:6px 0;">병원이 있쓰요!!</div>'; 
 						}
 					},
 					 error: () => {
@@ -609,6 +661,8 @@ $.ajax('../../json/auth/loginUser', {
 				prm_addr = result.member.primaryAddress;
 				searchText = "동물병원",
 				imageSrc = '../../images/icon/placeholderhome.png';
+				map = new daum.maps.Map(container, options);
+				zoomControl = new daum.maps.ZoomControl();
 			}
 			
 		}
@@ -619,25 +673,28 @@ $.ajax('../../json/auth/loginUser', {
 	 }
 	 }); 
 
+
+
+
+
+
 //37.566295037
 
 //126.9779450126
 
 
-
-var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-var options = { //지도를 생성할 때 필요한 기본 옵션
-		
-    center : new daum.maps.LatLng(37.566295037, 126.9779450126), //지도의 중심좌표.
-    scrollwheel : false,
-    level : 5   
-};
+var addBtn = $('#addBtn');
 
 
-var map = new daum.maps.Map(container, options);
-var zoomControl = new daum.maps.ZoomControl();
 
-map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+
+/* var map = new daum.maps.Map(container, options);
+var zoomControl = new daum.maps.ZoomControl(); */
+
+if(map != null){
+	map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);	
+
+
 
 
 ////////////////주소로 장소표시/////////////////////////////
@@ -903,7 +960,11 @@ var marker = new daum.maps.Marker({
 	 infowindow.open(map, marker);
 	 map.setCenter(coords);
 }
-});   
+}); 
+}
+
+
+  
 
 
 

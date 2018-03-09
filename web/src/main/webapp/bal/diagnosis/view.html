@@ -220,7 +220,7 @@ addBtn.click(() => {
         method: 'POST',
         success: (result) => {
             if(result.status=='success'){
-                location.href = "list.html";    
+                location.href = "../diagnosis/CustomerForm.html";    
             }else if(result.status=='fail'){
                 window.alert('병원회원만 입력 가능합니다');
             }else{
@@ -249,9 +249,9 @@ updateBtn.click(() => {
         method: 'POST',
         success: (result) => {
             if(result.status=='success'){
-                location.href = "list.html";    
+                location.href = "../diagnosis/CustomerForm.html";    
             }else if(result.status=='fail'){
-                window.alert('왜 지것도 아닌 진료기록을 변경하려 하시나');
+                window.alert('자신의 병원 진료자료만 가능합니다');
             }else{
                 window.alert('병원운영 회원의 자기 병원의 진료만 변경가능 합니다');
             }
@@ -270,7 +270,7 @@ deleteBtn.click(() => {
         dataType: 'json',
         success: (result) => {
             if(result.status=='success'){
-                location.href = "list.html";    
+                location.href = "../diagnosis/CustomerForm.html";    
             }else if(result.status=='fail'){
                 window.alert('삭제권한이 없습니다');
             }else{

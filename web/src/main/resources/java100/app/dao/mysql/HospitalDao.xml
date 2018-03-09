@@ -123,15 +123,7 @@
 		left join memb as m on m.m_no=h.m_no
 		where h.hp_no=#{value}
     </select>
-    
-    <select id="hospitalNoLoginUserNo" resultMap="hospitalMap" parameterType="int">
-   		select h.hp_no,h.hp_name,h.op_time,h.conts,h.cl_time,h.mdc_sub,h.mdc_ani,h.hp_tel,h.mdc_staff,h.pst_no,h.prm_addr,h.det_addr,m.m_no,d.mda_no,d.file
-		from hp as h 
-		left join hp_mda as d on h.hp_no=d.hp_no
-		left join memb as m on m.m_no=h.m_no
-		where h.m_no=#{value}
-    </select>
-    
+        
     <update id="update" parameterType="hospital">
         update hp set
             hp_name=#{hospitalName}, 

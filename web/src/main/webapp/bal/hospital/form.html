@@ -148,7 +148,7 @@
 	<script src='../../node_modules/jquery/dist/jquery.js'></script>
 	<script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
 	<script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<!-- 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> -->
 	<script>
 var addBtn=$('#addBtn'),
 	updateBtn = $('#updateBtn'),
@@ -225,9 +225,9 @@ addBtn.click(() => {
     		contentType: false,
     		success: (result) => {
     			if(result.status=='success'){
-    				location.href = "../main/home.html#care";	
+    				location.href = "list.html";	
     			}else{
-    				window.alert('한계정당 하나의 병원만 생성할 수 있습니다');
+    				window.alert('한회원당 하나임');
     			}
     			
     		},
@@ -277,9 +277,9 @@ updateBtn.click(() => {
          contentType : false,
          success: (result) => {
         	   	if(result.status=='success'){
-    				location.href = "../main/home.html#care";	
+    				location.href = "list.html";	
     			}else{
-    				window.alert('자신의 병원만 변경 가능합니다');
+    				window.alert('왜 지것도 아닌 병원을 변경하려 하시나');
     			}
     		},
     		error: () => {
@@ -296,9 +296,9 @@ deleteBtn.click(() => {
         dataType: 'json',
         success: (result) => {
         	if(result.status=='success'){
-				location.href = "../main/home.html#care";	
+				location.href = "list.html";	
 			}else{
-				window.alert('자신의 병원만 삭제 가능합니다하시나');
+				window.alert('왜 지것도 아닌 병원을 삭제하려 하시나');
 			}
 			
 		},

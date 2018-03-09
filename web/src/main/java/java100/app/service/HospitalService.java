@@ -25,7 +25,6 @@ public interface HospitalService {
     int update(Hospital hospital);
     int delete(int no,int no2);
     int getHospitalLoginUserNo(int memberNo);
-    int getHospitalNoLoginUserNo(int memberNo);
 }
 
 

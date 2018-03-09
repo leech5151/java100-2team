@@ -329,7 +329,7 @@
 <div data-exact-height="630" data-content-padding-horizontal="0"
 	data-content-padding-vertical="0" title="" class="ca1"
 	id="comp-j7g8f80y"
-	style="left: 473px; position: absolute; visibility: inherit; top: 2455px; width: 600px; height: 630px;">
+	style="left: 370px; position: absolute; visibility: inherit; top: 2384px; width: 600px; height: 630px;">
 	<div id="comp-j7g8f80ylink" class="ca1link"
 		style="width: 600px; height: 630px;">
 		<div data-style="" class="ca1img" id="comp-j7g8f80yimg"
@@ -357,12 +357,25 @@
 </div>
 
 
-
+<div data-exact-height="244" data-content-padding-horizontal="0"
+	data-content-padding-vertical="0" title="" class="ca1"
+	id="comp-j7ggynwq"
+	style="left: 233px; position: absolute; visibility: inherit; top: 3844px; width: 600px; height: 244px;">
+	<div id="comp-j7ggynwqlink" class="ca1link"
+		style="width: 600px; height: 244px;">
+		<div data-style="" class="ca1img" id="comp-j7ggynwqimg"
+			style="position: relative; width: 600px; height: 244px;">
+			<img id="comp-j7ggynwqimgimage" alt="" data-type="image"
+				src="https://static.wixstatic.com/media/5bfb6f_1534be33e38b46dba2fcf0d135b70972~mv2.png/v1/crop/x_0,y_0,w_895,h_364/fill/w_750,h_305,al_c,usm_0.66_1.00_0.01/5bfb6f_1534be33e38b46dba2fcf0d135b70972~mv2.png"
+				style="width: 600px; height: 244px; object-fit: cover;">
+		</div>
+	</div>
+</div>
 
 <div data-exact-height="127" data-content-padding-horizontal="0"
 	data-content-padding-vertical="0" title="" class="ca1"
 	id="comp-j7ga48r0"
-	style="left: 640px; position: absolute; top: 4663px; width: 284px; height: 127px;">
+	style="left: 640px; position: absolute; top: 4050px; width: 284px; height: 127px;">
 	<div id="comp-j7ga48r0link" class="ca1link"
 		style="width: 284px; height: 127px;">
 		<div data-style="" class="ca1img" id="comp-j7ga48r0img"
@@ -395,7 +408,7 @@
 <div data-exact-height="279" data-content-padding-horizontal="0"
 	data-content-padding-vertical="0" title="" class="ca1"
 	id="comp-j7ga48qz"
-	style="left: 920px; position: absolute; top: 4511px; width: 44px; height: 279px;">
+	style="left: 920px; position: absolute; top: 3900px; width: 44px; height: 279px;">
 	<div id="comp-j7ga48qzlink" class="ca1link"
 		style="width: 44px; height: 279px;">
 		<div data-style="" class="ca1img" id="comp-j7ga48qzimg"
@@ -471,7 +484,7 @@
 <div data-exact-height="599" data-content-padding-horizontal="0"
 	data-content-padding-vertical="0" title="" class="ca1"
 	id="comp-j7g8a9jv"
-	style="left: -55px; position: absolute; visibility: inherit; top: 3251px; width: 338px; height: 599px;">
+	style="left: 275px; position: absolute; visibility: inherit; top: 2990px; width: 338px; height: 599px;">
 	<div id="comp-j7g8a9jvlink" class="ca1link"
 		style="width: 338px; height: 599px;">
 		<div data-style="" class="ca1img" id="comp-j7g8a9jvimg"
@@ -527,30 +540,14 @@
 		</div>
 	</div>
 </div>
-
-
-<div data-exact-height="244" data-content-padding-horizontal="0"
-	data-content-padding-vertical="0" title="" class="ca1"
-	id="comp-j7ggynwq"
-	style="left: 207px; position: absolute; visibility: inherit; top: 4480px; width: 600px; height: 244px;">
-	<div id="comp-j7ggynwqlink" class="ca1link"
-		style="width: 600px; height: 244px;">
-		<div data-style="" class="ca1img" id="comp-j7ggynwqimg"
-			style="position: relative; width: 600px; height: 244px;">
-			<img id="comp-j7ggynwqimgimage" alt="" data-type="image"
-				src="https://static.wixstatic.com/media/5bfb6f_1534be33e38b46dba2fcf0d135b70972~mv2.png/v1/crop/x_0,y_0,w_895,h_364/fill/w_750,h_305,al_c,usm_0.66_1.00_0.01/5bfb6f_1534be33e38b46dba2fcf0d135b70972~mv2.png"
-				style="width: 600px; height: 244px; object-fit: cover;">
-		</div>
-	</div>
-</div>
-
 <div style="width: 50%; margin-top: 100px; display: inline-block"
 	class="pricing-header px-3 py-3 pt-md-5 pb-md-4  text-center">
-	<h2 class="display-4">My Hospital</h2>
-	<p class="lead">주변 병원을 검색합니다</p>
+	<h2 class="display-4 hospitalh2">My Hospital</h2>
+	<p class="lead hospitalp">주변 병원을 검색합니다</p>
 </div>
 
-<div style="width: 980px; height: 500px; position:relative; margin-left: 40px">
+<div
+	style="width: 980px; height: 500px; position: relative; margin-left: 40px">
 	<div id="idPlease"></div>
 	<div class="map_wrap">
 		<div id="map" style="width: 100%; height: 100%; overflow: auto;"></div>
@@ -580,6 +577,15 @@ imageSize = new daum.maps.Size(36, 37), // 마커 이미지의 크기
 imgOptions = {  offset : new daum.maps.Point(13, 37)};
 
 
+var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+var options = { //지도를 생성할 때 필요한 기본 옵션
+    center : new daum.maps.LatLng(37.566295037, 126.9779450126), //지도의 중심좌표.
+    scrollwheel : false,
+    level : 5   
+};
+
+var map = null;
+var zoomControl = null;
 
 $.ajax('../../json/auth/loginUser', {
 	async: false,
@@ -595,6 +601,8 @@ $.ajax('../../json/auth/loginUser', {
                      "</div>")
                         .appendTo('#idPlease'); 
 			markerText = '<div style="width:400px;text-align:center;padding:6px 0;">로그인이 필요한 서비스입니다 로그인해서 확인해 주세요!</div>'; 
+			map = new daum.maps.Map(container, options);
+			zoomControl = new daum.maps.ZoomControl();
 		}else{
 			if(result.member.memberType == "병원회원"){
 				$.ajax('../../json/hospital/hospitalNo', {
@@ -602,6 +610,14 @@ $.ajax('../../json/auth/loginUser', {
 					dataType: 'json',
 					success: (result) => {
 						if(result.status == "fail"){
+							$('.hospitalh2').text('Hospital');
+							$('.hospitalp').text('Register your Hospital');
+							$('<div>')
+		                     .html(  	
+		                    		 	'<button type="button" onclick="location.href="../hospital/form.html">AddBtn</button>'+
+		                    		 	// "<td><a href='form.html?no=" + data.diagnosisNo + "'>"+ data.hospital.hospitalName + "</a></td>" + 
+		 	                            "</div>")
+		 	                            .appendTo('.pricing-header');
 							prm_addr = "서울특별시 중구 세종대로 110 서울특별시청";
 							$('#idPlease').html("");
 				            $('<div>')
@@ -610,10 +626,12 @@ $.ajax('../../json/auth/loginUser', {
 				                     "<div style='float: left;width: 600px;color:white;font-size:35px;font-family:contsfont-kor;margin-right: 2em;'>병원이 등록이 필요한 서비스입니다.</div>"+
 				                     "</div>")
 				                        .appendTo('#idPlease'); 
-							markerText = '<div style="width:400px;text-align:center;padding:6px 0;">병원이 없쓰요!! 등록하세요오오옷</div>'; 
+							markerText = '<div style="width:400px;text-align:center;padding:6px 0;">Register Your Hospital!</div>'; 
+							map = new daum.maps.Map(container, options);
+							zoomControl = new daum.maps.ZoomControl();
 						}else{
-							prm_addr = "서울특별시 중구 세종대로 110 서울특별시청";
-							markerText = '<div style="width:400px;text-align:center;padding:6px 0;">병원이 있쓰요!!</div>'; 
+							$('.hospitalh2').text('Hospital');
+							$('.hospitalp').text('Manage Hospital');
 						}
 					},
 					 error: () => {
@@ -623,6 +641,8 @@ $.ajax('../../json/auth/loginUser', {
 				prm_addr = result.member.primaryAddress;
 				searchText = "동물병원",
 				imageSrc = '../../images/icon/placeholderhome.png';
+				map = new daum.maps.Map(container, options);
+				zoomControl = new daum.maps.ZoomControl();
 			}
 			
 		}
@@ -633,64 +653,58 @@ $.ajax('../../json/auth/loginUser', {
 	 }
 	 }); 
 
+
+
+
+
+
 //37.566295037
 
 //126.9779450126
 
 
 
-var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-var options = { //지도를 생성할 때 필요한 기본 옵션
-		
-    center : new daum.maps.LatLng(37.566295037, 126.9779450126), //지도의 중심좌표.
-    scrollwheel : false,
-    level : 5   
-};
+if(map != null){
+	map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);	
+	
 
 
-var map = new daum.maps.Map(container, options);
-var zoomControl = new daum.maps.ZoomControl();
-
-map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 
 
 ////////////////주소로 장소표시/////////////////////////////
 var geocoder = new daum.maps.services.Geocoder();
 
- 
 //주소로 좌표를 검색합니다
 geocoder.addressSearch(prm_addr, function(result, status) {
 // 정상적으로 검색이 완료됐으면 
 if (status === daum.maps.services.Status.OK) {
  var coords = new daum.maps.LatLng(result[0].y, result[0].x);
  var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize,imgOptions);
- 
  if(imageSrc === null){
  var marker = new daum.maps.Marker({
      map: map,
      position: coords
  });
  }else{
-var marker = new daum.maps.Marker({
-	map: map,
-	position: coords,
-    image:markerImage
-
-});
-}
- // 인포윈도우로 장소에 대한 설명을 표시합니다
- if(prm_addr ==="서울특별시 중구 세종대로 110 서울특별시청"){
-	 var infowindow = new daum.maps.InfoWindow({
-	     content: markerText
-	 });
-	 infowindow.open(map, marker);
-	 // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-	 map.setCenter(coords);
- }else{
-	 map.setCenter(coords);
- }
-
- 
+	 var marker = new daum.maps.Marker({
+			map: map,
+		 	position: coords,
+		    image:markerImage
+		  
+		});
+		 }
+		   // 인포윈도우로 장소에 대한 설명을 표시합니다
+		  if(prm_addr ==="서울특별시 중구 세종대로 110 서울특별시청"){
+		 	 var infowindow = new daum.maps.InfoWindow({
+		 	     content: markerText
+		 	 });
+		 	 infowindow.open(map, marker);
+		 	 // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+		 	 map.setCenter(coords);
+		  }else{
+		 	 map.setCenter(coords);
+		  }
+		 
  ///////////////////////////////////////////////////////////////////////////////////////////
  var markers = [];
  // 장소 검색 객체를 생성합니다
@@ -722,9 +736,6 @@ var marker = new daum.maps.Marker({
 				// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
 			        ps.keywordSearch(keyword, placesSearchCB, options);
 			}
-	       
-
-	        
      }
 
      // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
@@ -740,12 +751,12 @@ var marker = new daum.maps.Marker({
 
 	        } else if (status === daum.maps.services.Status.ZERO_RESULT) {
 
-		        swal('검색 결과가 존재하지 않습니다.');
+		        swal('검색 결과가 존재하지 않습니다.  ');
 		        return;
 
 	        } else if (status === daum.maps.services.Status.ERROR) {
 
-		        swal('검색 결과 중 오류가 발생했습니다.');
+		        swal('검색 결과 중 오류가 발생했습니다.  ');
 		        return;
 
 	        }
@@ -830,11 +841,11 @@ var marker = new daum.maps.Marker({
 
      // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
      function addMarker(position, idx, title) {
-	        var imageSrc = '../../images/icon/placeholder.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+	        var imageSrc = '../../images/icon/placeholder.png',  // 마커 이미지 url, 스프라이트 이미지를 씁니다
 	        imageSize = new daum.maps.Size(36, 37), // 마커 이미지의 크기
 	        imgOptions = {
 	            //spriteSize : new daum.maps.Size(36, 691), // 스프라이트 이미지의 크기
-	           // spriteOrigin : new daum.maps.Point(0, (idx * 46) + 10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+	            // spriteOrigin : new daum.maps.Point(0, (idx * 46) + 10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
 	            offset : new daum.maps.Point(13, 37)
 	        // 마커 좌표에 일치시킬 이미지 내에서의 좌표
 	        }, markerImage = new daum.maps.MarkerImage(imageSrc, imageSize,
@@ -916,8 +927,13 @@ var marker = new daum.maps.Marker({
 	 });
 	 infowindow.open(map, marker);
 	 map.setCenter(coords);
+	 
 }
-});   
+}); 
+}
+
+
+  
 
 
 

@@ -1,4 +1,5 @@
 <meta charset="UTF-8" />
+<link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <link rel='stylesheet' href='../../css/common.css'>
 <link rel='stylesheet' href='../../css/business.css'>
 <link rel='stylesheet' href='../../css/main.css'>
@@ -199,7 +200,6 @@ if (index != -1) { // 기존 데이터를 조회할 경우,
                 filedItem.html( "<img src='../../download/" + file.filename + "' alt=" + file.filename + ">")
                 console.log(file.filename)
                 }
-                    console.log("여기서 넘겨준다잉" + b_number);
                 $.get('../../json/review/form',{
                     b_number: b_number
                 },  
@@ -216,10 +216,10 @@ if (index != -1) { // 기존 데이터를 조회할 경우,
     $('.my-view').css('display', 'none');
 }
 
- addReviewBtn.click(()=> {
+addReviewBtn.click(()=> {
     location.href = "review.html";
      alert(number)
- }); 
+ });
 
  addBtn.click(() => {
      if (ctgrItem.val() == '카테고리') {

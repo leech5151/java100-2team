@@ -13,6 +13,7 @@ public class Lost {
     protected String viewCount;
     protected String contents;
     protected Member registrant;
+    protected boolean pushAlert;
     protected List<LostUploadFile> files;
     
     public int getLostNo() {
@@ -93,6 +94,14 @@ public class Lost {
 
     public void setRegistrant(Member registrant) {
         this.registrant = registrant;
+    }
+
+    public boolean getPushAlert() {
+        return pushAlert;
+    }
+
+    public void setPushAlert(boolean pushAlert) {
+        this.pushAlert = pushAlert;
     }
 
     public List<LostUploadFile> getFiles() {

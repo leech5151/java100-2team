@@ -123,14 +123,20 @@ public class HospitalServiceImpl implements HospitalService {
     @Override
     public int getHospitalBymemberNo(Hospital hospital) {
         int countmemberNo = hospitalDao.hospitalSelectByMemberNo(hospital.getMember().getMemberNo());
+        
         return countmemberNo;
     }
 
     @Override
     public int getHospitalLoginUserNo(int memberNo) {
         int countHospitalNO = hospitalDao.hospitalSelectByMemberNo(memberNo);
+        
         return countHospitalNO;
     }
 
-    
+    @Override
+    public int getHospitalNoLoginUserNo(int memberNo) {
+        int hospitalNo = hospitalDao.hospitalNoLoginUserNo(memberNo).getHospitalNo();
+        return hospitalNo;
+    }
 }

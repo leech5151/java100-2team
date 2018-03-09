@@ -11,7 +11,7 @@
     content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
 
 <title>Balance Pet</title>
-
+<link rel="stylesheet" href="/path/to/jquery.mCustomScrollbar.css" />
 <link rel='stylesheet' href='../../css/hospitalproducermainlist.css'> 
 <!-- Bootstrap core CSS -->
 <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -104,23 +104,23 @@
 </div>
 
 <!-- lostFormAdd -->
-<div class="modal fade" role="dialog" id="lostFormAddModal">
+<!-- <div class="modal fade" role="dialog" id="lostFormAddModal">
 <div class="modal-dialog">
     <div class="modal-content"
         style="width: 40rem; height: 80vh; overflow: auto; z-index: 30;">
         </div>
 </div>
 </div>
+ -->
 
-<!-- hospital -->
-<div class="modal fade" role="dialog" id="diagnosisModalView">
+<!-- lostPushAlert -->
+<div class="modal fade" role="dialog" id="lostPushAlertModal">
 <div class="modal-dialog">
-	<div class="modal-content" id=modal_view_content>
-		</div>
+    <div class="modal-content"
+        style="width: 30rem; height: 38vh; overflow: auto; z-index: 30;">
+        </div>
 </div>
 </div>
-
-
 <!-- Bootstrap core JavaScript -->
 <script src="../../vendor/jquery/jquery.min.js"></script>
 <script src="../../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -134,12 +134,12 @@
 <!-- Custom scripts for this template -->
 <script src='../../node_modules/handlebars/dist/handlebars.min.js'></script>
 <script src='../../node_modules/jquery/dist/jquery.js'></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94bb2cfc7cdc1dacca4463266c794af3&libraries=services,clusterer,drawing"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=94bb2cfc7cdc1dacca4463266c794af3&libraries=services,clusterer,drawing"></script>
 <script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
 <script src='../../node_modules/sweetalert/dist/sweetalert.min.js'></script>
 <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-
+<script src="/path/to/jquery.mCustomScrollbar.concat.min.js"></script>
 <script type="text/javascript">
 $('#first').load('section_first.html');
 $('#care').load('section_pet_care.html');
@@ -162,8 +162,28 @@ $.getJSON('../../json/auth/loginUser', (result) => {
         $('.after-login').css('display', 'none');
         return;
     } else {
-        var member = result.member;
-        memberNo = member.memberNo;
+        var member = result.member,
+            memberNo = member.memberNo;
+        
+        if (result.member.push) {
+        	$.getJSON('../../json/lost/listAll', (result) => {
+	        	var count = 0;
+        		for (var data of result.list) {
+	        	    if (data.pushAlert  && data.registrant.tel != member.tel) {	count++; }
+        		}
+        		
+        		if (count > 0) {
+       	    	    var lostPushAlertModal = $('#lostPushAlertModal');
+       	    	    var lostPushAlertModalContent = $('#lostPushAlertModal .modal-content');
+       	    	    event.preventDefault();
+       	    	    event.stopPropagation();
+       	    	    lostPushAlertModalContent.load('../lost/lostPushAlert.html', () => {
+       	    	    	lostPushAlertModal.modal();
+       	    	    });
+        		}
+            })
+        }
+
         $('.before-login').css('display', 'none');
         for (var file of member.files) {
             if (file.filename == null) {
@@ -192,7 +212,7 @@ if (index != -1) {
                 location.href = "../main/home.html";
             },
             error: () => {
-                window.alert('서버 실행 오류!');
+            	swal('실행 오류', "잠시 후 다시 시도해주세요.", 'error');
             }
         });
     });
@@ -220,6 +240,14 @@ $('#memberView').click(() => {
 });
 
 </script>
-
+<script>
+    (function($){
+        $(window).on("load",function(){
+            $(".content").mCustomScrollbar({
+                theme:"rounded";
+            });
+        });
+    })(jQuery);
+</script>
 </body>
 </html>

@@ -34,6 +34,12 @@ public class LostServiceImpl implements LostService {
     }
     
     @Override
+    public List<Lost> listAll() {
+        
+        return lostDao.findAllList();
+    }
+    
+    @Override
     public int getTotalCount() {
         return lostDao.countAll();
     }

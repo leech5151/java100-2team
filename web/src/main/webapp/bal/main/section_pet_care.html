@@ -408,7 +408,6 @@
 </div>
 
 <div style="width: 980px; height: 500px; position:relative; margin-left: 40px">
-	<div id="idPlease"></div>
 	<div class="map_wrap">
 		<div id="map" style="width: 100%; height: 100%; overflow: auto;"></div>
 	</div>
@@ -446,9 +445,6 @@ var options = { //지도를 생성할 때 필요한 기본 옵션
 
 var map = null;
 var zoomControl = null;
-
-
-
 
 $.ajax('../../json/auth/loginUser', {
 	async: false,
@@ -527,9 +523,6 @@ $.ajax('../../json/auth/loginUser', {
 
 
 
-
-
-
 if(map != null){
 	map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);	
 	
@@ -540,39 +533,34 @@ if(map != null){
 ////////////////주소로 장소표시/////////////////////////////
 var geocoder = new daum.maps.services.Geocoder();
 
- 
+$.ajax('../../json/auth/loginUser', {
+async: false,
+dataType: 'json',
+success: (result) => {
+   prm_addr = result.member.primaryAddress;
+},
+ error: () => {
+	  window.alert('서버 실행 오류!');
+ }
+ });  
 //주소로 좌표를 검색합니다
 geocoder.addressSearch(prm_addr, function(result, status) {
 // 정상적으로 검색이 완료됐으면 
 if (status === daum.maps.services.Status.OK) {
  var coords = new daum.maps.LatLng(result[0].y, result[0].x);
- var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize,imgOptions);
- 
- if(imageSrc === null){
+ // 결과값으로 받은 위치를 마커로 표시합니다
  var marker = new daum.maps.Marker({
      map: map,
      position: coords
  });
- }else{
-var marker = new daum.maps.Marker({
-	map: map,
-	position: coords,
-    image:markerImage
 
-});
-}
  // 인포윈도우로 장소에 대한 설명을 표시합니다
- if(prm_addr ==="서울특별시 중구 세종대로 110 서울특별시청"){
-	 var infowindow = new daum.maps.InfoWindow({
-	     content: markerText
-	 });
-	 infowindow.open(map, marker);
-	 // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-	 map.setCenter(coords);
- }else{
-	 map.setCenter(coords);
- }
-
+ var infowindow = new daum.maps.InfoWindow({
+     content: '<div style="width:150px;text-align:center;padding:6px 0;">현재위치</div>'
+ });
+ infowindow.open(map, marker);
+ // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+ map.setCenter(coords);
  
  ///////////////////////////////////////////////////////////////////////////////////////////
  var markers = [];
@@ -605,10 +593,14 @@ var marker = new daum.maps.Marker({
 				// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
 			        ps.keywordSearch(keyword, placesSearchCB, options);
 			}
-			
 	       
+	        if (!keyword.replace(/^\s+|\s+$/g, '')) {
+		        alert('키워드를 입력해주세요!');
+		        return false;
+	        }
 
-	        
+	        // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+	        ps.keywordSearch(keyword, placesSearchCB, options);
      }
 
      // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
@@ -624,12 +616,12 @@ var marker = new daum.maps.Marker({
 
 	        } else if (status === daum.maps.services.Status.ZERO_RESULT) {
 
-		        swal('검색 결과가 존재하지 않습니다.');
+		        alert('검색 결과가 존재하지 않습니다.');
 		        return;
 
 	        } else if (status === daum.maps.services.Status.ERROR) {
 
-		        swal('검색 결과 중 오류가 발생했습니다.');
+		        alert('검색 결과 중 오류가 발생했습니다.');
 		        return;
 
 	        }
@@ -714,11 +706,10 @@ var marker = new daum.maps.Marker({
 
      // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
      function addMarker(position, idx, title) {
-	        var imageSrc = '../../images/icon/placeholder.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
+	        var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
 	        imageSize = new daum.maps.Size(36, 37), // 마커 이미지의 크기
 	        imgOptions = {
 	            //spriteSize : new daum.maps.Size(36, 691), // 스프라이트 이미지의 크기
-	            
 	            // spriteOrigin : new daum.maps.Point(0, (idx * 46) + 10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
 	            offset : new daum.maps.Point(13, 37)
 	        // 마커 좌표에 일치시킬 이미지 내에서의 좌표

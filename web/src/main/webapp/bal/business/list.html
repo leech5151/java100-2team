@@ -8,36 +8,23 @@
 body {
 padding-left: 0;
 }
-#businessInfo {
-font-family: contsfont-kor;
-font-size: 25px;
-}
 </style>
 <header style="text-align: center;">
 <ul style="cursor: pointer; list-style-type: none; text-align: center; padding-top: 2vh; font-size:40px;">
            <li class="menuItem" style="top: 12px; margin: 0; display: inline;">
                  <img id="_logo7" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/53/Snoopy_Peanuts.png/200px-Snoopy_Peanuts.png" height="40"> Balance Pet
            </li>
-              <li class="menuItem" style="display: inline; padding: 0px 2% 0px 100px;"><a class="js-scroll-trigger" href="../main/home.html#first" style="color: #BD5D38;">Home</a></li>
-              <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="../main/home.html#care" style="color: #BD5D38;">Pet Care</a></li>
-              <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="../main/home.html#diagnosis" style="color: #BD5D38;">Pet Diagnosis</a></li>
-              <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="../main/home.html#together" style="color: #BD5D38;">Pet Together</a></li>
-              <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="../main/home.html#cast" style="color: #BD5D38;">Cast</a></li>
-              <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="../main/home.html#lost" style="color: #BD5D38;">Lost</a></li>
+              <li class="menuItem" style="display: inline; padding: 0px 2% 0px 100px;"><a class="js-scroll-trigger" href="../main/home.html#first">Home</a></li>
+              <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="../main/home.html#care">Pet Care</a></li>
+              <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="../main/home.html#diagnosis">Pet Diagnosis</a></li>
+              <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="../main/home.html#together">Pet Together</a></li>
+              <li class="menuItem" style="display: inline; padding: 0px 2% 0px 2px;"><a class="js-scroll-trigger" href="../main/home.html#cast">Cast</a></li>
               <li id="loginBtn" class="menuItem" style="display: inline; padding: 0px 0px 0px 2%; font-size: 25px; font: italic bold; color: black;"><a class="js-scroll-trigger before-login" href="#" style="color:#000000;">Login</a></li>
               <li id="logoutBtn" class="menuItem" style="display: inline; padding: 0px 0px 0px 2%; font-size: 25px; font: italic bold; color: black;"><a class="js-scroll-trigger after-login" href="#" style="color:#000000;">Logout</a></li>
 </ul>
 <h2>PET' TOGETHER</h2>
 </header>
-<!-- <button id="addBtn" type="button" class='btn btn-primary btn-sm my-new'style="margin-left: 100px;" >추가</button> -->
-<a data-toggle="modal" id="businessInfo" class="open-modal" href="#businessViewModal" style="margin-left:60px;color: #BD5D38; ">추가</a><br>
-<div class="modal fade" role="dialog" id="businessViewModal">
-<div class="modal-dialog">
-<div class="modal-content" id=modal_view_content style="width: 220%;font-size: 1em;    margin-left: -300px;">
-<!-- modal 삽입 -->
-</div>
-</div>
-</div>
+<button id="addBtn" type="button" class='btn btn-primary btn-sm my-new'style="margin-left: 100px;" >추가</button>
 
 <div class="form-group row" style="text-align: right;">
 <div class="col-sm-10">
@@ -227,15 +214,7 @@ function load2(pageNo, options) {
 	        window.alert('error! blist');
 	    }
 	});
-	
-	var businessViewModalContent = $('#businessViewModal .modal-content');
-    $(document).ready(function(){ 
-        $('#businessInfo').click(function(){
-            businessViewModalContent.load('../business/view.html', () => {
-            });
-        });
-    }); 
-}
+	}
 </script>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">

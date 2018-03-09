@@ -103,14 +103,14 @@
 </div>
 
 <!-- lostFormAdd -->
-<!-- <div class="modal fade" role="dialog" id="lostFormAddModal">
+ <div class="modal fade" role="dialog" id="lostFormAddModal">
 <div class="modal-dialog">
     <div class="modal-content"
         style="width: 40rem; height: 80vh; overflow: auto; z-index: 30;">
         </div>
 </div>
 </div>
- -->
+
 
 <!-- lostPushAlert -->
 <div class="modal fade" role="dialog" id="lostPushAlertModal">
@@ -144,7 +144,7 @@ $('#care').load('section_pet_care.html');
 $('#diagnosis').load('section_diagnosis.html');
 $('#together').load('section_pet_together.html');
 $('#cast').load('section_pet_cast.html');
-$('#lost').load('section_lost.html');
+$('#lost').load('section_lost.html'); 
 </script>
 
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -163,7 +163,7 @@ $.getJSON('../../json/auth/loginUser', (result) => {
         var member = result.member,
             memberNo = member.memberNo;
         
-        if (result.member.push) {
+        if (result.member.push) { 
         	$.getJSON('../../json/lost/listAll', (result) => {
 	        	var count = 0;
         		for (var data of result.list) {
@@ -180,7 +180,7 @@ $.getJSON('../../json/auth/loginUser', (result) => {
        	    	    });
         		}
             })
-        }
+        } 
 
         $('.before-login').css('display', 'none');
         for (var file of member.files) {

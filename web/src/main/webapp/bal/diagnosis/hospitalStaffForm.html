@@ -8,24 +8,24 @@
 <link rel="shortcut icon" href="../favicon.ico">
 
 <link rel="stylesheet" type="text/css" href="../../css/diagnosis/font-awesome-4.3.0/css/font-awesome.min.css" />
-<link rel="stylesheet" href='../../node_modules/jquery-ui-dist/jquery-ui.css' />
+<link rel="stylesheet" href='../../node_modules/jquery-ui-dist/jquery-ui.css' /> 
 <link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <link rel="stylesheet" type="text/css" href="../../business_view/css/demo.css" />
 <link rel="stylesheet" type="text/css" href="../../business_view/css/gallery.css" />
-<link rel="stylesheet" type="text/css" href="../../css/main.css" />
+<link rel="stylesheet" type="text/css" href="../../css/main.css" /> 
 <style>
  nav a {
 color:#7D87AE;
 }
- nav a:hover{
+ nav a:hover{ 
 color:#212529;
-}
+} 
 </style>
 <div id=diagnosis_form>
 	<div class="container_b">
 		<header class="codrops-header" style="margin-bottom: -4%">
 			<h1>
-				Diagnosis<span> <a href="../main/home.html#diagnosis">of hospital staff</a></span>
+				Diagnosis<span> <a href="../main/home.html#diagnosis">of hospital staff</a></span> 
 			</h1>
 			<nav class="codrops-demos">
 
@@ -62,7 +62,7 @@ color:#212529;
 			<div style='width:10%; display:inline-block; ; font-size:20px;'>No</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Customer Name</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Tel</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Date</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Category</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Medical name</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Contents</div>
 		</div>
 
-		<div id="diagnosisbody"style="font-size:18px;margin-top: 15px;"">
+		<div id="diagnosisbody"style="font-size:18px;margin-top: 15px;""> 
 		
 		
 		</div>
@@ -87,9 +87,9 @@ color:#212529;
 <div class="modal-header">
 </div>
 <div class="modal-body" style="padding: 40px 50px;">
-<div class='container'>
+<div class='container' style="font-family:contsfont-kor">
 
-        <h1>진료 상세정보</h1>
+        <h2 style="margin-bottom: 50px; font-family:contsfont-kor">진료 상세정보</h2>
 
         <form action='update' method='post'>
 
@@ -324,7 +324,7 @@ $.datepicker.regional['kr'] = {
 	                        .html(  
 	                                "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
                                     "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.memberName + "</div>" +
-                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>"+ data.memberTel + "</div>" + 
+                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>"+ data.memberTel + "</div>" +  
                                     "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
                                     "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
                                     "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
@@ -520,7 +520,7 @@ $.datepicker.regional['kr'] = {
 		                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.memberName + "</div>" +
 		                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
 		                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
-		                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
+		                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisName + "</div>" + 
 		                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
 				                            .appendTo('#diagnosisbody'); 
 			               }
@@ -578,7 +578,7 @@ $.datepicker.regional['kr'] = {
 		                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
 		                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
 		                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
-		                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
+		                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisContents + "</div>") 
 				                            .appendTo('#diagnosisbody'); 
 			               }
 			               
@@ -641,7 +641,7 @@ $.ajax('../../json/diagnosis/hospitalalllist', {
                        "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.memberName + "</div>" +
                        "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
                        "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
-                       "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
+                       "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisName + "</div>" + 
                        "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
                         .appendTo('#diagnosisbody'); 
         }
@@ -678,7 +678,7 @@ function load(pageNo, options){
                                "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.memberName + "</div>" +
                                "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
                                "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
-                               "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
+                               "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisName + "</div>" + 
                                "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
 	                            .appendTo('#diagnosisbody'); 
                }

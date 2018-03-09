@@ -15,7 +15,7 @@
 .b {
 	border-bottom: 1px solid gray;
 	padding-bottom: 30px;
-	margin-left: -22px;
+	margin-left: -38px;
 }
 
 .c {
@@ -68,11 +68,11 @@
 			</div> -->
 
 		 	<div class='form-group row'>
+				<label for='title' class='col-sm-2 col-form-label'>제목</label>
 				<div class='col-sm-10'>
-				<label for='title' id='title' class='col-sm-2 col-form-label'></label>
 					<input class='form-control' id='title' type='text' name='title'>
 				</div>
-			</div>
+			</div> 
 
 
 
@@ -230,8 +230,8 @@ if (index != -1) { // 기존 데이터를 조회할 경우,
                 vwcntItem.val(result.data.viewCount);
                 rdtItem.val(result.data.registrationDate);
                 /* likesItem.val(result.data.likes); */
-                $('#reg').html('게시일 &nbsp; &nbsp; '  + result.data.registrationDate);
-                $('#view').html('조회수 &nbsp; &nbsp; '  + result.data.viewCount);
+                $('#reg').html('게시일 &nbsp; '  + result.data.registrationDate);
+                $('#view').html('조회수 &nbsp; '  + result.data.viewCount);
                 for (var file of result.data.files){
                /*  $('#vi').html('<video src="../../download/' + file.filename + '" controls="controls"  autoplay loop id="video" width="1000px" height="500px"></video>') */
                 /* filedItem.html("<input type='file' class='form-control-file' id='file1' name='file'>" +

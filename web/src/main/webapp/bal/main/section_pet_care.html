@@ -702,7 +702,7 @@ $.ajax('../../json/auth/loginUser', {
                                 for (var file of result.data.files) {
                                 	$('#fileView').html("<img src='../../download/" + file.filename + "' alt=" + file.filename + " width='400px' height='400px'>").appendTo('#fileView');
                                 };
-                                $('<button id="updateBtn" type="button" onclick="location.href=\'../hospital/form.html?no='+result.data.hospitalNo +'\'">변경</button>').insertAfter('.hospitalp');
+                                $('<button type="button" onclick="location.href=\'../hospital/form.html?no='+result.data.hospitalNo +'\'">변경</button>').insertAfter('.hospitalp');
 	                
 	            },
 	            error: () => {

@@ -52,12 +52,14 @@ public class DiagnosisServiceImpl implements DiagnosisService {
     @Override
     public int add(Diagnosis diagnosis) {
         int count = diagnosisDao.insert(diagnosis);
+        System.out.println(count);
         return count;
     }
 
     @Override
     public int get(String tel) {
         int j = diagnosisDao.CountMember(tel);
+        System.out.println("j=" + j);
         return j;
     }
 
@@ -74,6 +76,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
             Diagnosis diagnosis2 = diagnosisDao.findByHospitalNo(no);
             diagnosis.setHospital(diagnosis2.getHospital());
             count = diagnosisDao.update(diagnosis);
+            System.out.println("count=" + count);
             return count;
     }
       
@@ -91,8 +94,12 @@ public class DiagnosisServiceImpl implements DiagnosisService {
         
 
         int i = diagnosisDao.countAll();
+        System.out.print("i=");
+        System.out.println(i);
         diagnosisDao.delete(no,k);
         int j = diagnosisDao.countAll();
+        System.out.print("j=");
+        System.out.println(j);
         
         if(i==j) {
             return 0;

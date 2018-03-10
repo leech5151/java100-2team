@@ -153,6 +153,16 @@ public class HospitalController {
         result.put("data", hospitalService.get(no));
         return result;
     }
+    
+    @RequestMapping("hospitalview")
+    public Object hospitalView(@ModelAttribute(value="loginUser") Member loginUser) throws Exception {
+                HashMap<String,Object> result = new HashMap<>();
+                int hospitalNo = hospitalService.getHospitalNoLoginUserNo(loginUser.getMemberNo());//로그인 유저의 번호로 병원번호 가져오기
+                result.put("data", hospitalService.get(hospitalNo)); 
+                result.put("status", "success");
+                return result;   
+    }
+    
 
     @RequestMapping("update")
     public Object update(
@@ -218,8 +228,6 @@ public class HospitalController {
                 return result;   
             }
     }
-    
-    
 
     long prevMillis = 0;
     int count = 0;

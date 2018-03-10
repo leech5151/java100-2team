@@ -82,7 +82,8 @@ public class LoginController {
             Map userInfo = facebookService.me(accessToken, Map.class);
             
             Member member = memberService.get(
-            (String)userInfo.get("email"));
+                                (String)userInfo.get("email"));
+            System.out.println(member);
             if (member == null) { // 등록된 회원이 아니면,
                 // 페이스북에서 받은 정보로 회원을 자동 등록한다.
                 member = new Member();
@@ -94,7 +95,9 @@ public class LoginController {
             
             // 회원 정보를 세션에 저장하여 자동 로그인 처리를 한다.
             model.addAttribute("loginUser", member);
-            
+            System.out.println(member.getEmail());
+            System.out.println(member.getName());
+            System.out.println(member.getPassword());
             HashMap<String,Object> result = new HashMap<>();
             result.put("status", "success");
             return result;

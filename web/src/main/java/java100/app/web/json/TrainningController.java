@@ -163,6 +163,7 @@ public class TrainningController {
     public Object checkLike(Trainning trainning) throws Exception {
 
         HashMap<String, Object> result = new HashMap<>();
+        System.out.println("ttttttttttttttt: " +trainningService.checkLike(trainning));
         if (trainning.getLiked() == 0)
             return result.put("status", "unchecked");
         else

@@ -81,78 +81,76 @@ $.getJSON('../../json/auth/loginUser', (result) => {
         success: (result) => {
            list.append(lostTemplateEngine(result));
 
-               $('button').click(function(e){
-	            var id = e.target.getAttribute('id');
-	            if ((id != '') && (id != null))  
-	                var newId = '#' + id;
-
-	            if (newId == '#lostAddBtn') {
-			    	addModalStart();
-			    } else if ((newId == '#lostPrevBtn')) {
-	    			pageNo = pageCalculator(-1, result.lastPageNo)
-			    	pageChange(pageNo, options)
-			    } else if (newId == '#lostNextBtn') {
-	    			pageNo = pageCalculator(1, result.lastPageNo)
-			    	pageChange(pageNo, options)
-			    } else if (newId.substring(0, 7) == '#delete') {
-			    	
-			    	$.getJSON('../../json/lost/' + newId.substring(7), (result) => {
-			    		if(currTel==result.data.registrant.tel) {
-					    	$.getJSON('../../json/delete/' + newId.substring(7));
-			    		}
-			    	});
-			    } else if (newId.substring(0, 9) == '#lostView') {
-		    		$.ajax('../../json/lost/' + newId.substring(9), {
-		    	        dataType: 'json',
-		    	        success: (result) => {
-		    	           list.empty();
-		    	        		   for (var file of result.data.files) {}	   
-		    	           $('#lostList').html(
-		    	        		   "<div class='bal-mb-3-data lostData' style='border: 1px; border-color: #808080; margin-left: 10rem;'>" + 
-		    	        		   "<figure class='snip1283p'>" + 
-		    	        		   "<img src='../../download/" + file.filename + "' alt='" + file.filename + "' style='width:100%; height:100%;'>" + 
-		    	        		   "<figcaption>" + 
-		    	        		   "<h3 style='text-align: center;'> < " + result.data.petName + " > </h3>" + 
-		    	        		       
-		    	        		       "<form id='fileForm2' enctype='multipart/form-data'>" + 
-			    	        		       "이름 :           <input id='petName2' class='afterUpdate' type='text' name='petName' style='width: 20rem; margin-left: 6.5rem; background-color: black; color: white;' placeholder='" + result.data.petName + "'><br><br><br>" + 
-			    	        		       "품종 :           <input id='breed2' class='afterUpdate' type='text' name='breed' style='width: 20rem; margin-left: 6.5rem; background-color: black; color: white;' placeholder='" + result.data.breed + "'><br><br><br>" + 
-			    	        		       "분실장소 :       <input id='lostLocation2' class='afterUpdate' type='text' name='lostLocation' style='width: 20rem; margin-left: 4.5rem; background-color: black; color: white;' placeholder='" + result.data.lostLocation + "'><br><br><br>" + 
-			    	        		       "분실일(" + result.data.lostDate + ") : <input id='lostDate2' class='afterUpdate' type='date' name='lostDate' style='width: 18.5rem; margin-left: 1rem; background-color: black; color: white;'><br><br><br>" + 
-			    	        		       "특이사항 :       <input id='character2' class='afterUpdate' type='text' name='character' style='width: 20rem; margin-left: 4.5rem; background-color: black; color: white;' placeholder='" + result.data.character + "'><br><br><br>" + 
-			    	        		       "사례금 :         <input id='reward2' class='afterUpdate' type='text' name='reward' style='width: 20rem; margin-left: 5.5rem; background-color: black; color: white;' placeholder='" + result.data.reward + "'><br><br><br>" + 
-			    	        		       "알릴사항 : <input id='contents2' class='afterUpdate' type='text' name='contents' style='width: 20rem; margin-left: 4.5rem; background-color: black; color: white;' placeholder='" + result.data.contents + "'><br><br>" + 
-			    	        		       "사진 :           <input id='file2' class='afterUpdate' type='file' name='file' style='width: 20rem; color: black; color: white;'>" + 
-		    	        		       "</form>" + 
-		    	        		       
-		    	        		   "<button id='lostUpdateBtn' type='button' style='margin-left: 1rem; color: white;' class='btn btn-sm btn-dark after-login'>수정</button>" + 
-		    	        		   "<button id='return' type='button' style='margin-left: 1rem; color: white;' class='btn btn-sm btn-dark'>전체조회</button>" + 
-		    	        		   "</figcaption>" + 
-		    	        		   "</figure>" + 
-		    	        		   "</a>" + 
-		    	        		   "</div>");
-		    	           
-		    	           $('#lostUpdateBtn').click(() => {
-		    	        	    var formData = new FormData($("#fileForm2")[0]);
-		    	        	    $.ajax('../../json/lost/update', {
-		    	        	        data: formData,
-		    	        	        dataType: 'json',
-		    	        	        method: 'POST',
-		    	        	        processData : false,
-		    	        	        contentType : false,
-		    	        	        success: (result) => {
-		    	        	        location.href = "../main/home.html#lost";
-		    	        	        },
-		    	        	        error: (jqXHR, textStatus, errorThrown) => {
-		    	        	            swal("수정 실패!", "정보를 확인 해보세요!", "error");
-		    	        	            /* window.alert('서버 실행 오류!'); */
-		    	        	        }
-		    	        	    });
-		    	        	});
-	    	        		   }
-	    	        });
-			    }
-		    });
+            $('button').click(function(e){
+	          var id = e.target.getAttribute('id');
+	          if ((id != '') && (id != null))  
+	              var newId = '#' + id;
+	
+	          if (newId == '#lostAddBtn') {
+	    	addModalStart();
+		    } else if ((newId == '#lostPrevBtn')) {
+		  			pageNo = pageCalculator(-1, result.lastPageNo)
+		    	pageChange(pageNo, options)
+		    } else if (newId == '#lostNextBtn') {
+		  			pageNo = pageCalculator(1, result.lastPageNo)
+		    	pageChange(pageNo, options)
+		    } else if (newId.substring(0, 7) == '#delete') {
+		    	
+		    	$.getJSON('../../json/lost/' + newId.substring(7), (result) => {
+		    		if(currTel==result.data.registrant.tel) {
+				    	$.getJSON('../../json/delete/' + newId.substring(7));
+		    		}
+		    	});
+		    } else if (newId.substring(0, 9) == '#lostView') {
+		   		$.ajax('../../json/lost/' + newId.substring(9), {
+		   	        dataType: 'json',
+		   	        success: (result) => {
+		   	           list.empty();
+   	        		   for (var file of result.data.files) {}	   
+		   	           $('#lostList').html(
+   	        		   "<div class='bal-mb-3-data lostData' style='border: 1px; border-color: #808080; margin-left: 10rem;'>" + 
+   	        		   "<figure class='snip1283p'>" + 
+   	        		   "<img src='../../download/" + file.filename + "' alt='" + file.filename + "' style='width:100%; height:100%;'>" + 
+   	        		   "<figcaption>" + 
+	      		       "<form id='fileForm2' enctype='multipart/form-data'>" + 
+	      		       "<img id='lostPetPhoto2' class='' style='width: 100px; height: 100px; margin-top: 3rem;' src= '" + file.filename + "' alt=''>" + 
+	      		       "이름 :           <input id='petName2' class='afterUpdate' type='text' name='petName' style='width: 20rem; margin-left: 6.5rem; background-color: black; color: white;' placeholder='" + result.data.petName + "'><br><br>" + 
+	      		       "품종 :           <input id='breed2' class='afterUpdate' type='text' name='breed' style='width: 20rem; margin-left: 6.5rem; background-color: black; color: white;' placeholder='" + result.data.breed + "'><br><br>" + 
+	      		       "분실장소 :       <input id='lostLocation2' class='afterUpdate' type='text' name='lostLocation' style='width: 20rem; margin-left: 4.5rem; background-color: black; color: white;' placeholder='" + result.data.lostLocation + "'><br><br>" + 
+	      		       "분실일(" + result.data.lostDate + ") : <input id='lostDate2' class='afterUpdate' type='date' name='lostDate' style='width: 18.5rem; margin-left: 1rem; background-color: black; color: white;'><br><br>" + 
+	      		       "특이사항 :       <input id='character2' class='afterUpdate' type='text' name='character' style='width: 20rem; margin-left: 4.5rem; background-color: black; color: white;' placeholder='" + result.data.character + "'><br><br>" + 
+	      		       "사례금 :         <input id='reward2' class='afterUpdate' type='text' name='reward' style='width: 20rem; margin-left: 5.5rem; background-color: black; color: white;' placeholder='" + result.data.reward + "'><br><br>" + 
+	      		       "알릴사항 : <input id='contents2' class='afterUpdate' type='text' name='contents' style='width: 20rem; margin-left: 4.5rem; background-color: black; color: white;' placeholder='" + result.data.contents + "'><br><br>" + 
+	      		       "사진 :           <input id='file2' class='afterUpdate' type='file' name='file' style='width: 20rem; color: black; color: white;'>" + 
+	      		       "</form>" + 
+   	        		       
+   	        		   "<button id='lostUpdateBtn' type='button' style='margin-left: 1rem; color: white;' class='btn btn-sm btn-dark after-login'>수정</button>" + 
+   	        		   "<button id='return' type='button' style='margin-left: 1rem; color: white;' class='btn btn-sm btn-dark'>전체조회</button>" + 
+   	        		   "</figcaption>" + 
+   	        		   "</figure>" + 
+   	        		   "</a>" + 
+   	        		   "</div>");
+		   	           
+		   	           $('#lostUpdateBtn').click(() => {
+		   	        	    var formData = new FormData($("#fileForm2")[0]);
+		   	        	    $.ajax('../../json/lost/update', {
+		   	        	        data: formData,
+		   	        	        dataType: 'json',
+		   	        	        method: 'POST',
+		   	        	        processData : false,
+		   	        	        contentType : false,
+		   	        	        success: (result) => {
+		   	        	        location.href = "../main/home.html#lost";
+		   	        	        },
+		   	        	        error: (jqXHR, textStatus, errorThrown) => {
+		   	        	            swal("수정 실패!", "정보를 확인 해보세요!", "error");
+		   	        	        }
+		   	        	    });
+		   	        	});
+		  	        		   }
+		  	        });
+		    }
+		   });
        }
     });
 });

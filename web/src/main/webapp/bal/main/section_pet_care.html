@@ -719,7 +719,7 @@ $.ajax('../../json/auth/loginUser', {
                                             "<div style=' border-radius: 10px;border: 1px solid #aaa;width:100%; display:inline-block; '> 주소 : " + result.data.postalNo + "</div>" +
                                             "<div style=' border-radius:10px;border: 1px solid #aaa;width:100%; display:inline-block; '>" + result.data.primaryAddress + "</div>" +
                                             "<div style=' border-radius: 10px;border: 1px solid #aaa;width:100%; display:inline-block; '>" + result.data.detailAddress + "</div>")
-                                $('<button id="care_button" type="button" class="btn btn-primary btn-sm my-view">변경</button>').insertAfter('.hospitalp');
+                                $('<button id="careBtn" style="position: relative; z-index: 5;" type="button" class="btn btn-primary btn-sm">변경</button>').insertAfter('.hospitalp');
 	                
 	            },
 	            error: () => {
@@ -749,7 +749,9 @@ $.ajax('../../json/auth/loginUser', {
 	 }
 	 }); 
 
-
+careBtn.click(()=> {
+    location.href = "../hospital/form.html";
+ });
 
 
 

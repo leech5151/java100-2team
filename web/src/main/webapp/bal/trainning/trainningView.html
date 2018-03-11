@@ -12,10 +12,16 @@
 <!-- <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
 <style>
+
+.tvideo {
+	width: 50%;
+	height: 50%;
+}
+
 .b {
 	border-bottom: 1px solid gray;
 	padding-bottom: 30px;
-	margin-left: -38px;
+	margin-left: -28px;
 }
 
 .c {
@@ -35,7 +41,7 @@
 	<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
 </div>
 
-<div class="modal-body" style="padding: 40px 50px;">
+<div class="modal-body" style="padding: 20px 50px;">
 
   
 
@@ -46,7 +52,7 @@
 		<h2 class='my-view' style="margin-bottom: 50px; font-family:contsfont-kor"> 영상 상세정보</h2>
 
 
-		<form id='form' method="post" enctype="multipart/form-data">
+		<form id='form' method="post" enctype="multipart/form-data" style="font-size: 17px; font-weight: bold;">
 
 			<!-- <div class="form-group row ">
 				<div class="col-sm-10">
@@ -112,8 +118,8 @@
 			<div class='form-group row'>
 				<label for='contents' class='col-sm-2 col-form-label'>내용</label>
 				<div class='col-sm-10'>
-					<input class='form-control' id='contents' type='text'
-						name='contents'>
+					<textarea class='form-control' id='contents' type='text'
+						name='contents' style="height: 20%"></textarea>
 				</div>
 			</div>
 			
@@ -127,7 +133,7 @@
 						</div>
 					</div>
 				
-			<div class="" style="width:407px; position: absolute; top: 91%; left: 48%; transform: translate(-50%, -50%);">
+			<div class="" style="width:405px; position: absolute; top: 96%; left: 915px; transform: translate(-50%, -50%);">
 						<input type="file"  id="file1" name="file" class="input-file">
 						<div class="input-group form-group-lg col-xs-12">
 								<input type="text" class="form-control" disabled placeholder="Upload Video">
@@ -170,7 +176,7 @@
 
 
 
-<div class="modal-footer">
+<div class="modal-footer" style="margin-top: 50px; padding-right: 105px;">
 	<div style="margin: auto;">
 		<button id="addBtn" type="button"
 			class='btn btn-primary btn-sm my-new'>추가</button>

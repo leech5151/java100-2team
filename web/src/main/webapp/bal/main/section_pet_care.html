@@ -579,7 +579,7 @@
 		</div>
 	</div>
 </div>
-<div style="width: 50%; margin-top: 100px; display: inline-block"
+<div style="width: 100%; margin-top: 30px; display: inline-block"
 	class="pricing-header px-3 py-3 pt-md-5 pb-md-4  text-center">
 	<h2 class="display-4 hospitalh2">My Hospital</h2>
 	<p class="lead hospitalp">주변 병원을 검색합니다</p>
@@ -630,6 +630,9 @@ var options = { //지도를 생성할 때 필요한 기본 옵션
 
 var map = null;
 var zoomControl = null;
+var user_photo = null;
+var user_nicname = null;
+var user_email = null;
 
 $.ajax('../../json/auth/loginUser', {
 	async: false,
@@ -649,6 +652,11 @@ $.ajax('../../json/auth/loginUser', {
 			zoomControl = new daum.maps.ZoomControl();
 		}else{
 			if(result.member.memberType == "병원회원"){
+			    user_email = result.member.email;
+		        user_nicname = result.member.nicname;
+		        for (var file of result.member.files){
+		            user_photo=file.filename;
+		        } 
 				$.ajax('../../json/hospital/hospitalNo', {
 					async: false,
 					dataType: 'json',
@@ -684,7 +692,9 @@ $.ajax('../../json/auth/loginUser', {
 	            				$('#hospitalbody').html("");
 	              				$('<div class="hoslptal" style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
 	                    		.html(  
-	                      	        "<div style='width:10%; display:none; border-top: 1px solid #aaa;'>" + result.data.hospitalNo + "</div>" + 
+	                    		    "<div id='hos_fileView' class='col-sm-10' style='width: 50%; float:left'></div>" +
+	                    		    "<div id='hos_contsView' class='col-sm-10' style='width: 50%; float:left'></div>"
+	                      	        /* "<div style='width:10%; display:none; border-top: 1px solid #aaa;'>" + result.data.hospitalNo + "</div>" + 
                                     "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>"+ result.data.hospitalName + "</div>" + 
                                     "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.openTime + "</div>" +
                                     "<div style='width:20%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.closeTime + "</div>" +
@@ -695,14 +705,31 @@ $.ajax('../../json/auth/loginUser', {
                                     "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.postalNo + "</div>" +
                                     "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.primaryAddress + "</div>" +
                                     "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.detailAddress + "</div>" +
-                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.medicalStaff + "</div>"+
-                                    "<div id='fileView' class='col-sm-10'></div>")
+                                    "<div style='width:10%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.medicalStaff + "</div>" */)
 			                    .appendTo('#hospitalbody');
 
                                 for (var file of result.data.files) {
-                                	$('#fileView').html("<img src='../../download/" + file.filename + "' alt=" + file.filename + " width='400px' height='400px'>").appendTo('#fileView');
+                                	$('#hos_fileView').html("<img style='border-radius: 75px;' src='../../download/" + file.filename + "' alt=" + file.filename + " width='100%'>").appendTo('#fileView');
                                 };
-                                $('<button id="updateBtn" type="button" onclick="location.href=\'../hospital/form.html?no='+result.data.hospitalNo +'\'">변경</button>').insertAfter('.hospitalp');
+                                    $('#hos_contsView').html(
+                                            "<div style='width:100%; display:inline-block; border-top: 1px solid #aaa;'>"+ result.data.hospitalName + "</div>" + 
+                                            "<img style='border-radius: 75px;' src='../../download/" + user_photo + "' alt=" + user_photo + " width='40%'>" +
+                                            "<div style='width:100%; float: left;'>" +
+                                            "<div style='width:100%; display:inline-block; border-top: 1px solid #aaa;'>"+ user_nicname + "</div>" +
+                                            /* "<div style='width:100%; display:inline-block; border-top: 1px solid #aaa;'>"+ user_email + "</div>" + */
+                                            "</div>" +
+                                            "<div style='width:100%; display:none; border-top: 1px solid #aaa;'>" + result.data.hospitalNo + "</div>" + 
+                                            "<div style='width:100%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.openTime + "</div>" +
+                                            "<div style='width:100%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.closeTime + "</div>" +
+                                            "<div style='width:100%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.medicalSubject+ "</div>" +
+                                            "<div style='width:100%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.medicalAnimal + "</div>" +
+                                            "<div style='width:100%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.hospitalTel + "</div>"+
+                                            "<div style='width:100%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.contents + "</div>" +
+                                            "<div style='width:100%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.postalNo + "</div>" +
+                                            "<div style='width:100%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.primaryAddress + "</div>" +
+                                            "<div style='width:100%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.detailAddress + "</div>" +
+                                            "<div style='width:100%; display:inline-block; border-top: 1px solid #aaa;'>" + result.data.medicalStaff + "</div>");
+                                $('<button type="button" onclick="location.href=\'../hospital/form.html?no='+result.data.hospitalNo +'\'">변경</button>').insertAfter('.hospitalp');
 	                
 	            },
 	            error: () => {

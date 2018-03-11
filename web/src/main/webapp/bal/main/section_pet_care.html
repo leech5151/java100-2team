@@ -638,11 +638,6 @@ $.ajax('../../json/auth/loginUser', {
 	async: false,
 	dataType: 'json',
 	success: (result) => {
-	    user_email = result.member.email;
-	    user_nicname = result.member.nicname;
-	    for (var file of result.member.files){
-	        user_photo=file.filename;
-	    }
 		if(result.status == "fail"){
 			prm_addr = "서울특별시 중구 세종대로 110 서울특별시청";
 			$('#idPlease').html("");
@@ -657,6 +652,11 @@ $.ajax('../../json/auth/loginUser', {
 			zoomControl = new daum.maps.ZoomControl();
 		}else{
 			if(result.member.memberType == "병원회원"){
+			    user_email = result.member.email;
+		        user_nicname = result.member.nicname;
+		        for (var file of result.member.files){
+		            user_photo=file.filename;
+		        } 
 				$.ajax('../../json/hospital/hospitalNo', {
 					async: false,
 					dataType: 'json',

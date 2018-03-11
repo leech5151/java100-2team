@@ -41,9 +41,47 @@
                      color-stop(0.72, rgb(73,125,189)),
                      color-stop(0.86, rgb(28,58,148)));
 }
+
+/* //////////////////////////////////////////// */
+#care_button{
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+#care_button:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+#care_button:before,#care_button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+#care_button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+#care_button:hover:before,#care_button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
 </style>
 <body>
-<button id="deleteBtn" type="button" class='icono-sync'>asdf</button>
+<button id="care_button" >asdf</button>
 <script src="/path/to/jquery.mCustomScrollbar.concat.min.js"></script>
 </body>
 </html>

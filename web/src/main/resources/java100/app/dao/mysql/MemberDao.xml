@@ -120,7 +120,7 @@
     <insert id="insert" parameterType="member"
         useGeneratedKeys="true" keyColumn="m_no" keyProperty="memberNo">
         insert into memb(email,pwd,nic_name,name,tel,push,pst_no,prm_addr,det_addr,m_type,cre_date)
-        values(#{email},password(#{password}),#{nicname},#{name},#{tel},#{push},#{postalNo},#{primaryAddress},#{detailAddress},#{memberType},now())
+        values(#{email},password('test'),#{nicname},#{name},#{tel},#{push},#{postalNo},#{primaryAddress},#{detailAddress},#{memberType},now())
     </insert>
 
     <select id="findByNo" resultMap="memberMap" parameterType="int">
@@ -149,7 +149,7 @@
             resultMap="memberMap" parameterType="map">
         <include refid="select1"/>
         from memb
-        where email=#{email} and pwd=password(#{password})
+        where email=#{email} and pwd=password('test')
     </select>
         
     <select id="findByEmail" resultMap="memberMap" parameterType="String">
@@ -163,7 +163,7 @@
             name=#{name}, 
             nic_name=#{nicname}, 
             email=#{email}, 
-            pwd=password(#{password}),
+            pwd=password('test'),
             tel=#{tel}, 
             push=#{push},
             pst_no=#{postalNo}, 

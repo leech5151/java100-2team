@@ -140,40 +140,6 @@ addBtn2.click(() => {
     });
 });
 
-updateBtn.click(() => {
-	var formData = new FormData($("#fileForm")[0]);
-    $.ajax('../../json/lost/update', {
-        data: formData,
-        dataType: 'json',
-        method: 'POST',
-        processData : false,
-        contentType : false,
-        success: (result) => {
-        location.href = "../main/home.html#awards";
-        },
-        error: (jqXHR, textStatus, errorThrown) => {
-            swal("수정 실패!", "정보를 확인 해보세요!", "error");
-            /* window.alert('서버 실행 오류!'); */
-        }
-    });
-});
-
-deleteBtn.click(() => {
-
-    $.ajax('../../json/lost/delete', {
-        data: {
-        	no: $('#lostNo').val()
-        },
-        dataType: 'json',
-        success: (result) => {
-        location.href = "../main/home.html#awards";
-        },
-        error: () => {
-            swal("삭제 실패!", "다시 시도해보세요!", "error");
-        }
-    });
-});
-
 </script>
 
 </body>

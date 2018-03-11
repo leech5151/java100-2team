@@ -20,7 +20,7 @@
 
     <delete id="deleteAllByLostNo" parameterType="int">
         delete from lost_mda
-        where l_no=#{value}
+        where l_no=#{lostNo}
     </delete> 
 
 </mapper>  

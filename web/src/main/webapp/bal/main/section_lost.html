@@ -8,7 +8,7 @@
     <h2>Lost</h2>
     <div>
     
-<nav aria-label="Page navigation" style="position: relative; float: left; width: 100%;">
+<nav id="lostBtn" aria-label="Page navigation" style="position: relative; float: left; width: 100%;">
 <button id="lostPrevBtn" class="btn btn-sm btn-light before-login" style="margin-left: 44%; color: blue;">이전</button>
 <button id="lostNextBtn" class="btn btn-sm btn-light before-login" style="color: blue;">다음</button>
 <button id="lostAddBtn" type="button" class="btn btn-danger btn-sm after-login">미아 등록</button>
@@ -39,8 +39,7 @@
     <li style="font-size: 20px;">분실일 : {{lostDate}}</li>
     <li style="font-size: 20px;">연락처 : {{registrant.tel}}</li>
 </ul>
-<button id="lostView{{lostNo}}" data-toggle="modal" data-target="#exampleModal" type="button" style="margin-left: 1rem; color: white;" class="btn btn-sm btn-dark after-login">&#x2795; 더 보기</button>
-<button id="lostDeleteBtn{{lostNo}}" type="button" style="margin-left: 4rem;" class="btn btn-sm btn-dark after-login lostDeleteBtn">&#x2796; 삭제</button>
+<button id="lostViewBtn{{lostNo}}" data-toggle="modal" data-target="#exampleModal" type="button" style="margin-left: 1rem; color: white;" class="btn btn-sm btn-dark after-login">&#x2795; 더 보기</button>
 </figcaption>
 </figure>
 </a>
@@ -55,7 +54,7 @@
 <script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
 <script src='../../node_modules/sweetalert/dist/sweetalert.min.js'></script>
 <script src="../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
-
+<script src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=AwM4n1sTQc0aC8F7RFeQ&submodules=geocoder"></script>
 <script type="text/javascript">
 var pageNo = 1,
     list = $('#lostList'),      
@@ -79,43 +78,41 @@ $.getJSON('../../json/auth/loginUser', (result) => {
         data: options,
         dataType: 'json',
         success: (result) => {
+           
            list.append(lostTemplateEngine(result));
-
-           for (var data of result.list) {
-        	   if (currTel != data.registrant.tel) {
-        		   $('.lostDeleteBtn').css('display', 'none');
-        	   }
-           }
-            $('button').click(function(e){
+            $('button').click(
+        		
+           function(e){ // 여기부터
 	          var id = e.target.getAttribute('id');
 	          if ((id != '') && (id != null))  
 	              var newId = '#' + id;
 	          if (newId == '#lostAddBtn') {
-	    	  addModalStart();
-			  } else if ((newId == '#lostPrevBtn')) {
+	        	  
+	        	  $.ajax('https://apis.daum.net/local/geo/addr2coord?apikey=ff1cbf9468f0d7759d24a8472491276e', {
+                      data: {
+                    	  title: '경기도 성남시 분당구 판교역로 235',
+                      },
+                      dataType: 'json',
+                      success: (result) => {
+                      alert(lng);
+                      alert(lat);
+                      },
+                      error: (jqXHR, textStatus, errorThrown) => {
+                          swal("수정 실패!", "정보를 확인 해보세요!", "error");
+                      }
+                  });
+// 	    	  addModalStart();
+
+			  } else if (newId == '#lostPrevBtn') {
 		  		pageNo = pageCalculator(-1, result.lastPageNo)
 			    pageChange(pageNo, options)
 			  } else if (newId == '#lostNextBtn') {
 		  		pageNo = pageCalculator(1, result.lastPageNo)
 			   	pageChange(pageNo, options)
-			  } else if (newId.substring(0, 14) == '#lostDeleteBtn') {
-				  $.getJSON('../../json/lost/' + newId.substring(14), (result) => {
-		    		if(currTel==result.data.registrant.tel) {
-				    	$.ajax('../../json/lost/delete/', {
-				    		data: {
-				    			no: newId.substring(14)
-				    		},
-				            dataType: 'json',
-				            success: (result) => {
-				            	location.href = '../main/home.html';
-				            }
-				    	});
-		    		} else {
-		    			swal('삭제불가', '삭제할 수 없습니다.', 'error')
-		    		}
-		    	});
-		    } else if (newId.substring(0, 9) == '#lostView') {
-		   		$.ajax('../../json/lost/' + newId.substring(9), {
+		    } else if (newId.substring(0, 12) == '#lostViewBtn') {
+   	            $('#lostBtn').remove();
+		    	
+		   		$.ajax('../../json/lost/' + newId.substring(12), {
 		   	        dataType: 'json',
 		   	        success: (result) => {
 		   	           list.empty();
@@ -128,7 +125,7 @@ $.getJSON('../../json/auth/loginUser', (result) => {
 		      		       "<div style='float: left;'>" + 
 		      		       "<p>" + 
 		      		       "<b>품종 :       </b><input id='breed' class='afterUpdate' type='text' name='breed' style='background-color: black; color: white;' placeholder='" + result.data.breed + "'><br>" + 
-		      		       "<b>분실장소 :   </b><input id='lostLocation' class='afterUpdate' type='text' name='lostLocation' style='background-color: black; color: white;' placeholder='" + result.data.lostLocation + "'><br>" + 
+		      		       "<b>분실장소 :   </b><input id='lostLocation' onclick='addreSearch()' class='afterUpdate' type='text' name='lostLocation' style='background-color: black; color: white;' placeholder='" + result.data.lostLocation + "'><br>" + 
 		      		       "<b>분실일 :     </b><input type='date' id='lostDate' name='lostDate' value='" + result.data.lostDate + "' class='calendar hasDatepicker' style='width: 9rem; background-color: black; background-image:url(../../images/button/calendar48_2.png); background-repeat: no-repeat; background-position: right; background-size: 40px'><br>" + 
 		      		       "<b>사진 :       </b><input id='file' class='afterUpdate' type='file' name='file' style='width: 5rem; black; color: white;'>" + 
 		      		       "</p></div>" +
@@ -138,6 +135,7 @@ $.getJSON('../../json/auth/loginUser', (result) => {
 		      		       "<b>사례금 :     </b><input id='reward' class='afterUpdate' type='text' name='reward' style='background-color: black; color: white;' placeholder='" + result.data.reward + " 원'><br>" + 
 		      		       "<b>알릴사항 :   </b><input id='contents' class='afterUpdate' type='text' name='contents' style='background-color: black; color: white;' placeholder='" + result.data.contents + "'><br>" + 
 	   	        		   "<button id='lostUpdateBtn' type='button' style='margin-left: 0rem; color: white;' class='btn btn-sm btn-dark after-login'>수정</button>" + 
+	   	        		   "<button id='lostDeleteBtn' type='button' style='margin-left: 1rem; color: white;' class='btn btn-sm btn-dark after-login'>삭제</button>" + 
 	   	        		   "<button id='lostReturnBtn' type='button' style='margin-left: 1rem; color: white;' class='btn btn-sm btn-dark'>전체조회</button>" + 
 		      		       "</p></div>" +
 		      		       "</form>" + 
@@ -154,12 +152,17 @@ $.getJSON('../../json/auth/loginUser', (result) => {
 						    if (input.files && input.files[0]) {
 						    var reader = new FileReader();
 						    reader.onload = function (e) {
-						            $('#lostPetPhoto2').attr('src', e.target.result);
+						      $('#lostPetPhoto2').attr('src', e.target.result);
 						    }
 						      reader.readAsDataURL(input.files[0]);
 						    } 
 						}
 		   	           
+						if (currTel != result.data.registrant.tel) {
+			                   $('#lostUpdateBtn').css('display', 'none');
+			                   $('#lostDeleteBtn').css('display', 'none');
+			               }
+						
 		   	           $('#lostUpdateBtn').click(() => {
 		   	        	   $(document).ready(() => {
 		   	        	    var formData = new FormData($("#fileForm2")[0]);
@@ -178,6 +181,23 @@ $.getJSON('../../json/auth/loginUser', (result) => {
 		   	        	        }
 		   	        	    });
 		   	           });
+		   	        	});
+						
+		   	           $('#lostDeleteBtn').click(() => {
+		   	        	   $(document).ready(() => {
+			   	        	    $.ajax('../../json/lost/delete', {
+			   	        	        data: {
+			   	        	        	no: result.data.lostNo,
+			   	        	        },
+			   	        	        dataType: 'json',
+			   	        	        success: (result) => {
+			   	        	        location.href = "../main/home.html";
+			   	        	        },
+			   	        	        error: (jqXHR, textStatus, errorThrown) => {
+			   	        	            swal("수정 실패!", "정보를 확인 해보세요!", "error");
+			   	        	        }
+			   	        	    });
+		   	        	    });
 		   	        	});
 		   	           
 		   	           $('#lostReturnBtn').click(() => {
@@ -199,7 +219,9 @@ $.getJSON('../../json/auth/loginUser', (result) => {
  	        		   }
 		  	        });
 		   	    }
-		   });
+		   }
+        		
+        ); //여기까지
        }
     });
 });
@@ -238,4 +260,40 @@ function addModalStart() {
     });
 }
 
+
+function addreSearch() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            var fullAddr = ''; // 최종 주소 변수
+            var extraAddr = ''; // 조합형 주소 변수
+
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                fullAddr = data.roadAddress;
+
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                fullAddr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+            if(data.userSelectedType === 'R'){
+                //법정동명이 있을 경우 추가한다.
+                if(data.bname !== ''){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있을 경우 추가한다.
+                if(data.buildingName !== ''){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('lostLocation').value = fullAddr;
+
+        }
+    }).open();
+}
 </script>
+
+

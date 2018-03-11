@@ -656,7 +656,7 @@ $.ajax('../../json/auth/loginUser', {
 		        user_nicname = result.member.nicname;
 		        for (var file of result.member.files){
 		            user_photo=file.filename;
-		        } 
+		        }
 				$.ajax('../../json/hospital/hospitalNo', {
 					async: false,
 					dataType: 'json',
@@ -666,7 +666,7 @@ $.ajax('../../json/auth/loginUser', {
 							$('.hospitalp').text('Register your Hospital');
 							$('<div>')
 		                     .html(  	
-		                    		 	'<button type="button" onclick="location.href=\'../hospital/form.html\'">AddBtn</button>'+
+		                    		 	'<button style="z-index: 5;    position: relative;"type="button" onclick="location.href=\'../hospital/form.html\'">AddBtn</button>'+
 		 	                            "</div>")
 		 	                            .appendTo('.pricing-header');
 							prm_addr = "서울특별시 중구 세종대로 110 서울특별시청";
@@ -719,8 +719,7 @@ $.ajax('../../json/auth/loginUser', {
                                             "<div style=' border-radius: 10px;border: 1px solid #aaa;width:100%; display:inline-block; '> 주소 : " + result.data.postalNo + "</div>" +
                                             "<div style=' border-radius:10px;border: 1px solid #aaa;width:100%; display:inline-block; '>" + result.data.primaryAddress + "</div>" +
                                             "<div style=' border-radius: 10px;border: 1px solid #aaa;width:100%; display:inline-block; '>" + result.data.detailAddress + "</div>")
-                                $('<button id="careBtn" style="position: relative; z-index: 5;" type="button" class="btn btn-primary btn-sm">변경</button>').insertAfter('.hospitalp');
-	                
+                                    $('<button class="btn btn-primary btn-sm" style="position: relative; z-index: 5;" type="button" onclick="location.href=\'../hospital/form.html?no='+result.data.hospitalNo +'\'">변경</button>').insertAfter('.hospitalp');
 	            },
 	            error: () => {
 	            }
@@ -748,10 +747,6 @@ $.ajax('../../json/auth/loginUser', {
 		  window.alert('서버 실행 오류!');
 	 }
 	 }); 
-
-careBtn.click(()=> {
-    location.href = "../hospital/form.html";
- });
 
 
 

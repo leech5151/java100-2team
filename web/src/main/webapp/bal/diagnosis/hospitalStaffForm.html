@@ -409,7 +409,7 @@ $.datepicker.regional['kr'] = {
 	
 	addBtn.click(() => {
 		 if (hospitalNoItem.val()=='') {
-		        alert("병원관련 회원만 입력 가능 합니다");
+		        swal("병원관련 회원만 입력 가능 합니다");
 		        return;
 		    }
 	    $.ajax('../../json/diagnosis/add', {
@@ -425,11 +425,24 @@ $.datepicker.regional['kr'] = {
 	            memberName: memberNameItem.val(),
 	            memberTel: memberTelItem.val()
 	        },
+	        /////////////////////////////
+	     
+	        //////////////////////////////
 	        dataType: 'json',
 	        method: 'POST',
 	        success: (result) => {
 	        	if(result.status=='success'){
-					window.alert("성공!!")	
+					
+					   swal({
+			                position: 'center',
+			                type: 'success',
+			                title: '진료자료가 입력 되었습니다.',
+			                //showConfirmButton: false,
+			                timer: 1000
+			          }),
+			          setTimeout(() => {
+			        	  location.href = "../diagnosis/hospitalStaffForm.html";
+			          }, 1000);
 				}else if(result.status=='fail'){
 					swal("병원 회원만 입력 가능합니다","병원 등록 후 사용하세요");
 				}else{
@@ -458,7 +471,17 @@ $.datepicker.regional['kr'] = {
 	        method: 'POST',
 	        success: (result) => {
 	        	if(result.status=='success'){
-					location.href = "list.html";	
+
+					   swal({
+			                position: 'center',
+			                type: 'success',
+			                title: '진료자료가 변경 되었습니다.',
+			                //showConfirmButton: false,
+			                timer: 1000
+			          }),
+			          setTimeout(() => {
+			        	  location.href = "../diagnosis/hospitalStaffForm.html";
+			          }, 1000);
 				}else if(result.status=='fail'){
 					swal("다른 병원의 자료는 수정할 수 없습니다");
 				}else{
@@ -479,7 +502,17 @@ $.datepicker.regional['kr'] = {
 	        dataType: 'json',
 	        success: (result) => {
 	        	if(result.status=='success'){
-					location.href = "list.html";	
+
+					   swal({
+			                position: 'center',
+			                type: 'success',
+			                title: '진료자료가 삭제 되었습니다.',
+			                //showConfirmButton: false,
+			                timer: 1000
+			          }),
+			          setTimeout(() => {
+			        	  location.href = "../diagnosis/hospitalStaffForm.html";
+			          }, 1000);
 				}else if(result.status=='fail'){
 					swal("삭제권한이 없습니다!");
 				}else{

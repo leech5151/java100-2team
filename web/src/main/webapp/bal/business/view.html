@@ -133,10 +133,10 @@
 
 <div class="modal-footer" >
 <div>
-<button id="backBtn" type="button" class='btn btn-primary btn-sm my-new'  onclick="history.back();">돌아가기</button>
-<button id="addBtn" type="button" class='btn btn-primary btn-sm my-new'>추가</button>
-<button id="updateBtn" type="button" class='btn btn-primary btn-sm my-view'>변경</button>
-<button id="deleteBtn" type="button" class='btn btn-primary btn-sm my-view'>삭제</button>
+<button id="bus_backBtn" type="button" class='btn btn-primary btn-sm my-new'  onclick="history.back();">돌아가기</button>
+<button id="bus_addBtn" type="button" class='btn btn-primary btn-sm my-new'>추가</button>
+<button id="bus_updateBtn" type="button" class='btn btn-primary btn-sm my-view'>변경</button>
+<button id="bus_deleteBtn" type="button" class='btn btn-primary btn-sm my-view'>삭제</button>
 </div>
 </div>
 
@@ -144,11 +144,13 @@
 <script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
 <script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
 
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 <script type="text/javascript">
-var addBtn = $('#addBtn'),
-    updateBtn = $('#updateBtn'),
-    deleteBtn = $('#deleteBtn'),
-    addReviewBtn = $('#addRBtn'),
+var addBtn = $('#bus_addBtn'),
+    updateBtn = $('#bus_updateBtn'),
+    deleteBtn = $('#bus_deleteBtn'),
+    addReviewBtn = $('#bus_addRBtn'),
     modifyBtn = $('#modifyBtn'),
     ctgrItem = $('#category'),
     nameItem = $('#businessName'),
@@ -265,10 +267,11 @@ addReviewBtn.click(()=> {
 deleteBtn.click(function() {
     $.ajax('../../json/business/delete', {
         data: {
-            no: $('#businessNo').val()
+            no: b_number
         },
         dataType: 'json',
         success: (result) => {
+           
             location.href = "list.html";
         },
         error: () => {

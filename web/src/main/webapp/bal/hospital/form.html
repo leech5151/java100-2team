@@ -6,14 +6,21 @@
 <link rel='stylesheet'
 	href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
 <link rel='stylesheet' href='../../css/common.css'>
+<link rel='stylesheet' href='../../css/main.css'>
 
 </head>
 <body>
-	<div class='container'>
 
-		<header></header>
+<div class="modal-header" style="padding: 30px 50px;">
+	<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+</div>
 
-		<h1>신규병원</h1>
+<div class="modal-body" style="padding: 13px 50px;">
+
+	<div class='container' style="font-family:contsfont-kor; font-weight: bold">
+
+
+		<h1 style="margin-bottom: 30px; font-family:contsfont-kor; font-size: 70px;">신규병원등록</h1>
 		<form id='addForm' method="post" enctype="multipart/form-data">
 
 		 	<div class='form-group row my-view'>
@@ -130,20 +137,23 @@
 				</div>
 			</div>
 
-			<div class='form-group row'>
-				<div class='col-sm-10'>
-					<button id="addBtn" type="button"
-						class='btn btn-primary btn-sm my-new'>추가</button>
-					<button id="updateBtn" type="button"
-						class='btn btn-primary btn-sm my-view'>변경</button>
-					<button id="deleteBtn" type="button"
-						class='btn btn-primary btn-sm my-view'>삭제</button>
-				</div>
-			</div>
-		</form>
-
-		<footer> </footer>
+					</form>
 	</div>
+</div>
+
+
+<div class="modal-footer">
+	<div style="margin: auto;">
+		<button id="addBtn" type="button"
+			class='btn btn-primary btn-sm my-new'>추가</button>
+		<button id="backBtn" type="button"
+			class='btn btn-primary btn-sm my-new' onclick="history.back();">돌아가기</button>
+		<button id="updateBtn" type="button"
+			class='btn btn-primary btn-sm my-view'>변경</button>
+		<button id="deleteBtn" type="button"
+			class='btn btn-primary btn-sm my-view'>삭제</button>
+	</div>
+</div>
 
 	<script src='../../node_modules/jquery/dist/jquery.js'></script>
 	<script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>

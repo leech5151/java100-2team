@@ -4,11 +4,11 @@
 <link rel='stylesheet' href='../../css/business.css'>
 <link rel='stylesheet' href='../../css/main.css'>
 
-<div class="modal-header"  style="padding: 40px 50px;">
+<div class="modal-header"  style="padding: 15px 50px;">
     <button type="button" class="close my-view'" data-dismiss="modal">&times;</button>
 </div> 
 
-<div class="modal-body" style="padding: 40px 50px;">
+<div class="modal-body" style="padding: 25px 50px;">
 <div class='container' style="font-family:contsfont-kor">
 
     <h2 class='my-new' style="margin-bottom: 50px; font-family:contsfont-kor">업체등록</h2>
@@ -27,11 +27,12 @@
     </select>
 </div>
 </div>
-<!-- <div class='form-group row my-view' style="float: left; width: 50%;">
+<div class='form-group row my-view' style="float: left; display:none; width: 50%;">
 <label for='businessNo' class='col-sm-2 col-form-label'>번호</label>
 <div id="nodiv" class='col-sm-10'></div>
-</div>  -->
+</div> 
 
+<div style="font-weight: bold; width: 77%; margin: auto;">
 <div class='form-group row my-mo' style="float: left; width: 50%;">
 <label for='businessName' class='col-sm-2 col-form-label'>업체명</label>
 <div class='col-sm-10'>
@@ -45,7 +46,9 @@
 <input class='form-control' id='tel' type='text' name='tel' >
 </div>
 </div>
+</div>
 
+<div style="font-weight: bold; width: 77%; margin: auto;">
 <div class='form-group row my-mo' style="float: left; width: 50%;">
 <label for='open_time' class='col-sm-2 col-form-label'>오픈시간</label>
 <div class='col-sm-10'>
@@ -59,19 +62,21 @@
 <input class='form-control' id='close_time' type='time' name='close_time' >
 </div>
 </div>
-
-
-<!-- <div class='form-group row my-mo'>
-<label for='menu' class='col-sm-2 col-form-label'>메뉴</label>
-<div class='col-sm-10'>
-<input class='form-control' id='menu' type='text' name='menu' >
 </div>
-</div> -->
 
-<div class='form-group row my-mo' style="float: left; width: 50%;">
-<label for='content' class='col-sm-2 col-form-label'>내용</label>
+<div class='form-group row my-mo' style="margin-left: 0px; width: 96%">
+<label for='content' class='col-sm-2 col-form-label' style="padding-left: 105px; font-weight: bold; margin: auto;">내용</label>
 <div class='col-sm-10'>
-<input class='form-control' id='content' type='text' name='content'>
+<textarea class='form-control' id='content' type='text' name='content' style="width: 612px; height: 130px;"></textarea>
+</div>
+</div>
+
+<div style="font-weight: bold; width: 77%; margin: auto;">
+<div class='form-group row my-mo'  style="float: left; width: 50%;">
+<label for='post_no' class='col-sm-2 col-form-label'>우편번호</label>
+<div class='col-sm-10'>
+<input class='form-control' id='post_no' type="number" name='post_no' >
+<input type="button" onclick="addresearch()" value="우편번호 찾기" style="float: left;"><br>
 </div>
 </div>
 
@@ -81,26 +86,19 @@
 <input class='form-control' id='url' type='text' name='url' >
 </div>
 </div>
-
-<div class='form-group row my-mo'>
-<label for='post_no' class='col-sm-2 col-form-label'>우편번호</label>
-<div class='col-sm-10'>
-<input class='form-control' id='post_no' type="number" name='post_no' >
-<input type="button" onclick="addresearch()" value="우편번호 찾기" style="float: left;"><br>
-</div>
 </div>
 
-<div class='form-group row my-mo'>
+<div class='form-group row my-mo' style="font-weight: bold; float: left; width: 739px; margin-left: 52px;">
 <label for='primary_address' class='col-sm-2 col-form-label'>기본주소</label>
-<div class='col-sm-10'>
-<input class='form-control' id='primary_address' type='text' name='primary_address' >
+<div class='col-sm-10' style="margin-left: -31px;">
+<input class='form-control' id='primary_address' type='text' name='primary_address' style="width: 610px;">
 </div>
 </div>
 
-<div class='form-group row my-mo'>
+<div class='form-group row my-mo'  style="font-weight: bold; float: left; width: 739px; margin-left: 52px;">
 <label for='detail_address' class='col-sm-2 col-form-label'>상세주소</label>
-<div class='col-sm-10'>
-<input class='form-control' id='detail_address' type='text' name='detail_address' >
+<div class='col-sm-10' style="margin-left: -31px;">
+<input class='form-control' id='detail_address' type='text' name='detail_address' style="width: 610px;">
 </div>
 </div>
  
@@ -109,7 +107,6 @@
 <div id=filediv class='col-sm-10'>
 </div>
 </div> -->
-
 <div class='col-sm-10 my-mo'>
 <input type='file' class='form-control-file' id='filename1' name='file'>
 </div>
@@ -119,8 +116,7 @@
 <div class='col-sm-10 my-mo'>
 <input type='file' class='form-control-file' id='filename3' name='file'>
 </div>
-<div id="inserthere" class='form-group row my-view'></div>
-
+<!-- <div id="inserthere" class='form-group row my-view'></div> -->
 
 <div class='form-group row'>
 <div class='col-sm-10'>
@@ -133,10 +129,10 @@
 
 <div class="modal-footer" >
 <div>
-<button id="backBtn" type="button" class='btn btn-primary btn-sm my-new'  onclick="history.back();">돌아가기</button>
-<button id="addBtn" type="button" class='btn btn-primary btn-sm my-new'>추가</button>
-<button id="updateBtn" type="button" class='btn btn-primary btn-sm my-view'>변경</button>
-<button id="deleteBtn" type="button" class='btn btn-primary btn-sm my-view'>삭제</button>
+<button id="bus_backBtn" type="button" class='btn btn-primary btn-sm my-new'  onclick="history.back();">돌아가기</button>
+<button id="bus_addBtn" type="button" class='btn btn-primary btn-sm my-new'>추가</button>
+<button id="bus_updateBtn" type="button" class='btn btn-primary btn-sm my-view'>변경</button>
+<button id="bus_deleteBtn" type="button" class='btn btn-primary btn-sm my-view'>삭제</button>
 </div>
 </div>
 
@@ -144,11 +140,13 @@
 <script src='../../node_modules/popper.js/dist/umd/popper.min.js'></script>
 <script src='../../node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
 
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 <script type="text/javascript">
-var addBtn = $('#addBtn'),
-    updateBtn = $('#updateBtn'),
-    deleteBtn = $('#deleteBtn'),
-    addReviewBtn = $('#addRBtn'),
+var addBtn = $('#bus_addBtn'),
+    updateBtn = $('#bus_updateBtn'),
+    deleteBtn = $('#bus_deleteBtn'),
+    addReviewBtn = $('#bus_addRBtn'),
     modifyBtn = $('#modifyBtn'),
     ctgrItem = $('#category'),
     nameItem = $('#businessName'),
@@ -265,10 +263,11 @@ addReviewBtn.click(()=> {
 deleteBtn.click(function() {
     $.ajax('../../json/business/delete', {
         data: {
-            no: $('#businessNo').val()
+            no: b_number
         },
         dataType: 'json',
         success: (result) => {
+           
             location.href = "list.html";
         },
         error: () => {

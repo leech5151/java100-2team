@@ -46,6 +46,7 @@
 }
 #modal_view_content {
 	width: 220%;
+	margin-left: -280px;
 	font-size: 1em;
 	box-shadow: 20px 20px 0px rgba(0, 0, 0, 0.16);
 	color: black;

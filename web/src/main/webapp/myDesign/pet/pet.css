@@ -1,3 +1,7 @@
+@font-face{
+   font-family: 'contsfont-kor';
+   src: url(../../fonts/Binggrae.ttf) format('truetype');
+}
 .w3-content{max-width:980px;margin:auto}.w3-rest{overflow:hidden}
 
 .w3-tooltip,.w3-display-container{position:relative}.w3-tooltip .w3-text{display:none}.w3-tooltip:hover .w3-text{display:inline-block}

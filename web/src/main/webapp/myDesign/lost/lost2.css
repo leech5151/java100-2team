@@ -8,12 +8,15 @@ figure.snip1436 {
   margin: 10px 1%;
   min-width: 230px;
   max-width: 315px;
-  max-height: 230px;
+  max-height: 315px;
   width: 100%;
-  color: #ffffff;
+  height:100%;
+  color: #07090c;
   text-align: left;
-  background-color: #07090c;
+  background-color: #ffffff;
   font-size: 16px;
+  border-radius: 60px;
+  border : 1px solid #07090c;
 }
 figure.snip1436 * {
   -webkit-box-sizing: border-box;
@@ -22,6 +25,7 @@ figure.snip1436 * {
   transition: all 0.35s ease;
 }
 figure.snip1436 img {
+	border-radius: 60px;
   max-width: 100%;
   -webkit-transition-delay: 0.2s;
   transition-delay: 0.2s;

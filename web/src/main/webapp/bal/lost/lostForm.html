@@ -18,7 +18,7 @@
       <br><br>
       <input id="breed" type="text" name="breed" style="width: 14rem;" placeholder="품종을 입력하세요."> 
       <br><br>
-      <input id="lostLocation" type="text" name="lostLocation" style="width: 14rem;" placeholder="분실 장소를 입력하세요.">
+      <input id="lostLocation" type="text" name="lostLocation" style="width: 14rem;" onclick="addreSearch()" placeholder="분실 장소를 입력하세요.">
       <br><br>
       분실일 : <input id='lostDate' type='date' name='lostDate' style="width: 10.2rem;">
   </p>
@@ -140,39 +140,39 @@ addBtn2.click(() => {
     });
 });
 
-updateBtn.click(() => {
-	var formData = new FormData($("#fileForm")[0]);
-    $.ajax('../../json/lost/update', {
-        data: formData,
-        dataType: 'json',
-        method: 'POST',
-        processData : false,
-        contentType : false,
-        success: (result) => {
-        location.href = "../main/home.html#awards";
-        },
-        error: (jqXHR, textStatus, errorThrown) => {
-            swal("수정 실패!", "정보를 확인 해보세요!", "error");
-            /* window.alert('서버 실행 오류!'); */
-        }
-    });
-});
+function addreSearch() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            var fullAddr = ''; // 최종 주소 변수
+            var extraAddr = ''; // 조합형 주소 변수
 
-deleteBtn.click(() => {
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                fullAddr = data.roadAddress;
 
-    $.ajax('../../json/lost/delete', {
-        data: {
-        	no: $('#lostNo').val()
-        },
-        dataType: 'json',
-        success: (result) => {
-        location.href = "../main/home.html#awards";
-        },
-        error: () => {
-            swal("삭제 실패!", "다시 시도해보세요!", "error");
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                fullAddr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+            if(data.userSelectedType === 'R'){
+                //법정동명이 있을 경우 추가한다.
+                if(data.bname !== ''){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있을 경우 추가한다.
+                if(data.buildingName !== ''){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('lostLocation').value = fullAddr;
+
         }
-    });
-});
+    }).open();
+}
 
 </script>
 

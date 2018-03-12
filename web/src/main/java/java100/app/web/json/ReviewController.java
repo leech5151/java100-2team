@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import java100.app.domain.Business;
 import java100.app.domain.BusinessReview;
 import java100.app.domain.BusinessReviewUploadFile;
 import java100.app.domain.Member;

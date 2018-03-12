@@ -88,20 +88,7 @@ $.getJSON('../../json/auth/loginUser', (result) => {
 	              var newId = '#' + id;
 	          if (newId == '#lostAddBtn') {
 	        	  
-	        	  $.ajax('https://apis.daum.net/local/geo/addr2coord?apikey=ff1cbf9468f0d7759d24a8472491276e', {
-                      data: {
-                    	  title: '경기도 성남시 분당구 판교역로 235',
-                      },
-                      dataType: 'json',
-                      success: (result) => {
-                      alert(lng);
-                      alert(lat);
-                      },
-                      error: (jqXHR, textStatus, errorThrown) => {
-                          swal("수정 실패!", "정보를 확인 해보세요!", "error");
-                      }
-                  });
-// 	    	  addModalStart();
+	    	  addModalStart();
 
 			  } else if (newId == '#lostPrevBtn') {
 		  		pageNo = pageCalculator(-1, result.lastPageNo)

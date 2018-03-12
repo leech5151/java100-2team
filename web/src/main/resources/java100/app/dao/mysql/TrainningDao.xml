@@ -46,7 +46,7 @@
             m.nic_name
         	from 
         	trainning as t join memb as m on t.m_no=m.m_no
-        	left join t_mda as tm 
+        left join t_mda as tm 
              on t.t_no=tm.t_no 
 
         <if test="words != null">
@@ -58,6 +58,7 @@
         </if>
         
         order by vwcnt desc
+     	
      	
         <!-- 페이지징 처리 -->
         limit #{startIndex}, #{size}

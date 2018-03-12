@@ -29,13 +29,11 @@
 <img src="../../download/{{filename}}" alt="{{filename}}" style="width:100%; height:100%;">
 {{/each}}
 <figcaption>
-<h3 style="text-align: center;"> < 이름 : {{petName}} > </h3>
-<ul style="margin-top: 1rem;">
-    <li style="font-size: 20px;">특이사항 : {{character}}</>
-    <li style="font-size: 20px;">분실장소 : {{lostLocation}}</>
-    <li style="font-size: 20px;">분실일 : {{lostDate}}</li>
-    <li style="font-size: 20px;">연락처 : {{registrant.tel}}</li>
-</ul>
+<h3 style="text-align: center; text-overflow: ellipsis; width: 15rem; margin-top: 0rem; white-space: nowrap; overflow: hidden;"> 이름 : {{petName}} </h3>
+    <div style="font: bold; font-size: 17px; text-overflow: ellipsis; width: 15rem; white-space: nowrap; overflow: hidden; margin-top: 0.5rem; margin-bottom: 0.5rem; padding-left: 1rem;">    - 특이사항 : {{character}}</div>
+    <div style="font: bold; font-size: 17px; text-overflow: ellipsis; width: 15rem; white-space: nowrap; overflow: hidden; margin-top: 0.5rem; margin-bottom: 0.5rem; padding-left: 1rem;">    - 분실장소 : {{lostLocation}}</div>
+    <div style="font: bold; font-size: 17px; margin-top: 0.5rem; margin-bottom: 0.5rem; padding-left: 1rem;">    - 분실일 : {{lostDate}}</div>
+    <div style="font: bold; font-size: 17px; margin-top: 0.5rem; margin-bottom: 0.5rem; padding-left: 1rem;">    - 연락처 : {{registrant.tel}}</div>
 <button id="lostViewBtn{{lostNo}}" data-toggle="modal" data-target="#exampleModal" type="button" style="margin-left: 1rem; color: white;" class="btn btn-sm btn-dark after-login">&#x2795; 더 보기</button>
 </figcaption>
 </figure>

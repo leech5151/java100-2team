@@ -75,7 +75,6 @@ public class MemberController {
             String password,
             Member member,
             Model model) throws Exception {
-        
         if (memberService.get(email) != null) {
             HashMap<String, Object> result = new HashMap<>();
             result.put("status", "addFail");

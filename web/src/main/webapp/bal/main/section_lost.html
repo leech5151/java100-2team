@@ -189,7 +189,7 @@ $.getJSON('../../json/auth/loginUser', (result) => {
 		   	        	        processData : false,
 		   	        	        contentType : false,
 		   	        	        success: (result) => {
-		   	        	        location.href = "../main/home.html";
+		   	        	        location.reload();
 		   	        	        },
 		   	        	        error: (jqXHR, textStatus, errorThrown) => {
 		   	        	            swal("이동 실패!", "잠시 후 다시 시도해보세요!", "error");

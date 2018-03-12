@@ -121,14 +121,18 @@ function load(pageNo, options) {
             
             if (result.pageNo == 1) {
                 $(prevBtn.parent()).addClass("disabled");
+                $('.page-item').css('color', '#6c757d');
             } else {
                 $(prevBtn.parent()).removeClass("disabled");
+                $('.page-item').css('color', '#6c757d');
             }
             
             if (result.lastPageNo == result.pageNo) {
                 $(nextBtn.parent()).addClass("disabled");
+                $('.page-item').css('color', '#6c757d');
             } else {
                 $(nextBtn.parent()).removeClass("disabled");
+                $('.page-item').css('color', '#6c757d');
             }
         },
         error: () => {

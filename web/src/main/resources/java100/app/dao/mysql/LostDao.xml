@@ -50,6 +50,8 @@
             l.p_name,
             l.brd,
             l.cha,
+            l_loc,
+            l_date,
             l.rwd,
             l.vwcnt,
             m.tel,

@@ -47,12 +47,18 @@ $.getJSON('../../json/auth/loginUser', (result) => {
 	                      "</figure>" + 
 	                      "</a>" + 
 	                      "<div id='pushView' style='display: inline-block; margin-left: 3%; margin-top: 1rem; width: 100%;'>" + 
-	                      "<button id='pushCloseBtn' class='btn btn-sm btn-primary' type='button' for='push' style='margin-left: 14rem; font-size: 15px;'>알람 끄기</button>" + 
+	                      "<button id='pushCloseBtn' class='btn btn-sm btn-light' style='margin-left: 14rem;'>" + 
+                          "<img src='../../download/offBell.png'>알람 끄기</button>" + 
 	                      "</div>" + 
 	                      "</div>").appendTo('#lostPushAlertListUp');
 	                }
 	            }
 
+/* 	                      
+ "<div id='pushCloseBtn' style='margin-left: 14rem;' class='btn btn-sm btn-outline'>" + 
+                          "<img src='../../download/offBell.png'>알람 끄기</div>" + 
+ 	                      "<button id='pushCloseBtn' class='btn btn-sm btn-primary' type='button' for='push' style='margin-left: 14rem; font-size: 15px;'>알람 끄기</button>" + 
+                          */
 	    var lostListNo = {};
         var lostList = 0;
         var i = 0;

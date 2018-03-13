@@ -74,24 +74,24 @@ public class BusinessController {
     @RequestMapping("manyList")
     public Object manyList(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
-            @RequestParam(value="ps", defaultValue="18") int pageSize,
+            @RequestParam(value="ps", defaultValue="16") int pageSize,
             @RequestParam(value="words", required=false) String[] words,
             @RequestParam(value="oc", required=false) String orderColumn,
             @RequestParam(value="al", required=false) String align,
-            String category,
-            String value
+            String category
             ) throws Exception {
 
         // UI 제어와 관련된 코드는 이렇게 페이지 컨트롤러에 두어야 한다.
         //
-        System.out.println("value="+value);
+        
+        System.out.println(category);
         
         if (pageNo < 1) {
             pageNo = 1;
         }
         
-        if (pageSize < 18 || pageSize > 54) {
-            pageSize = 18;
+        if (pageSize < 16 || pageSize > 48) {
+            pageSize = 16;
         }
         
         HashMap<String,Object> options = new HashMap<>();
@@ -100,6 +100,7 @@ public class BusinessController {
         }
         options.put("orderColumn", orderColumn);
         options.put("align", align);
+        
         int totalCount = businessService.getTotalCount();
         int lastPageNo = totalCount / pageSize;
         if ((totalCount % pageSize) > 0) {

@@ -11,6 +11,8 @@
 <button style=" background-color: #ff8040;border-color: #ff8040;"id="lostAddBtn" type="button" class="btn btn-danger btn-sm after-login">미아 등록</button>
 <button id="lostPrevBtn" class="btn btn-sm btn-light after-login" style="margin-left: 35%; color: #BD5D38;">이전</button>
 <button id="lostNextBtn" class="btn btn-sm btn-light after-login" style="color: #BD5D38;">다음</button>
+<button id="lostPrevBtn" class="btn btn-sm btn-light before-login" style="margin-left: 45%; color: #BD5D38;">이전</button>
+<button id="lostNextBtn" class="btn btn-sm btn-light before-login" style="color: #BD5D38;">다음</button>
 </nav>
 <br>
 <br>
@@ -56,7 +58,6 @@ var pageNo = 1,
     lostTemplateSrc = $('#lostTemplate').html(),
     lostTemplateEngine = Handlebars.compile(lostTemplateSrc);
     
-
 $.getJSON('../../json/auth/loginUser', (result) => {
     if (result.status == 'fail') {
         $('.after-login').css('display', 'none');
@@ -77,133 +78,31 @@ $.getJSON('../../json/auth/loginUser', (result) => {
            list.append(lostTemplateEngine(result));
             $('button').click(
         		
-           function(e){ // 여기부터
+           function(e){ 
 	          var id = e.target.getAttribute('id');
 	          if ((id != '') && (id != null))  
 	              var newId = '#' + id;
-	          if (newId == '#lostAddBtn') {
-	        	  
-	    	  addModalStart();
 
-			  } else if (newId == '#lostPrevBtn') {
-		  		pageNo = pageCalculator(-1, result.lastPageNo)
-			    pageChange(pageNo, options)
-			  } else if (newId == '#lostNextBtn') {
-		  		pageNo = pageCalculator(1, result.lastPageNo)
-			   	pageChange(pageNo, options)
-		    } else if (newId.substring(0, 12) == '#lostViewBtn') {
-   	            $('#lostBtn').remove();
-		    	
-		   		$.ajax('../../json/lost/' + newId.substring(12), {
-		   	        dataType: 'json',
-		   	        success: (result) => {
-		   	           list.empty();
-   	        		   for (var file of result.data.files) {}	   
-		   	           $('#lostList').html(
-	   	        		   "<div class='lostViewUpdate'>" + 
-		      		       "<form id='fileForm2' style='text-align:center;' enctype='multipart/form-data'>" + 
-		      		       "<p id='lostPetName'> <input id='petName' class='afterUpdate' type='text' name='petName' style='color:#E2758C;' placeholder='" + result.data.petName + "'> 아이를 찾습니다 ! </p><br>" + 
-		      		       "<img id='lostPetPhoto2' class='' src= '../../download/" + file.filename + "' alt=''>" + 
-		      		       "<div style='float: left;'>" + 
-		      		       "<p>" + 
-		      		       "<b>품종 :       </b><input id='breed' class='afterUpdate' type='text' name='breed' style='' placeholder='" + result.data.breed + "'><br>" + 
-		      		       "<b>분실장소 :   </b><input id='lostLocation' onclick='addreSearch()' class='afterUpdate' type='text' name='lostLocation' style='' placeholder='" + result.data.lostLocation + "'><br>" + 
-		      		       "<b>분실일 :     </b><input type='date' id='lostDate' name='lostDate' value='" + result.data.lostDate + "' class='calendar hasDatepicker' style='width: 9rem;  background-image:url(../../images/button/calendar48_2.png); background-repeat: no-repeat; background-position: right; background-size: 40px'><br>" + 
-		      		       "<b>특이사항 :   </b><input id='character' class='afterUpdate' type='text' name='character' style='width: ;' placeholder='" + result.data.character + "'><br>" + 
-		      		       "<b>사례금 :     </b><input id='reward' class='afterUpdate' type='text' name='reward' style='' placeholder='" + result.data.reward + " 원'><br>" + 
-		      		       "<b>알릴사항 :   </b><input id='contents' class='afterUpdate' type='text' name='contents' style='' placeholder='" + result.data.contents + "'><br>" + 
-		      		       "<b>사진         </b><input id='file' class='afterUpdate' type='file' name='file' style=' margin-left: 1.5em;width: 15rem; '><br><br>" + 
-	   	        		   "<button id='lostUpdateBtn' type='button' style='margin-left: 0rem;' class='btn btn-sm btn-dark after-login'>수정</button>" + 
-	   	        		   "<button id='lostDeleteBtn' type='button' style='margin-left: 1rem; ' class='btn btn-sm btn-dark after-login'>삭제</button>" + 
-	   	        		   "<button id='lostReturnBtn' type='button' style='margin-left: 1rem; ' class='btn btn-sm btn-dark'>전체조회</button>" + 
-		      		       "</p>" +
-		      		       "</form>" + 
-		      		       "</div>"
-   	        		   );
-		   	           
-						$(function() {
-						  $("#file").on('change', function(){
-						      readURL(this);
-						  });
-						});
-						
-						function readURL(input) {
-						    if (input.files && input.files[0]) {
-						    var reader = new FileReader();
-						    reader.onload = function (e) {
-						      $('#lostPetPhoto2').attr('src', e.target.result);
-						    }
-						      reader.readAsDataURL(input.files[0]);
-						    } 
-						}
-		   	           
-						if (currTel != result.data.registrant.tel) {
-			                   $('#lostUpdateBtn').css('display', 'none');
-			                   $('#lostDeleteBtn').css('display', 'none');
-			               }
-						
-		   	           $('#lostUpdateBtn').click(() => {
-		   	        	   $(document).ready(() => {
-		   	        	    var formData = new FormData($("#fileForm2")[0]);
-		   	        	    formData.append('lostNo', result.data.lostNo)
-		   	        	    $.ajax('../../json/lost/update', {
-		   	        	        data: formData,
-		   	        	        dataType: 'json',
-		   	        	        method: 'POST',
-		   	        	        processData : false,
-		   	        	        contentType : false,
-		   	        	        success: (result) => {
-		   	        	        location.href = "../main/home.html";
-		   	        	        },
-		   	        	        error: (jqXHR, textStatus, errorThrown) => {
-		   	        	            swal("수정 실패!", "정보를 확인 해보세요!", "error");
-		   	        	        }
-		   	        	    });
-		   	           });
-		   	        	});
-						
-		   	           $('#lostDeleteBtn').click(() => {
-		   	        	   $(document).ready(() => {
-			   	        	    $.ajax('../../json/lost/delete', {
-			   	        	        data: {
-			   	        	        	no: result.data.lostNo,
-			   	        	        },
-			   	        	        dataType: 'json',
-			   	        	        success: (result) => {
-			   	        	        location.href = "../main/home.html";
-			   	        	        },
-			   	        	        error: (jqXHR, textStatus, errorThrown) => {
-			   	        	            swal("수정 실패!", "정보를 확인 해보세요!", "error");
-			   	        	        }
-			   	        	    });
-		   	        	    });
-		   	        	});
-		   	           
-		   	           $('#lostReturnBtn').click(() => {
-		   	        	   $(document).ready(() => {
-		   	        	    $.ajax('../../json/lost/list', {
-		   	        	        dataType: 'json',
-		   	        	        method: 'POST',
-		   	        	        processData : false,
-		   	        	        contentType : false,
-		   	        	        success: (result) => {
-		   	        	        location.reload();
-		   	        	        },
-		   	        	        error: (jqXHR, textStatus, errorThrown) => {
-		   	        	            swal("이동 실패!", "잠시 후 다시 시도해보세요!", "error");
-		   	        	        }
-		   	        	    });
-		   	           });
-		   	        	});
- 	        		   }
-		  	        });
-		   	    }
-		   }
-        		
-        ); //여기까지
+	          clickEvent(newId, result.lastPageNo, options, currTel);
+		   });
        }
     });
 });
+
+function clickEvent(newId, lastPageNo, options, currTel) {
+	if (newId == '#lostAddBtn') {
+	  addModalStart();
+	} else if (newId == '#lostPrevBtn') {
+	  pageNo = pageCalculator(-1, lastPageNo)
+	  pageChange(pageNo, options, currTel)
+	} else if (newId == '#lostNextBtn') {
+	  pageNo = pageCalculator(1, lastPageNo)
+	  pageChange(pageNo, options, currTel)
+	} else if (newId.substring(0, 12) == '#lostViewBtn') {
+        $('#lostBtn').remove();
+        lostView(newId, currTel);
+    }
+}
 
 function pageCalculator(n, lastPageNo) {
    pageNo += n;
@@ -215,7 +114,7 @@ function pageCalculator(n, lastPageNo) {
    return pageNo;
 }
 
-function pageChange(pageNo, options) {
+function pageChange(pageNo, options, currTel) {
 
 	$('.lostData').remove();
 	options.pn = pageNo;
@@ -224,7 +123,16 @@ function pageChange(pageNo, options) {
         dataType: 'json',
         success: (result) => {
            list.append(lostTemplateEngine(result));
-           location.href = "../main/home.html#lost";
+        $('button').click(
+          function(e){ 
+			var id = e.target.getAttribute('id');
+			  if ((id != '') && (id != null))  
+			    var newId = '#' + id;
+			  if (newId.substring(0, 12) == '#lostViewBtn') {
+				  $('#lostBtn').remove();
+				  lostView(newId, currTel);
+			  } 
+	      });
        }
     });
 }
@@ -239,6 +147,111 @@ function addModalStart() {
     });
 }
 
+function lostView(newId, currTel) {
+	$.ajax('../../json/lost/' + newId.substring(12), {
+        dataType: 'json',
+        success: (result) => {
+           list.empty();
+           for (var file of result.data.files) {}      
+           $('#lostList').html(
+               "<div class='lostViewUpdate'>" + 
+               "<form id='fileForm2' style='text-align:center;' enctype='multipart/form-data'>" + 
+               "<p id='lostPetName'> <input id='petName' class='afterUpdate' type='text' name='petName' style='color:#E2758C;' placeholder='" + result.data.petName + "'> 아이를 찾습니다 ! </p><br>" + 
+               "<img id='lostPetPhoto2' class='' src= '../../download/" + file.filename + "' alt=''>" + 
+               "<div style='float: left;'>" + 
+               "<p>" + 
+               "<b>품종 :       </b><input id='breed' class='afterUpdate' type='text' name='breed' style='' placeholder='" + result.data.breed + "'><br>" + 
+               "<b>분실장소 :   </b><input id='lostLocation' onclick='addreSearch()' class='afterUpdate' type='text' name='lostLocation' style='' placeholder='" + result.data.lostLocation + "'><br>" + 
+               "<b>분실일 :     </b><input type='date' id='lostDate' name='lostDate' value='" + result.data.lostDate + "' class='calendar hasDatepicker' style='width: 9rem;  background-image:url(../../images/button/calendar48_2.png); background-repeat: no-repeat; background-position: right; background-size: 40px'><br>" + 
+               "<b>특이사항 :   </b><input id='character' class='afterUpdate' type='text' name='character' style='width: ;' placeholder='" + result.data.character + "'><br>" + 
+               "<b>사례금 :     </b><input id='reward' class='afterUpdate' type='text' name='reward' style='' placeholder='" + result.data.reward + " 원'><br>" + 
+               "<b>알릴사항 :   </b><input id='contents' class='afterUpdate' type='text' name='contents' style='' placeholder='" + result.data.contents + "'><br>" + 
+               "<b>사진         </b><input id='file' class='afterUpdate' type='file' name='file' style=' margin-left: 1.5em;width: 15rem; '><br><br>" + 
+               "<button id='lostUpdateBtn' type='button' style='margin-left: 0rem;' class='btn btn-sm btn-dark after-login'>수정</button>" + 
+               "<button id='lostDeleteBtn' type='button' style='margin-left: 1rem; ' class='btn btn-sm btn-dark after-login'>삭제</button>" + 
+               "<button id='lostReturnBtn' type='button' style='margin-left: 1rem; ' class='btn btn-sm btn-dark'>전체조회</button>" + 
+               "</p>" +
+               "</form>" + 
+               "</div>"
+           );
+           
+            $(function() {
+              $("#file").on('change', function(){
+                  readURL(this);
+              });
+            });
+            
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                  $('#lostPetPhoto2').attr('src', e.target.result);
+                }
+                  reader.readAsDataURL(input.files[0]);
+                } 
+            }
+           
+            if (currTel != result.data.registrant.tel) {
+                   $('#lostUpdateBtn').css('display', 'none');
+                   $('#lostDeleteBtn').css('display', 'none');
+               }
+            
+           $('#lostUpdateBtn').click(() => {
+               $(document).ready(() => {
+                var formData = new FormData($("#fileForm2")[0]);
+                formData.append('lostNo', result.data.lostNo)
+                $.ajax('../../json/lost/update', {
+                    data: formData,
+                    dataType: 'json',
+                    method: 'POST',
+                    processData : false,
+                    contentType : false,
+                    success: (result) => {
+                    location.href = "../main/home.html";
+                    },
+                    error: (jqXHR, textStatus, errorThrown) => {
+                        swal("수정 실패!", "정보를 확인 해보세요!", "error");
+                    }
+                });
+           });
+            });
+            
+           $('#lostDeleteBtn').click(() => {
+               $(document).ready(() => {
+                    $.ajax('../../json/lost/delete', {
+                        data: {
+                            no: result.data.lostNo,
+                        },
+                        dataType: 'json',
+                        success: (result) => {
+                           location.reload();
+                        },
+                        error: (jqXHR, textStatus, errorThrown) => {
+                            swal("수정 실패!", "정보를 확인 해보세요!", "error");
+                        }
+                    });
+                });
+            });
+           
+           $('#lostReturnBtn').click(() => {
+               $(document).ready(() => {
+                $.ajax('../../json/lost/list', {
+                    dataType: 'json',
+                    method: 'POST',
+                    processData : false,
+                    contentType : false,
+                    success: (result) => {
+                    location.reload();
+                    },
+                    error: (jqXHR, textStatus, errorThrown) => {
+                        swal("이동 실패!", "잠시 후 다시 시도해보세요!", "error");
+                    }
+                });
+           });
+            });
+           }
+        });
+}
 
 function addreSearch() {
     new daum.Postcode({

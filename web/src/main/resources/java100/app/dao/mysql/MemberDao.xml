@@ -172,6 +172,12 @@
             m_type=#{memberType}
         where m_no=#{memberNo}
     </update>
+    
+    <update id="updatePush" parameterType="map">
+        update memb set
+            push=#{push}
+        where m_no=#{no}
+    </update>
 
     <delete id="delete" parameterType="int">
         delete from memb

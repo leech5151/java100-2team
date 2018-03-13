@@ -14,6 +14,7 @@ public interface MemberDao {
     Member findByEmailAndPassword(HashMap<String, Object> params);
     Member findByEmail(String email);
     int update(Member member);
+    int updatePush(Map<String,Object> params);
     int delete(int no); 
 }
 

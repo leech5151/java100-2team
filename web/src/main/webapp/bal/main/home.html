@@ -163,7 +163,8 @@ $.getJSON('../../json/auth/loginUser', (result) => {
     } else {
         var member = result.member,
             memberNo = member.memberNo,
-            addPoint = distance(member.primaryAddress);
+            addPoint = {};
+        addPoint = distance(member.primaryAddress);
         
     	console.log(addPoint)
 
@@ -243,8 +244,7 @@ $('#memberView').click(() => {
 
 function distance(addr) {
     var myaddress = addr;// 도로명 주소나 지번 주소만 가능 (건물명 불가!!!!)
-    var resultPoint = {x: undefined, y: undefined};
-    naver.maps.Service.geocode({address: myaddress}, function(status, response) {
+    var resultPoint = naver.maps.Service.geocode({address: myaddress}, function(status, response) {
         if (status !== naver.maps.Service.Status.OK) {
             return alert(myaddress + '의 검색 결과가 없거나 기타 네트워크 에러');
             }
@@ -255,7 +255,7 @@ function distance(addr) {
 	    resultPoint.x = result.items[0].point.x;
 	    resultPoint.y = result.items[0].point.y;
     });
-    return resultPoint;
+    console.log(resultPoint)
 };
 </script>
 

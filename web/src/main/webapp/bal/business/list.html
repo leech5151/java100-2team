@@ -64,7 +64,7 @@ padding-left: 0;
 		
 	</div>
 	<div class="slidecontainer">
-  <input type="range" min="1" max="500"  value="10" class="slider" id="myRange">
+  <input type="range" min="1" max="500"  value="500" class="slider" id="myRange">
    <p><span id="demo"></span>Km</p>
 </div>
 	
@@ -112,7 +112,7 @@ padding-left: 0;
   	<a href="../business/form.html?no={{businessNo}}"></a>
 	</figure>
     <div class="input-group mb-3">
-        <div><input class="form-control" placeholder="0km" type="text" style="font-weight: bold;font-family: contsfont-kor;text-align: center;width: 100px;margin-left: 6.3em;" readonly id="length{{businessNo}}"></input></div>
+        <div><div style="float: left;font-weight: bold;font-family: contsfont-kor;text-align: center;margin-left: 8em;" id="length{{businessNo}}"></div><span style="font-weight: bold;font-family: contsfont-kor;">Km</span></div>
     </div></div>
 {{/each}}
 </script>
@@ -176,8 +176,8 @@ Handlebars.registerHelper('location', function (options) {
 		            Math.cos((lat1*Math.PI)/180) * Math.cos((lat2*Math.PI)/180) * 
 		            Math.sin(dLon/2) * Math.sin(dLon/2); 
 		    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-		    var d = Math.round(R * c) + "Km";
-	        $('#length'+bno).val(d) ;
+		    var d = Math.round(R * c);
+	        $('#length'+bno).text(d) ;
 	        if(slidervalue < d){
 	        	$('#together'+bno).css("display","none");
 	        }

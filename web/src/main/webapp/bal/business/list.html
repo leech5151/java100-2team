@@ -77,22 +77,6 @@ padding-left: 0;
 		<div class="bal-mb-3-list"></div>
 	</div>
 </div>
-<footer>
-	<nav aria-label="Page navigation">
-		<ul class="pagination justify-content-center"
-			style="margin-top: -100px;">
-			<li class="page-item"><a id="prevBtn"  class="page-link"
-				tabindex="-1">이전</a></li>
-				
-
-			<li class="page-item"><a id="currBtn" class="page-link" href="#">1 </a></li>
-
-			<li class="page-item "><a id="nextBtn" class="page-link"
-				tabindex="0">다음</a></li>
-				
-		</ul>
-	</nav>
-</footer>
 <!-- <a href="../business/form.html?no={{businessNo}}"></a> -->
 <script src='../../node_modules/handlebars/dist/handlebars.min.js'></script>
 <script src='../../node_modules/jquery/dist/jquery.js'></script>
@@ -105,7 +89,7 @@ padding-left: 0;
 <script id="businessTemplate" type="text/x-handlebars-template">
 
 {{#each list}}
-    <div class="bal-mb-3-data" id="together{{businessNo}}" style="width:300px; height:250px;">
+    <div class="bal-mb-3-data" id="together{{businessNo}}" style="margin-top: 3em;width:300px; height:250px;">
 		<figure class="snip1132">
         {{#each files}}
             {{#if @first}}
@@ -117,19 +101,19 @@ padding-left: 0;
 		<div><input type="text" style="display:none" id="locationx{{businessNo}}"></input></div>
 		<div><input type="text" style="display:none" id="locationy{{businessNo}}"></input></div>
 		<div>{{length}}</div>
-		<div><input type="number" style="" id="length{{businessNo}}"></input></div>
 		<div>{{km}}</div>
     	<div class="heading">
      		<h3><span>{{adress primary_address}} </span></h3>
     	</div>
     	<div class="caption">
       		<p>{{category}}</p>
-            <p>{{businessNo}}</p>
     	</div>
   	</figcaption>
   	<a href="../business/form.html?no={{businessNo}}"></a>
 	</figure>
-    </div>
+    <div class="input-group mb-3">
+        <div><input class="form-control" placeholder="0km" type="text" style="font-weight: bold;font-family: contsfont-kor;text-align: center;width: 100px;margin-left: 6.3em;" readonly id="length{{businessNo}}"></input></div>
+    </div></div>
 {{/each}}
 </script>
 <script type="text/javascript">
@@ -192,8 +176,8 @@ Handlebars.registerHelper('location', function (options) {
 		            Math.cos((lat1*Math.PI)/180) * Math.cos((lat2*Math.PI)/180) * 
 		            Math.sin(dLon/2) * Math.sin(dLon/2); 
 		    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-		    var d = Math.round(R * c);
-	        $('#length'+bno).val(d);
+		    var d = Math.round(R * c) + "Km";
+	        $('#length'+bno).val(d) ;
 	        if(slidervalue < d){
 	        	$('#together'+bno).css("display","none");
 	        }
@@ -212,15 +196,14 @@ load2();
 $('#category').on('change', function() {
 	  category = $("#category option:selected").val();
 	
-	  if(category == '카테고리'){
-		 load2(1);
-	  }else if(category =='숙박업소'){
+	  if(category =='숙박업소'){
 		  load(1);
-		  
 	  }else if(category == '식당'){
 		  load(1);
 	  }else if(category == '기타'){
 		  load(1);
+	  }else {
+	      load2(1);
 	  }
 	})
 
@@ -250,7 +233,7 @@ options.category = category;
 options.value = slider.value;
 var count;
 
-$.ajax('../../json/business/categorylist', {
+$.ajax('../../json/business/categoryList', {
     /*method: 'GET',*/
     data: options,
     dataType: 'json',  
@@ -312,16 +295,11 @@ function load2(pageNo, options) {
 	
 	
 	
-	$.ajax('../../json/business/manyList', {
+	$.ajax('../../json/business/categoryAllList', {
 	    /*method: 'GET',*/
 	    data: 	options,
 	    dataType: 'json',  
 	    success: (result) => {
-	        for (var item of result.list) {
-	            for (var files of item.files) {
-	                files.businessName = item.businessName;
-	            }
-	        }
 	        console.log(result);
 	        blistItem.html(businessTemplateEngine(result));
 	        

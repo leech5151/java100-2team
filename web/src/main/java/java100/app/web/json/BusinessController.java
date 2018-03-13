@@ -106,6 +106,7 @@ public class BusinessController {
         if ((totalCount % pageSize) > 0) {
             lastPageNo++;
         }
+        System.out.println("토탈 : " + totalCount);
         
         HashMap<String,Object> result = new HashMap<>();
         result.put("pageNo", pageNo);
@@ -114,46 +115,16 @@ public class BusinessController {
         return result;
     }
     
-    @RequestMapping("categorylist")
-    public Object categoryList(
-            @RequestParam(value="pn", defaultValue="1") int pageNo,
-            @RequestParam(value="ps", defaultValue="12") int pageSize,
-            @RequestParam(value="words", required=false) String[] words,
-            @RequestParam(value="oc", required=false) String orderColumn,
-            @RequestParam(value="al", required=false) String align,
-            String category
-            ) throws Exception {
-
-        // UI 제어와 관련된 코드는 이렇게 페이지 컨트롤러에 두어야 한다.
-        //
-        
-//        System.out.println(category);
-        
-        if (pageNo < 1) {
-            pageNo = 1;
-        }
-        
-        if (pageSize < 12 || pageSize > 36) {
-            pageSize = 12;
-        }
-        
-        HashMap<String,Object> options = new HashMap<>();
-        if (words != null && words[0].length() > 0) {
-            options.put("words", words);
-        }
-        options.put("orderColumn", orderColumn);
-        options.put("align", align);
-        
-        int totalCount = businessService.getTotalCount();
-        int lastPageNo = totalCount / pageSize;
-        if ((totalCount % pageSize) > 0) {
-            lastPageNo++;
-        }
-        
+    @RequestMapping("categoryList")
+    public Object categoryList(String category) throws Exception {
         HashMap<String,Object> result = new HashMap<>();
-        result.put("pageNo", pageNo);
-        result.put("lastPageNo", lastPageNo);
-        result.put("list", businessService.listCategory(pageNo, pageSize, options,category));
+        result.put("list", businessService.listCategory(category));
+        return result;
+    }
+    @RequestMapping("categoryAllList")
+    public Object categoryAllLsist(String category) throws Exception {
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("list", businessService.listAllCategory(category));
         return result;
     }
     

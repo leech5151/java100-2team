@@ -78,13 +78,13 @@ public class BusinessController {
             @RequestParam(value="words", required=false) String[] words,
             @RequestParam(value="oc", required=false) String orderColumn,
             @RequestParam(value="al", required=false) String align,
-            String category
+            String category,
+            String value
             ) throws Exception {
 
         // UI 제어와 관련된 코드는 이렇게 페이지 컨트롤러에 두어야 한다.
         //
-        
-        System.out.println(category);
+        System.out.println("value="+value);
         
         if (pageNo < 1) {
             pageNo = 1;
@@ -100,7 +100,6 @@ public class BusinessController {
         }
         options.put("orderColumn", orderColumn);
         options.put("align", align);
-        
         int totalCount = businessService.getTotalCount();
         int lastPageNo = totalCount / pageSize;
         if ((totalCount % pageSize) > 0) {

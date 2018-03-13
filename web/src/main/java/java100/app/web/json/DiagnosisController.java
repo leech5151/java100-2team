@@ -208,7 +208,6 @@ public class DiagnosisController {
         
         Diagnosis diagnosishpno =  diagnosisService.getHospitalNo(loginUser.getMemberNo());
         int hpno = diagnosishpno.getHospital().getHospitalNo();
-        
         HashMap<String, Object> result = new HashMap<>();
         result.put("list", diagnosisService.gethospitalListAll(hpno));
         return result;

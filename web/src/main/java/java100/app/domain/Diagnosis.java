@@ -17,7 +17,8 @@ public class Diagnosis {
     protected String memberName;
     protected Member member;
     protected Hospital hospital;
-    protected HospitalUploadFile files;
+    protected HospitalUploadFile hfiles;
+    protected MemberUploadFile mfiles;
     
     
     
@@ -34,19 +35,23 @@ public class Diagnosis {
     
     
 
-    public HospitalUploadFile getFiles() {
-        return files;
+
+
+    public HospitalUploadFile getHfiles() {
+        return hfiles;
     }
 
-
-
-
-    public void setFiles(HospitalUploadFile files) {
-        this.files = files;
+    public void setHfiles(HospitalUploadFile hfiles) {
+        this.hfiles = hfiles;
     }
 
+    public MemberUploadFile getMfiles() {
+        return mfiles;
+    }
 
-
+    public void setMfiles(MemberUploadFile mfiles) {
+        this.mfiles = mfiles;
+    }
 
     public String getNowDateRecording() {
         return nowDateRecording;

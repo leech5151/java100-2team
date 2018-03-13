@@ -117,13 +117,14 @@ padding-left: 0;
 		<div><input type="text" style="display:none" id="locationx{{businessNo}}"></input></div>
 		<div><input type="text" style="display:none" id="locationy{{businessNo}}"></input></div>
 		<div>{{length}}</div>
-		<div><input type="number" style="display:none" id="length{{businessNo}}"></input></div>
+		<div><input type="number" style="" id="length{{businessNo}}"></input></div>
 		<div>{{km}}</div>
     	<div class="heading">
      		<h3><span>{{adress primary_address}} </span></h3>
     	</div>
     	<div class="caption">
       		<p>{{category}}</p>
+            <p>{{businessNo}}</p>
     	</div>
   	</figcaption>
   	<a href="../business/form.html?no={{businessNo}}"></a>
@@ -193,7 +194,7 @@ Handlebars.registerHelper('location', function (options) {
 		    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
 		    var d = Math.round(R * c);
 	        $('#length'+bno).val(d);
-	        if(slidervalue > d){
+	        if(slidervalue < d){
 	        	$('#together'+bno).css("display","none");
 	        }
 	        

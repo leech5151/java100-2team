@@ -43,7 +43,7 @@
     </resultMap>
 
     <select id="findAll" resultMap="businessMap" parameterType="map">
-         select 
+         select distinct
             b.bus_no,
             d.file,
             b.b_name,

@@ -25,6 +25,7 @@ public interface MemberService {
     Member get(String email);
     int update(Member member);
     int delete(int no);
+    void updatePush(boolean push, int no);
 }
 
 

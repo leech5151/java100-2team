@@ -1,9 +1,15 @@
 <link rel="stylesheet" href="../../myDesign/pet/pet.css">
-
-<div class="modal-header"  style="padding: 5% 5% 5% 5%;">
-    <h4>
+<link rel='stylesheet' href='../../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+<link rel='stylesheet' type="text/css" href='../../css/main.css'>
+<style>
+a,li{
+color: #BD5D38;
+}
+</style>
+<div class="modal-header"  style="padding: 5% 5% 5% 5%; text-align: center">
+    <h3 style="font-family:contsfont-kor;">
         <span class="glyphicon glyphicon-lock"></span> 미아 등록
-    </h4>
+    </h3>
     <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 
@@ -11,28 +17,28 @@
 <form id="fileForm" enctype="multipart/form-data">
 
   <img id="lostPetPhoto" class="mySlides2" style="width: 35rem; height: 35vh; margin-top: 3rem;" src= "https://static.wixstatic.com/media/5bfb6f_1534be33e38b46dba2fcf0d135b70972~mv2.png/v1/fill/w_750,h_788,al_c,usm_0.66_1.00_0.01/5bfb6f_1534be33e38b46dba2fcf0d135b70972~mv2.png" alt=''>
-  <div class="mySlides3" style="width: 35rem; height: 23vh; background-color: black;">
-  <div style="width: 40%; float: left; margin-top: 3%; margin-left: 10%;">
+  <div class="mySlides3" style="width: 35rem; height: 23vh;">
+  <div class="input-group mb-3" style="width: 40%; float: left; margin-top: 3%; margin-left: 10%;">
   <p style="color: gray;">
-      <input id="petName" type="text" name="petName" style="width: 14rem;" placeholder="이름을 입력하세요."> 
-      <br><br>
-      <input id="breed" type="text" name="breed" style="width: 14rem;" placeholder="품종을 입력하세요."> 
-      <br><br>
-      <input id="lostLocation" type="text" name="lostLocation" style="width: 14rem;" onclick="addreSearch()" placeholder="분실 장소를 입력하세요.">
-      <br><br>
-      분실일 : <input id='lostDate' type='date' name='lostDate' style="width: 10.2rem;">
+      <input class="form-control" id="petName" type="text" name="petName" style="width: 14rem;" placeholder="이름을 입력하세요."> 
+      <br>
+      <input class="form-control"  id="breed" type="text" name="breed" style="width: 14rem;" placeholder="품종을 입력하세요."> 
+      <br>
+      <input class="form-control"  id="lostLocation" type="text" name="lostLocation" style="width: 14rem;" onclick="addreSearch()" placeholder="분실 장소를 입력하세요.">
+      <br>
+      분실일 : <input class="form-control"  id='lostDate' type='date' name='lostDate' style="width: 10.2rem;">
   </p>
   </div>
   <div style="width: 37%; float: left; margin-top: 3%; margin-left: 10%;">
-  <p style="color: white; margin-left: -1rem;">
-      <input id='character' type='text' name='character' style="width: 14rem;" placeholder="특징을 입력하세요.">
-      <br><br>
+  <p style=" margin-left: -1rem;">
+      <input class="form-control"  id='character' type='text' name='character' style="width: 14rem;" placeholder="특징을 입력하세요.">
+      <br>
       알람 전송 : <input id='pushAlert' type="checkbox" name='pushAlert' style="width: 1rem;">
-      <input id='reward' type='text' name='reward' style="width: 6.5rem;" placeholder="사례금 입력">
-      <br><br>
-      <input id='contents' type='text' name='contents' style="width: 14rem;" placeholder="기타 알릴 사항을 입력하세요.">
-      <br><br>
-      <input id="file" type="file" name="file" style="width: 10rem; color: black;" >
+      <input class="form-control"  id='contents' type='text' name='contents' style="width: 14rem;" placeholder="기타 알릴 사항을 입력하세요.">
+      <br>
+      <input class="form-control"  id='reward' type='text' name='reward' style="width: 14rem;" placeholder="사례금 입력">
+      <br>
+      <input class="form-control"  id="file" type="file" name="file" style="width: 10rem; color: black;" >
   </p>
   </div>
   </div>
@@ -41,7 +47,7 @@
 </div>
 
 <div style="width: 100%; height: 8vh;">
-<button style="margin: 0 0 0 34.5rem;" id="addBtn2" type="button" class='btn btn-primary btn-sm'>등록</button>
+<button style="margin: 0 0 0 16.5rem;    width: 7em;font-size: 17px;" id="addBtn2" type="button" class='btn btn-primary btn-sm'>등록</button>
 </div>
 
 <script src='../../node_modules/jquery/dist/jquery.js'></script>

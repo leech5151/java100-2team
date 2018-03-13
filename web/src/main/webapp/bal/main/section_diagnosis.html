@@ -29,9 +29,9 @@ function load() {
     					        			$('.header').children().attr('href','../diagnosis/hospitalStaffForm.html')        	   
         					            	$('#diagnosisList').html("");
         					                for (var data of result.list) {
-        					             		$('<figure class="snip1200">')
+        					             		$('<figure class="snip1200" onclick="location.href=\'../diagnosis/hospitalStaffForm.html\';" style="cursor:pointer">')
         					                     .html(  	
-        					                    		 	'<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample32.jpg" alt="sq-sample32" />'+
+        					                    		 	'<img src="../../download/'+data.files.filename+'" />'+
         					                     	       "<figcaption>"+
         					                    		 	"<p  style='text-align: center'><strong><u>Hospital</u></strong><br>" + data.hospital.hospitalName + "<br><strong><u>CUSTOMERNAME</u></strong><br>" + data.memberName +"<br><strong><u>CATEGORY</u></strong><br>" + data.diagnosisCategory  + "</p>" + 
         					 	                   			 "<div class='heading'>"+
@@ -61,9 +61,9 @@ function load() {
     					               
     					            	$('#diagnosisList').html("");
     					                for (var data of result.list) {
-    					             		$('<figure class="snip1200">')
+    					             		$('<figure class="snip1200" onclick="location.href=\'../diagnosis/CustomerForm.html\';" style="cursor:pointer">')
     					                     .html(  	
-    					                    		 	'<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample32.jpg" alt="sq-sample32" />'+
+    					                    		   '<img src="../../download/'+data.files.filename+'"/>'+
     					                     	       "<figcaption>"+
     					                    		 	"<p  style='text-align: center'><strong><u>Hospital</u></strong><br>" + data.hospital.hospitalName + "<br><strong><u>CUSTOMERNAME</u></strong><br>" + data.memberName +"<br><strong><u>CATEGORY</u></strong><br>" + data.diagnosisCategory  + "</p>" + 
     					 	                   			 "<div class='heading'>"+

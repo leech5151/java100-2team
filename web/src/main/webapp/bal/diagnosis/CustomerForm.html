@@ -302,7 +302,7 @@ $.datepicker.regional['kr'] = {
 	            success: (result) => {
 	            	 $('#diagnosisbody').html("");
 	                for (var data of result.list) {
-	                	$('<div class="modalList" style="font-family: contsfont-kor;width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">') 
+	                	$('<div class="modalList" style="cursor:pointer; font-family: contsfont-kor;width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">') 
 	                        .html(  
 	                                "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
                                     "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
@@ -381,7 +381,7 @@ $.datepicker.regional['kr'] = {
 			               
 			           	$('#diagnosisbody').html("");
 			               for (var data of result.list) {
-			            		$('<div class="modalList" style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
+			            		$('<div class="modalList" style="cursor:pointer;  font-family: contsfont-kor; width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
 		                        .html(  
 		                        		   "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
 		                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
@@ -438,7 +438,7 @@ $.datepicker.regional['kr'] = {
 			               
 			           	$('#diagnosisbody').html("");
 			               for (var data of result.list) {
-			            		$('<div class="modalList" style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
+			            		$('<div class="modalList" style="cursor:pointer;  font-family: contsfont-kor; width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
 		                        .html(  
 		                        		   "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
 		                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
@@ -498,7 +498,7 @@ $.ajax('../../json/diagnosis/myAlllist', {
     success: (result) => {
    	 $('#diagnosisbody').html("");
         for (var data of result.list) {
-        	$('<div class="modalList" style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
+        	$('<div class="modalList" style="cursor:pointer; width:70%;  font-family: contsfont-kor; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
             .html(  
             		   "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
                        "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
@@ -535,7 +535,7 @@ function load(pageNo, options){
                
            	$('#diagnosisbody').html("");
                for (var data of result.list) {
-            		$('<div class="modalList" style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
+            		$('<div class="modalList" style="cursor:pointer;  font-family: contsfont-kor; width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
                     .html(  
                     		   "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
                                "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 

@@ -1,5 +1,7 @@
 package java100.app.domain;
 
+import java.util.List;
+
 public class Diagnosis {
     
     protected int diagnosisNo;
@@ -15,7 +17,7 @@ public class Diagnosis {
     protected String memberName;
     protected Member member;
     protected Hospital hospital;
-    
+    protected HospitalUploadFile files;
     
     
     
@@ -29,6 +31,23 @@ public class Diagnosis {
                 + hospital + "]";
     }
     
+    
+    
+
+    public HospitalUploadFile getFiles() {
+        return files;
+    }
+
+
+
+
+    public void setFiles(HospitalUploadFile files) {
+        this.files = files;
+    }
+
+
+
+
     public String getNowDateRecording() {
         return nowDateRecording;
     }

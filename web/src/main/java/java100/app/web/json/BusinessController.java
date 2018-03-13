@@ -133,8 +133,8 @@ public class BusinessController {
             pageNo = 1;
         }
         
-        if (pageSize < 18 || pageSize > 54) {
-            pageSize = 18;
+        if (pageSize < 12 || pageSize > 36) {
+            pageSize = 12;
         }
         
         HashMap<String,Object> options = new HashMap<>();

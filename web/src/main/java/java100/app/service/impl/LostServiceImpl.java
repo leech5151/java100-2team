@@ -73,8 +73,8 @@ public class LostServiceImpl implements LostService {
     @Override
     public int update(Lost lost) {
         int count = lostDao.update(lost);
-        
-        lostFileDao.deleteAllByLostNo(lost.getLostNo());
+        if (!lost.getFiles().isEmpty())
+            lostFileDao.deleteAllByLostNo(lost.getLostNo());
         
         addFiles(lost.getFiles(), lost.getLostNo());
         

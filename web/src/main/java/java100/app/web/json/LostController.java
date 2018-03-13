@@ -109,21 +109,22 @@ public class LostController {
             Lost lost, 
             MultipartFile[] file,
             @ModelAttribute(value="loginUser") Member loginUser) throws Exception {
-        
-        String uploadDir = servletContext.getRealPath("/download");
-
-        ArrayList<LostUploadFile> uploadFiles = new ArrayList<>();
-        
-        for (MultipartFile part : file) {
-            if (part.isEmpty())
-                continue;
+            String uploadDir = servletContext.getRealPath("/download");
+            if (!uploadDir.isEmpty()) {
+                
+            ArrayList<LostUploadFile> uploadFiles = new ArrayList<>();
             
-            String filename = this.writeUploadFile(part, uploadDir);
+            for (MultipartFile part : file) {
+                if (part.isEmpty())
+                    continue;
+                
+                String filename = this.writeUploadFile(part, uploadDir);
+                
+                uploadFiles.add(new LostUploadFile(filename));
+            }
             
-            uploadFiles.add(new LostUploadFile(filename));
-        }
-        
-        lost.setFiles(uploadFiles);
+            lost.setFiles(uploadFiles);
+            }
 
         lostService.update(lost);
         

@@ -140,6 +140,18 @@ public class MemberController {
         result.put("member", member);
         return result;
     }
+    
+    @RequestMapping("updatePush")
+    public Object update(
+            boolean push,
+            int no) throws Exception {
+        
+        memberService.updatePush(push, no);
+        
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("status", "success");
+        return result;
+    }
 
     long prevMillis = 0;
     int count = 0;

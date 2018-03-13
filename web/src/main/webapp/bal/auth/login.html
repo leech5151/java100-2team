@@ -200,8 +200,6 @@ signUpBtn2.click(() => {
         if (result.status == "addFail") {
         	swal("가입 실패!", "이미 등록된 이메일입니다.", "error");
         } else {
-        	console.log(result.email)
-        	console.log(result.password)
         	$.post('../../json/auth/login', {
                 email: result.email,
                 password: result.password

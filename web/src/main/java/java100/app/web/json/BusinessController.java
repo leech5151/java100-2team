@@ -74,7 +74,7 @@ public class BusinessController {
     @RequestMapping("manyList")
     public Object manyList(
             @RequestParam(value="pn", defaultValue="1") int pageNo,
-            @RequestParam(value="ps", defaultValue="18") int pageSize,
+            @RequestParam(value="ps", defaultValue="16") int pageSize,
             @RequestParam(value="words", required=false) String[] words,
             @RequestParam(value="oc", required=false) String orderColumn,
             @RequestParam(value="al", required=false) String align,
@@ -90,8 +90,8 @@ public class BusinessController {
             pageNo = 1;
         }
         
-        if (pageSize < 18 || pageSize > 54) {
-            pageSize = 18;
+        if (pageSize < 16 || pageSize > 48) {
+            pageSize = 16;
         }
         
         HashMap<String,Object> options = new HashMap<>();

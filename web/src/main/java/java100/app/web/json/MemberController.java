@@ -122,18 +122,21 @@ public class MemberController {
 
         String uploadDir = servletContext.getRealPath("/download");
 
-        ArrayList<MemberUploadFile> uploadFiles = new ArrayList<>();
-        
-        for (MultipartFile part : file) {
-            if (part.isEmpty())
-                continue;
+        if (!uploadDir.isEmpty()) {
             
-            String filename = this.writeUploadFile(part, uploadDir);
+            ArrayList<MemberUploadFile> uploadFiles = new ArrayList<>();
             
-            uploadFiles.add(new MemberUploadFile(filename));
+            for (MultipartFile part : file) {
+                if (part.isEmpty())
+                    continue;
+                
+                String filename = this.writeUploadFile(part, uploadDir);
+                
+                uploadFiles.add(new MemberUploadFile(filename));
+            }
+            
+            member.setFiles(uploadFiles);
         }
-        
-        member.setFiles(uploadFiles);
         memberService.update(member);
 
         HashMap<String, Object> result = new HashMap<>();

@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,500,800);
 figure.snip1283 {
+	border-radius: 140px;
   font-family: 'Raleway', Arial, sans-serif;
   color: #fff;
   position: relative;

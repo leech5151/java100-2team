@@ -233,9 +233,8 @@ memberModifyBtn.click(() => {
     } else {
         var pushKey = 'pushModify2';
     }
-    
+
     formData.append(pushKey, pushData); 
-    
     $.ajax('../../json/member/update', {
         data: formData,
         dataType: 'json',

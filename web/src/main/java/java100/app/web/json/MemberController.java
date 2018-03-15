@@ -119,9 +119,8 @@ public class MemberController {
     public Object update(
             Member member, 
             MultipartFile[] file) throws Exception {
-
+        
         String uploadDir = servletContext.getRealPath("/download");
-
         if (!uploadDir.isEmpty()) {
             
             ArrayList<MemberUploadFile> uploadFiles = new ArrayList<>();
@@ -131,7 +130,6 @@ public class MemberController {
                     continue;
                 
                 String filename = this.writeUploadFile(part, uploadDir);
-                
                 uploadFiles.add(new MemberUploadFile(filename));
             }
             

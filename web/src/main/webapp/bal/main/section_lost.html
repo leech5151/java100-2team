@@ -73,9 +73,6 @@ $.getJSON('../../json/auth/loginUser', (result) => {
         data: options,
         dataType: 'json',
         success: (result) => {
-           for (var data of result.list) {
-        	   console.log(data.registrant.tel)
-           }
            list.append(lostTemplateEngine(result));
             $('button').click(
         		
@@ -209,7 +206,7 @@ function lostView(newId, currTel) {
                     processData : false,
                     contentType : false,
                     success: (result) => {
-                    location.href = "../main/home.html";
+                    	location.reload();
                     },
                     error: (jqXHR, textStatus, errorThrown) => {
                         swal("수정 실패!", "정보를 확인 해보세요!", "error");

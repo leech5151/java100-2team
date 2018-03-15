@@ -266,7 +266,7 @@
        	 	left join hp as h on d.hp_no=h.hp_no 
         	left join memb as m on d.m_tel=m.tel
         	left join m_mda as f on m.m_no = f.m_no
-        	where d.hp_no='66' order by d.dgn_no DESC, d.date_rec DESC
+        	where d.hp_no=#{value} order by d.dgn_no DESC, d.date_rec DESC
         	limit 5]]>
     </select>
     

@@ -73,7 +73,9 @@ $.getJSON('../../json/auth/loginUser', (result) => {
         data: options,
         dataType: 'json',
         success: (result) => {
-           
+           for (var data of result.list) {
+        	   console.log(data.registrant.tel)
+           }
            list.append(lostTemplateEngine(result));
             $('button').click(
         		

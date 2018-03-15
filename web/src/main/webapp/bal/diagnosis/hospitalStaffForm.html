@@ -27,9 +27,9 @@ color:#212529;
 			<h1>
 				Diagnosis<span> <a href="../main/home.html#diagnosis">of hospital staff</a></span> 
 			</h1>
-			<nav class="codrops-demos">
+			<nav style="margin-bottom:40px" class="codrops-demos">
 
-				<a href="../main/home.html#diagnosis">home</a>
+				<a  href="../main/home.html#diagnosis">home</a>
 				
 				
 				<div class="modal fade" role="dialog" id="diagnosisModalView">
@@ -42,7 +42,11 @@ color:#212529;
 			</nav>
 		</header>
 		<div style="width: 21%; text-align: left; margin-bottom: 1%; margin-left:15%; display: inline-block;">
-			<div class="col-sm-10">
+		
+			<input type="text" readonly="readonly" id="selectDate" class="selectDate calendar" style="font-size:15px; height: 40px; background-image:url(../../images/button/calendar48_2.png); background-repeat: no-repeat; background-position: right; background-size: 40px">
+			<a>~</a>
+			<input type="text" readonly="readonly" id="nowDate" class="nowDate calendar" style="font-size:15px; height: 40px; background-image:url(../../images/button/calendar48_2.png); background-repeat: no-repeat; background-position: right; background-size: 40px">
+		</div>
 		<select id='category' class="btn btn-secondary data-reset"
 			name="category">
 			<option value="All">All</option>
@@ -50,12 +54,9 @@ color:#212529;
 			<option  value="10">10</option>
 			<option  value="15">15</option>
 		</select> 
-		</div>
-			<input type="text" readonly="readonly" id="selectDate" class="selectDate calendar" style="font-size:15px; height: 40px; background-image:url(../../images/button/calendar48_2.png); background-repeat: no-repeat; background-position: right; background-size: 40px">
-			<a>~</a>
-			<input type="text" readonly="readonly" id="nowDate" class="nowDate calendar" style="font-size:15px; height: 40px; background-image:url(../../images/button/calendar48_2.png); background-repeat: no-repeat; background-position: right; background-size: 40px">
-		</div>
-		<img id="addform" src="../../images/button/add.png" height="32" width="32" style="right: 100px" ></img>
+		<img id="addform" src="../../images/button/add.png" height="32" width="32"  style="margin-left: 20px" ></img>
+		
+		
 <!-- 		<div id="sidebox">
 		 <nav id="navigation-list">
    		 <ul style="list-style: none; position: relative; float: left;">

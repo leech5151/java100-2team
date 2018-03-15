@@ -25,13 +25,14 @@ function load() {
             			console.log('병원회원')
     					       $.ajax('../../json/diagnosis/hospitalproducerlist5', {
     					           success: (result) => {
+    					        	   
     					        	  if(result.status=="success"){
     					        			$('.header').children().attr('href','../diagnosis/hospitalStaffForm.html')        	   
         					            	$('#diagnosisList').html("");
         					                for (var data of result.list) {
         					             		$('<figure class="snip1200" onclick="location.href=\'../diagnosis/hospitalStaffForm.html\';" style="cursor:pointer">')
         					                     .html(  	
-        					                    		 	'<img src="../../download/'+data.files.filename+'" />'+
+        					                    		 	'<img src="../../download/'+data.mfiles.filename+'" />'+
         					                     	       "<figcaption>"+
         					                    		 	"<p  style='text-align: center'><strong><u>Hospital</u></strong><br>" + data.hospital.hospitalName + "<br><strong><u>CUSTOMERNAME</u></strong><br>" + data.memberName +"<br><strong><u>CATEGORY</u></strong><br>" + data.diagnosisCategory  + "</p>" + 
         					 	                   			 "<div class='heading'>"+
@@ -63,7 +64,7 @@ function load() {
     					                for (var data of result.list) {
     					             		$('<figure class="snip1200" onclick="location.href=\'../diagnosis/CustomerForm.html\';" style="cursor:pointer">')
     					                     .html(  	
-    					                    		   '<img src="../../download/'+data.files.filename+'"/>'+
+    					                    		   '<img src="../../download/'+data.hfiles.filename+'"/>'+
     					                     	       "<figcaption>"+
     					                    		 	"<p  style='text-align: center'><strong><u>Hospital</u></strong><br>" + data.hospital.hospitalName + "<br><strong><u>CUSTOMERNAME</u></strong><br>" + data.memberName +"<br><strong><u>CATEGORY</u></strong><br>" + data.diagnosisCategory  + "</p>" + 
     					 	                   			 "<div class='heading'>"+

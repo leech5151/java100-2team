@@ -169,7 +169,7 @@ color:#212529;
             </div>
 
 
-            <div class='form-group row my-view'>
+            <div class='form-group row my-view' id='datediv'>
                 <label for='dateRecording' class='col-sm-2 col-form-label'>기록일자</label>
                 <div class='col-sm-10'>
                     <input class='form-control my-recordData' id='dateRecording'
@@ -243,7 +243,8 @@ recorderItem=$('#recorder'),
 remarksItem=$('#remarks'),
 addBtn = $('#addBtn'),
 updateBtn = $('#updateBtn'),
-deleteBtn = $('#deleteBtn');
+deleteBtn = $('#deleteBtn'),
+datediv=$('#datediv');
 
 
 var nowDate = new Date();
@@ -349,6 +350,8 @@ $.datepicker.regional['kr'] = {
 	        });
 	    }
 	$(document).on('click', '#addform', function(){
+		
+		$("#datediv").css("display","none");
 		 dogweightItem.val(null);
          categoryItem.val(null);
          nameItem.val(null);
@@ -362,6 +365,7 @@ $.datepicker.regional['kr'] = {
          memberTelItem.val(null);
 		
 		 $.ajax('../../json/diagnosis/form' ,{
+			 
              dataType: 'json',
              success: (result) => {
              	if(result.data==null){

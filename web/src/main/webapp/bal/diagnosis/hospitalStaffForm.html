@@ -69,7 +69,7 @@ color:#212529;
 		</div> -->
 		
 		<div style="width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">
-			<div style='width:10%; display:inline-block; ; font-size:20px;'>No</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Customer Name</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Tel</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Date</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Category</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Medical name</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Contents</div>
+			<div style='width:10%; display:inline-block; ; font-size:20px;'>No</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Name</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Tel</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Date</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Category</div><div style='width:10%; display:inline-block; ; font-size:20px;'>Medical name</div><div style='width:20%; display:inline-block; ; font-size:20px;'>Contents</div>
 		</div>
 
 		<div id="diagnosisbody" style="font-size:18px;margin-top:15px;"> 
@@ -169,7 +169,7 @@ color:#212529;
             </div>
 
 
-            <div class='form-group row my-view'>
+            <div class='form-group row my-view' id='datediv'>
                 <label for='dateRecording' class='col-sm-2 col-form-label'>기록일자</label>
                 <div class='col-sm-10'>
                     <input class='form-control my-recordData' id='dateRecording'
@@ -243,7 +243,8 @@ recorderItem=$('#recorder'),
 remarksItem=$('#remarks'),
 addBtn = $('#addBtn'),
 updateBtn = $('#updateBtn'),
-deleteBtn = $('#deleteBtn');
+deleteBtn = $('#deleteBtn'),
+datediv=$('#datediv');
 
 
 var nowDate = new Date();
@@ -326,19 +327,19 @@ $.datepicker.regional['kr'] = {
 	            dataType: 'json',
 	            method: 'POST',
 	            success: (result) => {
-	            	 $('#diagnosisbody').html("");
-	                for (var data of result.list) {
-	                	$('<div class="modalList" style="cursor:pointer; font-family: contsfont-kor; width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
-	                        .html(  
-	                                "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
-                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.memberName + "</div>" +
-                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>"+ data.memberTel + "</div>" +  
-                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
-                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
-                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
-                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
+	          	   $('#diagnosisbody').html("");
+	               for (var data of result.list) {
+	               	$('<div class="modalList" style="cursor:pointer; border-bottom: 1px solid #aaa; font-family: contsfont-kor; width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
+	                       .html(  
+	                            "<div style='width:8%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.diagnosisNo + "</div>" + 
+	                            "<div style='width:8%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis; white-space:nowrap;'>" + data.memberName + "</div>" +
+	                            "<div style='width:18%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>"+ data.memberTel + "</div>" +  
+	                            "<div style='width:18%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.dateRecording + "</div>" +
+	                            "<div style='width:8%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.diagnosisCategory + "</div>" +
+	                            "<div style='width:8%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.diagnosisName + "</div>" +
+	                            "<div style='width:18%; margin-left:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.diagnosisContents + "</div>")
 			                            .appendTo('#diagnosisbody'); 
-	                }
+	               }
 	                
 	             	$(prevBtn.parent()).css("display","none");
 	            	$(currBtn.parent()).css("display","none");
@@ -349,6 +350,8 @@ $.datepicker.regional['kr'] = {
 	        });
 	    }
 	$(document).on('click', '#addform', function(){
+		
+		$("#datediv").css("display","none");
 		 dogweightItem.val(null);
          categoryItem.val(null);
          nameItem.val(null);
@@ -362,6 +365,7 @@ $.datepicker.regional['kr'] = {
          memberTelItem.val(null);
 		
 		 $.ajax('../../json/diagnosis/form' ,{
+			 
              dataType: 'json',
              success: (result) => {
              	if(result.data==null){
@@ -551,19 +555,18 @@ $.datepicker.regional['kr'] = {
 						       
 			           dataType: 'json',
 			           success: (result) => {
-			               
-			           	$('#diagnosisbody').html("");
+			         	   $('#diagnosisbody').html("");
 			               for (var data of result.list) {
-			            		$('<div class="modalList" style="cursor:pointer; font-family: contsfont-kor;width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
-		                        .html(  
-		                        		   "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
-		                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
-		                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.memberName + "</div>" +
-		                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
-		                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
-		                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisName + "</div>" + 
-		                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
-				                            .appendTo('#diagnosisbody'); 
+			               	$('<div class="modalList" style="cursor:pointer; border-bottom: 1px solid #aaa; font-family: contsfont-kor; width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
+			                       .html(  
+			                            "<div style='width:8%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.diagnosisNo + "</div>" + 
+			                            "<div style='width:8%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis; white-space:nowrap;'>" + data.memberName + "</div>" +
+			                            "<div style='width:18%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>"+ data.memberTel + "</div>" +  
+			                            "<div style='width:18%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.dateRecording + "</div>" +
+			                            "<div style='width:8%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.diagnosisCategory + "</div>" +
+			                            "<div style='width:8%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.diagnosisName + "</div>" +
+			                            "<div style='width:18%; margin-left:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.diagnosisContents + "</div>")
+					                            .appendTo('#diagnosisbody'); 
 			               }
 			               
 			               currPageNo = result.pageNo;
@@ -608,20 +611,20 @@ $.datepicker.regional['kr'] = {
 						       
 			           dataType: 'json',
 			           success: (result) => {
-			               
-			           	$('#diagnosisbody').html("");
+			         	   $('#diagnosisbody').html("");
 			               for (var data of result.list) {
-			            		$('<div class="modalList" style="cursor:pointer; font-family: contsfont-kor;width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
-		                        .html(  
-		                        		   "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
-		                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
-		                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.memberName + "</div>" +
-		                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
-		                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
-		                                    "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisName + "</div>" +
-		                                    "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisContents + "</div>") 
-				                            .appendTo('#diagnosisbody'); 
+			               	$('<div class="modalList" style="cursor:pointer; border-bottom: 1px solid #aaa; font-family: contsfont-kor; width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
+			                       .html(  
+			                            "<div style='width:8%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.diagnosisNo + "</div>" + 
+			                            "<div style='width:8%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis; white-space:nowrap;'>" + data.memberName + "</div>" +
+			                            "<div style='width:18%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>"+ data.memberTel + "</div>" +  
+			                            "<div style='width:18%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.dateRecording + "</div>" +
+			                            "<div style='width:8%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.diagnosisCategory + "</div>" +
+			                            "<div style='width:8%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.diagnosisName + "</div>" +
+			                            "<div style='width:18%; margin-left:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.diagnosisContents + "</div>")
+					                            .appendTo('#diagnosisbody'); 
 			               }
+				                
 			               
 			               currPageNo = result.pageNo;
 			               currBtn.html(currPageNo);
@@ -690,19 +693,20 @@ function loadAll(pageNo, option){
 $.ajax('../../json/diagnosis/hospitalalllist', {
     dataType: 'json',
     success: (result) => {
-   	 $('#diagnosisbody').html("");
-        for (var data of result.list) {
-        	$('<div class="modalList" style="cursor:pointer; font-family: contsfont-kor;width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
-            .html(  
-            		   "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
-                       "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
-                       "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.memberName + "</div>" +
-                       "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
-                       "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
-                       "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisName + "</div>" + 
-                       "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
-                        .appendTo('#diagnosisbody'); 
-        }
+  	   $('#diagnosisbody').html("");
+       for (var data of result.list) {
+       	$('<div class="modalList" style="cursor:pointer; border-bottom: 1px solid #aaa; font-family: contsfont-kor; width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
+               .html(  
+                    "<div style='width:8%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.diagnosisNo + "</div>" + 
+                    "<div style='width:8%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis; white-space:nowrap;'>" + data.memberName + "</div>" +
+                    "<div style='width:18%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>"+ data.memberTel + "</div>" +  
+                    "<div style='width:18%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.dateRecording + "</div>" +
+                    "<div style='width:8%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.diagnosisCategory + "</div>" +
+                    "<div style='width:8%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.diagnosisName + "</div>" +
+                    "<div style='width:18%; margin-left:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.diagnosisContents + "</div>")
+                            .appendTo('#diagnosisbody'); 
+       }
+         
         	$(prevBtn.parent()).css("display","none");
         	$(currBtn.parent()).css("display","none");
             $(nextBtn.parent()).css("display","none");
@@ -727,18 +731,18 @@ function load(pageNo, options){
            dataType: 'json',
            success: (result) => {
                
-           	$('#diagnosisbody').html("");
+        	   $('#diagnosisbody').html("");
                for (var data of result.list) {
-            		$('<div class="modalList" style="cursor:pointer; font-family: contsfont-kor;width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
-                    .html(  
-                    		   "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisNo + "</div>" + 
-                               "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>"+ data.hospital.hospitalName + "</div>" + 
-                               "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.memberName + "</div>" +
-                               "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.dateRecording + "</div>" +
-                               "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisCategory + "</div>" +
-                               "<div style='width:10%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisName + "</div>" + 
-                               "<div style='width:20%; display:inline-block; border-bottom: 1px solid #aaa;'>" + data.diagnosisContents + "</div>")
-	                            .appendTo('#diagnosisbody'); 
+               	$('<div class="modalList" style="cursor:pointer; border-bottom: 1px solid #aaa; font-family: contsfont-kor; width:70%; margin-left:15%; margin-right:15%; margin-bottom:0.5%;text-align:center">')
+                       .html(  
+                            "<div style='width:8%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.diagnosisNo + "</div>" + 
+                            "<div style='width:8%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis; white-space:nowrap;'>" + data.memberName + "</div>" +
+                            "<div style='width:18%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>"+ data.memberTel + "</div>" +  
+                            "<div style='width:18%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.dateRecording + "</div>" +
+                            "<div style='width:8%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.diagnosisCategory + "</div>" +
+                            "<div style='width:8%; margin-left:1%; margin-right:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.diagnosisName + "</div>" +
+                            "<div style='width:18%; margin-left:1%; display:inline-block; overflow:hidden;text-overflow: ellipsis;white-space:nowrap;'>" + data.diagnosisContents + "</div>")
+		                            .appendTo('#diagnosisbody'); 
                }
                
                currPageNo = result.pageNo;

@@ -170,6 +170,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
 
     @Override
     public List<Diagnosis> gethopspitalProducerList5(int no) {
+        System.out.println(diagnosisDao.findHospitalList5(no));
        return diagnosisDao.findHospitalList5(no);
     }
 

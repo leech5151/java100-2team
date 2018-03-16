@@ -128,18 +128,18 @@ public class DiagnosisController {
         System.out.println(count);
         if (count == 1) {
             result.put("status", "success");
-            System.out.println(result);
+//            System.out.println(result);
 
             return result;
         } else if(count == 0){
             result.put("status", "fail");
-            System.out.println(result);
+//            System.out.println(result);
 
             return result;
             
         }else {
             result.put("status", "fail2");
-            System.out.println(result);
+//            System.out.println(result);
             return result;
         }
         
@@ -227,6 +227,7 @@ public class DiagnosisController {
         }
         result.put("status","success");
         result.put("list", diagnosisService.gethopspitalProducerList5(hpno));
+//        System.out.println(diagnosisService.gethopspitalProducerList5(hpno));
         return result;
     }
     

@@ -252,7 +252,7 @@
     
     
     <select id="findHospitalList5" resultMap="diagnosisMap" parameterType="map">
-         <![CDATA[select 
+         select 
           d.dgn_no,
             d.dgn_cg,
             d.dgn_name,
@@ -267,7 +267,8 @@
         	left join memb as m on d.m_tel=m.tel
         	left join m_mda as f on m.m_no = f.m_no
         	where d.hp_no='66' order by d.dgn_no DESC, d.date_rec DESC
-        	limit 5]]>
+        	limit 0,5
+        
     </select>
     
      <select id="findHospitalListAll" resultMap="diagnosisMap" parameterType="map">

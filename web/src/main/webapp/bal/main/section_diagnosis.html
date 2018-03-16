@@ -32,7 +32,7 @@ function load() {
         					                for (var data of result.list) {
         					             		$('<figure class="snip1200" onclick="location.href=\'../diagnosis/hospitalStaffForm.html\';" style="cursor:pointer">')
         					                     .html(  	
-        					                    		 	'<img src="../../download/'+data.mfiles.filename+'" />'+
+        					                    		 	'<img style="width: 180px;height:225px;" src="../../download/'+data.mfiles.filename+'" />'+
         					                     	       "<figcaption>"+
         					                    		 	"<p  style='text-align: center'><strong><u>Hospital</u></strong><br>" + data.hospital.hospitalName + "<br><strong><u>CUSTOMERNAME</u></strong><br>" + data.memberName +"<br><strong><u>CATEGORY</u></strong><br>" + data.diagnosisCategory  + "</p>" + 
         					 	                   			 "<div class='heading'>"+
@@ -64,7 +64,7 @@ function load() {
     					                for (var data of result.list) {
     					             		$('<figure class="snip1200" onclick="location.href=\'../diagnosis/CustomerForm.html\';" style="cursor:pointer">')
     					                     .html(  	
-    					                    		   '<img src="../../download/'+data.hfiles.filename+'"/>'+
+    					                    		   '<img style="width: 180px;height:225px;" src="../../download/'+data.hfiles.filename+'"/>'+
     					                     	       "<figcaption>"+
     					                    		 	"<p  style='text-align: center'><strong><u>Hospital</u></strong><br>" + data.hospital.hospitalName + "<br><strong><u>CUSTOMERNAME</u></strong><br>" + data.memberName +"<br><strong><u>CATEGORY</u></strong><br>" + data.diagnosisCategory  + "</p>" + 
     					 	                   			 "<div class='heading'>"+

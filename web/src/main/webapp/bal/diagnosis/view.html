@@ -242,6 +242,7 @@ updateBtn.click(() => {
              diagnosisContents: contentsItem.val(),
              hospitalName: hospitalNameItem.val(),
              remarks: remarksItem.val(),
+             recorder: recorderItem.val(),
              memberName: memberNameItem.val(),
              memberTel: memberTelItem.val()
         },
@@ -249,7 +250,7 @@ updateBtn.click(() => {
         method: 'POST',
         success: (result) => {
             if(result.status=='success'){
-                location.href = "../diagnosis/CustomerForm.html";    
+                location.href = "../diagnosis/hospitalStaffForm.html";    
             }else if(result.status=='fail'){
                 window.alert('자신의 병원 진료자료만 가능합니다');
             }else{

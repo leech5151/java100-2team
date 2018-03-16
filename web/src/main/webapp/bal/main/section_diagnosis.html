@@ -15,7 +15,7 @@
 
 load();
 function load() {
-	$.ajax('../../json/auth/loginUser', {
+   $.ajax('../../json/auth/loginUser', {
         dataType: 'json',
         success: (result) => {
         	if(result.status == "success"){
@@ -85,18 +85,18 @@ function load() {
             		$('#diagnosisList').html("");
                  		$('<div>')
                          .html(     "<div style='padding-top: 6em;text-align: center;height: 283px;background-color: #000000;opacity: 0.8;'>"+
-                        		 "<h3 style='float: left;font-size: 50px;margin-left: 166px;color:red;width:50px;'>!</h3>" +
-                        		 "<div style='float: left;width: 600px;color:white;font-size:40px;font-family:contsfont-kor;'>로그인이 필요한 서비스입니다</div>"+
-        		                 "</div>")
-     	                            .appendTo('#diagnosisList'); 
-                 		
-        	}
+                               "<h3 style='float: left;font-size: 50px;margin-left: 166px;color:red;width:50px;'>!</h3>" +
+                               "<div style='float: left;width: 600px;color:white;font-size:40px;font-family:contsfont-kor;'>로그인이 필요한 서비스입니다</div>"+
+                               "</div>")
+                                    .appendTo('#diagnosisList'); 
+                       
+           }
         },
-		error: () => {
-			window.alert('서버 실행 오류!');
-		}
+      error: () => {
+         window.alert('서버 실행 오류!');
+      }
     });
-	
+   
 }; 
 
 

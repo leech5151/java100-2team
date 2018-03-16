@@ -73,8 +73,8 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public int update(Member member) {
         int count = memberDao.update(member);
-        
-//        memberFileDao.deleteAllByMemberNo(member.getMemberNo());
+        if (!member.getFiles().isEmpty())
+            memberFileDao.deleteAllByMemberNo(member.getMemberNo());
         
         addFiles(member.getFiles(), member.getMemberNo());
         

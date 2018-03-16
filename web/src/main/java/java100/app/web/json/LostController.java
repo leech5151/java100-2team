@@ -73,7 +73,6 @@ public class LostController {
     @RequestMapping("add")
     public Object add(
             Lost lost,
-            String tel,
             MultipartFile[] file,
             @ModelAttribute(value="loginUser") Member loginUser) throws Exception {
         
@@ -92,8 +91,6 @@ public class LostController {
         
         lost.setFiles(uploadFiles);
         lost.setRegistrant(loginUser);
-        loginUser.setTel(tel);
-        memberService.update(loginUser);
         lostService.add(lost);
         
         HashMap<String, Object> result = new HashMap<>();
@@ -112,18 +109,18 @@ public class LostController {
             String uploadDir = servletContext.getRealPath("/download");
             if (!uploadDir.isEmpty()) {
                 
-            ArrayList<LostUploadFile> uploadFiles = new ArrayList<>();
-            
-            for (MultipartFile part : file) {
-                if (part.isEmpty())
-                    continue;
+                ArrayList<LostUploadFile> uploadFiles = new ArrayList<>();
                 
-                String filename = this.writeUploadFile(part, uploadDir);
+                for (MultipartFile part : file) {
+                    if (part.isEmpty())
+                        continue;
+                    
+                    String filename = this.writeUploadFile(part, uploadDir);
+                    
+                    uploadFiles.add(new LostUploadFile(filename));
+                }
                 
-                uploadFiles.add(new LostUploadFile(filename));
-            }
-            
-            lost.setFiles(uploadFiles);
+                lost.setFiles(uploadFiles);
             }
 
         lostService.update(lost);

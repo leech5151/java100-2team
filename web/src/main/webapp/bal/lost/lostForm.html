@@ -138,7 +138,7 @@ addBtn2.click(() => {
         processData : false,
         contentType : false,
         success: (result) => {
-         	location.href = '../main/home.html';
+         	location.reload();
         },
         error: (jqXHR, textStatus, errorThrown) => {
             swal("등록 실패!", "정보를 확인해보세요!", "error");

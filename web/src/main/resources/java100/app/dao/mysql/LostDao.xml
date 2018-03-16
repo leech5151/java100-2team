@@ -122,6 +122,9 @@
 	        l.cha,
 	        l.rwd,
 	        l.vwcnt,
+	        l.l_loc,
+            l.l_date,
+	        l.vwcnt,
 	        l.pushAlert,
 	        m.tel,
 	        lm.file
